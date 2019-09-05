@@ -39,8 +39,8 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
             val model = viewHolder.getModel<Any>()
 
             if (model is ItemModel) {
-                drag = model.drag
-                swipe = model.swipe
+                drag = model.drag()
+                swipe = model.swipe()
             }
         }
 
@@ -106,7 +106,7 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
         if (target is BindingAdapter.BindingViewHolder) {
 
             val model = target.getModel<Any>()
-            if (model is ItemModel && model.drag != 0) {
+            if (model is ItemModel && model.drag() != 0) {
                 adapter.notifyItemMoved(currentPosition, targetPosition)
                 Collections.swap(
                     adapter.models,

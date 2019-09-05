@@ -113,7 +113,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             field = value
             val size = checkedPositions.size
             if (field && size > 1) {
-                for (iA in 0 until size - 1) {
+                for (i in 0 until size - 1) {
                     setChecked(checkedPositions[0], false)
                 }
             }
@@ -149,9 +149,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
-    private var onCheckedChange: ((itemViewType: Int, position: Int, isChecked: Boolean, isAllChecked: Boolean) -> Unit)? =
+    private var onCheckedChange: ((itemType: Int, position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? =
         null
-    private var onToggle: ((itemViewType: Int, position: Int, toggleModel: Boolean) -> Unit)? = null
+    private var onToggle: ((itemType: Int, position: Int, toggleModel: Boolean) -> Unit)? = null
     private var onToggleEnd: ((toggleModel: Boolean) -> Unit)? = null
 
     var itemTouchHelper = ItemTouchHelper(DefaultItemTouchCallback(this))
@@ -185,13 +185,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * 条目位置
      * 是否选中
      * 是否全部选中
-     * @param block BindingAdapter.(Int, Int, Boolean, Boolean) -> Unit
+     * @param block bindingAdapter.(Int, Int, Boolean, Boolean) -> Unit
      */
-    fun onCheckedChange(block: (Int, Int, Boolean, Boolean) -> Unit) {
+    fun onCheckedChange(block: (itemType: Int, position: Int, checked: Boolean, allChecked: Boolean) -> Unit) {
         onCheckedChange = block
     }
 
-    fun onToggle(block: (Int, Int, Boolean) -> Unit) {
+    fun onToggle(block: (itemType: Int, position: Int, toggleMode: Boolean) -> Unit) {
         onToggle = block
     }
 
@@ -400,7 +400,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * mAdapter position  convert to  model position
+     * adapter position  convert to  model position
      * @receiver Int model of position
      * @return Int
      */
@@ -452,41 +452,32 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         checkableItemTypeList = checkableItemType.toMutableList()
     }
 
-    /**
-     * 全选
-     *
-     * @see .setOnItemCheckedChangeListener
-     */
-    fun allChecked() {
-        if (singleMode) {
-            return
-        }
-        for (i in 0 until itemCount) {
-            if (!checkedPositions.contains(i)) {
-                setChecked(i, true)
-            }
-        }
-    }
 
-    fun allChecked(isAllChecked: Boolean) {
-        if (isAllChecked) {
-            allChecked()
+    fun checkedAll(checked: Boolean = true) {
+        if (checked) {
+            if (singleMode) {
+                return
+            }
+            for (i in 0 until itemCount) {
+                if (!checkedPositions.contains(i)) {
+                    setChecked(i, true)
+                }
+            }
         } else {
-            clearChecked()
+            for (i in 0 until itemCount) {
+                if (checkedPositions.contains(i)) {
+                    setChecked(i, false)
+                }
+            }
         }
     }
 
     /**
-     * 取消全选
-     *
-     * @see .setOnItemCheckedChangeListener
+     * 是否全选状态中
+     * @return Boolean
      */
-    fun clearChecked() {
-        for (i in 0 until itemCount) {
-            if (checkedPositions.contains(i)) {
-                setChecked(i, false)
-            }
-        }
+    fun isCheckedAll(): Boolean {
+        return checkedCount == checkableCount
     }
 
     /**
@@ -494,7 +485,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      *
      * @see .setOnItemCheckedChangeListener
      */
-    fun reverseChecked() {
+    fun checkedReverse() {
         if (singleMode) {
             return
         }
@@ -506,6 +497,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
         }
     }
+
 
     /**
      * 指定索引选择
@@ -530,12 +522,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         } else {
             checkedPositions.remove(Integer.valueOf(position))
         }
-        val isAllChecked = checkedCount == checkableCount
+
         onCheckedChange?.invoke(
             itemViewType,
             position,
             checked,
-            isAllChecked
+            isCheckedAll()
         )
         if (singleMode && checked && checkedPositions.size > 1) {
             setChecked(checkedPositions[0], false)
@@ -569,7 +561,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
         private lateinit var viewDataBinding: ViewDataBinding
         private lateinit var model: Any
-        val mAdapter: BindingAdapter = this@BindingAdapter
+        val bindingAdapter: BindingAdapter = this@BindingAdapter
         val modelPosition = adapterPosition - headerCount
 
         constructor(itemView: View) : super(itemView)

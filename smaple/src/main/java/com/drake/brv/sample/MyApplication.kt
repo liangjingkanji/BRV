@@ -13,6 +13,6 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        BindingAdapter.modelId = BR.m
+//        bindingAdapter.modelId = BR.m
     }
 }

@@ -13,7 +13,7 @@
     tools:context=".fragment.OneMoreTypeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+        android:id="@+id/rv_one_more_type"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
