@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：Nathan
+  ~ Date：8/27/19 12:31 PM
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.drake.brv.sample.fragment.RefreshFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="RefreshFragment" />
+
+</FrameLayout>

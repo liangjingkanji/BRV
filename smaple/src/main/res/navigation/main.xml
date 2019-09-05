@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main.xml"
+    app:startDestination="@id/multi_type">
+
+    <fragment
+        android:id="@+id/multi_type"
+        android:name="com.drake.brv.sample.fragment.MultiTypeFragment"
+        android:label="多类型"
+        tools:layout="@layout/fragment_multi_type" />
+    <fragment
+        android:id="@+id/check_mode"
+        android:name="com.drake.brv.sample.fragment.CheckModeFragment"
+        android:label="选择模式"
+        tools:layout="@layout/fragment_check_mode" />
+    <fragment
+        android:id="@+id/state"
+        android:name="com.drake.brv.sample.fragment.StateFragment"
+        android:label="缺省状态"
+        tools:layout="@layout/fragment_state" />
+    <fragment
+        android:id="@+id/swipe_drag"
+        android:name="com.drake.brv.sample.fragment.SwipeDragFragment"
+        android:label="侧滑|拖拽"
+        tools:layout="@layout/fragment_swipe_drag" />
+    <fragment
+        android:id="@+id/one_more_multi_type"
+        android:name="com.drake.brv.sample.fragment.OneMoreTypeFragment"
+        android:label="一对多"
+        tools:layout="@layout/fragment_one_more_type" />
+    <fragment
+        android:id="@+id/flex_box"
+        android:name="com.drake.brv.sample.fragment.FlexBoxFragment"
+        android:label="伸缩布局"
+        tools:layout="@layout/fragment_flex_box" />
+    <fragment
+        android:id="@+id/header_footer"
+        android:name="com.drake.brv.sample.fragment.HeaderFooterFragment"
+        android:label="头|脚布局" />
+</navigation>

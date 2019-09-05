@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：Nathan
+  ~ Date：8/24/19 2:35 AM
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:navigationIcon="@drawable/ic_menu"
+        app:title="BindingAdapter" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:id="@+id/fragment_nav"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/main"
+        app:defaultNavHost="true"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

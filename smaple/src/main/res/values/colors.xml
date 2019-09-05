@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：Nathan
+  ~ Date：8/24/19 2:35 AM
+  -->
+
+<resources>
+    <color name="colorPrimary">#2FA8E6</color>
+    <color name="colorPrimaryDark">#2FA8E6</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#FFFFFF</color>
+</resources>
