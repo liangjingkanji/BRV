@@ -23,7 +23,7 @@
             android:layout_height="48dp">
 
             <TextView
-                android:id="@+id/tv_checked"
+                android:id="@+id/tv_checked_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -61,37 +61,47 @@
         android:background="@color/white"
         android:elevation="8dp"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
-        <TextView
+        <CheckBox
             android:id="@+id/tv_single_mode"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:background="@drawable/btn_checked"
+            android:button="@null"
+            android:foreground="?selectableItemBackground"
             android:gravity="center"
+            android:textColor="@drawable/btn_checked_text"
             android:text="单选模式" />
 
+
+        <CheckBox
+            android:background="@drawable/btn_checked"
+            android:id="@+id/tv_all_checked"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:textColor="@drawable/btn_checked_text"
+            android:gravity="center"
+            android:text="全选" />
 
         <TextView
             android:id="@+id/tv_reverse_checked"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:gravity="center"
             android:text="反选" />
-
-        <TextView
-            android:id="@+id/tv_all_checked"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="全选" />
 
         <TextView
             android:id="@+id/tv_cancel_checked"
             android:layout_width="0dp"
             android:layout_height="48dp"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:gravity="center"
             android:text="取消选择" />

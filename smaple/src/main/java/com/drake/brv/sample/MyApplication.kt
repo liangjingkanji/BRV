@@ -8,11 +8,12 @@
 package com.drake.brv.sample
 
 import android.app.Application
+import com.drake.brv.BindingAdapter
 
 class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        bindingAdapter.modelId = BR.m
+        BindingAdapter.modelId = BR.m
     }
 }

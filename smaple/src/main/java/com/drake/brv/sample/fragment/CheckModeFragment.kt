@@ -36,6 +36,7 @@ class CheckModeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         rv_check_mode.linear().setup {
+
             addType<CheckModel>(R.layout.item_check_mode)
 
             onLongClick(R.id.item) {
@@ -43,10 +44,26 @@ class CheckModeFragment : Fragment() {
                 setChecked(adapterPosition, true)
             }
 
+            onClick(R.id.cb, R.id.item) {
+                if (!toggleMode && it == R.id.item) {
+                    return@onClick
+                }
+                var checked = (getModel() as CheckModel).checked
+                if (it == R.id.item) checked = !checked
+                setChecked(adapterPosition, checked)
+            }
+
             onCheckedChange { itemType, position, isChecked, isAllChecked ->
                 val model = getModel<CheckModel>(position)
-                model?.checked = true
+                model?.checked = isChecked
                 model?.notifyChange()
+                tv_checked_count.text = "已选择 ${checkedCount}/${modelCount}"
+
+                tv_all_checked.isChecked = isAllChecked
+
+                if (!isAllChecked) {
+                    tv_all_checked.isEnabled = true
+                }
             }
 
             onToggle { itemType, position, toggleMode ->
@@ -58,6 +75,9 @@ class CheckModeFragment : Fragment() {
             onToggleEnd {
                 tv_manage.text = if (it) "取消" else "管理"
                 ll_menu.visibility = if (it) View.VISIBLE else View.GONE
+                tv_checked_count.visibility = if (it) View.VISIBLE else View.GONE
+                tv_checked_count.text = "已选择 ${checkedCount}/${modelCount}"
+                if (!it) checkedAll(false)
             }
 
         }.models = listOf(
@@ -95,6 +115,7 @@ class CheckModeFragment : Fragment() {
         // 全选
         tv_all_checked.setOnClickListener {
             adapter.checkedAll()
+            it.isEnabled = false
         }
 
         // 取消选择
@@ -102,6 +123,7 @@ class CheckModeFragment : Fragment() {
             adapter.checkedAll(false)
         }
 
+        // 切换选择模式
         tv_manage.setOnClickListener {
             adapter.toggle()
         }
