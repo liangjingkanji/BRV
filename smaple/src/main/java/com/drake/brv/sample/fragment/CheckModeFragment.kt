@@ -104,6 +104,9 @@ class CheckModeFragment : Fragment() {
         // 单选模式切换
         tv_single_mode.setOnClickListener {
             adapter.singleMode = !adapter.singleMode
+
+            // 单选模式不应该支持全选
+            it.isEnabled = !adapter.singleMode
         }
 
 
@@ -114,8 +117,8 @@ class CheckModeFragment : Fragment() {
 
         // 全选
         tv_all_checked.setOnClickListener {
+
             adapter.checkedAll()
-            it.isEnabled = false
         }
 
         // 取消选择
