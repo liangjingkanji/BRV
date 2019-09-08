@@ -156,7 +156,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     var itemTouchHelper = ItemTouchHelper(DefaultItemTouchCallback(this))
 
     /**
-     * 函数参数返回值表示是否拒绝默认的绑定布局数据, true表示不再进行自动绑定
+     * function params of return value , true brv not handler onBindViewHolder
      * @param block [@kotlin.ExtensionFunctionType] Function1<BindingViewHolder, Boolean>
      */
     fun onBind(block: BindingViewHolder.() -> Boolean) {
@@ -164,7 +164,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 增量数据更新
+     * increment data update
      * @param block [@kotlin.ExtensionFunctionType] Function2<BindingViewHolder, Any, Unit>
      */
     fun onPayload(block: BindingViewHolder.(Any) -> Unit) {
@@ -185,15 +185,6 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         onLongClick = block
     }
 
-    /**
-     * 选择变化监听器
-     *
-     * 条目类型
-     * 条目位置
-     * 是否选中
-     * 是否全部选中
-     * @param block bindingAdapter.(Int, Int, Boolean, Boolean) -> Unit
-     */
     fun onCheckedChange(block: (itemType: Int, position: Int, checked: Boolean, allChecked: Boolean) -> Unit) {
         onCheckedChange = block
     }
@@ -307,8 +298,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 添加点击事件
-     * 在500毫秒内的重复点击无效
+     * add click event
+     * in 500 milliSecond be invalid
      */
     fun addClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -316,18 +307,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    /**
-     * 添加点击事件
-     */
     fun addFastClickable(@IdRes vararg id: Int) {
         for (i in id) {
             clickableIds.put(i, true)
         }
     }
 
-    /**
-     * 添加长按事件
-     */
     fun addLongClickable(@IdRes vararg id: Int) {
         for (i in id) {
             longClickableIds.add(i)
@@ -416,7 +401,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 得到被选择的数据集
+     * get checked status of list model
      */
     fun <M> getCheckedModels(): List<M> {
         val checkedModels = ArrayList<M>()
@@ -429,7 +414,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     var toggleMode = false
 
     /**
-     * 切换列表模式, 会遍历所有item
+     * switch list mode, can iterate each item of list
      *
      * @see .setOnItemToggleListener
      */
@@ -444,6 +429,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
 
+    /**
+     * set list mode, can iterate each item of list
+     * @param toggleModel Boolean
+     */
     fun setToggle(toggleModel: Boolean) {
         if (toggleModel != this.toggleMode) {
             toggle()
@@ -451,11 +440,20 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
 
+    /**
+     * set checked status of multi type list
+     * @see setChecked
+     * @param checkableItemType IntArray
+     */
     fun setCheckableType(@LayoutRes vararg checkableItemType: Int) {
         checkableItemTypeList = checkableItemType.toMutableList()
     }
 
 
+    /**
+     * single mode be not support checked of all, but support cancel checked of all
+     * @param checked Boolean true is checked of all, false is cancel checked of all
+     */
     fun checkedAll(checked: Boolean = true) {
         if (checked) {
             if (singleMode) {
@@ -476,12 +474,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 是否全选状态中
+     * whether checked of all or not
      * @return Boolean
      */
     fun isCheckedAll(): Boolean {
         return checkedCount == checkableCount
     }
+
 
 
     fun checkedReverse() {
@@ -499,7 +498,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     /**
-     * 指定索引选择
+     * set checked status of item
      *
      * @see .setOnItemCheckedChangeListener
      */
@@ -545,7 +544,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 添加新数据
+     * add new data
      */
     fun addModels(models: List<Any?>?) {
         if (models.isNullOrEmpty()) {
@@ -603,14 +602,14 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
         /**
-         * 该数据绑定的对象类型应该根据对应的itemType确定
+         * get viewDataBinding of list
          */
         fun <B : ViewDataBinding> getViewDataBinding(): B {
             return viewDataBinding as B
         }
 
         /**
-         * 该模型的对象类型应该根据对应的itemType确定
+         * get model of list
          */
         fun <M> getModel(): M {
 

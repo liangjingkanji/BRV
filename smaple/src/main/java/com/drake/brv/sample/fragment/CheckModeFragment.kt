@@ -45,6 +45,8 @@ class CheckModeFragment : Fragment() {
             }
 
             onClick(R.id.cb, R.id.item) {
+
+                // 如果当前未处于选择模式下 点击无效
                 if (!toggleMode && it == R.id.item) {
                     return@onClick
                 }
@@ -57,26 +59,35 @@ class CheckModeFragment : Fragment() {
                 val model = getModel<CheckModel>(position)
                 model?.checked = isChecked
                 model?.notifyChange()
+
+                // 刷新已选择计数器
                 tv_checked_count.text = "已选择 ${checkedCount}/${modelCount}"
 
+                // 全选按钮进行更新
                 tv_all_checked.isChecked = isAllChecked
-
-                if (!isAllChecked) {
-                    tv_all_checked.isEnabled = true
-                }
+                tv_all_checked.isEnabled = !isAllChecked
             }
 
             onToggle { itemType, position, toggleMode ->
+
                 val model = getModel<CheckModel>(position)
                 model?.visibility = toggleMode
                 model?.notifyChange()
             }
 
             onToggleEnd {
+
+                // 管理按钮
                 tv_manage.text = if (it) "取消" else "管理"
+
+                // 显示和隐藏编辑菜单
                 ll_menu.visibility = if (it) View.VISIBLE else View.GONE
+
+                // 显示/隐藏计数器
                 tv_checked_count.visibility = if (it) View.VISIBLE else View.GONE
                 tv_checked_count.text = "已选择 ${checkedCount}/${modelCount}"
+
+                // 如果取消管理模式则取消全部已选择
                 if (!it) checkedAll(false)
             }
 
@@ -106,7 +117,7 @@ class CheckModeFragment : Fragment() {
             adapter.singleMode = !adapter.singleMode
 
             // 单选模式不应该支持全选
-            it.isEnabled = !adapter.singleMode
+            tv_all_checked.isEnabled = !adapter.singleMode
         }
 
 
@@ -117,7 +128,6 @@ class CheckModeFragment : Fragment() {
 
         // 全选
         tv_all_checked.setOnClickListener {
-
             adapter.checkedAll()
         }
 
@@ -130,6 +140,8 @@ class CheckModeFragment : Fragment() {
         tv_manage.setOnClickListener {
             adapter.toggle()
         }
+
+        // val checkedResult = adapter.getCheckedModels<CheckModel>()
     }
 
 

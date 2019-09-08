@@ -66,4 +66,6 @@ class MultiTypeFragment : Fragment() {
             MultiType1Model()
         )
     }
+
+
 }
