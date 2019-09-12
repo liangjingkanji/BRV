@@ -22,7 +22,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.animation.*
-import com.drake.brv.callback.DefaultItemTouchCallback
+import com.drake.brv.listener.DefaultItemTouchCallback
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.view.longClicks
 import java.util.concurrent.TimeUnit
@@ -480,7 +480,6 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     fun isCheckedAll(): Boolean {
         return checkedCount == checkableCount
     }
-
 
 
     fun checkedReverse() {

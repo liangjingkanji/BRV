@@ -5,15 +5,36 @@
   ~ Date：8/27/19 12:31 PM
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--布局中配置PageRefreshLayout-->
+<!--<com.drake.brv.PageRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/page"
+    app:stateEnabled="true"
+    app:error_layout="@layout/layout_error"
+    app:empty_layout="@layout/layout_empty"
+    app:loading_layout="@layout/layout_loading"
     android:layout_height="match_parent"
     tools:context="com.drake.brv.sample.fragment.RefreshFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="RefreshFragment" />
+        android:layout_height="match_parent" />
+
+</com.drake.brv.PageRefreshLayout>-->
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

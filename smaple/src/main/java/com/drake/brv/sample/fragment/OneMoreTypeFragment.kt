@@ -1,8 +1,8 @@
 /*
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
- * Author：Nathan
- * Date：8/24/19 2:35 AM
+ * Author：Drake
+ * Date：9/11/19 6:49 PM
  */
 
 package com.drake.brv.sample.fragment
@@ -12,10 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.drake.brv.linear
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.OneMoreTypeModel
-import com.drake.brv.setup
+import com.drake.brv.utils.linear
+import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_one_more_type.*
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：Drake
+  ~ Date：9/11/19 8:15 PM
+  -->
+
+<resources>
+
+    <!--下拉刷新上拉加载布局-->
+    <declare-styleable name="PageRefreshLayout">
+        <attr name="empty_layout" format="reference" />
+        <attr name="error_layout" format="reference" />
+        <attr name="loading_layout" format="reference" />
+        <!--        启用缺省页-->
+        <attr name="stateEnabled" format="boolean" />
+    </declare-styleable>
+
+</resources>

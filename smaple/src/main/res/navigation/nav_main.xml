@@ -39,4 +39,9 @@
         android:id="@+id/header_footer"
         android:name="com.drake.brv.sample.fragment.HeaderFooterFragment"
         android:label="头|脚布局" />
+    <fragment
+        android:id="@+id/refresh"
+        android:name="com.drake.brv.sample.fragment.RefreshFragment"
+        android:label="刷新列表"
+        tools:layout="@layout/fragment_refresh" />
 </navigation>

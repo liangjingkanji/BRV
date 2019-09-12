@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：Drake
+  ~ Date：9/12/19 6:48 PM
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_loading"
+        android:title="加载中" />
+    <item
+        android:id="@+id/menu_pull_refresh"
+        android:title="下拉刷新" />
+    <item
+        android:id="@+id/menu_refresh"
+        android:title="静默刷新" />
+
+    <item
+        android:id="@+id/menu_content"
+        android:title="加载成功" />
+    <item
+        android:id="@+id/menu_error"
+        android:title="错误缺省页" />
+    <item
+        android:id="@+id/menu_empty"
+        android:title="空缺省页" />
+
+    <item
+        android:id="@+id/menu_refresh_success"
+        android:title="刷新成功" />
+    <item
+        android:id="@+id/menu_refresh_fail"
+        android:title="刷新失败" />
+    <item
+        android:id="@+id/menu_no_load_more"
+        android:title="没有更多数据" />
+</menu>

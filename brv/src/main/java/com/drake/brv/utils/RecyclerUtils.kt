@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
- * Author：Nathan
- * Date：8/24/19 2:35 AM
+ * Author：Drake
+ * Date：9/12/19 1:55 PM
  */
 
-package com.drake.brv
+package com.drake.brv.utils
 
 import android.graphics.Rect
 import android.util.NoSuchPropertyException
@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.drake.brv.BindingAdapter
+import com.drake.brv.DefaultDecoration
 
 
 /**
