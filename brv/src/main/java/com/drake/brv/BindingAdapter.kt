@@ -9,6 +9,7 @@ package com.drake.brv
 
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.util.NoSuchPropertyException
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
@@ -112,7 +113,30 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
 
+        Log.d(
+            "日志",
+            "(BindingAdapter.kt:116)_<onCreateViewHolder>    viewType = [$viewType]"
+        )
+
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+
         return when {
+            isHeader(viewType) || isFooter(viewType) -> BindingViewHolder(view)
+            else -> {
+                val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
+                    LayoutInflater.from(parent.context),
+                    viewType,
+                    parent,
+                    false
+                ) ?: return BindingViewHolder(
+                    view
+                )
+
+                return BindingViewHolder(viewDataBinding)
+            }
+        }
+
+/*        return when {
             isHeader(viewType) -> BindingViewHolder(headers[viewType])
             isFooter(viewType) -> BindingViewHolder(footers[viewType - headerCount - modelCount])
             else -> {
@@ -131,13 +155,16 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
                 return BindingViewHolder(viewDataBinding)
             }
-        }
+        }*/
     }
+
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
         if (isModel(position)) {
             holder.bind(getModel<Any>(position)!!)
         }
+
+        Log.d("日志", "(BindingAdapter.kt:168)_<onBindViewHolder>   position = [$position] ")
     }
 
     override fun onBindViewHolder(
@@ -154,9 +181,11 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     override fun getItemViewType(position: Int): Int {
 
+        Log.d("日志", "(BindingAdapter.kt:178)_<getItemViewType>   position = [$position]")
+
         return when {
-            isHeader(position) -> position
-            isFooter(position) -> position
+            isHeader(position) -> headers[position]
+            isFooter(position) -> footers[position - modelCount - headerCount]
             else -> {
                 val model = getModel<Any>(position)
                 val modelClass: Class<*> = model!!.javaClass
@@ -164,6 +193,17 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                     ?: throw NoSuchPropertyException("Please add item model type, model = $model"))
             }
         }
+
+        /*    return when {
+                isHeader(position) -> position
+                isFooter(position) -> position
+                else -> {
+                    val model = getModel<Any>(position)
+                    val modelClass: Class<*> = model!!.javaClass
+                    (typePool[modelClass]?.invoke(model, position)
+                        ?: throw NoSuchPropertyException("Please add item model type, model = $model"))
+                }
+            }*/
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -285,7 +325,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="Header">
 
-    val headers: ArrayList<View> = arrayListOf()
+    val headers = arrayListOf<Int>()
+    val HEADER_TYPE = -1
+    val FOOTER_TYPE = -2
 
     val headerCount: Int
         get() {
@@ -293,32 +335,35 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
 
-    fun addHeader(view: View, index: Int = -1) {
-
-        if (headers.contains(view)) {
-            return
-        }
-
+    fun addHeader(layout: Int, index: Int = -1, animation: Boolean = false) {
         if (index == -1) {
-            headers.add(view)
+            headers.add(0, layout)
+            if (animation) {
+                notifyItemInserted(0)
+            }
         } else if (index <= headerCount) {
-            headers.add(index, view)
+            headers.add(index, layout)
+            if (animation) {
+                notifyItemInserted(index)
+            }
         }
-
-        notifyDataSetChanged()
-    }
-
-    fun removeHeader(view: View) {
-        if (headerCount != 0 && headers.contains(view)) {
-            headers.remove(view)
+        if (!animation) {
             notifyDataSetChanged()
         }
     }
 
+    fun removeHeader(layout: Int) {
+        if (headerCount != 0 && headers.contains(layout)) {
+            headers.remove(layout)
+            notifyDataSetChanged()
+        }
+    }
+
+/*    */
     /**
      * 默认删除第一个头布局
      * @param index Int 删除头布局的索引
-     */
+     *//*
     fun removeHeader(index: Int = -1) {
 
         if (headerCount <= 0 || headerCount < index) return
@@ -330,12 +375,14 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
         notifyDataSetChanged()
-    }
+    }*/
 
-    fun clearHeader() {
+    fun clearHeader(animation: Boolean = false) {
         if (headers.isNotEmpty()) {
             headers.clear()
-            notifyDataSetChanged()
+            if (animation) {
+                notifyItemRangeRemoved(0, headerCount)
+            } else notifyDataSetChanged()
         }
     }
 
@@ -350,35 +397,44 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // <editor-fold desc="Footer">
 
 
-    val footers: ArrayList<View> = arrayListOf()
+    val footers = arrayListOf<Int>()
     val footerCount: Int
         get() {
             return footers.size
         }
 
 
-    fun addFooter(view: View, index: Int = -1) {
-        if (footers.contains(view)) {
-            return
-        }
+    fun addFooter(layout: Int, index: Int = -1, animation: Boolean = false) {
+
 
         if (index == -1) {
-            footers.add(view)
+            footers.add(layout)
+            if (animation) {
+                notifyItemInserted(0)
+            }
         } else if (index <= footerCount) {
-            footers.add(index, view)
+            footers.add(index, layout)
+            if (animation) {
+                notifyItemInserted(index)
+            }
         }
 
-        notifyDataSetChanged()
-    }
-
-    fun removeFooter(view: View) {
-        if (footerCount != 0 && footers.contains(view)) {
-            footers.remove(view)
+        if (!animation) {
             notifyDataSetChanged()
         }
     }
 
-    fun removeFooter(index: Int = -1) {
+    fun removeFooter(layout: Int) {
+        if (footerCount != 0 && footers.contains(layout)) {
+            footers.remove(layout)
+
+
+
+            notifyDataSetChanged()
+        }
+    }
+
+/*    fun removeFooter(index: Int = -1) {
 
         if (footerCount <= 0 || footerCount < index) return
 
@@ -388,7 +444,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             footers.removeAt(index)
         }
         notifyDataSetChanged()
-    }
+    }*/
 
     fun clearFooter() {
         if (footers.isNotEmpty()) {

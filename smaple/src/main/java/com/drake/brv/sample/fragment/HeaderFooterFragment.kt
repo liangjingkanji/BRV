@@ -61,29 +61,29 @@ class HeaderFooterFragment : Fragment() {
             when (it.itemId) {
                 R.id.menu_add_header -> {
 
-                    adapter.addHeader(getHeaderOrFooter())
-
+                    adapter.addHeader(R.layout.item_multi_type_1)
 
                     /* (adapter.models as ArrayList).add(index, Model())
                      adapter.notifyItemInserted(index)*/
 
 
                 } // 添加头布局
-                R.id.menu_remove_header -> adapter.removeHeader()  // 删除头布局
-                R.id.menu_clear_header -> adapter.clearHeader() // 清除头布局
-                R.id.menu_add_footer -> adapter.addFooter(getHeaderOrFooter())  // 添加脚布局
-                R.id.menu_remove_footer -> adapter.removeFooter()  // 删除脚布局
+//                R.id.menu_remove_header -> adapter.removeHeader()  // 删除头布局
+                R.id.menu_clear_header -> adapter.clearHeader(true) // 清除头布局
+                R.id.menu_add_footer -> adapter.addFooter(R.layout.item_multi_type_1)  // 添加脚布局
+//                R.id.menu_remove_footer -> adapter.removeFooter()  // 删除脚布局
                 R.id.menu_clear_footer -> adapter.clearFooter()  // 清除脚布局
             }
             true
         }
+
     }
 
 
     fun getHeaderOrFooter(): View {
         return LayoutInflater.from(activity).inflate(
             R.layout.item_multi_type_1,
-            rv_header_footer.bindingAdapter.recyclerView,
+            rv_header_footer,
             false
         )
     }
