@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main.xml"
-    app:startDestination="@id/multi_type">
+    app:startDestination="@id/header_footer">
 
     <fragment
         android:id="@+id/multi_type"

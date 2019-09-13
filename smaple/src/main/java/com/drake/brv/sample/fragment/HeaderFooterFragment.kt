@@ -42,13 +42,13 @@ class HeaderFooterFragment : Fragment() {
             addType<Model>(R.layout.item_multi_type_1)
         }.models = listOf(
             Model(),
-            Model(),
             Model()
         )
 
-
         initToolbar()
     }
+
+    var index = 0
 
 
     private fun initToolbar() {
@@ -59,11 +59,20 @@ class HeaderFooterFragment : Fragment() {
         toolbar.inflateMenu(R.menu.menu_header_footer)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_add_header -> adapter.addHeader(getHeaderOrFooter())  // 添加头布局
-                R.id.menu_remove_header -> adapter.removeHeader(getHeaderOrFooter())  // 删除头布局
+                R.id.menu_add_header -> {
+
+                    adapter.addHeader(getHeaderOrFooter())
+
+
+                    /* (adapter.models as ArrayList).add(index, Model())
+                     adapter.notifyItemInserted(index)*/
+
+
+                } // 添加头布局
+                R.id.menu_remove_header -> adapter.removeHeader()  // 删除头布局
                 R.id.menu_clear_header -> adapter.clearHeader() // 清除头布局
                 R.id.menu_add_footer -> adapter.addFooter(getHeaderOrFooter())  // 添加脚布局
-                R.id.menu_remove_footer -> adapter.removeFooter(getHeaderOrFooter())  // 删除脚布局
+                R.id.menu_remove_footer -> adapter.removeFooter()  // 删除脚布局
                 R.id.menu_clear_footer -> adapter.clearFooter()  // 清除脚布局
             }
             true
@@ -71,13 +80,15 @@ class HeaderFooterFragment : Fragment() {
     }
 
 
-    /**
-     * 随意创建View
-     * @return View
-     */
     fun getHeaderOrFooter(): View {
-        return layoutInflater.inflate(R.layout.item_multi_type_1, rv_header_footer, false)
+        return LayoutInflater.from(activity).inflate(
+            R.layout.item_multi_type_1,
+            rv_header_footer.bindingAdapter.recyclerView,
+            false
+        )
     }
 
 
 }
+
+

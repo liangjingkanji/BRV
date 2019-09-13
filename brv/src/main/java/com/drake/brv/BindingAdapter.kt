@@ -38,6 +38,11 @@ import java.util.concurrent.TimeUnit
  * item选择状态监听(切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
  */
 
+fun ViewGroup.getHeaderOrFooter(): View {
+    return LayoutInflater.from(context).inflate(R.layout.item_multi_type_1, this, false)
+}
+
+
 @Suppress("UNCHECKED_CAST")
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
@@ -106,6 +111,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // <editor-fold desc="继承函数">
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+
         return when {
             isHeader(viewType) -> BindingViewHolder(headers[viewType])
             isFooter(viewType) -> BindingViewHolder(footers[viewType - headerCount - modelCount])
@@ -115,8 +121,15 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                     viewType,
                     parent,
                     false
-                ) ?: throw NoSuchPropertyException("Item of layout must is data binding layout")
-                BindingViewHolder(viewDataBinding)
+                ) ?: return BindingViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        viewType,
+                        parent,
+                        false
+                    )
+                )
+
+                return BindingViewHolder(viewDataBinding)
             }
         }
     }
@@ -153,9 +166,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    override fun getItemCount(): Int {
-        return headerCount + modelCount + footerCount
-    }
+    override fun getItemCount() = headerCount + modelCount + footerCount
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
 
@@ -281,30 +292,50 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             return headers.size
         }
 
-    fun addHeader(view: View) {
+
+    fun addHeader(view: View, index: Int = -1) {
+
         if (headers.contains(view)) {
             return
         }
-        headers.apply {
-            add(view)
-            notifyItemInserted(headerCount - 1)
+
+        if (index == -1) {
+            headers.add(view)
+        } else if (index <= headerCount) {
+            headers.add(index, view)
         }
+
+        notifyDataSetChanged()
     }
 
     fun removeHeader(view: View) {
-        if (headers.contains(view)) {
-            val temp = headers.indexOf(view)
+        if (headerCount != 0 && headers.contains(view)) {
             headers.remove(view)
-            notifyItemRemoved(temp)
+            notifyDataSetChanged()
         }
     }
 
+    /**
+     * 默认删除第一个头布局
+     * @param index Int 删除头布局的索引
+     */
+    fun removeHeader(index: Int = -1) {
+
+        if (headerCount <= 0 || headerCount < index) return
+
+        if (index == -1) {
+            headers.removeAt(0)
+        } else {
+            headers.removeAt(index)
+        }
+
+        notifyDataSetChanged()
+    }
 
     fun clearHeader() {
         if (headers.isNotEmpty()) {
-            val temp = headerCount
             headers.clear()
-            notifyItemRangeRemoved(0, temp)
+            notifyDataSetChanged()
         }
     }
 
@@ -326,37 +357,43 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
 
-    fun addFooter(view: View) {
+    fun addFooter(view: View, index: Int = -1) {
         if (footers.contains(view)) {
             return
         }
-        footers.apply {
-            add(view)
-            notifyItemInserted(headerCount + modelCount + footerCount - 1)
+
+        if (index == -1) {
+            footers.add(view)
+        } else if (index <= footerCount) {
+            footers.add(index, view)
         }
+
+        notifyDataSetChanged()
     }
 
     fun removeFooter(view: View) {
-        if (footers.contains(view)) {
-            val temp = footers.indexOf(view)
+        if (footerCount != 0 && footers.contains(view)) {
             footers.remove(view)
-            notifyItemRemoved(temp)
+            notifyDataSetChanged()
         }
     }
 
-/*    fun removeFooter(index:Int){
-        if (footers.contains(view)) {
-            val temp = footers.indexOf(view)
-            footers.remove(view)
-            notifyItemRemoved(temp)
+    fun removeFooter(index: Int = -1) {
+
+        if (footerCount <= 0 || footerCount < index) return
+
+        if (index == -1) {
+            footers.removeAt(footerCount - 1)
+        } else {
+            footers.removeAt(index)
         }
-    }*/
+        notifyDataSetChanged()
+    }
 
     fun clearFooter() {
         if (footers.isNotEmpty()) {
-            val temp = footerCount
             footers.clear()
-            notifyItemRangeRemoved(headerCount + modelCount, temp)
+            notifyDataSetChanged()
         }
     }
 
@@ -383,9 +420,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     var models: List<Any?>? = null
         set(value) {
 
-            if (!value.isNullOrEmpty()) {
+            if (value != null) {
                 field = ArrayList(value)
             }
+
 
             notifyDataSetChanged()
 
@@ -418,15 +456,20 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     /**
      * add new data
      */
-    fun addModels(models: List<Any?>?) {
+    fun addModels(models: List<Any?>?, animation: Boolean = true) {
         if (models.isNullOrEmpty()) {
             return
         }
+
         if (this.models.isNullOrEmpty()) {
             this.models = models
         } else {
             (this.models!! as ArrayList).addAll(models)
-            notifyItemRangeInserted(headerCount + modelCount, models.size)
+            if (animation) {
+                notifyItemRangeInserted(headerCount + modelCount, models.size)
+            } else {
+                notifyDataSetChanged()
+            }
         }
     }
 
@@ -626,7 +669,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     inner class BindingViewHolder : RecyclerView.ViewHolder {
 
-        private lateinit var viewDataBinding: ViewDataBinding
+        private var viewDataBinding: ViewDataBinding? = null
         private lateinit var model: Any
         val bindingAdapter: BindingAdapter = this@BindingAdapter
         val modelPosition
@@ -663,8 +706,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                 if (isReturn) return
             }
 
-            viewDataBinding.setVariable(modelId, model)
-            viewDataBinding.executePendingBindings()
+            viewDataBinding?.setVariable(modelId, model)
+            viewDataBinding?.executePendingBindings()
         }
 
         /**
