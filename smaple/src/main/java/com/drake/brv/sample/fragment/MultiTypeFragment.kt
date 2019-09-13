@@ -14,8 +14,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.model.MultiType1Model
-import com.drake.brv.sample.model.MultiType2Model
+import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -42,22 +42,22 @@ class MultiTypeFragment : Fragment() {
          */
 
         rv_multi_type.linear().setup {
-            addType<MultiType1Model>(R.layout.item_multi_type_1)
-            addType<MultiType2Model>(R.layout.item_multi_type_2)
+            addType<Model>(R.layout.item_multi_type_1)
+            addType<Model2>(R.layout.item_multi_type_2)
         }.models = listOf(
-            MultiType1Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model()
+            Model(),
+            Model2(),
+            Model2(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model2(),
+            Model2(),
+            Model2(),
+            Model(),
+            Model(),
+            Model()
         )
 
         // 点击事件

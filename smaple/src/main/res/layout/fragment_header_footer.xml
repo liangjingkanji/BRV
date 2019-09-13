@@ -12,33 +12,6 @@
     android:orientation="vertical"
     tools:context="com.drake.brv.sample.fragment.HeaderFooterFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <Button
-            android:id="@+id/btn_add_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="add header" />
-
-        <Button
-            android:id="@+id/btn_add_footer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            android:text="add footer" />
-
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_header_footer"
         android:layout_width="match_parent"

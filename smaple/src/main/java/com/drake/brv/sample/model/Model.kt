@@ -7,4 +7,4 @@
 
 package com.drake.brv.sample.model
 
-class MultiType2Model
+class Model

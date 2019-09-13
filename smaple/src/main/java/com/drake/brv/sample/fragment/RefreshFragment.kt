@@ -11,12 +11,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
-import com.drake.brv.sample.model.MultiType1Model
-import com.drake.brv.sample.model.MultiType2Model
+import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.page
 import com.drake.brv.utils.setup
@@ -35,8 +36,9 @@ class RefreshFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_refresh, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         /**
          * 请查看Application的初始化
@@ -46,28 +48,30 @@ class RefreshFragment : Fragment() {
 
 
         rv.linear().setup {
-            addType<MultiType1Model>(R.layout.item_multi_type_1)
-            addType<MultiType2Model>(R.layout.item_multi_type_2)
+            addType<Model>(R.layout.item_multi_type_1)
+            addType<Model2>(R.layout.item_multi_type_2)
         }.models = listOf(
-            MultiType1Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model()
+            Model(),
+            Model2(),
+            Model2(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model2(),
+            Model2(),
+            Model2(),
+            Model(),
+            Model(),
+            Model()
         )
 
 
         page.onRefresh {
             // 模拟网络请求
             postDelayed({ showContent() }, 2000)
+
+            Toast.makeText(activity, "右上角菜单可以操作刷新结果, 默认2s结束", Toast.LENGTH_SHORT).show()
         }
 
 

@@ -11,9 +11,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.model.MultiType1Model
+import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -22,11 +23,13 @@ import kotlinx.android.synthetic.main.fragment_header_footer.*
 
 class HeaderFooterFragment : Fragment() {
 
+
+    lateinit var toolbar: Toolbar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
 
         return inflater.inflate(R.layout.fragment_header_footer, container, false)
@@ -36,27 +39,45 @@ class HeaderFooterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         rv_header_footer.linear().setup {
-            addType<MultiType1Model>(R.layout.item_multi_type_1)
+            addType<Model>(R.layout.item_multi_type_1)
         }.models = listOf(
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model()
+            Model(),
+            Model(),
+            Model()
         )
 
 
-        btn_add_header.setOnClickListener {
-            val view =
-                layoutInflater.inflate(R.layout.item_multi_type_1, rv_header_footer, false)
-            rv_header_footer.bindingAdapter.addHeader(view)
-//            rv_header_footer.bindingAdapter.removeHeader(view)
-        }
+        initToolbar()
+    }
 
-        btn_add_footer.setOnClickListener {
-            val view =
-                layoutInflater.inflate(R.layout.item_multi_type_1, rv_header_footer, false)
-            rv_header_footer.bindingAdapter.addFooter(view)
-//            rv_header_footer.bindingAdapter.removeFooter(view)
+
+    private fun initToolbar() {
+
+        val adapter = rv_header_footer.bindingAdapter
+
+        toolbar = activity!!.findViewById(R.id.toolbar)
+        toolbar.inflateMenu(R.menu.menu_header_footer)
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_add_header -> adapter.addHeader(getHeaderOrFooter())  // 添加头布局
+                R.id.menu_remove_header -> adapter.removeHeader(getHeaderOrFooter())  // 删除头布局
+                R.id.menu_clear_header -> adapter.clearHeader() // 清除头布局
+                R.id.menu_add_footer -> adapter.addFooter(getHeaderOrFooter())  // 添加脚布局
+                R.id.menu_remove_footer -> adapter.removeFooter(getHeaderOrFooter())  // 删除脚布局
+                R.id.menu_clear_footer -> adapter.clearFooter()  // 清除脚布局
+            }
+            true
         }
     }
+
+
+    /**
+     * 随意创建View
+     * @return View
+     */
+    fun getHeaderOrFooter(): View {
+        return layoutInflater.inflate(R.layout.item_multi_type_1, rv_header_footer, false)
+    }
+
 
 }

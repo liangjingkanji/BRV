@@ -7,22 +7,18 @@
 
 package com.drake.brv.model
 
-import androidx.recyclerview.widget.ItemTouchHelper
-
 interface ItemModel {
 
-    companion object {
-        const val LEFT = ItemTouchHelper.LEFT
-        const val RIGHT = ItemTouchHelper.RIGHT
-        const val UP = ItemTouchHelper.UP
-        const val DOWN = ItemTouchHelper.DOWN
-    }
 
+    @DragType
     fun drag(): Int {
-        return 0
+        return DragType.NONE
     }
 
+
+    @SwipeType
     fun swipe(): Int {
-        return 0
+        return SwipeType.NONE
     }
+
 }

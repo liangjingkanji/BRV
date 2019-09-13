@@ -14,8 +14,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.model.MultiType1Model
-import com.drake.brv.sample.model.MultiType2Model
+import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.statelayout.StateLayout
@@ -36,31 +36,30 @@ class StateFragment : Fragment() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         /**
          * 请查看Application的初始化
          */
 
 
         rv.linear().setup {
-            addType<MultiType1Model>(R.layout.item_multi_type_1)
-            addType<MultiType2Model>(R.layout.item_multi_type_2)
+            addType<Model>(R.layout.item_multi_type_1)
+            addType<Model2>(R.layout.item_multi_type_2)
         }.models = listOf(
-            MultiType1Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType2Model(),
-            MultiType1Model(),
-            MultiType1Model(),
-            MultiType1Model()
+            Model(),
+            Model2(),
+            Model2(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model2(),
+            Model2(),
+            Model2(),
+            Model(),
+            Model(),
+            Model()
         )
 
 

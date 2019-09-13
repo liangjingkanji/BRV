@@ -41,108 +41,11 @@ import java.util.concurrent.TimeUnit
 @Suppress("UNCHECKED_CAST")
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
-    var models: List<Any?>? = null
-        set(value) {
-
-            if (!value.isNullOrEmpty()) {
-                field = ArrayList(value)
-            }
-
-            notifyDataSetChanged()
-
-            if (checkedPositions.isNotEmpty()) {
-                checkedPositions.clear()
-            }
-
-            if (isFirst) {
-                lastPosition = -1
-                isFirst = false
-            } else {
-                lastPosition = itemCount - 1
-            }
-        }
-
-
-    val headers: ArrayList<View> = arrayListOf()
-    val footers: ArrayList<View> = arrayListOf()
-    val checkedPositions = arrayListOf<Int>()
-
-
-    val modelCount: Int
-        get() {
-            return if (models == null) {
-                0
-            } else {
-                models!!.size
-            }
-        }
-
-
-    val headerCount: Int
-        get() {
-            return headers.size
-        }
-
-    val footerCount: Int
-        get() {
-            return footers.size
-        }
-
-
-    val checkedCount: Int
-        get() = checkedPositions.size
-
-    val checkableCount: Int
-        get() {
-            var count = 0
-            if (checkableItemTypeList == null) {
-                return models!!.size
-            } else {
-                for (i in 0 until itemCount) {
-                    if (checkableItemTypeList!!.contains(getItemViewType(i))) {
-                        count++
-                    }
-                }
-            }
-            return count
-        }
-
-
-    var singleMode = false
-        set(value) {
-            field = value
-            val size = checkedPositions.size
-            if (field && size > 1) {
-                for (i in 0 until size - 1) {
-                    setChecked(checkedPositions[0], false)
-                }
-            }
-        }
-
 
     var recyclerView: RecyclerView? = null
 
-    var touchEnable = false
-        set(value) {
-            field = value
 
-            if (value) {
-                recyclerView?.let {
-                    itemTouchHelper.attachToRecyclerView(recyclerView)
-                }
-            } else {
-                itemTouchHelper.attachToRecyclerView(null)
-            }
-        }
-
-    private var itemAnimation: BaseItemAnimation = AlphaItemAnimation()
-    private var lastPosition = -1
-    private var isFirst = true
-    private var animationEnable = false
-    private val clickableIds = SparseBooleanArray()
-    private val longClickableIds = ArrayList<Int>()
-    private var checkableItemTypeList: List<Int>? = null
-    val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
+    // <editor-fold desc="生命周期">
 
     private var onBind: (BindingViewHolder.() -> Boolean)? = null
     private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
@@ -153,7 +56,6 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var onToggle: ((itemType: Int, position: Int, toggleModel: Boolean) -> Unit)? = null
     private var onToggleEnd: ((toggleModel: Boolean) -> Unit)? = null
 
-    var itemTouchHelper = ItemTouchHelper(DefaultItemTouchCallback(this))
 
     /**
      * function params of return value , true brv not handler onBindViewHolder
@@ -198,25 +100,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
 
-    fun addHeader(view: View) {
-        if (headers.contains(view)) {
-            return
-        }
-        headers.apply {
-            add(view)
-            notifyItemInserted(headerCount - 1)
-        }
-    }
+    // </editor-fold>
 
-    fun addFooter(view: View) {
-        if (footers.contains(view)) {
-            return
-        }
-        footers.apply {
-            add(view)
-            notifyItemInserted(headerCount + modelCount + footerCount - 1)
-        }
-    }
+
+    // <editor-fold desc="继承函数">
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
         return when {
@@ -289,6 +176,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+    // </editor-fold>
+
+
+    // <editor-fold desc="多类型">
+
+    val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
+
     inline fun <reified M> addType(@LayoutRes layout: Int) {
         typePool[M::class.java] = { layout }
     }
@@ -296,6 +190,30 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     inline fun <reified M> addType(noinline block: M.(Int) -> Int) {
         typePool[M::class.java] = block as Any.(Int) -> Int
     }
+
+
+    // </editor-fold>
+
+
+    // <editor-fold desc="事件">
+
+
+    private val clickableIds = SparseBooleanArray()
+    private val longClickableIds = ArrayList<Int>()
+    var itemTouchHelper = ItemTouchHelper(DefaultItemTouchCallback(this))
+
+    var touchEnable = false
+        set(value) {
+            field = value
+
+            if (value) {
+                recyclerView?.let {
+                    itemTouchHelper.attachToRecyclerView(recyclerView)
+                }
+            } else {
+                itemTouchHelper.attachToRecyclerView(null)
+            }
+        }
 
     /**
      * add click event
@@ -319,6 +237,17 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+
+    // </editor-fold>
+
+
+    // <editor-fold desc="动画">
+
+    private var itemAnimation: BaseItemAnimation = AlphaItemAnimation()
+    private var animationEnable = false
+    private var lastPosition = -1
+    private var isFirst = true
+
     fun setAnimation(animationEnable: Boolean) {
         this.animationEnable = animationEnable
     }
@@ -339,11 +268,71 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+
+    // </editor-fold>
+
+
+    // <editor-fold desc="Header">
+
+    val headers: ArrayList<View> = arrayListOf()
+
+    val headerCount: Int
+        get() {
+            return headers.size
+        }
+
+    fun addHeader(view: View) {
+        if (headers.contains(view)) {
+            return
+        }
+        headers.apply {
+            add(view)
+            notifyItemInserted(headerCount - 1)
+        }
+    }
+
     fun removeHeader(view: View) {
         if (headers.contains(view)) {
             val temp = headers.indexOf(view)
             headers.remove(view)
             notifyItemRemoved(temp)
+        }
+    }
+
+
+    fun clearHeader() {
+        if (headers.isNotEmpty()) {
+            val temp = headerCount
+            headers.clear()
+            notifyItemRangeRemoved(0, temp)
+        }
+    }
+
+
+    fun isHeader(@IntRange(from = 0) position: Int): Boolean {
+        return (headerCount > 0 && position < headerCount)
+    }
+
+    // </editor-fold>
+
+
+    // <editor-fold desc="Footer">
+
+
+    val footers: ArrayList<View> = arrayListOf()
+    val footerCount: Int
+        get() {
+            return footers.size
+        }
+
+
+    fun addFooter(view: View) {
+        if (footers.contains(view)) {
+            return
+        }
+        footers.apply {
+            add(view)
+            notifyItemInserted(headerCount + modelCount + footerCount - 1)
         }
     }
 
@@ -355,13 +344,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    fun clearHeader() {
-        if (headers.isNotEmpty()) {
-            val temp = headerCount
-            headers.clear()
-            notifyItemRangeRemoved(0, temp)
+/*    fun removeFooter(index:Int){
+        if (footers.contains(view)) {
+            val temp = footers.indexOf(view)
+            footers.remove(view)
+            notifyItemRemoved(temp)
         }
-    }
+    }*/
 
     fun clearFooter() {
         if (footers.isNotEmpty()) {
@@ -371,17 +360,51 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    fun isHeader(@IntRange(from = 0) position: Int): Boolean {
-        return (headerCount > 0 && position < headerCount)
+
+    fun isFooter(@IntRange(from = 0) position: Int): Boolean {
+        return (footerCount > 0 && position >= headerCount + modelCount && position < headerCount + modelCount + footerCount)
     }
+
+    // </editor-fold>
+
+
+    // <editor-fold desc="Model">
+
+
+    val modelCount: Int
+        get() {
+            return if (models == null) {
+                0
+            } else {
+                models!!.size
+            }
+        }
+
+    var models: List<Any?>? = null
+        set(value) {
+
+            if (!value.isNullOrEmpty()) {
+                field = ArrayList(value)
+            }
+
+            notifyDataSetChanged()
+
+            if (checkedPositions.isNotEmpty()) {
+                checkedPositions.clear()
+            }
+
+            if (isFirst) {
+                lastPosition = -1
+                isFirst = false
+            } else {
+                lastPosition = itemCount - 1
+            }
+        }
 
     fun isModel(position: Int): Boolean {
         return !(isHeader(position) || isFooter(position))
     }
 
-    fun isFooter(@IntRange(from = 0) position: Int): Boolean {
-        return (footerCount > 0 && position >= headerCount + modelCount && position < headerCount + modelCount + footerCount)
-    }
 
     fun <M> getModel(position: Int): M? {
         return when {
@@ -391,6 +414,23 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+
+    /**
+     * add new data
+     */
+    fun addModels(models: List<Any?>?) {
+        if (models.isNullOrEmpty()) {
+            return
+        }
+        if (this.models.isNullOrEmpty()) {
+            this.models = models
+        } else {
+            (this.models!! as ArrayList).addAll(models)
+            notifyItemRangeInserted(headerCount + modelCount, models.size)
+        }
+    }
+
+
     /**
      * adapter position  convert to  model position
      * @receiver Int model of position
@@ -399,6 +439,47 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     fun Int.getModelPosition(): Int {
         return this - headerCount
     }
+
+    // </editor-fold>
+
+
+    // <editor-fold desc="选择模式">
+
+    var toggleMode = false
+    val checkedPositions = arrayListOf<Int>()
+
+    private var checkableItemTypeList: List<Int>? = null
+
+
+    val checkedCount: Int
+        get() = checkedPositions.size
+
+    private val checkableCount: Int
+        get() {
+            var count = 0
+            if (checkableItemTypeList == null) {
+                return models!!.size
+            } else {
+                for (i in 0 until itemCount) {
+                    if (checkableItemTypeList!!.contains(getItemViewType(i))) {
+                        count++
+                    }
+                }
+            }
+            return count
+        }
+
+
+    var singleMode = false
+        set(value) {
+            field = value
+            val size = checkedPositions.size
+            if (field && size > 1) {
+                for (i in 0 until size - 1) {
+                    setChecked(checkedPositions[0], false)
+                }
+            }
+        }
 
     /**
      * get checked status of list model
@@ -410,8 +491,6 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
         return checkedModels
     }
-
-    var toggleMode = false
 
     /**
      * switch list mode, can iterate each item of list
@@ -542,20 +621,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    /**
-     * add new data
-     */
-    fun addModels(models: List<Any?>?) {
-        if (models.isNullOrEmpty()) {
-            return
-        }
-        if (this.models.isNullOrEmpty()) {
-            this.models = models
-        } else {
-            (this.models!! as ArrayList).addAll(models)
-            notifyItemRangeInserted(headerCount + modelCount, models.size)
-        }
-    }
+    // </editor-fold>
+
 
     inner class BindingViewHolder : RecyclerView.ViewHolder {
 

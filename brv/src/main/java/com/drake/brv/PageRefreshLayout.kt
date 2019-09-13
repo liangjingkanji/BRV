@@ -38,19 +38,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     var emptyLayout = View.NO_ID
     var errorLayout = View.NO_ID
     var loadingLayout = View.NO_ID
-
+    var index = startIndex
+    var hasMore = true
     var stateEnabled = true // 启用缺省页 (如果设置布局或者监听器会自动开启)
 
-    private var adapter: BindingAdapter? = null
 
     companion object {
         var startIndex = 1
     }
 
-    private var index = startIndex
 
-    private var hasMore = true
-
+    private var adapter: BindingAdapter? = null
     private var emptyView: View? = null
     private var errorView: View? = null
     private var contentView: View? = null
@@ -59,7 +57,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var onEmpty: (View.() -> Unit)? = null
     private var onError: (View.() -> Unit)? = null
     private var onLoading: (View.() -> Unit)? = null
-
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
 
@@ -223,6 +220,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             finishRefresh(success)
         }
 
+        setEnableRefresh(true)
+
         if (hasMore) {
             finishLoadMore(success)
         } else {
@@ -247,6 +246,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     fun showLoading() {
         state?.showLoading()
+        setEnableRefresh(false)
         onRefresh(this)
     }
 
