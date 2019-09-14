@@ -40,6 +40,14 @@ class HeaderFooterFragment : Fragment() {
 
         rv_header_footer.linear().setup {
             addType<Model>(R.layout.item_multi_type_1)
+
+            /**
+             * BRV的数据集 = Header + Footer + Models
+             * 所以本质上他们都是一组多类型而已, 我分出来只是为了方便替换Models而不影响Header和Footer
+             */
+
+            addType<Header>(R.layout.item_multi_type_1)
+            addType<Footer>(R.layout.item_multi_type_1)
         }.models = listOf(
             Model(),
             Model()
@@ -59,34 +67,20 @@ class HeaderFooterFragment : Fragment() {
         toolbar.inflateMenu(R.menu.menu_header_footer)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_add_header -> {
-
-                    adapter.addHeader(R.layout.item_multi_type_1)
-
-                    /* (adapter.models as ArrayList).add(index, Model())
-                     adapter.notifyItemInserted(index)*/
-
-
-                } // 添加头布局
-//                R.id.menu_remove_header -> adapter.removeHeader()  // 删除头布局
-                R.id.menu_clear_header -> adapter.clearHeader(true) // 清除头布局
-                R.id.menu_add_footer -> adapter.addFooter(R.layout.item_multi_type_1)  // 添加脚布局
-//                R.id.menu_remove_footer -> adapter.removeFooter()  // 删除脚布局
-                R.id.menu_clear_footer -> adapter.clearFooter()  // 清除脚布局
+                R.id.menu_add_header -> adapter.addHeader(Header(), animation = true)
+                R.id.menu_remove_header -> adapter.removeHeaderAt(animation = true)  // 删除头布局
+                R.id.menu_clear_header -> adapter.clearHeader() // 清除头布局
+                R.id.menu_add_footer -> adapter.addFooter(Footer())  // 添加脚布局
+                R.id.menu_remove_footer -> adapter.removeFooterAt()  // 删除脚布局
+                R.id.menu_clear_footer -> adapter.clearFooter(true)  // 清除脚布局
             }
             true
         }
 
     }
 
-
-    fun getHeaderOrFooter(): View {
-        return LayoutInflater.from(activity).inflate(
-            R.layout.item_multi_type_1,
-            rv_header_footer,
-            false
-        )
-    }
+    class Header
+    class Footer
 
 
 }

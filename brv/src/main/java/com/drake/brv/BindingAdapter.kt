@@ -9,7 +9,6 @@ package com.drake.brv
 
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.util.NoSuchPropertyException
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
@@ -113,58 +112,23 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
 
-        Log.d(
-            "日志",
-            "(BindingAdapter.kt:116)_<onCreateViewHolder>    viewType = [$viewType]"
-        )
+        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
+            LayoutInflater.from(parent.context),
+            viewType,
+            parent,
+            false
+        ) ?: return BindingViewHolder(parent.getView(viewType))
 
-        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        return BindingViewHolder(viewDataBinding)
+    }
 
-        return when {
-            isHeader(viewType) || isFooter(viewType) -> BindingViewHolder(view)
-            else -> {
-                val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-                    LayoutInflater.from(parent.context),
-                    viewType,
-                    parent,
-                    false
-                ) ?: return BindingViewHolder(
-                    view
-                )
-
-                return BindingViewHolder(viewDataBinding)
-            }
-        }
-
-/*        return when {
-            isHeader(viewType) -> BindingViewHolder(headers[viewType])
-            isFooter(viewType) -> BindingViewHolder(footers[viewType - headerCount - modelCount])
-            else -> {
-                val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-                    LayoutInflater.from(parent.context),
-                    viewType,
-                    parent,
-                    false
-                ) ?: return BindingViewHolder(
-                    LayoutInflater.from(parent.context).inflate(
-                        viewType,
-                        parent,
-                        false
-                    )
-                )
-
-                return BindingViewHolder(viewDataBinding)
-            }
-        }*/
+    fun ViewGroup.getView(@LayoutRes layout: Int): View {
+        return LayoutInflater.from(context).inflate(layout, this, false)
     }
 
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        if (isModel(position)) {
-            holder.bind(getModel<Any>(position)!!)
-        }
-
-        Log.d("日志", "(BindingAdapter.kt:168)_<onBindViewHolder>   position = [$position] ")
+        holder.bind(getModel<Any>(position)!!)
     }
 
     override fun onBindViewHolder(
@@ -345,39 +309,33 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    fun removeHeader(model: Any?) {
+    fun removeHeader(model: Any?, animation: Boolean = false) {
 
         if (headerCount != 0 && headers.contains(model)) {
+            val headerIndex = headers.indexOf(model)
+
             (headers as MutableList).remove(model)
-            notifyDataSetChanged()
+            if (animation) {
+                notifyItemRemoved(headerIndex)
+            } else notifyDataSetChanged()
         }
     }
 
-/*    */
-    /**
-     * 默认删除第一个头布局
-     * @param index Int 删除头布局的索引
-     */
-    fun removeHeader(index: Int = -1, animation: Boolean = false) {
+
+    fun removeHeaderAt(index: Int = 0, animation: Boolean = false) {
 
         if (headerCount <= 0 || headerCount < index) return
 
-        if (index == -1) {
-            (headers as MutableList).removeAt(0)
-            if (animation) {
-
-            }
-        } else {
-            (headers as MutableList).removeAt(index)
-        }
+        (headers as MutableList).removeAt(index)
 
         if (animation) {
-            notifyDataSetChanged()
-        }
+            notifyItemRemoved(index)
+        } else notifyDataSetChanged()
     }
 
     fun clearHeader(animation: Boolean = false) {
         if (headers.isNotEmpty()) {
+            val headerCount = this.headerCount
             (headers as MutableList).clear()
             if (animation) {
                 notifyItemRangeRemoved(0, headerCount)
@@ -422,12 +380,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         if (index == -1) {
             (footers as MutableList).add(model)
             if (animation) {
-                notifyItemInserted(0)
+                notifyItemInserted(itemCount)
             }
         } else if (index <= footerCount) {
             (footers as MutableList).add(index, model)
             if (animation) {
-                notifyItemInserted(index)
+                notifyItemInserted(headerCount + modelCount + index)
             }
         }
 
@@ -436,38 +394,51 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-    fun removeFooter(layout: Int) {
-        if (footerCount != 0 && footers.contains(layout)) {
-            (footers as MutableList).remove(layout)
-
-
-
-            notifyDataSetChanged()
+    fun removeFooter(model: Any?, animation: Boolean = false) {
+        if (footerCount != 0 && footers.contains(model)) {
+            val footerIndex = headerCount + modelCount + footers.indexOf(model)
+            (footers as MutableList).remove(model)
+            if (animation) {
+                notifyItemRemoved(footerIndex)
+            } else notifyDataSetChanged()
         }
     }
 
-/*    fun removeFooter(index: Int = -1) {
+    fun removeFooterAt(index: Int = -1, animation: Boolean = false) {
 
         if (footerCount <= 0 || footerCount < index) return
 
         if (index == -1) {
-            footers.removeAt(footerCount - 1)
+            (footers as MutableList).removeAt(0)
+            if (animation) {
+                notifyItemRemoved(headerCount + modelCount)
+            }
         } else {
-            footers.removeAt(index)
-        }
-        notifyDataSetChanged()
-    }*/
+            (footers as MutableList).removeAt(index)
 
-    fun clearFooter() {
-        if (footers.isNotEmpty()) {
-            (footers as MutableList).clear()
+            if (animation) {
+                notifyItemRemoved(headerCount + modelCount + index)
+            }
+        }
+
+        if (!animation) {
             notifyDataSetChanged()
+        }
+    }
+
+    fun clearFooter(animation: Boolean = false) {
+        if (footers.isNotEmpty()) {
+            val footerCount = this.footerCount
+            (footers as MutableList).clear()
+            if (animation) {
+                notifyItemRangeRemoved(headerCount + modelCount, itemCount + footerCount)
+            } else notifyDataSetChanged()
         }
     }
 
 
     fun isFooter(@IntRange(from = 0) position: Int): Boolean {
-        return (footerCount > 0 && position >= headerCount + modelCount && position < headerCount + modelCount + footerCount)
+        return (footerCount > 0 && position >= headerCount + modelCount && position < itemCount)
     }
 
     // </editor-fold>
@@ -704,7 +675,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         if (checkableItemTypeList != null && checkableItemTypeList!!.contains(itemViewType)) {
             return
         }
-        if (onCheckedChange == null || !isModel(position)) {
+        if (onCheckedChange == null) {
             return
         }
         if (checked) {
