@@ -181,29 +181,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     override fun getItemViewType(position: Int): Int {
 
-        Log.d("日志", "(BindingAdapter.kt:178)_<getItemViewType>   position = [$position]")
-
-        return when {
-            isHeader(position) -> headers[position]
-            isFooter(position) -> footers[position - modelCount - headerCount]
-            else -> {
-                val model = getModel<Any>(position)
-                val modelClass: Class<*> = model!!.javaClass
-                (typePool[modelClass]?.invoke(model, position)
-                    ?: throw NoSuchPropertyException("Please add item model type, model = $model"))
-            }
-        }
-
-        /*    return when {
-                isHeader(position) -> position
-                isFooter(position) -> position
-                else -> {
-                    val model = getModel<Any>(position)
-                    val modelClass: Class<*> = model!!.javaClass
-                    (typePool[modelClass]?.invoke(model, position)
-                        ?: throw NoSuchPropertyException("Please add item model type, model = $model"))
-                }
-            }*/
+        val model = getModel<Any>(position)
+        val modelClass: Class<*> = model!!.javaClass
+        return (typePool[modelClass]?.invoke(model, position)
+            ?: throw NoSuchPropertyException("Please add item model type, model = $model"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -325,9 +306,11 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="Header">
 
-    val headers = arrayListOf<Int>()
-    val HEADER_TYPE = -1
-    val FOOTER_TYPE = -2
+    var headers: List<Any?> = mutableListOf()
+        set(value) {
+            field = value.toMutableList()
+            notifyDataSetChanged()
+        }
 
     val headerCount: Int
         get() {
@@ -335,26 +318,37 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
 
-    fun addHeader(layout: Int, index: Int = -1, animation: Boolean = false) {
+    fun addHeader(
+        model: Any?,
+        index: Int = -1,
+        animation: Boolean = false
+    ) {
+
         if (index == -1) {
-            headers.add(0, layout)
+
+            (headers as MutableList).add(model)
+
             if (animation) {
                 notifyItemInserted(0)
             }
+
         } else if (index <= headerCount) {
-            headers.add(index, layout)
+            (headers as MutableList).add(index, model)
+
             if (animation) {
                 notifyItemInserted(index)
             }
         }
+
         if (!animation) {
             notifyDataSetChanged()
         }
     }
 
-    fun removeHeader(layout: Int) {
-        if (headerCount != 0 && headers.contains(layout)) {
-            headers.remove(layout)
+    fun removeHeader(model: Any?) {
+
+        if (headerCount != 0 && headers.contains(model)) {
+            (headers as MutableList).remove(model)
             notifyDataSetChanged()
         }
     }
@@ -363,23 +357,28 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     /**
      * 默认删除第一个头布局
      * @param index Int 删除头布局的索引
-     *//*
-    fun removeHeader(index: Int = -1) {
+     */
+    fun removeHeader(index: Int = -1, animation: Boolean = false) {
 
         if (headerCount <= 0 || headerCount < index) return
 
         if (index == -1) {
-            headers.removeAt(0)
+            (headers as MutableList).removeAt(0)
+            if (animation) {
+
+            }
         } else {
-            headers.removeAt(index)
+            (headers as MutableList).removeAt(index)
         }
 
-        notifyDataSetChanged()
-    }*/
+        if (animation) {
+            notifyDataSetChanged()
+        }
+    }
 
     fun clearHeader(animation: Boolean = false) {
         if (headers.isNotEmpty()) {
-            headers.clear()
+            (headers as MutableList).clear()
             if (animation) {
                 notifyItemRangeRemoved(0, headerCount)
             } else notifyDataSetChanged()
@@ -397,23 +396,36 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // <editor-fold desc="Footer">
 
 
-    val footers = arrayListOf<Int>()
+    var footers: List<Any?> = mutableListOf()
+        set(value) {
+
+            field = value.toMutableList()
+
+            notifyDataSetChanged()
+
+            if (isFirst) {
+                lastPosition = -1
+                isFirst = false
+            } else {
+                lastPosition = itemCount - 1
+            }
+        }
     val footerCount: Int
         get() {
             return footers.size
         }
 
 
-    fun addFooter(layout: Int, index: Int = -1, animation: Boolean = false) {
+    fun addFooter(model: Any?, index: Int = -1, animation: Boolean = false) {
 
 
         if (index == -1) {
-            footers.add(layout)
+            (footers as MutableList).add(model)
             if (animation) {
                 notifyItemInserted(0)
             }
         } else if (index <= footerCount) {
-            footers.add(index, layout)
+            (footers as MutableList).add(index, model)
             if (animation) {
                 notifyItemInserted(index)
             }
@@ -426,7 +438,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     fun removeFooter(layout: Int) {
         if (footerCount != 0 && footers.contains(layout)) {
-            footers.remove(layout)
+            (footers as MutableList).remove(layout)
 
 
 
@@ -448,7 +460,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     fun clearFooter() {
         if (footers.isNotEmpty()) {
-            footers.clear()
+            (footers as MutableList).clear()
             notifyDataSetChanged()
         }
     }
@@ -477,9 +489,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         set(value) {
 
             if (value != null) {
-                field = ArrayList(value)
+                field = value.toMutableList()
             }
-
 
             notifyDataSetChanged()
 
@@ -513,6 +524,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * add new data
      */
     fun addModels(models: List<Any?>?, animation: Boolean = true) {
+
         if (models.isNullOrEmpty()) {
             return
         }

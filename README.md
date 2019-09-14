@@ -515,7 +515,7 @@ page.onLoadMore {
 
 1. `autoRefesh`  这是触发的下拉刷新
 2. `showLoading` 这是触发的加载页面, 当然得先设置loadingLayout(或者读取全局缺省页配置)
-3. `refresh` 静默刷新, 不会触发任何动画
+3. `refresh` 静默刷新, 不会触发任何动画s
 
 
 
