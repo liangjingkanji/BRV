@@ -7,8 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.liangjingkanji'
-
+group = 'com.github.liangjingkanji'
 
 
 android {
@@ -44,9 +43,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-
-    api  'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
     api 'com.github.liangjingkanji:StateLayout:1.0.4'
 
 }

@@ -27,6 +27,7 @@ class MyApplication : Application() {
         BindingAdapter.modelId = BR.m
 
 
+/*        */
         /**
          *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
          *  具体查看 https://github.com/liangjingkanji/StateLayout
