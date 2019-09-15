@@ -23,9 +23,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.animation.*
 import com.drake.brv.listener.DefaultItemTouchCallback
-import com.jakewharton.rxbinding3.view.clicks
-import com.jakewharton.rxbinding3.view.longClicks
-import java.util.concurrent.TimeUnit
+import com.drake.brv.listener.throttleClick
 
 /**
  * 基于DataBinding实现的通用RecyclerViewAdapter
@@ -723,17 +721,18 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             for (i in 0 until clickableIds.size()) {
                 val view = itemView.findViewById<View>(clickableIds.keyAt(i)) ?: continue
                 if (clickableIds.valueAt(i)) {
-                    view.clicks().subscribe { onClick?.invoke(this, view.id) }
+                    view.throttleClick { onClick?.invoke(this@BindingViewHolder, view.id) }
                 } else {
-                    view.clicks()
-                        .throttleFirst(500, TimeUnit.MILLISECONDS)
-                        .subscribe { onClick?.invoke(this, view.id) }
+                    view.throttleClick { onClick?.invoke(this@BindingViewHolder, view.id) }
                 }
             }
 
             for (longClickableId in longClickableIds) {
                 val view = itemView.findViewById<View>(longClickableId) ?: continue
-                view.longClicks().subscribe { onLongClick?.invoke(this, view.id) }
+                view.setOnLongClickListener {
+                    onLongClick?.invoke(this, view.id)
+                    true
+                }
             }
         }
 
