@@ -110,31 +110,6 @@ class MyApplication : Application() {
 ```
 
 
-
-
-## LayoutManager
-
-快速创建布局管理器
-
-```kotlin
-fun RecyclerView.linear(
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
-)
-
-
-fun RecyclerView.grid(
-    spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
-)
-
-fun RecyclerView.staggered(
-    spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL
-)
-```
-
 ## 多类型
 
 ### 不同数据模型
@@ -636,3 +611,27 @@ page.onRefresh {
 
 
 如果感觉网络请求的代码很优雅, 可以关注我的Github网络请求库. 
+
+
+## LayoutManager
+
+快速创建布局管理器
+
+```kotlin
+fun RecyclerView.linear(
+    @RecyclerView.Orientation orientation: Int = VERTICAL,
+    reverseLayout: Boolean = false
+)
+
+
+fun RecyclerView.grid(
+    spanCount: Int,
+    @RecyclerView.Orientation orientation: Int = VERTICAL,
+    reverseLayout: Boolean = false
+)
+
+fun RecyclerView.staggered(
+    spanCount: Int,
+    @RecyclerView.Orientation orientation: Int = VERTICAL
+)
+```
