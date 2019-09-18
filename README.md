@@ -1,6 +1,6 @@
 ## 介绍
 
-我不认为有更方便的同类型框架
+代码量最少, 使用便捷, 非侵入式, 满足常见需求, 同时方便扩展和自定义.
 
 
 ### 特性
@@ -84,7 +84,17 @@ implementation 'com.github.liangjingkanji:BRV:1.0.4'
 
 
 
+## 预览
 
+
+
+
+
+![home](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvgb7unj308m0io762.jpg)![flex](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvl80unj308m0ioabb.jpg)![header](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvso45sj308m0iomye.jpg)
+
+
+
+![footer](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mrpvtgbg308m0iong7.gif)![check_mode](https://tva1.sinaimg.cn/large/006y8mN6gy1g73msf5g9qg308m0iotdk.gif)![footer](https://tva1.sinaimg.cn/large/006y8mN6gy1g73msnitazg308m0iong7.gif)![refresh](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mt2hy6xg308m0iox3o.gif)![state](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mtayt2tg308k0ijgqy.gif)![swipe_drag](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mthtdd4g308m0iojx4.gif)
 
 ## 初始化
 
@@ -322,6 +332,12 @@ onToggleEnd {
 
 
 ## 选择模式
+
+
+
+![check_mode](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mqbzzbyg308m0iotdk.gif)
+
+
 
 ```kotlin
 fun allChecked()
