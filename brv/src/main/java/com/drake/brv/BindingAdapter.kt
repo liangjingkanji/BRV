@@ -36,11 +36,6 @@ import com.drake.brv.listener.throttleClick
  * item选择状态监听(切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
  */
 
-fun ViewGroup.getHeaderOrFooter(): View {
-    return LayoutInflater.from(context).inflate(R.layout.item_multi_type_1, this, false)
-}
-
-
 @Suppress("UNCHECKED_CAST")
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
