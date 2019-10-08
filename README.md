@@ -610,7 +610,7 @@ page.onRefresh {
 
 
 
-如果感觉网络请求的代码很优雅, 可以关注我的Github网络请求库. 
+如果感觉网络请求的代码比较优雅, 可以关注我的网络请求库 [Net](https://github.com/liangjingkanji/Net).  
 
 
 ## LayoutManager
