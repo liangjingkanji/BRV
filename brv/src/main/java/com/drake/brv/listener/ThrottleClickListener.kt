@@ -10,13 +10,12 @@ package com.drake.brv.listener
 import android.view.View
 
 
-fun View.throttleClick(interval: Int = 500, block: View.() -> Unit) {
+internal fun View.throttleClick(interval: Long = 500, block: View.() -> Unit) {
     setOnClickListener(ThrottleClickListener(interval, block))
 }
 
-class ThrottleClickListener(val interval: Int = 500, var block: View.() -> Unit) :
+internal class ThrottleClickListener(val interval: Long = 500, var block: View.() -> Unit) :
     View.OnClickListener {
-
 
     var lastTime: Long = 0
 

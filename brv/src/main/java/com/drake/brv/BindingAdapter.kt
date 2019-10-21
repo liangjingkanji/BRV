@@ -41,6 +41,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     var recyclerView: RecyclerView? = null
+    var clickInterval: Long = 500
+    // 点击事件过滤间隔时间毫秒
 
 
     // <editor-fold desc="生命周期">
@@ -206,7 +208,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     /**
      * add click event
-     * in 500 milliSecond be invalid
+     * in 500 milliSecond be invalid of defaultValue
      */
     fun addClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -716,9 +718,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             for (i in 0 until clickableIds.size()) {
                 val view = itemView.findViewById<View>(clickableIds.keyAt(i)) ?: continue
                 if (clickableIds.valueAt(i)) {
-                    view.throttleClick { onClick?.invoke(this@BindingViewHolder, view.id) }
+                    view.setOnClickListener { onClick?.invoke(this@BindingViewHolder, view.id) }
                 } else {
-                    view.throttleClick { onClick?.invoke(this@BindingViewHolder, view.id) }
+                    view.throttleClick(clickInterval) { onClick?.invoke(this@BindingViewHolder, view.id) }
                 }
             }
 
