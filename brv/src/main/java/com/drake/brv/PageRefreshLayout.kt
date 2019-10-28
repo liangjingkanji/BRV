@@ -49,8 +49,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
 
     private var adapter: BindingAdapter? = null
-    private var emptyView: View? = null
-    private var errorView: View? = null
     private var contentView: View? = null
     private var state: StateLayout? = null
 
@@ -218,14 +216,14 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         if (getState() == RefreshState.Refreshing) {
             finishRefresh(success)
-        }
-
-        setEnableRefresh(true)
-
-        if (hasMore) {
-            finishLoadMore(success)
+        } else if (getState() == RefreshState.Loading) {
+            if (hasMore) {
+                finishLoadMore(success)
+            } else {
+                finishLoadMoreWithNoMoreData()
+            }
         } else {
-            finishLoadMoreWithNoMoreData()
+            setEnableRefresh(true)
         }
     }
 
@@ -267,6 +265,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         index = startIndex
+
         setNoMoreData(false)
         onRefresh?.invoke(this)
     }
