@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.ItemMultiType1Binding
 import com.drake.brv.sample.model.Model
 import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.bindingAdapter
@@ -62,6 +63,7 @@ class MultiTypeFragment : Fragment() {
 
         // 点击事件
         rv_multi_type.bindingAdapter.onClick(R.id.item) {
+
             when (itemViewType) {
                 R.layout.item_multi_type_1 -> {
                     Toast.makeText(activity, "类型1", Toast.LENGTH_SHORT).show()

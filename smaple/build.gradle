@@ -53,7 +53,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 
     implementation 'com.github.liangjingkanji:StatusBar:1.0.2'
-    implementation 'com.github.liangjingkanji:debugkit:1.2.5'
+    implementation 'com.github.liangjingkanji:debugkit:1.2.9'
 
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'

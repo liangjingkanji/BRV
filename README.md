@@ -79,7 +79,7 @@ allprojects {
 module of build.gradle
 
 ```
-implementation 'com.github.liangjingkanji:BRV:1.0.7'
+implementation 'com.github.liangjingkanji:BRV:1.0.8'
 ```
 
 

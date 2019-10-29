@@ -7,10 +7,12 @@
 
 package com.drake.brv.utils
 
+import android.app.Dialog
 import android.graphics.Rect
 import android.util.NoSuchPropertyException
 import android.view.View
 import android.view.View.NO_ID
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
@@ -96,6 +98,21 @@ fun RecyclerView.divider(
         decoration.onItemOffsets(block)
     }
     addItemDecoration(decoration)
+    return this
+}
+
+
+/**
+ *  对话框设置列表
+ *
+ */
+fun Dialog.setAdapter(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
+    val context = context
+    val recyclerView = RecyclerView(context)
+    recyclerView.setup(block)
+    recyclerView.layoutManager = LinearLayoutManager(context)
+    recyclerView.layoutParams = RecyclerView.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+    setContentView(recyclerView)
     return this
 }
 
