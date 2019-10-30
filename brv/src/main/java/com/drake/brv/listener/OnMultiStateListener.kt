@@ -13,7 +13,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.scwang.smart.refresh.layout.listener.OnMultiListener
 
-class OnMultiStateListener : OnMultiListener {
+open class OnMultiStateListener : OnMultiListener {
     override fun onFooterMoving(
         footer: RefreshFooter?,
         isDragging: Boolean,

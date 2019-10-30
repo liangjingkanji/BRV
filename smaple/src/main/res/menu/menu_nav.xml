@@ -7,6 +7,9 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/refresh"
+        android:title="刷新列表" />
+    <item
         android:id="@+id/multi_type"
         android:title="多类型" />
     <item
@@ -27,9 +30,6 @@
     <item
         android:id="@+id/state"
         android:title="缺省状态" />
-    <item
-        android:id="@+id/refresh"
-        android:title="刷新列表" />
     <item
         android:id="@+id/custom"
         android:title="数据更新" />

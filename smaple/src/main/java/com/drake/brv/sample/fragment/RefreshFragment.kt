@@ -8,6 +8,7 @@
 package com.drake.brv.sample.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,11 @@ import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.Model
 import com.drake.brv.sample.model.Model2
+import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.page
 import com.drake.brv.utils.setup
+import com.hulab.debugkit.dev
 import kotlinx.android.synthetic.main.fragment_refresh.*
 
 
@@ -44,32 +47,37 @@ class RefreshFragment : Fragment() {
          * 请查看Application的初始化
          */
 
-        val page = rv.page(loadMoreEnabled = true, stateEnabled = true)
+//        val page = rv.page(loadMoreEnabled = true, stateEnabled = true)
+        val page = content
 
+        page.autoRefresh()
 
         rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_1)
             addType<Model2>(R.layout.item_multi_type_2)
-        }.models = listOf(
-            Model(),
-            Model2(),
-            Model2(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model2(),
-            Model2(),
-            Model2(),
-            Model(),
-            Model(),
-            Model()
-        )
-
+        }
 
         page.onRefresh {
             // 模拟网络请求
-            postDelayed({ showContent() }, 2000)
+            postDelayed({
+                rv.bindingAdapter.models = listOf(
+                    Model(),
+                    Model2(),
+                    Model2(),
+                    Model(),
+                    Model(),
+                    Model(),
+                    Model(),
+                    Model2(),
+                    Model2(),
+                    Model2(),
+                    Model(),
+                    Model(),
+                    Model()
+                )
+
+                finish(true)
+            }, 0)
 
             Toast.makeText(activity, "右上角菜单可以操作刷新结果, 默认2s结束", Toast.LENGTH_SHORT).show()
         }

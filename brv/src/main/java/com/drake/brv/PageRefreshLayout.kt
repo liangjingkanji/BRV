@@ -13,6 +13,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.listener.OnMultiStateListener
 import com.drake.brv.utils.bindingAdapter
+import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshComponent
@@ -44,11 +45,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
 
     companion object {
+
         var startIndex = 1
     }
 
 
     private var adapter: BindingAdapter? = null
+    private var autoEnabledLoadMoreState = false
     private var contentView: View? = null
     private var state: StateLayout? = null
 
@@ -82,7 +85,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } finally {
             attributes.recycle()
         }
-
     }
 
 
@@ -92,7 +94,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 触发刷新
      */
     fun refresh() {
-        onRefresh(this)
+        post {
+            onRefresh(this)
+        }
     }
 
 
@@ -172,8 +176,18 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     internal fun init() {
 
-        setOnRefreshLoadMoreListener(this)
+        autoEnabledLoadMoreState = if (!mManualLoadMore) {
+            true
+        } else {
+            mEnableLoadMore
+        }
 
+
+        if (autoEnabledLoadMoreState) {
+            setEnableLoadMore(false)
+        }
+
+        setOnRefreshLoadMoreListener(this)
 
         if (contentView == null) {
             for (i in 0 until childCount) {
@@ -185,10 +199,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             }
         } else return
 
-
         if (stateEnabled) {
 
+            if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
+                stateEnabled = false
+                return
+            }
+
             state = StateLayout(context)
+
             state?.let {
 
                 removeView(contentView)
@@ -224,6 +243,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             }
         } else {
             setEnableRefresh(true)
+        }
+
+        if (getState() != RefreshState.Loading && autoEnabledLoadMoreState) {
+            setEnableLoadMore(success)
         }
     }
 
