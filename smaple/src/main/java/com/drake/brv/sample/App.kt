@@ -15,7 +15,7 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
-class MyApplication : Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
