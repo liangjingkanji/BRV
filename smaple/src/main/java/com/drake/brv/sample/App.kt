@@ -9,7 +9,6 @@ package com.drake.brv.sample
 
 import android.app.Application
 import com.drake.brv.BindingAdapter
-import com.drake.brv.PageRefreshLayout
 import com.drake.statelayout.StateConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -48,10 +47,5 @@ class App : Application() {
          */
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(this) }
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
-        PageRefreshLayout.startIndex = 0
-
-        SmartRefreshLayout.setDefaultRefreshInitializer { context, layout ->
-            layout.setEnableLoadMoreWhenContentNotFull(false)
-        }
     }
 }
