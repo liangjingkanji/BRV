@@ -52,7 +52,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onCheckedChange: ((itemType: Int, position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? =
-        null
+            null
     private var onToggle: ((itemType: Int, position: Int, toggleModel: Boolean) -> Unit)? = null
     private var onToggleEnd: ((toggleModel: Boolean) -> Unit)? = null
 
@@ -108,10 +108,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
 
         val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            viewType,
-            parent,
-            false
+                LayoutInflater.from(parent.context),
+                viewType,
+                parent,
+                false
         ) ?: return BindingViewHolder(parent.getView(viewType))
 
         return BindingViewHolder(viewDataBinding)
@@ -127,9 +127,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     override fun onBindViewHolder(
-        holder: BindingViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
+            holder: BindingViewHolder,
+            position: Int,
+            payloads: MutableList<Any>
     ) {
         if (payloads.isNotEmpty()) {
             onPayload?.invoke(holder, payloads[0])
@@ -143,7 +143,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model!!.javaClass
         return (typePool[modelClass]?.invoke(model, position)
-            ?: throw NoSuchPropertyException("Please add item model type, model = $model"))
+                ?: throw NoSuchPropertyException("please add item model type : ${model.javaClass.simpleName}"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -278,9 +278,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     fun addHeader(
-        model: Any?,
-        index: Int = -1,
-        animation: Boolean = false
+            model: Any?,
+            index: Int = -1,
+            animation: Boolean = false
     ) {
 
         if (index == -1) {
@@ -454,9 +454,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     var models: List<Any?>? = null
         set(value) {
 
-            if (value != null) {
-                field = value.toMutableList()
-            }
+            field = value?.toMutableList()
 
             notifyDataSetChanged()
 
@@ -660,7 +658,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     fun setChecked(@IntRange(from = 0) position: Int, checked: Boolean) {
 
         if ((checkedPositions.contains(position) && checked) || (!checked && !checkedPositions.contains(
-                position
+                    position
             ))
         ) {
             return
@@ -680,10 +678,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
         onCheckedChange?.invoke(
-            itemViewType,
-            position,
-            checked,
-            isCheckedAll()
+                itemViewType,
+                position,
+                checked,
+                isCheckedAll()
         )
         if (singleMode && checked && checkedPositions.size > 1) {
             setChecked(checkedPositions[0], false)
@@ -720,7 +718,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                 if (clickableIds.valueAt(i)) {
                     view.setOnClickListener { onClick?.invoke(this@BindingViewHolder, view.id) }
                 } else {
-                    view.throttleClick(clickInterval) { onClick?.invoke(this@BindingViewHolder, view.id) }
+                    view.throttleClick(clickInterval) {
+                        onClick?.invoke(
+                                this@BindingViewHolder,
+                                view.id
+                        )
+                    }
                 }
             }
 

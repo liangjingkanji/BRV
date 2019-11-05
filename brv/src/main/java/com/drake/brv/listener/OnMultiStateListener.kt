@@ -15,19 +15,19 @@ import com.scwang.smart.refresh.layout.listener.OnMultiListener
 
 open class OnMultiStateListener : OnMultiListener {
     override fun onFooterMoving(
-        footer: RefreshFooter?,
-        isDragging: Boolean,
-        percent: Float,
-        offset: Int,
-        footerHeight: Int,
-        maxDragHeight: Int
+            footer: RefreshFooter?,
+            isDragging: Boolean,
+            percent: Float,
+            offset: Int,
+            footerHeight: Int,
+            maxDragHeight: Int
     ) {
     }
 
     override fun onHeaderStartAnimator(
-        header: RefreshHeader?,
-        headerHeight: Int,
-        maxDragHeight: Int
+            header: RefreshHeader?,
+            headerHeight: Int,
+            maxDragHeight: Int
     ) {
     }
 
@@ -35,19 +35,19 @@ open class OnMultiStateListener : OnMultiListener {
     }
 
     override fun onStateChanged(
-        refreshLayout: RefreshLayout,
-        oldState: RefreshState,
-        newState: RefreshState
+            refreshLayout: RefreshLayout,
+            oldState: RefreshState,
+            newState: RefreshState
     ) {
     }
 
     override fun onHeaderMoving(
-        header: RefreshHeader?,
-        isDragging: Boolean,
-        percent: Float,
-        offset: Int,
-        headerHeight: Int,
-        maxDragHeight: Int
+            header: RefreshHeader?,
+            isDragging: Boolean,
+            percent: Float,
+            offset: Int,
+            headerHeight: Int,
+            maxDragHeight: Int
     ) {
     }
 
@@ -55,9 +55,9 @@ open class OnMultiStateListener : OnMultiListener {
     }
 
     override fun onFooterStartAnimator(
-        footer: RefreshFooter?,
-        footerHeight: Int,
-        maxDragHeight: Int
+            footer: RefreshFooter?,
+            footerHeight: Int,
+            maxDragHeight: Int
     ) {
     }
 

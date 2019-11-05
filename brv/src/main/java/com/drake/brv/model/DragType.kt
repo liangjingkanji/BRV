@@ -9,7 +9,7 @@ annotation class DragType {
     companion object {
         const val LEFT = ItemTouchHelper.LEFT
         const val ALL =
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         const val RIGHT = ItemTouchHelper.RIGHT
         const val LEFT_RIGHT = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         const val UP = ItemTouchHelper.UP

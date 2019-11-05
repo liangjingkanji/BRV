@@ -12,7 +12,6 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.listener.OnMultiStateListener
-import com.drake.brv.utils.bindingAdapter
 import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -70,25 +69,25 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         try {
             stateEnabled =
-                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+                    attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
-                com.scwang.smart.refresh.layout.kernel.R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
-                mEnableLoadMoreWhenContentNotFull
+                    com.scwang.smart.refresh.layout.kernel.R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
+                    mEnableLoadMoreWhenContentNotFull
             )
 
             emptyLayout = attributes.getResourceId(
-                R.styleable.PageRefreshLayout_empty_layout,
-                View.NO_ID
+                    R.styleable.PageRefreshLayout_empty_layout,
+                    View.NO_ID
             )
             errorLayout = attributes.getResourceId(
-                R.styleable.PageRefreshLayout_error_layout,
-                View.NO_ID
+                    R.styleable.PageRefreshLayout_error_layout,
+                    View.NO_ID
             )
             loadingLayout = attributes.getResourceId(
-                R.styleable.PageRefreshLayout_loading_layout,
-                View.NO_ID
+                    R.styleable.PageRefreshLayout_loading_layout,
+                    View.NO_ID
             )
         } finally {
             attributes.recycle()
@@ -159,6 +158,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun refresh() {
         post {
+            notifyStateChanged(RefreshState.Refreshing)
             onRefresh(this)
         }
     }
@@ -170,34 +170,37 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param data List<Any?>? 数据集
      * @param hasMore [@kotlin.ExtensionFunctionType] Function1<PageRefreshLayout, Boolean> 在函数参数中返回布尔类型来判断是否存在更多页
      */
-    fun addData(data: List<Any?>?, hasMore: PageRefreshLayout.() -> Boolean) {
+    fun addData(data: List<Any?>?, hasMore: BindingAdapter.() -> Boolean) {
 
-
-        this.hasMore = this.hasMore()
-
-        if (data.isNullOrEmpty() && getState() == RefreshState.Refreshing) {
-            showEmpty()
-            return
-        } else {
-            showContent()
+        if (contentView == null && contentView !is RecyclerView) {
+            throw UnsupportedOperationException("PageRefreshLayout require direct child is RecyclerView")
         }
 
+        adapter = adapter ?: (contentView as RecyclerView).adapter as? BindingAdapter
 
-        if (adapter == null && contentView != null && contentView is RecyclerView && (contentView as RecyclerView).adapter is BindingAdapter) {
-            adapter = (contentView as RecyclerView).bindingAdapter
+        if (adapter == null) {
+            throw UnsupportedOperationException("PageRefreshLayout require RecyclerView set BindingAdapter")
         }
+
+        val isRefreshState = getState() == RefreshState.Refreshing
 
         adapter?.let {
+            if (isRefreshState) {
+                it.models = data
 
-            if (index == startIndex) {
-                adapter!!.models = data
+                if (data.isNullOrEmpty()) {
+                    showEmpty()
+                    return
+                } else index++
+
             } else {
-                adapter!!.addModels(data)
+                it.addModels(data)
+                index++
             }
-
-            index++
         }
 
+        this.hasMore = adapter!!.hasMore()
+        if (isRefreshState) showContent() else finish(true)
     }
 
     // </editor-fold>
@@ -243,20 +246,18 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param success Boolean 刷新结果 true: 成功 false: 失败
      */
     fun finish(success: Boolean = true) {
-
-        if (getState() == RefreshState.Refreshing) {
+        val currentState = getState()
+        if (currentState == RefreshState.Refreshing) {
             finishRefresh(success)
-        } else if (getState() == RefreshState.Loading) {
+            setEnableRefresh(true)
+        } else if (currentState == RefreshState.Loading) {
             if (hasMore) {
                 finishLoadMore(success)
             } else {
                 finishLoadMoreWithNoMoreData()
             }
-        } else {
-            setEnableRefresh(true)
         }
-
-        if (getState() != RefreshState.Loading && autoEnabledLoadMoreState) {
+        if (currentState != RefreshState.Loading && autoEnabledLoadMoreState) {
             setEnableLoadMore(success)
         }
     }
@@ -279,6 +280,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     fun showLoading() {
         state?.showLoading()
         setEnableRefresh(false)
+        notifyStateChanged(RefreshState.Refreshing)
         onRefresh(this)
     }
 

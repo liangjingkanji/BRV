@@ -15,7 +15,7 @@ class SlideBottomItemAnimation : BaseItemAnimation {
 
     override fun onItemEnterAnimation(view: View) {
         ObjectAnimator.ofFloat(view, "translationY", view.measuredHeight.toFloat(), 0F)
-            .setDuration(300)
-            .start()
+                .setDuration(300)
+                .start()
     }
 }

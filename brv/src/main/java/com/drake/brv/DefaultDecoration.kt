@@ -32,7 +32,7 @@ class DefaultDecoration
  * @param orientation Divider orientation. Should be [.HORIZONTAL] or [.VERTICAL].
  */
 constructor(private val context: Context, @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL) :
-    RecyclerView.ItemDecoration() {
+        RecyclerView.ItemDecoration() {
     private val mBounds = Rect()
     var divider: Drawable? = null
         private set
@@ -47,8 +47,8 @@ constructor(private val context: Context, @RecyclerView.Orientation orientation:
         divider = a.getDrawable(0)
         if (divider == null) {
             Log.w(
-                TAG,
-                "@android:attr/listDivider was not set in the theme used for this " + "DividerItemDecoration. Please set that attribute all call setDrawable()"
+                    TAG,
+                    "@android:attr/listDivider was not set in the theme used for this " + "DividerItemDecoration. Please set that attribute all call setDrawable()"
             )
         }
         a.recycle()
@@ -64,7 +64,7 @@ constructor(private val context: Context, @RecyclerView.Orientation orientation:
     fun setOrientation(orientation: Int) {
         if (orientation != HORIZONTAL && orientation != VERTICAL) {
             throw IllegalArgumentException(
-                "Invalid orientation. It should be either HORIZONTAL or VERTICAL"
+                    "Invalid orientation. It should be either HORIZONTAL or VERTICAL"
             )
         }
         mOrientation = orientation
@@ -87,8 +87,8 @@ constructor(private val context: Context, @RecyclerView.Orientation orientation:
      */
     fun setDrawable(@DrawableRes drawableRes: Int) {
         val drawable =
-            context.resources.getDrawable(drawableRes)
-                ?: throw IllegalArgumentException("Drawable cannot be null.")
+                context.resources.getDrawable(drawableRes)
+                        ?: throw IllegalArgumentException("Drawable cannot be null.")
         divider = drawable
     }
 
@@ -108,10 +108,10 @@ constructor(private val context: Context, @RecyclerView.Orientation orientation:
     }
 
     override fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
     ) {
         onItemOffsets?.let {
             val isReturn = onItemOffsets!!.invoke(outRect, view, parent, state)
@@ -140,10 +140,10 @@ constructor(private val context: Context, @RecyclerView.Orientation orientation:
             left = parent.paddingLeft
             right = parent.width - parent.paddingRight
             canvas.clipRect(
-                left,
-                parent.paddingTop,
-                right,
-                parent.height - parent.paddingBottom
+                    left,
+                    parent.paddingTop,
+                    right,
+                    parent.height - parent.paddingBottom
             )
         } else {
             left = 0
@@ -171,10 +171,10 @@ constructor(private val context: Context, @RecyclerView.Orientation orientation:
             top = parent.paddingTop
             bottom = parent.height - parent.paddingBottom
             canvas.clipRect(
-                parent.paddingLeft,
-                top,
-                parent.width - parent.paddingRight,
-                bottom
+                    parent.paddingLeft,
+                    top,
+                    parent.width - parent.paddingRight,
+                    bottom
             )
         } else {
             top = 0

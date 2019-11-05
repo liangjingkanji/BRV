@@ -15,7 +15,7 @@ class SlideLeftItemAnimation : BaseItemAnimation {
 
     override fun onItemEnterAnimation(view: View) {
         ObjectAnimator.ofFloat(view, "translationX", -view.rootView.width.toFloat(), 0F)
-            .setDuration(300)
-            .start()
+                .setDuration(300)
+                .start()
     }
 }

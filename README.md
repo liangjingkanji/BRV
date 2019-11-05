@@ -9,7 +9,8 @@
 - 完美拥有Kotlin的特性
 - 通用适配器
 - 方便实现常见需求
-- 代码量最少, 逻辑更清晰.
+- 代码量最少, 逻辑更清晰
+- 刷新还是添加数据都无闪屏
 
 
 
@@ -49,7 +50,7 @@
   
   - 自动化网络请求 (KalleExtension)
   
-    该网络请求基于Kalle|RxJava|Moshi|LifeCycle|本库 实现自动化的网络请求
+    该网络请求基于Kalle|RxJava 实现自动化的网络请求
 
 
 
@@ -60,10 +61,9 @@
   - 展开折叠
   - 顶部附着
 
-## 依赖
+## 安装
 
-
-project of build.gradle
+project 的 build.gradle
 
 ```groovy
 allprojects {
@@ -76,10 +76,10 @@ allprojects {
 
 
 
-module of build.gradle
+module 的 build.gradle
 
-```
-implementation 'com.github.liangjingkanji:BRV:1.1.0'
+```groovy
+implementation 'com.github.liangjingkanji:BRV:1.1.1'
 ```
 
 
@@ -228,7 +228,7 @@ rv.linear().setup {
 
 ## 头布局/脚布局
 
-头布局和脚布局在rv中算作一个item, 所以计算`position`的时候应当考虑其.
+头布局和脚布局在rv中算作一个item, 所以计算`position`的时候应当考虑其中.
 
 
 
@@ -268,13 +268,11 @@ val headerCount: Int
 val footerCount: Int
 ```
 
-
-
-获取数据的最终手段不是只有一种而已可以存在对重对称加密手段
-
 ## 切换模式
 
 切换模式相当于会提供一个回调函数遍历所有的item, 你可以在这个回调函数里面依次刷新他们.
+
+
 
 常用于切换选择模式.
 
@@ -505,21 +503,22 @@ page.onLoadMore {
 触发刷新状态(两者都会回调函数onRefresh)
 
 1. `autoRefesh`  这是触发的下拉刷新
-2. `showLoading` 这是触发的加载页面, 当然得先设置loadingLayout(或者读取全局缺省页配置)
-3. `refresh` 静默刷新, 不会触发任何动画s
+2. `showLoading` 这是触发的加载缺省页, 当然得先设置loadingLayout(或者读取全局缺省页配置)
+3. `refresh` 静默刷新, 不会触发任何动画
 
 
 
-第二种方式一般用于初次进入页面时候加载数据, 这三种方式都会导致索引`index=startIndex`重置.
+第2种方式一般用于初次进入页面时候加载数据(产品经理可能有这个要求), 这三种方式都会导致索引`index=startIndex`重置.
 
 
 
-其他状态控制
+缺省页状态控制
 
 ```
 showEmpty()
 showError()
 showContent
+showLoading()
 ```
 
 
@@ -555,7 +554,6 @@ StateConfig.apply {
 ```xml
 <com.drake.brv.PageRefreshLayout 
     .....
-    app:stateEnabled="true"
     app:error_layout="@layout/layout_error"
     app:empty_layout="@layout/layout_empty"
     app:loading_layout="@layout/layout_loading">
@@ -570,18 +568,16 @@ page.apply {
     loadingLayout = R.layout.layout_loading
     emptyLayout = R.layout.layout_empty
     errorLayout = R.layout.layout_error
-
-    stateEnabled = true
 }
 ```
 
 
 
-两个方式可以看到都需要执行`stateEnabled = true`这个函数, 否则无效. 如果不设置单例就会显示默认的全局缺省页
+默认会使用缺省页, 如果你已经设置了全局缺省页但是此刻不想使用. 可以使用属性|函数: `stateEnabled`
 
 
 
-想要使用缺省页又要求缺省页不遮盖头布局, 请使用`CoordinatorLayout`. 使用`NestedScrollView`会导致rv无法复用item.
+想要使用缺省页又要求缺省页不遮盖头布局, 头布局请使用`CoordinatorLayout`实现. 注意使用`NestedScrollView`会导致rv一次性加载完item内存消耗大.
 
 
 
@@ -592,30 +588,41 @@ page.apply {
 
 
 ```kotlin
-// 设置分页加载第一页的索引, 默认=1, 触发刷新会重置索引.
-PageRefreshLayout.startIndex = 0 
+// 设置分页加载第一页的索引, 默认=1, 触发刷新会重置索引. 如果需要修改在Application设置一次即可
+// PageRefreshLayout.startIndex = 1
 
-page.onRefresh {
-
-  // 这是网络请求
-  post("/path") {
-		addParames("key", "value")
-  }.net(activity) {
-    // 该回调函数参数返回一个布尔类型用于判断是否存在下一页, 决定上拉加载的状态.
-    addData(data, { adapter.count < data.page }) 
+pageLayout.onRefresh { 
+  // 下拉刷新和上拉加载都会执行这个网络请求, 除非另外设置onLoadMore
+  get("/path") {
+      param("key", "value")
+      param("page", pageLayout.index) // 这里使用框架提供的属性
+  }.page(this) {
+    // 该回调函数参数返回一个布尔类型用于判断是否存在下一页, 决定上拉加载的状态. 以及当前属于刷新还是加载更多条目
+    addData(data){ adapter.itemCount < data.count // 这里是判断是否由更多页, 具体逻辑根据接口定义 } 
   }
-
 }
 ```
 
 
 
-如果感觉网络请求的代码比较优雅, 可以关注我的网络请求库 [Net](https://github.com/liangjingkanji/Net).  
+这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).  
 
 
-## LayoutManager
 
-快速创建布局管理器
+## 扩展
+
+
+### LayoutManager
+
+框架还提供快速创建布局管理器的扩展函数, 上面使用示例
+
+```kotlin
+rv.linear().setup {
+	
+}
+```
+
+函数
 
 ```kotlin
 fun RecyclerView.linear(
@@ -635,3 +642,38 @@ fun RecyclerView.staggered(
     @RecyclerView.Orientation orientation: Int = VERTICAL
 )
 ```
+
+
+
+### 分隔物
+
+框架提供快速设置分隔物扩展函数
+
+```kotlin
+fun RecyclerView.divider( 
+    @DrawableRes drawable: Int,  // 分隔物Drawable
+    @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL, // LayoutManager的方向
+    block: ((Rect, View, RecyclerView, RecyclerView.State) -> Boolean)? = null // getItemOffset回调用于设置间隔
+)
+```
+
+
+
+示例
+
+```kotlin
+rv.linear().divider(R.drawable.divider_horizontal_padding_15dp).setup {
+	
+}
+```
+
+
+
+### 对话框
+
+通过扩展函数快速给对话框创建列表
+
+```
+Dialog(context).setAdapter(bindingAdapter)
+```
+

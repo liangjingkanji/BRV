@@ -61,35 +61,35 @@ val RecyclerView.bindingAdapter: BindingAdapter
     get() = adapter as BindingAdapter
 
 fun RecyclerView.linear(
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
+        @RecyclerView.Orientation orientation: Int = VERTICAL,
+        reverseLayout: Boolean = false
 ): RecyclerView {
     layoutManager = LinearLayoutManager(context, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.grid(
-    spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
+        spanCount: Int,
+        @RecyclerView.Orientation orientation: Int = VERTICAL,
+        reverseLayout: Boolean = false
 ): RecyclerView {
     layoutManager = GridLayoutManager(context, spanCount, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.staggered(
-    spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL
+        spanCount: Int,
+        @RecyclerView.Orientation orientation: Int = VERTICAL
 ): RecyclerView {
     layoutManager =
-        StaggeredGridLayoutManager(spanCount, orientation) as RecyclerView.LayoutManager?
+            StaggeredGridLayoutManager(spanCount, orientation) as RecyclerView.LayoutManager?
     return this
 }
 
 fun RecyclerView.divider(
-    @DrawableRes drawable: Int,
-    @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL,
-    block: ((Rect, View, RecyclerView, RecyclerView.State) -> Boolean)? = null
+        @DrawableRes drawable: Int,
+        @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL,
+        block: ((Rect, View, RecyclerView, RecyclerView.State) -> Boolean)? = null
 ): RecyclerView {
     val decoration = DefaultDecoration(context).apply {
         setDrawable(drawable)
