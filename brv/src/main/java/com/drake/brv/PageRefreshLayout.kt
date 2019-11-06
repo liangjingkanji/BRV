@@ -69,25 +69,25 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         try {
             stateEnabled =
-                    attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
-                    com.scwang.smart.refresh.layout.kernel.R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
-                    mEnableLoadMoreWhenContentNotFull
+                com.scwang.smart.refresh.layout.kernel.R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
+                mEnableLoadMoreWhenContentNotFull
             )
 
             emptyLayout = attributes.getResourceId(
-                    R.styleable.PageRefreshLayout_empty_layout,
-                    View.NO_ID
+                R.styleable.PageRefreshLayout_empty_layout,
+                View.NO_ID
             )
             errorLayout = attributes.getResourceId(
-                    R.styleable.PageRefreshLayout_error_layout,
-                    View.NO_ID
+                R.styleable.PageRefreshLayout_error_layout,
+                View.NO_ID
             )
             loadingLayout = attributes.getResourceId(
-                    R.styleable.PageRefreshLayout_loading_layout,
-                    View.NO_ID
+                R.styleable.PageRefreshLayout_loading_layout,
+                View.NO_ID
             )
         } finally {
             attributes.recycle()
@@ -157,10 +157,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 触发刷新 (不包含下拉动画)
      */
     fun refresh() {
-        post {
-            notifyStateChanged(RefreshState.Refreshing)
-            onRefresh(this)
-        }
+        notifyStateChanged(RefreshState.Refreshing)
+        onRefresh(this)
     }
 
 
