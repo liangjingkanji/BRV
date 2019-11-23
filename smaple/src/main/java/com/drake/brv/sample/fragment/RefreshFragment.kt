@@ -48,6 +48,7 @@ class RefreshFragment : Fragment() {
 //        val page = rv.page(loadMoreEnabled = true, stateEnabled = true) 通过代码设置PageRefreshLayout
         val page = content // 在XML布局中声明PageRefreshLayout 两者选其一即可
 
+
         page.autoRefresh() // page.refresh() 属于没有动画效果的刷新
 
         rv.linear().setup {

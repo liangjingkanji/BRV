@@ -36,8 +36,20 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
 
     var emptyLayout = View.NO_ID
+        set(value) {
+            field = value
+            state?.emptyLayout = value
+        }
     var errorLayout = View.NO_ID
+        set(value) {
+            field = value
+            state?.errorLayout = value
+        }
     var loadingLayout = View.NO_ID
+        set(value) {
+            field = value
+            state?.loadingLayout = value
+        }
     var index = startIndex
     var stateEnabled = true // 启用缺省页
 
@@ -53,9 +65,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var contentView: View? = null
     private var state: StateLayout? = null
 
-    private var onEmpty: (View.() -> Unit)? = null
-    private var onError: (View.() -> Unit)? = null
-    private var onLoading: (View.() -> Unit)? = null
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
 
@@ -140,10 +149,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 it.emptyLayout = emptyLayout
                 it.errorLayout = errorLayout
                 it.loadingLayout = loadingLayout
-
-                it.onLoading(onLoading)
-                it.onEmpty(onEmpty)
-                it.onError(onError)
             }
         }
     }
@@ -207,15 +212,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     // <editor-fold desc="生命周期">
 
     fun onError(block: View.() -> Unit) {
-        onError = block
+        state?.onError(block)
     }
 
     fun onEmpty(block: View.() -> Unit) {
-        onEmpty = block
+        state?.onEmpty(block)
     }
 
     fun onLoading(block: View.() -> Unit) {
-        onLoading = block
+        state?.onLoading(block)
     }
 
     fun onRefresh(block: PageRefreshLayout.() -> Unit) {
