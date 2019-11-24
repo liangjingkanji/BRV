@@ -36,6 +36,8 @@ class App : Application() {
             errorLayout = R.layout.layout_error
             loadingLayout = R.layout.layout_loading
 
+            setRetryIds(R.id.msg)
+
             onLoading {
                 // 此生命周期可以拿到LoadingLayout创建的视图对象, 可以进行动画设置或点击事件.
             }

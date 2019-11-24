@@ -79,7 +79,7 @@ allprojects {
 module 的 build.gradle
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.1.2'
+implementation 'com.github.liangjingkanji:BRV:1.1.3'
 ```
 
 
@@ -437,7 +437,7 @@ rv.linear().setup {
 
 ## PageRefreshLayout
 
-该布局扩展自 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)(该库强烈推荐使用), 支持其所有特性.
+该布局扩展自 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)(该库强烈推荐使用), 支持其所有特性. 本框架拥有最完美的缺省页功能
 
 
 

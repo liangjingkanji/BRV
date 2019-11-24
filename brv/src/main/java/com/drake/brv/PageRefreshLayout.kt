@@ -10,9 +10,11 @@ package com.drake.brv
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.listener.OnMultiStateListener
 import com.drake.statelayout.StateConfig
+import com.drake.statelayout.StateConfig.errorLayout
 import com.drake.statelayout.StateLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshComponent
@@ -131,24 +133,30 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } else return
 
         if (stateEnabled) {
-
             if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
                 stateEnabled = false
                 return
             }
+            replaceState()
+        }
+    }
 
-            state = StateLayout(context)
+    private fun replaceState() {
+        state = StateLayout(context)
+        state?.let {
+            removeView(contentView)
+            state!!.addView(contentView)
+            state!!.setContentView(contentView!!)
+            setRefreshContent(state!!)
 
-            state?.let {
+            it.emptyLayout = emptyLayout
+            it.errorLayout = errorLayout
+            it.loadingLayout = loadingLayout
 
-                removeView(contentView)
-                state!!.addView(contentView)
-                state!!.setContentView(contentView!!)
-                setRefreshContent(state!!)
-
-                it.emptyLayout = emptyLayout
-                it.errorLayout = errorLayout
-                it.loadingLayout = loadingLayout
+            state?.onRefresh {
+                setEnableRefresh(false)
+                notifyStateChanged(RefreshState.Refreshing)
+                onRefresh(this@PageRefreshLayout)
             }
         }
     }
@@ -168,10 +176,18 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
 
     /**
+     * 设置[errorLayout]中的视图点击后会执行[StateLayout.showLoading]
+     * 并且500ms内防重复点击
+     */
+    fun setRetryIds(@IdRes vararg ids: Int) {
+        state?.setRetryIds(*ids)
+    }
+
+    /**
      * 直接接受数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
-     * @param data List<Any?>? 数据集
-     * @param hasMore [@kotlin.ExtensionFunctionType] Function1<PageRefreshLayout, Boolean> 在函数参数中返回布尔类型来判断是否存在更多页
+     * @param data 数据集
+     * @param hasMore 在函数参数中返回布尔类型来判断是否存在更多页
      */
     fun addData(data: List<Any?>?, hasMore: BindingAdapter.() -> Boolean) {
 
@@ -211,15 +227,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     // <editor-fold desc="生命周期">
 
-    fun onError(block: View.() -> Unit) {
+    fun onError(block: View.(StateLayout) -> Unit) {
         state?.onError(block)
     }
 
-    fun onEmpty(block: View.() -> Unit) {
+    fun onEmpty(block: View.(StateLayout) -> Unit) {
         state?.onEmpty(block)
     }
 
-    fun onLoading(block: View.() -> Unit) {
+    fun onLoading(block: View.(StateLayout) -> Unit) {
         state?.onLoading(block)
     }
 
@@ -282,9 +298,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     fun showLoading() {
         state?.showLoading()
-        setEnableRefresh(false)
-        notifyStateChanged(RefreshState.Refreshing)
-        onRefresh(this)
     }
 
     fun showContent() {

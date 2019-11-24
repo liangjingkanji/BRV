@@ -15,7 +15,7 @@ internal fun View.throttleClick(interval: Long = 500, block: View.() -> Unit) {
 }
 
 internal class ThrottleClickListener(val interval: Long = 500, var block: View.() -> Unit) :
-        View.OnClickListener {
+    View.OnClickListener {
 
     var lastTime: Long = 0
 
@@ -29,6 +29,4 @@ internal class ThrottleClickListener(val interval: Long = 500, var block: View.(
         }
 
     }
-
-
 }
