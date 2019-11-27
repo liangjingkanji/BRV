@@ -60,8 +60,11 @@ inline fun <reified M> RecyclerView.setup(@LayoutRes itemLayout: Int = NO_ID, no
 val RecyclerView.bindingAdapter
     get() = adapter as BindingAdapter
 
-val RecyclerView.models
+var RecyclerView.models
     get() = bindingAdapter.models
+    set(value) {
+        bindingAdapter.models = value
+    }
 
 fun RecyclerView.linear(
     @RecyclerView.Orientation orientation: Int = VERTICAL,

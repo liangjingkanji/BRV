@@ -179,8 +179,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 设置[errorLayout]中的视图点击后会执行[StateLayout.showLoading]
      * 并且500ms内防重复点击
      */
-    fun setRetryIds(@IdRes vararg ids: Int) {
+    fun setRetryIds(@IdRes vararg ids: Int): PageRefreshLayout {
         state?.setRetryIds(*ids)
+        return this
     }
 
     /**
@@ -227,24 +228,29 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     // <editor-fold desc="生命周期">
 
-    fun onError(block: View.(StateLayout) -> Unit) {
+    fun onError(block: View.(StateLayout) -> Unit): PageRefreshLayout {
         state?.onError(block)
+        return this
     }
 
-    fun onEmpty(block: View.(StateLayout) -> Unit) {
+    fun onEmpty(block: View.(StateLayout) -> Unit): PageRefreshLayout {
         state?.onEmpty(block)
+        return this
     }
 
-    fun onLoading(block: View.(StateLayout) -> Unit) {
+    fun onLoading(block: View.(StateLayout) -> Unit): PageRefreshLayout {
         state?.onLoading(block)
+        return this
     }
 
-    fun onRefresh(block: PageRefreshLayout.() -> Unit) {
+    fun onRefresh(block: PageRefreshLayout.() -> Unit): PageRefreshLayout {
         onRefresh = block
+        return this
     }
 
-    fun onLoadMore(block: PageRefreshLayout.() -> Unit) {
+    fun onLoadMore(block: PageRefreshLayout.() -> Unit): PageRefreshLayout {
         onLoadMore = block
+        return this
     }
 
 
@@ -253,8 +259,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param onMultiStateListener OnMultiStateListener
      * @return PageRefreshLayout
      */
-    fun setOnMultiStateListener(onMultiStateListener: OnMultiStateListener) {
+    fun setOnMultiStateListener(onMultiStateListener: OnMultiStateListener): PageRefreshLayout {
         setOnMultiListener(onMultiStateListener)
+        return this
     }
 
     // </editor-fold>
