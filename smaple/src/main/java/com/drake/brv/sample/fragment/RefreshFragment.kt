@@ -28,8 +28,8 @@ class RefreshFragment : Fragment() {
     lateinit var toolbar: Toolbar
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         return inflater.inflate(R.layout.fragment_refresh, container, false)
@@ -56,29 +56,31 @@ class RefreshFragment : Fragment() {
             addType<Model2>(R.layout.item_multi_type_2)
         }
 
+        val total = 1
+
         page.onRefresh {
             // 模拟网络请求
             postDelayed({
 
                 // 创建假的数据集
                 val data = listOf(
-                        Model(),
-                        Model2(),
-                        Model2(),
-                        Model(),
-                        Model(),
-                        Model(),
-                        Model(),
-                        Model2(),
-                        Model2(),
-                        Model2(),
-                        Model(),
-                        Model(),
-                        Model()
+                    Model(),
+                    Model2(),
+                    Model2(),
+                    Model(),
+                    Model(),
+                    Model(),
+                    Model(),
+                    Model2(),
+                    Model2(),
+                    Model2(),
+                    Model(),
+                    Model(),
+                    Model()
                 )
 
                 addData(data) {
-                    modelCount < 20 // 判断是否有更多页
+                    1 < total // 判断是否有更多页
                 }
 
             }, 2000)

@@ -188,18 +188,24 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 直接接受数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
      * @param data 数据集
+     * @param bindingAdapter 指定你想要添加数据的[BindingAdapter], 如果RecyclerView属于PageRefreshLayout的直接子View则不需要传入此参数
      * @param hasMore 在函数参数中返回布尔类型来判断是否存在更多页
      */
-    fun addData(data: List<Any?>?, hasMore: BindingAdapter.() -> Boolean) {
+    fun addData(
+        data: List<Any?>?,
+        bindingAdapter: BindingAdapter? = null,
+        hasMore: BindingAdapter.() -> Boolean = { false }
+    ) {
 
-        if (contentView == null && contentView !is RecyclerView) {
-            throw UnsupportedOperationException("PageRefreshLayout require direct child is RecyclerView")
+        if (contentView == null) {
+            throw UnsupportedOperationException("PageRefreshLayout require least one child view")
         }
 
-        adapter = adapter ?: (contentView as RecyclerView).adapter as? BindingAdapter
+        adapter =
+            bindingAdapter ?: adapter ?: (contentView as RecyclerView).adapter as? BindingAdapter
 
         if (adapter == null) {
-            throw UnsupportedOperationException("PageRefreshLayout require RecyclerView set BindingAdapter")
+            throw UnsupportedOperationException("PageRefreshLayout require direct child is RecyclerView or specify BindingAdapter")
         }
 
         val isRefreshState = getState() == RefreshState.Refreshing
@@ -211,11 +217,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 if (data.isNullOrEmpty()) {
                     showEmpty()
                     return
-                } else index++
+                }
 
             } else {
                 it.addModels(data)
-                index++
+                index += 1
             }
         }
 
@@ -276,13 +282,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (currentState == RefreshState.Refreshing) {
             finishRefresh(success)
             setEnableRefresh(true)
-        } else if (currentState == RefreshState.Loading) {
-            if (hasMore) {
-                finishLoadMore(success)
-            } else {
-                finishLoadMoreWithNoMoreData()
-            }
+            setNoMoreData(!hasMore)
+        } else {
+            if (hasMore) finishLoadMore(success) else finishLoadMoreWithNoMoreData()
         }
+
         if (currentState != RefreshState.Loading && autoEnabledLoadMoreState) {
             setEnableLoadMore(success)
         }
