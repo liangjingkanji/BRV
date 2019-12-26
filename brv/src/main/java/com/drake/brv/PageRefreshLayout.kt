@@ -297,22 +297,22 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
 
     fun showEmpty() {
-        state?.showEmpty()
+        if (stateEnabled) state?.showEmpty()
         finish()
     }
 
 
     fun showError() {
-        state?.showError()
+        if (stateEnabled) state?.showError()
         finish(false)
     }
 
     fun showLoading() {
-        state?.showLoading()
+        if (stateEnabled) state?.showLoading()
     }
 
     fun showContent() {
-        state?.showContent()
+        if (stateEnabled) state?.showContent()
         finish()
     }
 

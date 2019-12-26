@@ -79,7 +79,7 @@ allprojects {
 module 的 build.gradle
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.1.8'
+implementation 'com.github.liangjingkanji:BRV:1.1.9'
 ```
 
 
