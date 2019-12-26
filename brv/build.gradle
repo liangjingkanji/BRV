@@ -46,6 +46,6 @@ dependencies {
 
     compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
     api 'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
-    api 'com.github.liangjingkanji:StateLayout:1.0.7'
+    api 'com.github.liangjingkanji:StateLayout:1.0.8'
 
 }
