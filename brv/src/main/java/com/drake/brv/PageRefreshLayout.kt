@@ -217,7 +217,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 if (data.isNullOrEmpty()) {
                     showEmpty()
                     return
-                }
+                } else index += 1
 
             } else {
                 it.addModels(data)

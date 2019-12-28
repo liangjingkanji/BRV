@@ -8,6 +8,7 @@
 package com.drake.brv.sample.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,11 +57,13 @@ class RefreshFragment : Fragment() {
             addType<Model2>(R.layout.item_multi_type_2)
         }
 
-        val total = 1
+        val total = 3
 
         page.onRefresh {
             // 模拟网络请求
             postDelayed({
+
+                Log.d("日志", "(RefreshFragment.kt:65)    index = $index")
 
                 // 创建假的数据集
                 val data = listOf(
@@ -82,6 +85,8 @@ class RefreshFragment : Fragment() {
                 addData(data) {
                     1 < total // 判断是否有更多页
                 }
+
+                showContent()
 
             }, 2000)
 
