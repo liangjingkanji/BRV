@@ -8,7 +8,6 @@
 package com.drake.brv.sample.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,8 +62,6 @@ class RefreshFragment : Fragment() {
             // 模拟网络请求
             postDelayed({
 
-                Log.d("日志", "(RefreshFragment.kt:65)    index = $index")
-
                 // 创建假的数据集
                 val data = listOf(
                     Model(),
@@ -83,12 +80,9 @@ class RefreshFragment : Fragment() {
                 )
 
                 addData(data) {
-                    1 < total // 判断是否有更多页
+                    index < total // 判断是否有更多页
                 }
-
-                showContent()
-
-            }, 2000)
+            }, 1000)
 
             Toast.makeText(activity, "右上角菜单可以操作刷新结果, 默认2s结束", Toast.LENGTH_SHORT).show()
         }

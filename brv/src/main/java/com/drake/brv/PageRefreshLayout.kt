@@ -217,15 +217,16 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 if (data.isNullOrEmpty()) {
                     showEmpty()
                     return
-                } else index += 1
+                }
 
             } else {
                 it.addModels(data)
-                index += 1
             }
         }
 
         this.hasMore = adapter!!.hasMore()
+        index += 1
+
         if (isRefreshState) showContent() else finish(true)
     }
 
