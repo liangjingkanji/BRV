@@ -66,6 +66,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var autoEnabledLoadMoreState = false
     private var contentView: View? = null
     private var state: StateLayout? = null
+    private var loaded = false
 
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
@@ -282,6 +283,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val currentState = getState()
         if (currentState == RefreshState.Refreshing) {
             finishRefresh(success)
+            if (success) {
+                loaded = true
+            }
             setEnableRefresh(true)
             setNoMoreData(!hasMore)
         } else {
@@ -304,7 +308,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
 
     fun showError() {
-        if (stateEnabled) state?.showError()
+        if (stateEnabled && !loaded) state?.showError()
         finish(false)
     }
 
