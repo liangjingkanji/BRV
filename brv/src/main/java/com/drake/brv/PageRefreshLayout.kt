@@ -307,8 +307,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
 
-    fun showError() {
-        if (stateEnabled && !loaded) state?.showError()
+    /**
+     * 加载成功以后不会再显示错误页面, 除非指定强制显示
+     *
+     * @param force 强制显示错误页面
+     */
+    fun showError(force: Boolean = false) {
+        if (force || !loaded && stateEnabled) state?.showError()
         finish(false)
     }
 
