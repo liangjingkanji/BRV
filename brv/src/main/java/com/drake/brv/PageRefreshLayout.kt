@@ -281,11 +281,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun finish(success: Boolean = true) {
         val currentState = getState()
+
+        if (success) {
+            loaded = true
+        }
+
         if (currentState == RefreshState.Refreshing) {
             finishRefresh(success)
-            if (success) {
-                loaded = true
-            }
             setEnableRefresh(true)
             setNoMoreData(!hasMore)
         } else {
