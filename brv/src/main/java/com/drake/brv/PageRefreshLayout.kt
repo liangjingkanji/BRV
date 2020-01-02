@@ -236,17 +236,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     // <editor-fold desc="生命周期">
 
-    fun onError(block: View.(StateLayout) -> Unit): PageRefreshLayout {
+    fun onError(block: View.(Any?) -> Unit): PageRefreshLayout {
         state?.onError(block)
         return this
     }
 
-    fun onEmpty(block: View.(StateLayout) -> Unit): PageRefreshLayout {
+    fun onEmpty(block: View.(Any?) -> Unit): PageRefreshLayout {
         state?.onEmpty(block)
         return this
     }
 
-    fun onLoading(block: View.(StateLayout) -> Unit): PageRefreshLayout {
+    fun onLoading(block: View.(Any?) -> Unit): PageRefreshLayout {
         state?.onLoading(block)
         return this
     }
@@ -303,8 +303,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     // <editor-fold desc="缺省页">
 
 
-    fun showEmpty() {
-        if (stateEnabled) state?.showEmpty()
+    fun showEmpty(tag: Any? = null) {
+        if (stateEnabled) state?.showEmpty(tag)
         finish()
     }
 
@@ -314,13 +314,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      *
      * @param force 强制显示错误页面
      */
-    fun showError(force: Boolean = false) {
-        if (force || !loaded && stateEnabled) state?.showError()
+    fun showError(tag: Any? = null, force: Boolean = false) {
+        if (force || !loaded && stateEnabled) state?.showError(tag)
         finish(false)
     }
 
-    fun showLoading() {
-        if (stateEnabled) state?.showLoading()
+    fun showLoading(tag: Any? = null, refresh: Boolean = true) {
+        if (stateEnabled) state?.showLoading(tag, refresh)
     }
 
     fun showContent() {

@@ -8,6 +8,7 @@
 package com.drake.brv.sample.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,8 @@ class RefreshFragment : Fragment() {
         val total = 3
 
         page.onRefresh {
+            Log.d("日志", "(RefreshFragment.kt:62)    ")
+
             // 模拟网络请求
             postDelayed({
 
@@ -105,7 +108,7 @@ class RefreshFragment : Fragment() {
                 R.id.menu_pull_refresh -> page.autoRefresh() // 下拉刷新
                 R.id.menu_refresh -> page.refresh() // 静默刷新
                 R.id.menu_content -> page.showContent() // 加载成功
-                R.id.menu_error -> page.showError() // 加载错误
+                R.id.menu_error -> page.showError(force = true) // 加载错误
                 R.id.menu_empty -> page.showEmpty() // 空数据
                 R.id.menu_refresh_success -> page.finish() // 刷新成功
                 R.id.menu_refresh_fail -> page.finish(false) // 刷新失败
