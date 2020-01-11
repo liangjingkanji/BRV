@@ -8,7 +8,6 @@
 package com.drake.brv.sample.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,7 +59,6 @@ class RefreshFragment : Fragment() {
         val total = 3
 
         page.onRefresh {
-            Log.d("日志", "(RefreshFragment.kt:62)    ")
 
             // 模拟网络请求
             postDelayed({

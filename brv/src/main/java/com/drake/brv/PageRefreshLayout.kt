@@ -52,21 +52,22 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             field = value
             state?.loadingLayout = value
         }
-    var index = startIndex
+    var index = startIndex // 分页索引
     var stateEnabled = true // 启用缺省页
+    var loaded = false // 已加载, 已加载后将无法显示错误页面
 
     companion object {
 
         var startIndex = 1
     }
 
-
+    private var stateChanged = false
+    private var trigger = false
     private var hasMore = true
     private var adapter: BindingAdapter? = null
     private var autoEnabledLoadMoreState = false
     private var contentView: View? = null
     private var state: StateLayout? = null
-    private var loaded = false
 
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
@@ -272,6 +273,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         return this
     }
 
+    override fun autoRefresh(): Boolean {
+        return super.autoRefresh()
+    }
+
     // </editor-fold>
 
 
@@ -280,6 +285,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param success Boolean 刷新结果 true: 成功 false: 失败
      */
     fun finish(success: Boolean = true) {
+
+        if (trigger) {
+            stateChanged = true
+        }
+
         val currentState = getState()
 
         if (success) {
@@ -297,6 +307,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (currentState != RefreshState.Loading && autoEnabledLoadMoreState) {
             setEnableLoadMore(success)
         }
+    }
+
+    /**
+     * 用于网络请求的触发器
+     */
+    fun trigger(): Boolean {
+        trigger = !trigger
+        if (!trigger) stateChanged = false
+        return trigger
     }
 
 
@@ -324,6 +343,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     fun showContent() {
+        if (trigger && stateChanged) return
+
         if (stateEnabled) state?.showContent()
         finish()
     }
