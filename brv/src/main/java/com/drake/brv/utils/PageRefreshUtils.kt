@@ -20,8 +20,8 @@ import com.drake.brv.PageRefreshLayout
  * @param stateEnabled Boolean 启用缺省页
  */
 fun View.page(
-        loadMoreEnabled: Boolean = true,
-        stateEnabled: Boolean = true
+    loadMoreEnabled: Boolean = true,
+    stateEnabled: Boolean = true
 ): PageRefreshLayout {
 
     val pageRefreshLayout = PageRefreshLayout(context)
@@ -44,3 +44,5 @@ fun View.page(
 
     return pageRefreshLayout
 }
+
+

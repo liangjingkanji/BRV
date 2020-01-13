@@ -11,15 +11,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.ItemMultiType1Binding
 import com.drake.brv.sample.model.Model
 import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.drake.tooltip.toast
 import kotlinx.android.synthetic.main.fragment_multi_type.*
 
 
@@ -65,12 +64,8 @@ class MultiTypeFragment : Fragment() {
         rv_multi_type.bindingAdapter.onClick(R.id.item) {
 
             when (itemViewType) {
-                R.layout.item_multi_type_1 -> {
-                    Toast.makeText(activity, "类型1", Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-                    Toast.makeText(activity, "类型2", Toast.LENGTH_SHORT).show()
-                }
+                R.layout.item_multi_type_1 -> toast("类型1")
+                else -> toast("类型2")
             }
         }
     }

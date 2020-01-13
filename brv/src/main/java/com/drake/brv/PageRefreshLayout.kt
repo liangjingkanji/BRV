@@ -52,14 +52,22 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             field = value
             state?.loadingLayout = value
         }
+
     var index = startIndex // 分页索引
-    var stateEnabled = true // 启用缺省页
     var loaded = false // 已加载, 已加载后将无法显示错误页面
 
     companion object {
-
         var startIndex = 1
     }
+
+    internal var stateEnabled = true // 启用缺省页
+        set(value) {
+            field = value
+            if (!field && !mEnableLoadMore) {
+                setEnableLoadMore(field)
+            }
+        }
+
 
     private var stateChanged = false
     private var trigger = false
@@ -68,7 +76,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var autoEnabledLoadMoreState = false
     private var contentView: View? = null
     private var state: StateLayout? = null
-
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
 
@@ -81,6 +88,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.PageRefreshLayout)
 
         try {
+
             stateEnabled =
                 attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
@@ -90,18 +98,12 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 mEnableLoadMoreWhenContentNotFull
             )
 
-            emptyLayout = attributes.getResourceId(
-                R.styleable.PageRefreshLayout_empty_layout,
-                View.NO_ID
-            )
-            errorLayout = attributes.getResourceId(
-                R.styleable.PageRefreshLayout_error_layout,
-                View.NO_ID
-            )
-            loadingLayout = attributes.getResourceId(
-                R.styleable.PageRefreshLayout_loading_layout,
-                View.NO_ID
-            )
+            emptyLayout =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+            errorLayout =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+            loadingLayout =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
         } finally {
             attributes.recycle()
         }
@@ -113,16 +115,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         init()
     }
 
+
     internal fun init() {
 
         setOnRefreshLoadMoreListener(this)
         autoEnabledLoadMoreState = mEnableLoadMore
 
-
         if (autoEnabledLoadMoreState) {
             setEnableLoadMore(false)
         }
-
 
         if (contentView == null) {
             for (i in 0 until childCount) {
@@ -135,27 +136,30 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } else return
 
         if (stateEnabled) {
-            if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
-                stateEnabled = false
-                return
-            }
-            replaceState()
+            replaceStateLayout()
         }
     }
 
-    private fun replaceState() {
+    private fun replaceStateLayout() {
+
+        if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
+            stateEnabled = false
+            return
+        }
+
         state = StateLayout(context)
-        state?.let {
-            removeView(contentView)
-            state!!.addView(contentView)
+
+        state?.apply {
+            this@PageRefreshLayout.removeView(contentView)
+            addView(contentView)
             state!!.setContentView(contentView!!)
-            setRefreshContent(state!!)
+            setRefreshContent(this)
 
-            it.emptyLayout = emptyLayout
-            it.errorLayout = errorLayout
-            it.loadingLayout = loadingLayout
+            emptyLayout = emptyLayout
+            errorLayout = errorLayout
+            loadingLayout = loadingLayout
 
-            state?.onRefresh {
+            onRefresh {
                 setEnableRefresh(false)
                 notifyStateChanged(RefreshState.Refreshing)
                 onRefresh(this@PageRefreshLayout)
@@ -300,9 +304,14 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             finishRefresh(success)
             setEnableRefresh(true)
             setNoMoreData(!hasMore)
+
+            if (!mEnableLoadMoreWhenContentNotFull) {
+                setEnableLoadMoreWhenContentNotFull(hasMore)
+            }
         } else {
             if (hasMore) finishLoadMore(success) else finishLoadMoreWithNoMoreData()
         }
+
 
         if (currentState != RefreshState.Loading && autoEnabledLoadMoreState) {
             setEnableLoadMore(success)
@@ -334,7 +343,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param force 强制显示错误页面
      */
     fun showError(tag: Any? = null, force: Boolean = false) {
-        if (force || !loaded && stateEnabled) state?.showError(tag)
+        if (force || !loaded && stateEnabled) {
+            loaded = false
+            state?.showError(tag)
+        }
         finish(false)
     }
 

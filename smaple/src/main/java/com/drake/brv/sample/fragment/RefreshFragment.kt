@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.PageRefreshLayout
@@ -20,12 +19,14 @@ import com.drake.brv.sample.model.Model
 import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.drake.tooltip.toast
 import kotlinx.android.synthetic.main.fragment_refresh.*
 
 
 class RefreshFragment : Fragment() {
 
     lateinit var toolbar: Toolbar
+    private val total = 2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,59 +40,44 @@ class RefreshFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        /**
-         * 请查看Application的初始化
-         *
-         */
-
-
-//        val page = rv.page(loadMoreEnabled = true, stateEnabled = true) 通过代码设置PageRefreshLayout
-        val page = content // 在XML布局中声明PageRefreshLayout 两者选其一即可
-
-
-        page.autoRefresh() // page.refresh() 属于没有动画效果的刷新
 
         rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_1)
             addType<Model2>(R.layout.item_multi_type_2)
         }
 
-        val total = 3
-
         page.onRefresh {
 
-            // 模拟网络请求
             postDelayed({
 
-                // 创建假的数据集
+                // 模拟网络请求, 创建假的数据集
                 val data = listOf(
                     Model(),
                     Model2(),
                     Model2(),
                     Model(),
-                    Model(),
-                    Model(),
-                    Model(),
-                    Model2(),
-                    Model2(),
-                    Model2(),
-                    Model(),
-                    Model(),
+                    Model(), Model(),
+                    Model(), Model(),
+                    Model(), Model(),
+                    Model(), Model(),
+                    Model(), Model(),
                     Model()
                 )
 
                 addData(data) {
                     index < total // 判断是否有更多页
                 }
+
             }, 1000)
 
-            Toast.makeText(activity, "右上角菜单可以操作刷新结果, 默认2s结束", Toast.LENGTH_SHORT).show()
-        }
+            toast("右上角菜单可以操作刷新结果, 默认2s结束")
 
-        /**
+        }.autoRefresh()
+
+
+        /*
          * 关于自动化分页加载请查看我的网络请求库 Net : https://github.com/liangjingkanji/Net
          */
-
 
         initToolbar(page)
     }
