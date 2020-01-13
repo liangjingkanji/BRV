@@ -70,8 +70,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             if (finishInflate) {
                 if (value && state == null) {
                     replaceStateLayout()
-                } else {
-                    showContent()
+                } else if (!value) {
+                    state?.showContent()
                 }
             }
 
@@ -123,8 +123,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        finishInflate = true
         init()
+        finishInflate = true
     }
 
 
