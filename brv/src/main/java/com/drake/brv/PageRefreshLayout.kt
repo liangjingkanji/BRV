@@ -67,10 +67,12 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 setEnableLoadMore(value)
             }
 
-            if (value && state == null && finishInflate) {
-                replaceStateLayout()
-            } else {
-                showContent()
+            if (finishInflate) {
+                if (value && state == null) {
+                    replaceStateLayout()
+                } else {
+                    showContent()
+                }
             }
 
             field = value
