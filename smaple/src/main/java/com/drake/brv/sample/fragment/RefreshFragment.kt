@@ -74,7 +74,6 @@ class RefreshFragment : Fragment() {
 
         }.autoRefresh()
 
-
         /*
          * 关于自动化分页加载请查看我的网络请求库 Net : https://github.com/liangjingkanji/Net
          */

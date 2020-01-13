@@ -60,16 +60,25 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         var startIndex = 1
     }
 
-    internal var stateEnabled = true // 启用缺省页
+    var stateEnabled = true // 启用缺省页
         set(value) {
-            field = value
-            if (!field && !mEnableLoadMore) {
-                setEnableLoadMore(field)
+
+            if (!value && !mEnableLoadMore) {
+                setEnableLoadMore(value)
             }
+
+            if (value && state == null && finishInflate) {
+                replaceStateLayout()
+            } else {
+                showContent()
+            }
+
+            field = value
         }
 
 
     private var stateChanged = false
+    private var finishInflate = false
     private var trigger = false
     private var hasMore = true
     private var adapter: BindingAdapter? = null
@@ -112,6 +121,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
+        finishInflate = true
         init()
     }
 
@@ -343,7 +353,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param force 强制显示错误页面
      */
     fun showError(tag: Any? = null, force: Boolean = false) {
-        if (force || !loaded && stateEnabled) {
+        if (stateEnabled && (force || !loaded)) {
             loaded = false
             state?.showError(tag)
         }
