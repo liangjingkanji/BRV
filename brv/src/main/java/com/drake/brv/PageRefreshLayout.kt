@@ -105,7 +105,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
-                com.scwang.smart.refresh.layout.kernel.R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
+                R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
                 mEnableLoadMoreWhenContentNotFull
             )
 

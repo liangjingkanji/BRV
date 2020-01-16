@@ -447,6 +447,33 @@ rv.linear().setup {
 
 
 
+可选配置刷新头布局和脚布局
+
+```groovy
+implementation  'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'    //经典加载
+implementation  'com.scwang.smart:refresh-header-material:2.0.0-alpha-1'    //谷歌刷新头
+// 以上两种已内置
+
+
+implementation  'com.scwang.smart:refresh-header-classics:2.0.0-alpha-1'    //经典刷新头
+implementation  'com.scwang.smart:refresh-header-radar:2.0.0-alpha-1'       //雷达刷新头
+implementation  'com.scwang.smart:refresh-header-falsify:2.0.0-alpha-1'     //虚拟刷新头
+implementation  'com.scwang.smart:refresh-header-two-level:2.0.0-alpha-1'   //二级刷新头
+implementation  'com.scwang.smart:refresh-footer-ball:2.0.0-alpha-1'        //球脉冲加载
+implementation 'com.scwang.smartrefresh:SmartRefreshHorizontal:1.0.0-andx-1' // 水平
+```
+
+
+
+刷新布局要求必须先初始化, 推荐在Application中
+
+```
+SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(this) }
+SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
+```
+
+
+
 在此基础上增加特性
 
 - 缺省页

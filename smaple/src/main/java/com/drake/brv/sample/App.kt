@@ -11,7 +11,7 @@ import android.app.Application
 import com.drake.brv.BindingAdapter
 import com.drake.statelayout.StateConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 class App : Application() {
@@ -43,10 +43,15 @@ class App : Application() {
         }
 
 
-        /**
-         * 初始化SmartRefreshLayout
-         */
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(this) }
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+            MaterialHeader(
+                context
+            )
+        }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+            ClassicsFooter(
+                context
+            )
+        }
     }
 }
