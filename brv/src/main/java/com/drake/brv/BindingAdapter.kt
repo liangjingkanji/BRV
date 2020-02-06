@@ -41,7 +41,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     var recyclerView: RecyclerView? = null
-    var clickInterval: Long = 500
+    var clickPeriod: Long = 500
     // 点击事件过滤间隔时间毫秒
 
 
@@ -52,22 +52,20 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onCheckedChange: ((itemType: Int, position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? =
-            null
+        null
     private var onToggle: ((itemType: Int, position: Int, toggleModel: Boolean) -> Unit)? = null
     private var onToggleEnd: ((toggleModel: Boolean) -> Unit)? = null
 
 
     /**
-     * function params of return value , true brv not handler onBindViewHolder
-     * @param block [@kotlin.ExtensionFunctionType] Function1<BindingViewHolder, Boolean>
+     * 自定义处理[onBindViewHolder]数据绑定, 返回true表示不会处理DataBinding的数据绑定
      */
     fun onBind(block: BindingViewHolder.() -> Boolean) {
         onBind = block
     }
 
     /**
-     * increment data update
-     * @param block [@kotlin.ExtensionFunctionType] Function2<BindingViewHolder, Any, Unit>
+     * 增量更新
      */
     fun onPayload(block: BindingViewHolder.(Any) -> Unit) {
         onPayload = block
@@ -108,10 +106,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
 
         val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-                LayoutInflater.from(parent.context),
-                viewType,
-                parent,
-                false
+            LayoutInflater.from(parent.context),
+            viewType,
+            parent,
+            false
         ) ?: return BindingViewHolder(parent.getView(viewType))
 
         return BindingViewHolder(viewDataBinding)
@@ -127,9 +125,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     override fun onBindViewHolder(
-            holder: BindingViewHolder,
-            position: Int,
-            payloads: MutableList<Any>
+        holder: BindingViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
     ) {
         if (payloads.isNotEmpty()) {
             onPayload?.invoke(holder, payloads[0])
@@ -143,7 +141,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model!!.javaClass
         return (typePool[modelClass]?.invoke(model, position)
-                ?: throw NoSuchPropertyException("please add item model type : ${model.javaClass.simpleName}"))
+            ?: throw NoSuchPropertyException("please add item model type : ${model.javaClass.simpleName}"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -207,8 +205,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
     /**
-     * add click event
-     * in 500 milliSecond be invalid of defaultValue
+     * 添加点击事件
+     * 默认500ms内防抖, 修改[clickPeriod]属性可以全局设置间隔时间, 单位毫秒
      */
     fun addClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -278,9 +276,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     fun addHeader(
-            model: Any?,
-            index: Int = -1,
-            animation: Boolean = false
+        model: Any?,
+        index: Int = -1,
+        animation: Boolean = false
     ) {
 
         if (index == -1) {
@@ -458,8 +456,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
             notifyDataSetChanged()
 
-            if (checkedPositions.isNotEmpty()) {
-                checkedPositions.clear()
+            if (checkedPos.isNotEmpty()) {
+                checkedPos.clear()
             }
 
             if (isFirst) {
@@ -511,7 +509,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * @receiver Int model of position
      * @return Int
      */
-    fun Int.getModelPosition(): Int {
+    fun Int.toModelPos(): Int {
         return this - headerCount
     }
 
@@ -520,14 +518,16 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="选择模式">
 
-    var toggleMode = false
-    val checkedPositions = arrayListOf<Int>()
+    var toggleMode = false // 是否开启切换模式
+        private set
+
+    val checkedPos = arrayListOf<Int>() // 已选择的位置
 
     private var checkableItemTypeList: List<Int>? = null
 
 
     val checkedCount: Int
-        get() = checkedPositions.size
+        get() = checkedPos.size
 
     private val checkableCount: Int
         get() {
@@ -548,10 +548,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     var singleMode = false
         set(value) {
             field = value
-            val size = checkedPositions.size
+            val size = checkedPos.size
             if (field && size > 1) {
                 for (i in 0 until size - 1) {
-                    setChecked(checkedPositions[0], false)
+                    setChecked(checkedPos[0], false)
                 }
             }
         }
@@ -561,7 +561,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun <M> getCheckedModels(): List<M> {
         val checkedModels = ArrayList<M>()
-        for (position in this.checkedPositions) {
+        for (position in this.checkedPos) {
             checkedModels.add(getModel(position)!!)
         }
         return checkedModels
@@ -584,7 +584,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     /**
-     * set list mode, can iterate each item of list
+     * 设置切换模式, 切换模式为遍历每个item
      * @param toggleModel Boolean
      */
     fun setToggle(toggleModel: Boolean) {
@@ -595,9 +595,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     /**
-     * set checked status of multi type list
+     * 设置可以被选择的item类型
      * @see setChecked
-     * @param checkableItemType IntArray
      */
     fun setCheckableType(@LayoutRes vararg checkableItemType: Int) {
         checkableItemTypeList = checkableItemType.toMutableList()
@@ -605,8 +604,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     /**
-     * single mode be not support checked of all, but support cancel checked of all
-     * @param checked Boolean true is checked of all, false is cancel checked of all
+     * 单选模式下不支持全选, 但支持取消全部选择
+     * @param checked true为全选, false 取消全部选择
      */
     fun checkedAll(checked: Boolean = true) {
         if (checked) {
@@ -614,13 +613,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                 return
             }
             for (i in 0 until itemCount) {
-                if (!checkedPositions.contains(i)) {
+                if (!checkedPos.contains(i)) {
                     setChecked(i, true)
                 }
             }
         } else {
             for (i in 0 until itemCount) {
-                if (checkedPositions.contains(i)) {
+                if (checkedPos.contains(i)) {
                     setChecked(i, false)
                 }
             }
@@ -641,7 +640,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             return
         }
         for (i in 0 until itemCount) {
-            if (checkedPositions.contains(i)) {
+            if (checkedPos.contains(i)) {
                 setChecked(i, false)
             } else {
                 setChecked(i, true)
@@ -657,39 +656,32 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun setChecked(@IntRange(from = 0) position: Int, checked: Boolean) {
 
-        if ((checkedPositions.contains(position) && checked) || (!checked && !checkedPositions.contains(
-                    position
-            ))
-        ) {
-            return
-        }
+        if ((checkedPos.contains(position) && checked) ||
+            (!checked && !checkedPos.contains(position))
+        ) return
 
         val itemViewType = getItemViewType(position)
-        if (checkableItemTypeList != null && checkableItemTypeList!!.contains(itemViewType)) {
-            return
-        }
-        if (onCheckedChange == null) {
-            return
-        }
-        if (checked) {
-            checkedPositions.add(position)
-        } else {
-            checkedPositions.remove(Integer.valueOf(position))
-        }
+
+        if (checkableItemTypeList != null && checkableItemTypeList!!.contains(itemViewType)) return
+
+        if (onCheckedChange == null) return
+
+        if (checked) checkedPos.add(position)
+        else checkedPos.remove(Integer.valueOf(position))
 
         onCheckedChange?.invoke(
-                itemViewType,
-                position,
-                checked,
-                isCheckedAll()
+            itemViewType,
+            position,
+            checked,
+            isCheckedAll()
         )
-        if (singleMode && checked && checkedPositions.size > 1) {
-            setChecked(checkedPositions[0], false)
+        if (singleMode && checked && checkedPos.size > 1) {
+            setChecked(checkedPos[0], false)
         }
     }
 
     fun toggleChecked(@IntRange(from = 0) position: Int) {
-        if (checkedPositions.contains(position)) {
+        if (checkedPos.contains(position)) {
             setChecked(position, false)
         } else {
             setChecked(position, true)
@@ -718,10 +710,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                 if (clickableIds.valueAt(i)) {
                     view.setOnClickListener { onClick?.invoke(this@BindingViewHolder, view.id) }
                 } else {
-                    view.throttleClick(clickInterval) {
+                    view.throttleClick(clickPeriod) {
                         onClick?.invoke(
-                                this@BindingViewHolder,
-                                view.id
+                            this@BindingViewHolder,
+                            view.id
                         )
                     }
                 }
@@ -736,7 +728,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
         }
 
-        fun bind(model: Any) {
+        internal fun bind(model: Any) {
             this.model = model
 
             onBind?.apply {
@@ -748,19 +740,36 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             viewDataBinding?.executePendingBindings()
         }
 
-        /**
-         * get viewDataBinding of list
-         */
+
         fun <B : ViewDataBinding> getViewDataBinding(): B {
             return viewDataBinding as B
         }
 
-        /**
-         * get model of list
-         */
         fun <M> getModel(): M {
 
             return model as M
+        }
+
+
+        /**
+         * 展开
+         */
+        fun expand() {
+
+        }
+
+        /**
+         * 折叠
+         */
+        fun collapse() {
+
+        }
+
+        /**
+         * 切换折叠或者展开
+         */
+        fun switch() {
+
         }
     }
 

@@ -7,4 +7,4 @@
 
 package com.drake.brv.sample.model
 
-class Model2
+class DoubleItemModel

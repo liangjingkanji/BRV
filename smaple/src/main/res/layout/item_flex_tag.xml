@@ -24,7 +24,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.TagModel" />
+            type="com.drake.brv.sample.model.FlexTagModel" />
 
     </data>
 </layout>

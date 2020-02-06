@@ -36,11 +36,15 @@ class OneMoreTypeFragment : Fragment() {
         rv_one_more_type.linear().setup {
             addType<OneMoreTypeModel> {
                 when (type) {
-                    0 -> R.layout.item_multi_type_1
-                    else -> R.layout.item_multi_type_2
+                    0 -> R.layout.item_multi_type_simple
+                    else -> R.layout.item_multi_type_double
                 }
             }
-        }.models = listOf(
+        }.models = getData()
+    }
+
+    private fun getData(): List<OneMoreTypeModel> {
+        return listOf(
             OneMoreTypeModel(0),
             OneMoreTypeModel(0),
             OneMoreTypeModel(1),

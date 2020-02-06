@@ -15,8 +15,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
+import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -42,8 +42,8 @@ class RefreshFragment : Fragment() {
 
 
         rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_1)
-            addType<Model2>(R.layout.item_multi_type_2)
+            addType<Model>(R.layout.item_multi_type_simple)
+            addType<DoubleItemModel>(R.layout.item_multi_type_double)
         }
 
         page.onRefresh {
@@ -51,18 +51,7 @@ class RefreshFragment : Fragment() {
             postDelayed({
 
                 // 模拟网络请求, 创建假的数据集
-                val data = listOf(
-                    Model(),
-                    Model2(),
-                    Model2(),
-                    Model(),
-                    Model(), Model(),
-                    Model(), Model(),
-                    Model(), Model(),
-                    Model(), Model(),
-                    Model(), Model(),
-                    Model()
-                )
+                val data = getData()
 
                 addData(data) {
                     index < total // 判断是否有更多页
@@ -77,8 +66,22 @@ class RefreshFragment : Fragment() {
         /*
          * 关于自动化分页加载请查看我的网络请求库 Net : https://github.com/liangjingkanji/Net
          */
-
         initToolbar(page)
+    }
+
+    private fun getData(): List<Any> {
+        return listOf(
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(), Model(),
+            Model(), Model(),
+            Model(), Model(),
+            Model(), Model(),
+            Model(), Model(),
+            Model()
+        )
     }
 
 

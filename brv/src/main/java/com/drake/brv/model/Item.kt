@@ -7,18 +7,30 @@
 
 package com.drake.brv.model
 
-interface ItemModel {
+interface Item {
 
-
+    /**
+     * 拖拽方向
+     */
     @DragType
     fun drag(): Int {
         return DragType.NONE
     }
 
 
+    /**
+     * 侧滑方向
+     */
     @SwipeType
     fun swipe(): Int {
         return SwipeType.NONE
+    }
+
+    /**
+     * 子列表
+     */
+    fun sublist(): List<Any?>? {
+        return null
     }
 
 }

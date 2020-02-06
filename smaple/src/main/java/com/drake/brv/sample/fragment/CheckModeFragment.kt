@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.drake.brv.BindingAdapter
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.CheckModel
 import com.drake.brv.utils.bindingAdapter
@@ -69,7 +70,6 @@ class CheckModeFragment : Fragment() {
             }
 
             onToggle { itemType, position, toggleMode ->
-
                 val model = getModel<CheckModel>(position)
                 model?.visibility = toggleMode
                 model?.notifyChange()
@@ -91,27 +91,19 @@ class CheckModeFragment : Fragment() {
                 if (!it) checkedAll(false)
             }
 
-        }.models = listOf(
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel(),
-            CheckModel()
-        )
+        }.models = getData()
 
 
         val adapter = rv_check_mode.bindingAdapter
 
 
+        initOperation(adapter)
+    }
+
+    /**
+     * 初始化操作按钮
+     */
+    private fun initOperation(adapter: BindingAdapter) {
         // 单选模式切换
         tv_single_mode.setOnClickListener {
             adapter.singleMode = !adapter.singleMode
@@ -140,8 +132,25 @@ class CheckModeFragment : Fragment() {
         tv_manage.setOnClickListener {
             adapter.toggle()
         }
+    }
 
-        // val checkedResult = adapter.getCheckedModels<CheckModel>()
+    private fun getData(): List<CheckModel> {
+        return listOf(
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel(),
+            CheckModel()
+        )
     }
 
 

@@ -1,10 +1,10 @@
 package com.drake.brv.sample.model
 
 import com.drake.brv.model.DragType
-import com.drake.brv.model.ItemModel
+import com.drake.brv.model.Item
 import com.drake.brv.model.SwipeType
 
-data class SwipeDragModel(var swipe: Int, var drag: Int) : ItemModel {
+data class SwipeDragModel(var swipe: Int, var drag: Int) : Item {
 
     override fun drag(): Int {
         return drag

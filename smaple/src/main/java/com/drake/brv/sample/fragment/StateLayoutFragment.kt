@@ -14,16 +14,16 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.statelayout.StateLayout
 import com.drake.statelayout.state
-import kotlinx.android.synthetic.main.fragment_state.*
+import kotlinx.android.synthetic.main.fragment_state_layout.*
 
 
-class StateFragment : Fragment() {
+class StateLayoutFragment : Fragment() {
 
     lateinit var toolbar: Toolbar
 
@@ -32,40 +32,39 @@ class StateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_state, container, false)
+        return inflater.inflate(R.layout.fragment_state_layout, container, false)
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        /**
-         * 请查看Application的初始化
-         */
-
 
         rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_1)
-            addType<Model2>(R.layout.item_multi_type_2)
-        }.models = listOf(
-            Model(),
-            Model2(),
-            Model2(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model2(),
-            Model2(),
-            Model2(),
-            Model(),
-            Model(),
-            Model()
-        )
-
+            addType<Model>(R.layout.item_multi_type_simple)
+            addType<DoubleItemModel>(R.layout.item_multi_type_double)
+        }.models = getData()
 
         val state = state()
 
         initToolbar(state)
+    }
+
+    private fun getData(): List<Any> {
+        return listOf(
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(),
+            Model()
+        )
     }
 
 

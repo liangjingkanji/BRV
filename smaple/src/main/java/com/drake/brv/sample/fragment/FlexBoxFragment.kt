@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.model.TagModel
+import com.drake.brv.sample.model.FlexTagModel
 import com.drake.brv.utils.setup
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_flex_box.*
@@ -41,14 +41,18 @@ class FlexBoxFragment : Fragment() {
         rv.layoutManager = FlexboxLayoutManager(activity)
 
         rv.setup {
-            addType<TagModel>(R.layout.item_tag)
-        }.models = listOf(
-            TagModel("吴彦祖"),
-            TagModel("金城武"),
-            TagModel("Amber Gao"),
-            TagModel("设计师"),
-            TagModel("肥宅"),
-            TagModel("不识妻美刘强东")
+            addType<FlexTagModel>(R.layout.item_flex_tag)
+        }.models = getData()
+    }
+
+    private fun getData(): List<FlexTagModel> {
+        return listOf(
+            FlexTagModel("吴彦祖"),
+            FlexTagModel("金城武"),
+            FlexTagModel("Amber Gao"),
+            FlexTagModel("设计师"),
+            FlexTagModel("肥宅"),
+            FlexTagModel("不识妻美刘强东")
         )
     }
 

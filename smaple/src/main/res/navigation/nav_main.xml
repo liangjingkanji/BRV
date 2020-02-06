@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main.xml"
-    app:startDestination="@id/refresh">
+    app:startDestination="@id/groupFragment">
 
     <fragment
         android:id="@+id/multi_type"
@@ -17,9 +17,9 @@
         tools:layout="@layout/fragment_check_mode" />
     <fragment
         android:id="@+id/state"
-        android:name="com.drake.brv.sample.fragment.StateFragment"
+        android:name="com.drake.brv.sample.fragment.StateLayoutFragment"
         android:label="缺省状态"
-        tools:layout="@layout/fragment_state" />
+        tools:layout="@layout/fragment_state_layout" />
     <fragment
         android:id="@+id/swipe_drag"
         android:name="com.drake.brv.sample.fragment.SwipeDragFragment"
@@ -44,4 +44,9 @@
         android:name="com.drake.brv.sample.fragment.RefreshFragment"
         android:label="刷新列表"
         tools:layout="@layout/fragment_refresh" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.drake.brv.sample.fragment.GroupFragment"
+        android:label="fragment_group"
+        tools:layout="@layout/fragment_group" />
 </navigation>

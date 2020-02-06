@@ -13,8 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.Model2
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -42,32 +42,36 @@ class MultiTypeFragment : Fragment() {
          */
 
         rv_multi_type.linear().setup {
-            addType<Model>(R.layout.item_multi_type_1)
-            addType<Model2>(R.layout.item_multi_type_2)
-        }.models = listOf(
-            Model(),
-            Model2(),
-            Model2(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model2(),
-            Model2(),
-            Model2(),
-            Model(),
-            Model(),
-            Model()
-        )
+            addType<Model>(R.layout.item_multi_type_simple)
+            addType<DoubleItemModel>(R.layout.item_multi_type_double)
+        }.models = getData()
 
         // 点击事件
         rv_multi_type.bindingAdapter.onClick(R.id.item) {
 
             when (itemViewType) {
-                R.layout.item_multi_type_1 -> toast("类型1")
+                R.layout.item_multi_type_simple -> toast("类型1")
                 else -> toast("类型2")
             }
         }
+    }
+
+    private fun getData(): List<Any> {
+        return listOf(
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(),
+            Model()
+        )
     }
 
 

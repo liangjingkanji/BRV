@@ -41,12 +41,15 @@ class SwipeDragFragment : Fragment() {
          * 侧滑删除会改变数据的内容
          */
 
-
         rv.linear().setup {
             touchEnable = true // 支持启用和关闭
 
-            addType<SwipeDragModel>(R.layout.item_swipe_drag)
-        }.models = listOf(
+            addType<SwipeDragModel>(R.layout.item_swipe_or_drag)
+        }.models = getData()
+    }
+
+    private fun getData(): List<SwipeDragModel> {
+        return listOf(
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL),
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL),
             SwipeDragModel(SwipeType.NONE, DragType.NONE), // 不支持拖拽 | 不支持侧滑

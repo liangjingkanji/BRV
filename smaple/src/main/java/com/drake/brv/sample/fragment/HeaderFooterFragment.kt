@@ -39,21 +39,25 @@ class HeaderFooterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         rv_header_footer.linear().setup {
-            addType<Model>(R.layout.item_multi_type_1)
+            addType<Model>(R.layout.item_multi_type_simple)
 
             /**
              * BRV的数据集 = Header + Footer + Models
              * 所以本质上他们都是一组多类型而已, 我分出来只是为了方便替换Models而不影响Header和Footer
              */
 
-            addType<Header>(R.layout.item_multi_type_1)
-            addType<Footer>(R.layout.item_multi_type_1)
-        }.models = listOf(
+            addType<Header>(R.layout.item_multi_type_simple)
+            addType<Footer>(R.layout.item_multi_type_simple)
+        }.models = getData()
+
+        initToolbar()
+    }
+
+    private fun getData(): List<Model> {
+        return listOf(
             Model(),
             Model()
         )
-
-        initToolbar()
     }
 
     var index = 0

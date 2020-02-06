@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.drake.statusbar.immersiveDark
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_content.*
+import kotlinx.android.synthetic.main.layout_drawer_content.*
 
 class MainActivity : AppCompatActivity() {
 

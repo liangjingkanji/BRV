@@ -7,4 +7,14 @@
 
 package com.drake.brv.sample.model
 
-class Model
+import com.drake.brv.model.Item
+
+class Model : Item {
+    override fun drag(): Int {
+        return super.drag()
+    }
+
+    override fun swipe(): Int {
+        return super.swipe()
+    }
+}

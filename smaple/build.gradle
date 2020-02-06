@@ -58,7 +58,7 @@ dependencies {
 
     implementation "androidx.recyclerview:recyclerview:$rv_version"
     implementation "com.google.android:flexbox:1.1.0"
-    implementation  "com.scwang.smart:refresh-header-classics:2.0.0-alpha-1"
+    implementation "com.scwang.smart:refresh-header-classics:2.0.0-alpha-1"
 
 
     implementation project(":brv")
