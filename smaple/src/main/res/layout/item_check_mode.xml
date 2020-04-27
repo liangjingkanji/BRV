@@ -8,47 +8,41 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/item"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="4dp">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <CheckBox
-                    android:id="@+id/cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|right"
-                    android:layout_marginRight="16dp"
-                    android:checked="@={m.checked}"
-                    android:visibility="@{m.visibility ? View.VISIBLE : View.GONE}" />
-
-            </FrameLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </FrameLayout>
-
     <data>
 
         <import type="android.view.View" />
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.CheckModel" />
+            type="com.drake.brv.sample.mod.CheckModel" />
 
     </data>
 
+    <FrameLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_card"
+        android:foreground="?selectableItemBackgroundBorderless"
+        app:cardCornerRadius="4dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <CheckBox
+                android:id="@+id/cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="16dp"
+                android:checked="@={m.checked}"
+                android:visibility="@{m.visibility ? View.VISIBLE : View.GONE}" />
+
+        </FrameLayout>
+
+    </FrameLayout>
 
 </layout>

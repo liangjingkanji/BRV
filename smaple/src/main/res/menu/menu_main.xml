@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：Nathan
+  ~ Date：8/24/19 2:35 AM
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/group"
+        android:icon="@drawable/ic_group"
+        android:title="分组" />
+    <item
+        android:id="@+id/sticky_header"
+        android:icon="@drawable/ic_sticky_header"
+        android:title="粘性头部" />
+    <item
+        android:id="@+id/tree_structure"
+        android:icon="@drawable/ic_tree_structure"
+        android:title="树状结构" />
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/ic_refresh"
+        android:title="刷新列表" />
+    <item
+        android:id="@+id/multi_type"
+        android:icon="@drawable/ic_multi_type"
+        android:title="多类型" />
+    <item
+        android:id="@+id/one_more_multi_type"
+        android:icon="@drawable/ic_one_more"
+        android:title="一对多" />
+    <item
+        android:id="@+id/header_footer"
+        android:icon="@drawable/ic_head_footer"
+        android:title="头|脚布局" />
+    <item
+        android:id="@+id/check_mode"
+        android:icon="@drawable/ic_check_mode"
+        android:title="选择模式" />
+    <item
+        android:id="@+id/flex_box"
+        android:icon="@drawable/ic_flex_box"
+        android:title="伸缩布局" />
+    <item
+        android:id="@+id/swipe_drag"
+        android:icon="@drawable/ic_touch"
+        android:title="侧滑|拖拽" />
+    <item
+        android:id="@+id/state"
+        android:icon="@drawable/ic_state"
+        android:title="缺省状态" />
+</menu>

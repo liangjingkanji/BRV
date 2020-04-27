@@ -16,7 +16,7 @@
     app:empty_layout="@layout/layout_empty"
     app:loading_layout="@layout/layout_loading"
     android:layout_height="match_parent"
-    tools:context="com.drake.brv.sample.fragment.RefreshFragment">
+    tools:context="com.drake.brv.sample.ui.fragment.RefreshFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"

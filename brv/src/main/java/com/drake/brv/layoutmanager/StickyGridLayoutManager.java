@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.drake.brv.StickyAdapter;
+import com.drake.brv.adapter.StickyAdapter;
+import com.drake.brv.listener.OnStickyChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,17 +93,17 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
     }
 
     @SuppressWarnings("unchecked")
-    private void setAdapter(RecyclerView.Adapter adapter) {
-        if (mAdapter != null) {
-            mAdapter.unregisterAdapterDataObserver(mHeaderPositionsObserver);
+    private void setAdapter(RecyclerView.Adapter mAdapter) {
+        if (this.mAdapter != null) {
+            this.mAdapter.unregisterAdapterDataObserver(mHeaderPositionsObserver);
         }
 
-        if (adapter instanceof StickyAdapter) {
-            mAdapter = (T) adapter;
-            mAdapter.registerAdapterDataObserver(mHeaderPositionsObserver);
+        if (mAdapter instanceof StickyAdapter) {
+            this.mAdapter = (T) mAdapter;
+            this.mAdapter.registerAdapterDataObserver(mHeaderPositionsObserver);
             mHeaderPositionsObserver.onChanged();
         } else {
-            mAdapter = null;
+            this.mAdapter = null;
             mHeaderPositions.clear();
         }
     }
@@ -365,8 +366,9 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
         View stickyHeader = recycler.getViewForPosition(position);
 
         // Setup sticky header if the adapter requires it.
-        if (mAdapter instanceof StickyAdapter.ViewSetup) {
-            ((StickyAdapter.ViewSetup) mAdapter).setupStickyHeaderView(stickyHeader);
+        OnStickyChangeListener onStickyChangeListener = mAdapter.getOnStickyChangeListener();
+        if (onStickyChangeListener != null) {
+            onStickyChangeListener.attachSticky(stickyHeader);
         }
 
         // Add sticky header as a child view, to be detached / reattached whenever LinearLayoutManager#fill() is called,
@@ -435,8 +437,9 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
         stickyHeader.setTranslationY(0);
 
         // Teardown holder if the adapter requires it.
-        if (mAdapter instanceof StickyAdapter.ViewSetup) {
-            ((StickyAdapter.ViewSetup) mAdapter).teardownStickyHeaderView(stickyHeader);
+        OnStickyChangeListener onStickyChangeListener = mAdapter.getOnStickyChangeListener();
+        if (onStickyChangeListener != null) {
+            onStickyChangeListener.detachSticky(stickyHeader);
         }
 
         // Stop ignoring sticky header so that it can be recycled.
@@ -611,7 +614,7 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
             mHeaderPositions.clear();
             int itemCount = mAdapter.getItemCount();
             for (int i = 0; i < itemCount; i++) {
-                if (mAdapter.isStickyHeader(i)) {
+                if (mAdapter.isSticky(i)) {
                     mHeaderPositions.add(i);
                 }
             }
@@ -634,7 +637,7 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
 
             // Add new headers.
             for (int i = positionStart; i < positionStart + itemCount; i++) {
-                if (mAdapter.isStickyHeader(i)) {
+                if (mAdapter.isSticky(i)) {
                     int headerIndex = findHeaderIndexOrNext(i);
                     if (headerIndex != -1) {
                         mHeaderPositions.add(headerIndex, i);

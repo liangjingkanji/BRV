@@ -22,6 +22,9 @@ import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.drake.brv.BindingAdapter
 import com.drake.brv.DefaultDecoration
+import com.drake.brv.layoutmanager.StickyGridLayoutManager
+import com.drake.brv.layoutmanager.StickyLinearLayoutManager
+import com.drake.brv.layoutmanager.StickyStaggeredGridLayoutManager
 
 
 /**
@@ -46,7 +49,10 @@ fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAda
  * @param block (M.(Int) -> Int)?
  * @return bindingAdapter
  */
-inline fun <reified M> RecyclerView.setup(@LayoutRes itemLayout: Int = NO_ID, noinline block: (M.(Int) -> Int)? = null): BindingAdapter {
+inline fun <reified M> RecyclerView.setup(
+    @LayoutRes itemLayout: Int = NO_ID,
+    noinline block: (M.(Int) -> Int)? = null
+): BindingAdapter {
     val adapter = BindingAdapter()
     when {
         itemLayout != NO_ID -> adapter.addType<M>(itemLayout)
@@ -68,27 +74,45 @@ var RecyclerView.models
 
 fun RecyclerView.linear(
     @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
+    reverseLayout: Boolean = false,
+    sticky: Boolean = false
 ): RecyclerView {
-    layoutManager = LinearLayoutManager(context, orientation, reverseLayout)
+    layoutManager = if (sticky) StickyLinearLayoutManager<BindingAdapter>(
+        context,
+        orientation,
+        reverseLayout
+    ) else LinearLayoutManager(context, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.grid(
     spanCount: Int,
     @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
+    reverseLayout: Boolean = false,
+    sticky: Boolean = false
 ): RecyclerView {
-    layoutManager = GridLayoutManager(context, spanCount, orientation, reverseLayout)
+    layoutManager = if (sticky)
+        StickyGridLayoutManager<BindingAdapter>(
+            context,
+            spanCount,
+            orientation,
+            reverseLayout
+        )
+    else GridLayoutManager(context, spanCount, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.staggered(
     spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL
+    @RecyclerView.Orientation orientation: Int = VERTICAL,
+    sticky: Boolean = false
 ): RecyclerView {
     layoutManager =
-        StaggeredGridLayoutManager(spanCount, orientation) as RecyclerView.LayoutManager?
+        if (sticky) StickyStaggeredGridLayoutManager<BindingAdapter>(
+            spanCount,
+            orientation
+        )
+        else StaggeredGridLayoutManager(spanCount, orientation)
     return this
 }
 

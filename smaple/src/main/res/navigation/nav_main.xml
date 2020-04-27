@@ -3,50 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main.xml"
-    app:startDestination="@id/groupFragment">
+    app:startDestination="@id/group">
 
     <fragment
         android:id="@+id/multi_type"
-        android:name="com.drake.brv.sample.fragment.MultiTypeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.MultiTypeFragment"
         android:label="多类型"
         tools:layout="@layout/fragment_multi_type" />
     <fragment
         android:id="@+id/check_mode"
-        android:name="com.drake.brv.sample.fragment.CheckModeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.CheckModeFragment"
         android:label="选择模式"
         tools:layout="@layout/fragment_check_mode" />
     <fragment
         android:id="@+id/state"
-        android:name="com.drake.brv.sample.fragment.StateLayoutFragment"
+        android:name="com.drake.brv.sample.ui.fragment.StateLayoutFragment"
         android:label="缺省状态"
         tools:layout="@layout/fragment_state_layout" />
     <fragment
         android:id="@+id/swipe_drag"
-        android:name="com.drake.brv.sample.fragment.SwipeDragFragment"
+        android:name="com.drake.brv.sample.ui.fragment.SwipeDragFragment"
         android:label="侧滑|拖拽"
         tools:layout="@layout/fragment_swipe_drag" />
     <fragment
         android:id="@+id/one_more_multi_type"
-        android:name="com.drake.brv.sample.fragment.OneMoreTypeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.OneMoreTypeFragment"
         android:label="一对多"
         tools:layout="@layout/fragment_one_more_type" />
     <fragment
         android:id="@+id/flex_box"
-        android:name="com.drake.brv.sample.fragment.FlexBoxFragment"
+        android:name="com.drake.brv.sample.ui.fragment.FlexBoxFragment"
         android:label="伸缩布局"
         tools:layout="@layout/fragment_flex_box" />
     <fragment
         android:id="@+id/header_footer"
-        android:name="com.drake.brv.sample.fragment.HeaderFooterFragment"
-        android:label="头|脚布局" />
+        android:name="com.drake.brv.sample.ui.fragment.HeaderFooterFragment"
+        android:label="头|脚布局"
+        tools:layout="@layout/fragment_header_footer" />
+    <fragment
+        android:id="@+id/group"
+        android:name="com.drake.brv.sample.ui.fragment.GroupFragment"
+        android:label="分组"
+        tools:layout="@layout/fragment_group" />
     <fragment
         android:id="@+id/refresh"
-        android:name="com.drake.brv.sample.fragment.RefreshFragment"
+        android:name="com.drake.brv.sample.ui.fragment.RefreshFragment"
         android:label="刷新列表"
         tools:layout="@layout/fragment_refresh" />
     <fragment
-        android:id="@+id/groupFragment"
-        android:name="com.drake.brv.sample.fragment.GroupFragment"
-        android:label="fragment_group"
-        tools:layout="@layout/fragment_group" />
+        android:id="@+id/sticky_header"
+        android:name="com.drake.brv.sample.ui.fragment.StickyHeaderFragment"
+        android:label="粘性头部"
+        tools:layout="@layout/fragment_sticky_header" />
+    <fragment
+        android:id="@+id/tree_structure"
+        android:name="com.drake.brv.sample.ui.fragment.TreeStructureFragment"
+        android:label="树状结构"
+        tools:layout="@layout/fragment_tree_structure" />
 </navigation>

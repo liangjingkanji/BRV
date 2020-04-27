@@ -21,9 +21,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.drake.brv.adapter.StickyAdapter
 import com.drake.brv.animation.*
 import com.drake.brv.listener.DefaultItemTouchCallback
+import com.drake.brv.listener.OnStickyChangeListener
 import com.drake.brv.listener.throttleClick
+import com.drake.brv.model.Item
 
 /**
  * 基于DataBinding实现的通用RecyclerViewAdapter
@@ -36,17 +39,16 @@ import com.drake.brv.listener.throttleClick
  * item选择状态监听(切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
  */
 
-@Suppress("UNCHECKED_CAST")
-class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
-
+@Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
+class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>(),
+    StickyAdapter {
 
     var recyclerView: RecyclerView? = null
-    var clickPeriod: Long = 500
-    // 点击事件过滤间隔时间毫秒
 
+    // 点击事件过滤间隔时间毫秒
+    var clickPeriod: Long = 500
 
     // <editor-fold desc="生命周期">
-
     private var onBind: (BindingViewHolder.() -> Boolean)? = null
     private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
@@ -775,5 +777,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     companion object {
         var modelId: Int = -1
+    }
+
+    override var onStickyChangeListener: OnStickyChangeListener? = null
+
+    override fun isSticky(position: Int): Boolean {
+        val model = getModel<Item>(position)
+        return model != null && model.isSticky()
     }
 }

@@ -13,8 +13,19 @@ interface Item {
      * 拖拽方向
      */
     @DragType
-    fun drag(): Int {
+    fun isDrag(): Int {
         return DragType.NONE
+    }
+
+    /**
+     * 悬停
+     * @return true 表示启用悬停, 要求使用Hover前缀的LayoutManager才生效
+     * @see com.drake.brv.layoutmanager.StickyLinearLayoutManager
+     * @see com.drake.brv.layoutmanager.StickyGridLayoutManager
+     * @see com.drake.brv.layoutmanager.StickyStaggeredGridLayoutManager
+     */
+    fun isSticky(): Boolean {
+        return false
     }
 
 
@@ -22,7 +33,7 @@ interface Item {
      * 侧滑方向
      */
     @SwipeType
-    fun swipe(): Int {
+    fun isSwipe(): Int {
         return SwipeType.NONE
     }
 
