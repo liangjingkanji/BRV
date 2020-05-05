@@ -12,8 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.drake.brv.model.DragType
-import com.drake.brv.model.SwipeType
+import com.drake.brv.annotaion.DragType
+import com.drake.brv.annotaion.SwipeType
 import com.drake.brv.sample.R
 import com.drake.brv.sample.mod.SwipeDragModel
 import com.drake.brv.utils.linear

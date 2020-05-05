@@ -11,9 +11,9 @@
         android:icon="@drawable/ic_group"
         android:title="分组" />
     <item
-        android:id="@+id/sticky_header"
-        android:icon="@drawable/ic_sticky_header"
-        android:title="粘性头部" />
+        android:id="@+id/hover"
+        android:icon="@drawable/ic_hover_header"
+        android:title="悬停" />
     <item
         android:id="@+id/tree_structure"
         android:icon="@drawable/ic_tree_structure"

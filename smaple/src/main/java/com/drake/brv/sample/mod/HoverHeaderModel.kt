@@ -7,11 +7,9 @@
 
 package com.drake.brv.sample.mod
 
-import com.drake.brv.model.Item
+import com.drake.brv.item.ItemHover
 
-class StickyHeaderModel : Item {
+class HoverHeaderModel : ItemHover {
 
-    override fun isSticky(): Boolean {
-        return true
-    }
+    override var itemHover: Boolean = true
 }

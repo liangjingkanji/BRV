@@ -2,7 +2,7 @@
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
  * Author：Drake
- * Date：9/15/19 7:41 PM
+ * Date：5/5/20 9:12 PM
  */
 
 package com.drake.brv.listener
@@ -10,23 +10,20 @@ package com.drake.brv.listener
 import android.view.View
 
 
-internal fun View.throttleClick(interval: Long = 500, block: View.() -> Unit) {
-    setOnClickListener(ThrottleClickListener(interval, block))
+fun View.throttleClick(period: Long = 500, block: View.() -> Unit) {
+    setOnClickListener(ThrottleClickListener(period, block))
 }
 
-internal class ThrottleClickListener(val interval: Long = 500, var block: View.() -> Unit) :
-    View.OnClickListener {
+private class ThrottleClickListener(private val period: Long = 500, private var block: View.() -> Unit) :
+        View.OnClickListener {
 
-    var lastTime: Long = 0
+    private var lastTime: Long = 0
 
     override fun onClick(v: View) {
-
         val currentTime = System.currentTimeMillis()
-
-        if (currentTime - lastTime > interval) {
+        if (currentTime - lastTime > period) {
             lastTime = currentTime
             block(v)
         }
-
     }
 }

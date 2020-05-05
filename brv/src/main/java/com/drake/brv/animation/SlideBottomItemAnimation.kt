@@ -1,8 +1,8 @@
 /*
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
- * Author：Nathan
- * Date：8/24/19 2:35 AM
+ * Author：Drake
+ * Date：5/5/20 9:12 PM
  */
 
 package com.drake.brv.animation
@@ -11,7 +11,7 @@ import android.animation.ObjectAnimator
 import android.view.View
 
 
-class SlideBottomItemAnimation : BaseItemAnimation {
+class SlideBottomItemAnimation : ItemAnimation {
 
     override fun onItemEnterAnimation(view: View) {
         ObjectAnimator.ofFloat(view, "translationY", view.measuredHeight.toFloat(), 0F)

@@ -51,10 +51,10 @@
         android:label="刷新列表"
         tools:layout="@layout/fragment_refresh" />
     <fragment
-        android:id="@+id/sticky_header"
-        android:name="com.drake.brv.sample.ui.fragment.StickyHeaderFragment"
-        android:label="粘性头部"
-        tools:layout="@layout/fragment_sticky_header" />
+        android:id="@+id/hover"
+        android:name="com.drake.brv.sample.ui.fragment.HoverHeaderFragment"
+        android:label="悬停"
+        tools:layout="@layout/fragment_hover_header" />
     <fragment
         android:id="@+id/tree_structure"
         android:name="com.drake.brv.sample.ui.fragment.TreeStructureFragment"

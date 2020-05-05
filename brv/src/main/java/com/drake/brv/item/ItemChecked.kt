@@ -2,9 +2,11 @@
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
  * Author：Drake
- * Date：9/11/19 6:49 PM
+ * Date：5/5/20 9:12 PM
  */
 
-package com.drake.brv.sample.mod
+package com.drake.brv.item
 
-class Model
+interface ItemChecked {
+    var itemChecked: Boolean
+}

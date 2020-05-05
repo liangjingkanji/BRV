@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+ * Project：BRV
+ * Author：Drake
+ * Date：5/5/20 9:12 PM
+ */
+
 package com.drake.brv.layoutmanager;
 
 import android.content.Context;
@@ -10,27 +17,24 @@ import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.drake.brv.adapter.StickyAdapter;
-import com.drake.brv.listener.OnStickyChangeListener;
+import com.drake.brv.BindingAdapter;
+import com.drake.brv.listener.OnHoverAttachListener;
+import com.drake.brv.listener.SnapLinearSmoothScroller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jay on 2017/12/4 上午10:57
- * <p>
- * Adds sticky headers capabilities to your {@link RecyclerView.Adapter}. It must implement {@link StickyAdapter} to
- * indicate which items are headers.
  *
- * @link https://github.com/Doist/RecyclerViewExtensions/blob/master/StickyAdapter
+ * @link https://github.com/Doist/RecyclerViewExtensions
  */
-public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdapter>
-        extends GridLayoutManager {
-    private T mAdapter;
+public class HoverLinearLayoutManager extends LinearLayoutManager {
 
+    private BindingAdapter mAdapter;
     private float mTranslationX;
     private float mTranslationY;
 
@@ -39,45 +43,52 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
     private RecyclerView.AdapterDataObserver mHeaderPositionsObserver = new HeaderPositionsAdapterDataObserver();
 
     // Sticky header's ViewHolder and dirty state.
-    private View mStickyHeader;
-    private int mStickyHeaderPosition = RecyclerView.NO_POSITION;
+    private View mHover;
+    private int mHoverPosition = RecyclerView.NO_POSITION;
 
     private int mPendingScrollPosition = RecyclerView.NO_POSITION;
     private int mPendingScrollOffset = 0;
 
-    public StickyGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public HoverLinearLayoutManager(Context context) {
+        super(context);
+    }
+
+    public HoverLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
+        super(context, orientation, reverseLayout);
+    }
+
+    public HoverLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public StickyGridLayoutManager(Context context, int spanCount) {
-        super(context, spanCount);
-    }
-
-    public StickyGridLayoutManager(Context context, int spanCount, int orientation, boolean reverseLayout) {
-        super(context, spanCount, orientation, reverseLayout);
-    }
-
     /**
-     * Offsets the vertical location of the sticky header relative to the its default position.
+     * Offsets the vertical location of the hover header relative to the its default position.
      */
-    public void setStickyHeaderTranslationY(float translationY) {
+    public void setHoverTranslationY(float translationY) {
         mTranslationY = translationY;
         requestLayout();
     }
 
     /**
-     * Offsets the horizontal location of the sticky header relative to the its default position.
+     * Offsets the horizontal location of the hover header relative to the its default position.
      */
-    public void setStickyHeaderTranslationX(float translationX) {
+    public void setHoverTranslationX(float translationX) {
         mTranslationX = translationX;
         requestLayout();
     }
 
+    @Override
+    public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+        SnapLinearSmoothScroller scroller = new SnapLinearSmoothScroller(recyclerView.getContext());
+        scroller.setTargetPosition(position);
+        startSmoothScroll(scroller);
+    }
+
     /**
-     * Returns true if {@code view} is the current sticky header.
+     * Returns true if {@code view} is the current hover header.
      */
-    public boolean isStickyHeader(View view) {
-        return view == mStickyHeader;
+    public boolean isHover(View view) {
+        return view == mHover;
     }
 
     @Override
@@ -93,17 +104,17 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
     }
 
     @SuppressWarnings("unchecked")
-    private void setAdapter(RecyclerView.Adapter mAdapter) {
-        if (this.mAdapter != null) {
-            this.mAdapter.unregisterAdapterDataObserver(mHeaderPositionsObserver);
+    private void setAdapter(RecyclerView.Adapter adapter) {
+        if (mAdapter != null) {
+            mAdapter.unregisterAdapterDataObserver(mHeaderPositionsObserver);
         }
 
-        if (mAdapter instanceof StickyAdapter) {
-            this.mAdapter = (T) mAdapter;
-            this.mAdapter.registerAdapterDataObserver(mHeaderPositionsObserver);
+        if (adapter instanceof BindingAdapter) {
+            mAdapter = (BindingAdapter) adapter;
+            mAdapter.registerAdapterDataObserver(mHeaderPositionsObserver);
             mHeaderPositionsObserver.onChanged();
         } else {
-            this.mAdapter = null;
+            mAdapter = null;
             mHeaderPositions.clear();
         }
     }
@@ -131,12 +142,12 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
 
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int scrolled = super.scrollVerticallyBy(dy, recycler, state);
-        attachStickyHeader();
+        attachHover();
 
         if (scrolled != 0) {
-            updateStickyHeader(recycler, false);
+            updateHover(recycler, false);
         }
 
         return scrolled;
@@ -144,12 +155,12 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
 
     @Override
     public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int scrolled = super.scrollHorizontallyBy(dx, recycler, state);
-        attachStickyHeader();
+        attachHover();
 
         if (scrolled != 0) {
-            updateStickyHeader(recycler, false);
+            updateHover(recycler, false);
         }
 
         return scrolled;
@@ -157,12 +168,12 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
 
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         super.onLayoutChildren(recycler, state);
-        attachStickyHeader();
+        attachHover();
 
         if (!state.isPreLayout()) {
-            updateStickyHeader(recycler, true);
+            updateHover(recycler, true);
         }
     }
 
@@ -176,12 +187,12 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
         scrollToPositionWithOffset(position, offset, true);
     }
 
-    private void scrollToPositionWithOffset(int position, int offset, boolean adjustForStickyHeader) {
+    private void scrollToPositionWithOffset(int position, int offset, boolean adjustForHover) {
         // Reset pending scroll.
         setPendingScroll(RecyclerView.NO_POSITION, INVALID_OFFSET);
 
         // Adjusting is disabled.
-        if (!adjustForStickyHeader) {
+        if (!adjustForHover) {
             super.scrollToPositionWithOffset(position, offset);
             return;
         }
@@ -199,99 +210,99 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
             return;
         }
 
-        // Current sticky header is the same as at the position. Adjust the scroll offset and reset pending scroll.
-        if (mStickyHeader != null && headerIndex == findHeaderIndex(mStickyHeaderPosition)) {
-            int adjustedOffset = (offset != INVALID_OFFSET ? offset : 0) + mStickyHeader.getHeight();
+        // Current hover header is the same as at the position. Adjust the scroll offset and reset pending scroll.
+        if (mHover != null && headerIndex == findHeaderIndex(mHoverPosition)) {
+            int adjustedOffset = (offset != INVALID_OFFSET ? offset : 0) + mHover.getHeight();
             super.scrollToPositionWithOffset(position, adjustedOffset);
             return;
         }
 
-        // Remember this position and offset and scroll to it to trigger creating the sticky header.
+        // Remember this position and offset and scroll to it to trigger creating the hover header.
         setPendingScroll(position, offset);
         super.scrollToPositionWithOffset(position, offset);
     }
 
     @Override
     public int computeVerticalScrollExtent(RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int extent = super.computeVerticalScrollExtent(state);
-        attachStickyHeader();
+        attachHover();
         return extent;
     }
 
     @Override
     public int computeVerticalScrollOffset(RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int offset = super.computeVerticalScrollOffset(state);
-        attachStickyHeader();
+        attachHover();
         return offset;
     }
 
     @Override
     public int computeVerticalScrollRange(RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int range = super.computeVerticalScrollRange(state);
-        attachStickyHeader();
+        attachHover();
         return range;
     }
 
     @Override
     public int computeHorizontalScrollExtent(RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int extent = super.computeHorizontalScrollExtent(state);
-        attachStickyHeader();
+        attachHover();
         return extent;
     }
 
     @Override
     public int computeHorizontalScrollOffset(RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int offset = super.computeHorizontalScrollOffset(state);
-        attachStickyHeader();
+        attachHover();
         return offset;
     }
 
     @Override
     public int computeHorizontalScrollRange(RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         int range = super.computeHorizontalScrollRange(state);
-        attachStickyHeader();
+        attachHover();
         return range;
     }
 
     @Override
     public PointF computeScrollVectorForPosition(int targetPosition) {
-        detachStickyHeader();
+        detachHover();
         PointF vector = super.computeScrollVectorForPosition(targetPosition);
-        attachStickyHeader();
+        attachHover();
         return vector;
     }
 
     @Override
     public View onFocusSearchFailed(View focused, int focusDirection, RecyclerView.Recycler recycler,
                                     RecyclerView.State state) {
-        detachStickyHeader();
+        detachHover();
         View view = super.onFocusSearchFailed(focused, focusDirection, recycler, state);
-        attachStickyHeader();
+        attachHover();
         return view;
     }
 
-    private void detachStickyHeader() {
-        if (mStickyHeader != null) {
-            detachView(mStickyHeader);
+    private void detachHover() {
+        if (mHover != null) {
+            detachView(mHover);
         }
     }
 
-    private void attachStickyHeader() {
-        if (mStickyHeader != null) {
-            attachView(mStickyHeader);
+    private void attachHover() {
+        if (mHover != null) {
+            attachView(mHover);
         }
     }
 
     /**
-     * Updates the sticky header state (creation, binding, display), to be called whenever there's a layout or scroll
+     * Updates the hover header state (creation, binding, display), to be called whenever there's a layout or scroll
      */
-    private void updateStickyHeader(RecyclerView.Recycler recycler, boolean layout) {
+    private void updateHover(RecyclerView.Recycler recycler, boolean layout) {
         int headerCount = mHeaderPositions.size();
         int childCount = getChildCount();
         if (headerCount > 0 && childCount > 0) {
@@ -313,88 +324,87 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
                 int headerIndex = findHeaderIndexOrBefore(anchorPos);
                 int headerPos = headerIndex != -1 ? mHeaderPositions.get(headerIndex) : -1;
                 int nextHeaderPos = headerCount > headerIndex + 1 ? mHeaderPositions.get(headerIndex + 1) : -1;
-
-                // Show sticky header if:
+                // Show hover header if:
                 // - There's one to show;
                 // - It's on the edge or it's not the anchor view;
-                // - Isn't followed by another sticky header;
+                // - Isn't followed by another hover header;
                 if (headerPos != -1
                         && (headerPos != anchorPos || isViewOnBoundary(anchorView))
                         && nextHeaderPos != headerPos + 1) {
-                    // Ensure existing sticky header, if any, is of correct type.
-                    if (mStickyHeader != null
-                            && getItemViewType(mStickyHeader) != mAdapter.getItemViewType(headerPos)) {
-                        // A sticky header was shown before but is not of the correct type. Scrap it.
-                        scrapStickyHeader(recycler);
+                    // Ensure existing hover header, if any, is of correct type.
+                    if (mHover != null
+                            && getItemViewType(mHover) != mAdapter.getItemViewType(headerPos)) {
+                        // A hover header was shown before but is not of the correct type. Scrap it.
+                        scrapHover(recycler);
                     }
 
-                    // Ensure sticky header is created, if absent, or bound, if being laid out or the position changed.
-                    if (mStickyHeader == null) {
-                        createStickyHeader(recycler, headerPos);
+                    // Ensure hover header is created, if absent, or bound, if being laid out or the position changed.
+                    if (mHover == null) {
+                        createHover(recycler, headerPos);
                     }
-                    if (layout || getPosition(mStickyHeader) != headerPos) {
-                        bindStickyHeader(recycler, headerPos);
+                    if (layout || getPosition(mHover) != headerPos) {
+                        bindHover(recycler, headerPos);
                     }
 
-                    // Draw the sticky header using translation values which depend on orientation, direction and
+                    // Draw the hover header using translation values which depend on orientation, direction and
                     // position of the next header view.
                     View nextHeaderView = null;
                     if (nextHeaderPos != -1) {
                         nextHeaderView = getChildAt(anchorIndex + (nextHeaderPos - anchorPos));
                         // The header view itself is added to the RecyclerView. Discard it if it comes up.
-                        if (nextHeaderView == mStickyHeader) {
+                        if (nextHeaderView == mHover) {
                             nextHeaderView = null;
                         }
                     }
-                    mStickyHeader.setTranslationX(getX(mStickyHeader, nextHeaderView));
-                    mStickyHeader.setTranslationY(getY(mStickyHeader, nextHeaderView));
+                    mHover.setTranslationX(getX(mHover, nextHeaderView));
+                    mHover.setTranslationY(getY(mHover, nextHeaderView));
                     return;
                 }
             }
         }
 
-        if (mStickyHeader != null) {
-            scrapStickyHeader(recycler);
+        if (mHover != null) {
+            scrapHover(recycler);
         }
     }
 
     /**
      * Creates {@link RecyclerView.ViewHolder} for {@code position}, including measure / layout, and assigns it to
-     * {@link #mStickyHeader}.
+     * {@link #mHover}.
      */
-    private void createStickyHeader(@NonNull RecyclerView.Recycler recycler, int position) {
-        View stickyHeader = recycler.getViewForPosition(position);
+    private void createHover(@NonNull RecyclerView.Recycler recycler, int position) {
+        View hoverHeader = recycler.getViewForPosition(position);
 
-        // Setup sticky header if the adapter requires it.
-        OnStickyChangeListener onStickyChangeListener = mAdapter.getOnStickyChangeListener();
-        if (onStickyChangeListener != null) {
-            onStickyChangeListener.attachSticky(stickyHeader);
+        // Setup hover header if the adapter requires it.
+        OnHoverAttachListener onHoverAttachListener = mAdapter.getOnHoverAttachListener();
+        if (onHoverAttachListener != null) {
+            onHoverAttachListener.attachHover(hoverHeader);
         }
 
-        // Add sticky header as a child view, to be detached / reattached whenever LinearLayoutManager#fill() is called,
+        // Add hover header as a child view, to be detached / reattached whenever LinearLayoutManager#fill() is called,
         // which happens on layout and scroll (see overrides).
-        addView(stickyHeader);
-        measureAndLayout(stickyHeader);
+        addView(hoverHeader);
+        measureAndLayout(hoverHeader);
 
-        // Ignore sticky header, as it's fully managed by this LayoutManager.
-        ignoreView(stickyHeader);
+        // Ignore hover header, as it's fully managed by this LayoutManager.
+        ignoreView(hoverHeader);
 
-        mStickyHeader = stickyHeader;
-        mStickyHeaderPosition = position;
+        mHover = hoverHeader;
+        mHoverPosition = position;
     }
 
     /**
-     * Binds the {@link #mStickyHeader} for the given {@code position}.
+     * Binds the {@link #mHover} for the given {@code position}.
      */
-    private void bindStickyHeader(@NonNull RecyclerView.Recycler recycler, int position) {
-        // Bind the sticky header.
-        recycler.bindViewToPosition(mStickyHeader, position);
-        mStickyHeaderPosition = position;
-        measureAndLayout(mStickyHeader);
+    private void bindHover(@NonNull RecyclerView.Recycler recycler, int position) {
+        // Bind the hover header.
+        recycler.bindViewToPosition(mHover, position);
+        mHoverPosition = position;
+        measureAndLayout(mHover);
 
         // If we have a pending scroll wait until the end of layout and scroll again.
         if (mPendingScrollPosition != RecyclerView.NO_POSITION) {
-            final ViewTreeObserver vto = mStickyHeader.getViewTreeObserver();
+            final ViewTreeObserver vto = mHover.getViewTreeObserver();
             vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
@@ -410,45 +420,44 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
     }
 
     /**
-     * Measures and lays out {@code stickyHeader}.
+     * Measures and lays out {@code hoverHeader}.
      */
-    private void measureAndLayout(View stickyHeader) {
-        measureChildWithMargins(stickyHeader, 0, 0);
+    private void measureAndLayout(View hoverHeader) {
+        measureChildWithMargins(hoverHeader, 0, 0);
         if (getOrientation() == VERTICAL) {
-            stickyHeader.layout(getPaddingLeft(), 0, getWidth() - getPaddingRight(), stickyHeader.getMeasuredHeight());
+            hoverHeader.layout(getPaddingLeft(), 0, getWidth() - getPaddingRight(), hoverHeader.getMeasuredHeight());
         } else {
-            stickyHeader.layout(0, getPaddingTop(), stickyHeader.getMeasuredWidth(), getHeight() - getPaddingBottom());
+            hoverHeader.layout(0, getPaddingTop(), hoverHeader.getMeasuredWidth(), getHeight() - getPaddingBottom());
         }
     }
 
     /**
-     * Returns {@link #mStickyHeader} to the {@link RecyclerView}'s {@link RecyclerView.RecycledViewPool}, assigning it
+     * Returns {@link #mHover} to the {@link RecyclerView}'s {@link RecyclerView.RecycledViewPool}, assigning it
      * to {@code null}.
      *
-     * @param recycler If passed, the sticky header will be returned to the recycled view pool.
+     * @param recycler If passed, the hover header will be returned to the recycled view pool.
      */
-    private void scrapStickyHeader(@Nullable RecyclerView.Recycler recycler) {
-        View stickyHeader = mStickyHeader;
-        mStickyHeader = null;
-        mStickyHeaderPosition = RecyclerView.NO_POSITION;
+    private void scrapHover(@Nullable RecyclerView.Recycler recycler) {
+        View hoverHeader = mHover;
+        mHover = null;
+        mHoverPosition = RecyclerView.NO_POSITION;
 
         // Revert translation values.
-        stickyHeader.setTranslationX(0);
-        stickyHeader.setTranslationY(0);
+        hoverHeader.setTranslationX(0);
+        hoverHeader.setTranslationY(0);
 
         // Teardown holder if the adapter requires it.
-        OnStickyChangeListener onStickyChangeListener = mAdapter.getOnStickyChangeListener();
-        if (onStickyChangeListener != null) {
-            onStickyChangeListener.detachSticky(stickyHeader);
+        OnHoverAttachListener onHoverAttachListener = mAdapter.getOnHoverAttachListener();
+        if (onHoverAttachListener != null) {
+            onHoverAttachListener.detachHover(hoverHeader);
         }
+        // Stop ignoring hover header so that it can be recycled.
+        stopIgnoringView(hoverHeader);
 
-        // Stop ignoring sticky header so that it can be recycled.
-        stopIgnoringView(stickyHeader);
-
-        // Remove and recycle sticky header.
-        removeView(stickyHeader);
+        // Remove and recycle hover header.
+        removeView(hoverHeader);
         if (recycler != null) {
-            recycler.recycleView(stickyHeader);
+            recycler.recycleView(hoverHeader);
         }
     }
 
@@ -614,14 +623,14 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
             mHeaderPositions.clear();
             int itemCount = mAdapter.getItemCount();
             for (int i = 0; i < itemCount; i++) {
-                if (mAdapter.isSticky(i)) {
+                if (mAdapter.isHover(i)) {
                     mHeaderPositions.add(i);
                 }
             }
 
-            // Remove sticky header immediately if the entry it represents has been removed. A layout will follow.
-            if (mStickyHeader != null && !mHeaderPositions.contains(mStickyHeaderPosition)) {
-                scrapStickyHeader(null);
+            // Remove hover header immediately if the entry it represents has been removed. A layout will follow.
+            if (mHover != null && !mHeaderPositions.contains(mHoverPosition)) {
+                scrapHover(null);
             }
         }
 
@@ -637,7 +646,7 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
 
             // Add new headers.
             for (int i = positionStart; i < positionStart + itemCount; i++) {
-                if (mAdapter.isSticky(i)) {
+                if (mAdapter.isHover(i)) {
                     int headerIndex = findHeaderIndexOrNext(i);
                     if (headerIndex != -1) {
                         mHeaderPositions.add(headerIndex, i);
@@ -661,9 +670,9 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
                     }
                 }
 
-                // Remove sticky header immediately if the entry it represents has been removed. A layout will follow.
-                if (mStickyHeader != null && !mHeaderPositions.contains(mStickyHeaderPosition)) {
-                    scrapStickyHeader(null);
+                // Remove hover header immediately if the entry it represents has been removed. A layout will follow.
+                if (mHover != null && !mHeaderPositions.contains(mHoverPosition)) {
+                    scrapHover(null);
                 }
 
                 // Shift headers below up.
@@ -746,7 +755,7 @@ public class StickyGridLayoutManager<T extends RecyclerView.Adapter & StickyAdap
             dest.writeInt(pendingScrollOffset);
         }
 
-        public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);

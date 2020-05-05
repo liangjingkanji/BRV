@@ -1,4 +1,11 @@
-package com.drake.brv.model
+/*
+ * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+ * Project：BRV
+ * Author：Drake
+ * Date：5/5/20 9:12 PM
+ */
+
+package com.drake.brv.annotaion
 
 import androidx.annotation.IntDef
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -8,8 +15,7 @@ annotation class DragType {
 
     companion object {
         const val LEFT = ItemTouchHelper.LEFT
-        const val ALL =
-                ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        const val ALL = ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         const val RIGHT = ItemTouchHelper.RIGHT
         const val LEFT_RIGHT = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         const val UP = ItemTouchHelper.UP

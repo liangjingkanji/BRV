@@ -1,33 +1,24 @@
 package com.drake.brv.sample.mod
 
-import com.drake.brv.model.DragType
-import com.drake.brv.model.Item
-import com.drake.brv.model.SwipeType
+import com.drake.brv.annotaion.DragType
+import com.drake.brv.annotaion.SwipeType
+import com.drake.brv.item.ItemTouchable
 
-data class SwipeDragModel(var swipe: Int, var drag: Int) : Item {
-
-    override fun isDrag(): Int {
-        return drag
-    }
-
-
-    override fun isSwipe(): Int {
-        return swipe
-    }
+data class SwipeDragModel(override var itemSwipe: Int, override var itemDrag: Int) : ItemTouchable {
 
     val txt: String
         get() {
 
             var temp = ""
 
-            if (drag == DragType.NONE) {
+            if (itemDrag == DragType.NONE) {
                 temp += "不支持拖拽"
             }
 
-            if (drag == DragType.NONE && swipe == SwipeType.NONE)
+            if (itemDrag == DragType.NONE && itemSwipe == SwipeType.NONE)
                 temp += " | "
 
-            if (swipe == SwipeType.NONE)
+            if (itemSwipe == SwipeType.NONE)
                 temp += "不支持侧滑"
 
             if (temp.isNotEmpty()) {

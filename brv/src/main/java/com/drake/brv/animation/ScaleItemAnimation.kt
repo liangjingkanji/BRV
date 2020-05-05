@@ -1,8 +1,8 @@
 /*
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
- * Author：Nathan
- * Date：8/24/19 2:35 AM
+ * Author：Drake
+ * Date：5/5/20 9:12 PM
  */
 
 package com.drake.brv.animation
@@ -12,7 +12,7 @@ import android.animation.ObjectAnimator
 import android.view.View
 
 
-class ScaleItemAnimation @JvmOverloads constructor(private val mFrom: Float = DEFAULT_SCALE_FROM) : BaseItemAnimation {
+class ScaleItemAnimation @JvmOverloads constructor(private val mFrom: Float = DEFAULT_SCALE_FROM) : ItemAnimation {
 
     override fun onItemEnterAnimation(view: View) {
         val scaleX = ObjectAnimator.ofFloat(view, "scaleX", mFrom, 1f)

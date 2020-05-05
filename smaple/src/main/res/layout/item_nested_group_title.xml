@@ -7,32 +7,32 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.mod.GroupModel" />
+            type="com.drake.brv.sample.mod.NestedGroupModel" />
     </data>
 
     <LinearLayout
         android:id="@+id/item"
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="60dp"
+        android:background="@color/white"
         android:foreground="?selectableItemBackgroundBorderless"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
+        android:paddingLeft="48dp"
         android:paddingRight="16dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_collapse" />
+            android:src="@drawable/ic_arrow_nested_collapse" />
 
         <TextView
-            android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:singleLine="true"
             android:text="@{m.title}"
+            android:textSize="16dp"
             tools:text="标题" />
 
     </LinearLayout>

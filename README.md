@@ -385,7 +385,7 @@ data class Model(val name: String) : ItemModel() {
 
 
 
-> 扩展功能
+**扩展功能**
 
 如果想要扩展ItemTouchHelper可以给BindingAdapter的变量`itemTouchHelper`赋值
 

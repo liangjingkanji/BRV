@@ -2,7 +2,7 @@
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
  * Author：Drake
- * Date：9/12/19 1:55 PM
+ * Date：5/5/20 9:12 PM
  */
 
 package com.drake.brv.utils
@@ -15,16 +15,14 @@ import android.view.View.NO_ID
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.drake.brv.BindingAdapter
 import com.drake.brv.DefaultDecoration
-import com.drake.brv.layoutmanager.StickyGridLayoutManager
-import com.drake.brv.layoutmanager.StickyLinearLayoutManager
-import com.drake.brv.layoutmanager.StickyStaggeredGridLayoutManager
+import com.drake.brv.layoutmanager.HoverGridLayoutManager
+import com.drake.brv.layoutmanager.HoverLinearLayoutManager
+import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
 
 
 /**
@@ -50,8 +48,8 @@ fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAda
  * @return bindingAdapter
  */
 inline fun <reified M> RecyclerView.setup(
-    @LayoutRes itemLayout: Int = NO_ID,
-    noinline block: (M.(Int) -> Int)? = null
+        @LayoutRes itemLayout: Int = NO_ID,
+        noinline block: (M.(Int) -> Int)? = null
 ): BindingAdapter {
     val adapter = BindingAdapter()
     when {
@@ -73,53 +71,34 @@ var RecyclerView.models
     }
 
 fun RecyclerView.linear(
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false,
-    sticky: Boolean = false
+        @RecyclerView.Orientation orientation: Int = VERTICAL,
+        reverseLayout: Boolean = false
 ): RecyclerView {
-    layoutManager = if (sticky) StickyLinearLayoutManager<BindingAdapter>(
-        context,
-        orientation,
-        reverseLayout
-    ) else LinearLayoutManager(context, orientation, reverseLayout)
+    layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.grid(
-    spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false,
-    sticky: Boolean = false
+        spanCount: Int,
+        @RecyclerView.Orientation orientation: Int = VERTICAL,
+        reverseLayout: Boolean = false
 ): RecyclerView {
-    layoutManager = if (sticky)
-        StickyGridLayoutManager<BindingAdapter>(
-            context,
-            spanCount,
-            orientation,
-            reverseLayout
-        )
-    else GridLayoutManager(context, spanCount, orientation, reverseLayout)
+    layoutManager = HoverGridLayoutManager(context, spanCount, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.staggered(
-    spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL,
-    sticky: Boolean = false
+        spanCount: Int,
+        @RecyclerView.Orientation orientation: Int = VERTICAL
 ): RecyclerView {
-    layoutManager =
-        if (sticky) StickyStaggeredGridLayoutManager<BindingAdapter>(
-            spanCount,
-            orientation
-        )
-        else StaggeredGridLayoutManager(spanCount, orientation)
+    layoutManager = HoverStaggeredGridLayoutManager(spanCount, orientation)
     return this
 }
 
 fun RecyclerView.divider(
-    @DrawableRes drawable: Int,
-    @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL,
-    block: ((Rect, View, RecyclerView, RecyclerView.State) -> Boolean)? = null
+        @DrawableRes drawable: Int,
+        @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL,
+        block: ((Rect, View, RecyclerView, RecyclerView.State) -> Boolean)? = null
 ): RecyclerView {
     val decoration = DefaultDecoration(context).apply {
         setDrawable(drawable)

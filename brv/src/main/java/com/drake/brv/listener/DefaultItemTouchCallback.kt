@@ -1,8 +1,8 @@
 /*
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
- * Author：Nathan
- * Date：8/24/19 2:35 AM
+ * Author：Drake
+ * Date：5/5/20 9:12 PM
  */
 
 package com.drake.brv.listener
@@ -12,7 +12,7 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.BindingAdapter
-import com.drake.brv.model.Item
+import com.drake.brv.item.ItemTouchable
 import java.util.*
 
 /**
@@ -38,9 +38,9 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
         if (viewHolder is BindingAdapter.BindingViewHolder) {
             val model = viewHolder.getModel<Any>()
 
-            if (model is Item) {
-                drag = model.isDrag()
-                swipe = model.isSwipe()
+            if (model is ItemTouchable) {
+                drag = model.itemDrag
+                swipe = model.itemSwipe
             }
         }
 
@@ -106,7 +106,7 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
         if (target is BindingAdapter.BindingViewHolder) {
 
             val model = target.getModel<Any>()
-            if (model is Item && model.isDrag() != 0) {
+            if (model is ItemTouchable && model.itemDrag != 0) {
                 adapter.notifyItemMoved(currentPosition, targetPosition)
                 Collections.swap(
                         adapter.models,

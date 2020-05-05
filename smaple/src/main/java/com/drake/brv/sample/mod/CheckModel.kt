@@ -8,7 +8,5 @@
 package com.drake.brv.sample.mod
 
 import androidx.databinding.BaseObservable
-import com.drake.brv.model.Item
 
-data class CheckModel(var checked: Boolean = false, var visibility: Boolean = false) :
-    BaseObservable(), Item
+data class CheckModel(var checked: Boolean = false, var visibility: Boolean = false) : BaseObservable()
