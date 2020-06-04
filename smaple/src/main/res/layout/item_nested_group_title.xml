@@ -7,7 +7,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.mod.NestedGroupModel" />
+            type="com.drake.brv.sample.model.NestedGroupModel" />
     </data>
 
     <LinearLayout
@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_nested_collapse" />
+            android:src="@{m.expandIcon}" />
 
         <TextView
             android:layout_width="wrap_content"

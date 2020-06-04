@@ -1,3 +1,3 @@
-package com.drake.brv.sample.mod
+package com.drake.brv.sample.model
 
 class FlexTagModel(var name: String)

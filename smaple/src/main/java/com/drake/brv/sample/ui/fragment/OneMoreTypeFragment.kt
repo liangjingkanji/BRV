@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.OneMoreTypeModel
+import com.drake.brv.sample.model.OneMoreTypeModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_one_more_type.*

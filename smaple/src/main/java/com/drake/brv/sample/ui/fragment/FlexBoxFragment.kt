@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.FlexTagModel
+import com.drake.brv.sample.model.FlexTagModel
 import com.drake.brv.utils.setup
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_flex_box.*

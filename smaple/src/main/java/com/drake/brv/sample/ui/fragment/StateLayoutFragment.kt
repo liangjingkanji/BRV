@@ -14,8 +14,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.DoubleItemModel
-import com.drake.brv.sample.mod.Model
+import com.drake.brv.sample.model.DoubleItemModel
+import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.statelayout.StateLayout
@@ -24,8 +24,6 @@ import kotlinx.android.synthetic.main.fragment_state_layout.*
 
 
 class StateLayoutFragment : Fragment() {
-
-    lateinit var toolbar: Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +67,7 @@ class StateLayoutFragment : Fragment() {
 
 
     private fun initToolbar(state: StateLayout) {
-        toolbar = activity!!.findViewById(R.id.toolbar)
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.inflateMenu(R.menu.menu_state)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

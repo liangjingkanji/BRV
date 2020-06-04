@@ -14,7 +14,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.mod.CheckModel" />
+            type="com.drake.brv.sample.model.CheckModel" />
 
     </data>
 

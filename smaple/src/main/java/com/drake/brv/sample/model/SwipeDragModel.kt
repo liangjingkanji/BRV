@@ -1,4 +1,4 @@
-package com.drake.brv.sample.mod
+package com.drake.brv.sample.model
 
 import com.drake.brv.annotaion.DragType
 import com.drake.brv.annotaion.SwipeType

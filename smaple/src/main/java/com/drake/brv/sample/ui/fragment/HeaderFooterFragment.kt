@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.Model
+import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -23,8 +23,6 @@ import kotlinx.android.synthetic.main.fragment_header_footer.*
 
 class HeaderFooterFragment : Fragment() {
 
-
-    lateinit var toolbar: Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +65,7 @@ class HeaderFooterFragment : Fragment() {
 
         val adapter = rv_header_footer.bindingAdapter
 
-        toolbar = activity!!.findViewById(R.id.toolbar)
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.inflateMenu(R.menu.menu_header_footer)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

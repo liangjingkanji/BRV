@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
+import com.drake.brv.item.ItemBind
 import com.drake.brv.item.ItemExpand
 import com.drake.brv.item.ItemHover
 import com.drake.brv.item.ItemPosition
@@ -45,9 +46,6 @@ import com.drake.brv.listener.throttleClick
  * 强大的选择状态 [setChecked] (切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
  * 遵守高内聚低耦合原则, 支持功能配合使用, 代码简洁函数分组
  *
- * TODO
- * [] 无限划动
- * [] 拖动多选
  */
 
 @Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
@@ -103,7 +101,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
 
         val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), viewType, parent, false)
-                ?: return BindingViewHolder(parent.getView(viewType))
+            ?: return BindingViewHolder(parent.getView(viewType))
 
         return BindingViewHolder(viewDataBinding)
     }
@@ -130,7 +128,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
         return (typePool[modelClass]?.invoke(model, position)
-                ?: throw NoSuchPropertyException("Please add item model type : ${model.javaClass.simpleName}"))
+            ?: throw NoSuchPropertyException("Please add item model type : ${model.javaClass.simpleName}"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -268,7 +266,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     /**
      * 设置当前库自带的条目的动画样式
      */
-    fun setAnimation(@AnimationType animationType: Int) {
+    fun setAnimation(animationType: AnimationType) {
         this.animationEnabled = true
         when (animationType) {
             AnimationType.ALPHA -> this.itemAnimation = AlphaItemAnimation()
@@ -336,7 +334,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     fun isHeader(@IntRange(from = 0) position: Int): Boolean =
-            (headerCount > 0 && position < headerCount)
+        (headerCount > 0 && position < headerCount)
 
     // </editor-fold>
 
@@ -426,7 +424,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     fun isFooter(@IntRange(from = 0) position: Int): Boolean =
-            (footerCount > 0 && position >= headerCount + modelCount && position < itemCount)
+        (footerCount > 0 && position >= headerCount + modelCount && position < itemCount)
 
     // </editor-fold>
 
@@ -484,7 +482,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         return result
     }
 
-    fun isModel(@IntRange(from = 0) position: Int): Boolean = !(isHeader(position) || isFooter(position))
+    fun isModel(@IntRange(from = 0) position: Int): Boolean =
+        !(isHeader(position) || isFooter(position))
 
     /**
      * 根据索引返回数据模型, 如果不存在该模型则返回Null
@@ -719,8 +718,14 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     //<editor-fold desc="分组">
 
+    private var onExpand: (BindingViewHolder.(Boolean) -> Unit)? = null
+
     // 分组展开和折叠是否启用动画
     var expandAnimationEnabled: Boolean = true
+
+    fun onExpand(block: BindingViewHolder.(Boolean) -> Unit) {
+        this.onExpand = block
+    }
 
     /**
      * 展开
@@ -765,7 +770,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         lateinit var data: Any
 
         val adapter: BindingAdapter = this@BindingAdapter
-        val modelPosition get() = adapterPosition - headerCount
+        val modelPosition get() = layoutPosition - headerCount
 
         constructor(itemView: View) : super(itemView)
 
@@ -797,13 +802,18 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         internal fun bind(model: Any) {
             this.data = model
 
+            if (model is ItemPosition) {
+                model.itemPosition = layoutPosition
+            }
+
+            if (model is ItemBind) {
+                model.onBind(this)
+                return
+            }
+
             onBind?.apply {
                 val isReturn = onBind!!.invoke(this@BindingViewHolder)
                 if (isReturn) return
-            }
-
-            if (model is ItemPosition) {
-                model.itemPosition = layoutPosition
             }
 
             viewDataBinding?.setVariable(modelId, model)
@@ -837,19 +847,21 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         fun expand(scrollTop: Boolean = true, @IntRange(from = -1) depth: Int = 0): Int {
             val itemExpand = getModelOrNull<ItemExpand>()
 
+            onExpand?.invoke(this, true)
+
             return if (itemExpand != null && !itemExpand.itemExpand) {
                 val sublist = itemExpand.itemSublist
                 itemExpand.itemExpand = true
 
                 if (sublist.isNullOrEmpty()) {
-                    notifyItemChanged(adapterPosition)
+                    notifyItemChanged(layoutPosition)
                     0
                 } else {
                     val sublistFlat = flat(sublist, true, depth) ?: return 0
-                    this@BindingAdapter.data?.addAll(adapterPosition + 1, sublistFlat)
+                    this@BindingAdapter.data?.addAll(layoutPosition + 1, sublistFlat)
                     if (expandAnimationEnabled) {
-                        notifyItemChanged(adapterPosition)
-                        notifyItemRangeInserted(adapterPosition + 1, sublistFlat.size)
+                        notifyItemChanged(layoutPosition)
+                        notifyItemRangeInserted(layoutPosition + 1, sublistFlat.size)
                     } else {
                         notifyDataSetChanged()
                     }
@@ -871,19 +883,21 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         fun collapse(@IntRange(from = -1) depth: Int = 0): Int {
             val itemExpand = getModelOrNull<ItemExpand>()
 
+            onExpand?.invoke(this, false)
+
             return if (itemExpand != null && itemExpand.itemExpand) {
                 val sublist = itemExpand.itemSublist
                 itemExpand.itemExpand = false
 
                 if (sublist.isNullOrEmpty()) {
-                    notifyItemChanged(adapterPosition, itemExpand)
+                    notifyItemChanged(layoutPosition, itemExpand)
                     0
                 } else {
                     val sublistFlat = flat(sublist, false, depth) ?: return 0
                     this@BindingAdapter.data?.removeAll(sublistFlat)
                     if (expandAnimationEnabled) {
-                        notifyItemChanged(adapterPosition, itemExpand)
-                        notifyItemRangeRemoved(adapterPosition + 1, sublistFlat.size)
+                        notifyItemChanged(layoutPosition, itemExpand)
+                        notifyItemRangeRemoved(layoutPosition + 1, sublistFlat.size)
                     } else {
                         notifyDataSetChanged()
                     }

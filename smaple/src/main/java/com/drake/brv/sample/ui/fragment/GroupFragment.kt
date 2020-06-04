@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.item.ItemExpand
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.GroupModel
-import com.drake.brv.sample.mod.Model
-import com.drake.brv.sample.mod.NestedGroupModel
-import com.drake.brv.utils.divider
+import com.drake.brv.sample.model.GroupModel
+import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.NestedGroupModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -27,13 +26,15 @@ class GroupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        rv_group.linear().divider(R.drawable.divider_horizontal).setup {
+        rv_group.linear().setup {
+
             // 任何条目都需要添加类型到BindingAdapter中
             addType<GroupModel>(R.layout.item_group_title)
             addType<NestedGroupModel>(R.layout.item_nested_group_title)
             addType<Model>(R.layout.item_multi_type_simple)
+            addFastClickable(R.id.item)
 
-            onClick(R.id.item) {
+            onClick {
                 when (itemViewType) {
                     R.layout.item_nested_group_title, R.layout.item_group_title -> {
                         val changeCount = if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"
@@ -41,14 +42,8 @@ class GroupFragment : Fragment() {
                     }
                 }
             }
-        }.models = getData()
 
-        // dev {
-        //     function {
-        //         // (rv_group.layoutManager as LinearLayoutManager).scrollToPosition(3)
-        //         rv_group.smoothScrollToPosition(3)
-        //     }
-        // }
+        }.models = getData()
     }
 
 

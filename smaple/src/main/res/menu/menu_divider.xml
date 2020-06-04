@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="LinearLayoutManager 垂直" />
+    <item android:title="LinearLayoutManager 水平" />
+    <item android:title="GridLayoutManager 垂直" />
+    <item android:title="GridLayoutManager 水平" />
+    <item android:title="GridLayoutManager 网格" />
+</menu>

@@ -5,11 +5,10 @@
 
 ### 特性
 
-- 使用Databinding构建MVVM
-- 完美拥有Kotlin的特性
-- 通用适配器
-- 方便实现常见需求
-- 代码量最少, 逻辑更清晰
+- 全网最少的代码
+- Kotlin的特性
+- 通用适配器, 无需继承
+- 快速实现常见需求
 - 刷新还是添加数据都无闪屏
 
 
@@ -28,6 +27,13 @@
   
   - 过滤重复点击
   
+- 分组
+
+    - 展开折叠
+    - 顶部附着
+
+- 支持所有的`LayoutManager`的分割线/均布间隔
+
 - 切换模式
 
 - 选择模式
@@ -39,7 +45,7 @@
 
 - 侧滑删除
 
-- 下拉刷新 | 上拉加载 (PageRefreshLayout|SmartRefreshLayout)
+- 下拉刷新 | 上拉加载 (PageRefreshLayout)
 
 - 多状态缺省页 (PageRefreshLayout)
 
@@ -57,9 +63,6 @@
 未来将支持:
 
 - 无限滚动
-- 分组
-  - 展开折叠
-  - 顶部附着
 
 ## 安装
 
@@ -79,7 +82,7 @@ allprojects {
 module 的 build.gradle
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.2.11'
+implementation 'com.github.liangjingkanji:BRV:1.2.13'
 ```
 
 

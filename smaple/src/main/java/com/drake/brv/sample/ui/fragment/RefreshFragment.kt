@@ -15,8 +15,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.DoubleItemModel
-import com.drake.brv.sample.mod.Model
+import com.drake.brv.sample.model.DoubleItemModel
+import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.fragment_refresh.*
 
 class RefreshFragment : Fragment() {
 
-    lateinit var toolbar: Toolbar
     private val total = 2
 
     override fun onCreateView(
@@ -86,7 +85,7 @@ class RefreshFragment : Fragment() {
 
 
     private fun initToolbar(page: PageRefreshLayout) {
-        toolbar = activity!!.findViewById(R.id.toolbar)
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.inflateMenu(R.menu.menu_refresh)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

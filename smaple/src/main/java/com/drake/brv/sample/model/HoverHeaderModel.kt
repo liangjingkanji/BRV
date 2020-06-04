@@ -5,7 +5,7 @@
  * Date：9/11/19 6:49 PM
  */
 
-package com.drake.brv.sample.mod
+package com.drake.brv.sample.model
 
 import com.drake.brv.item.ItemHover
 

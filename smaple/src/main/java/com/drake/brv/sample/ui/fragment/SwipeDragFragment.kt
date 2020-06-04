@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import com.drake.brv.annotaion.DragType
 import com.drake.brv.annotaion.SwipeType
 import com.drake.brv.sample.R
-import com.drake.brv.sample.mod.SwipeDragModel
+import com.drake.brv.sample.model.SwipeDragModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_swipe_drag.*

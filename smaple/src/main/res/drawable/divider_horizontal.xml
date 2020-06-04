@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/divider" />
-    <size android:height="1px" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/colorAccent" />
+            <size
+                android:width="30px"
+                android:height="10px" />
+        </shape>
+    </item>
+</layer-list>

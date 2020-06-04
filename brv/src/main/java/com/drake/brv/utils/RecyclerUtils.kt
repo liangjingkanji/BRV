@@ -8,13 +8,10 @@
 package com.drake.brv.utils
 
 import android.app.Dialog
-import android.graphics.Rect
-import android.util.NoSuchPropertyException
-import android.view.View
-import android.view.View.NO_ID
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -25,42 +22,6 @@ import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
 
 
-/**
- * 详细设置适配器
- * @receiver RecyclerView
- * @param block bindingAdapter.() -> Unit
- */
-fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAdapter {
-    val adapter = BindingAdapter()
-    adapter.block(this)
-    this.adapter = adapter
-    return adapter
-}
-
-/**
- * 快速创建多类型
- * itemLayout和block二者选一, 分别对应 单一类型/一对多数据类型,
- * 普通多类型配置请使用 {@link RecyclerView.bindingAdapter(block: bindingAdapter.() -> Unit): bindingAdapter}
- *
- * @receiver RecyclerView
- * @param itemLayout Int
- * @param block (M.(Int) -> Int)?
- * @return bindingAdapter
- */
-inline fun <reified M> RecyclerView.setup(
-        @LayoutRes itemLayout: Int = NO_ID,
-        noinline block: (M.(Int) -> Int)? = null
-): BindingAdapter {
-    val adapter = BindingAdapter()
-    when {
-        itemLayout != NO_ID -> adapter.addType<M>(itemLayout)
-        block != null -> adapter.addType(block)
-        else -> throw NoSuchPropertyException("Please add item model type")
-    }
-    this.adapter = adapter
-    return adapter
-}
-
 val RecyclerView.bindingAdapter
     get() = adapter as BindingAdapter
 
@@ -70,52 +31,124 @@ var RecyclerView.models
         bindingAdapter.models = value
     }
 
+
+//<editor-fold desc="配置列表">
+/**
+ * 设置适配器
+ */
+fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAdapter {
+    val adapter = BindingAdapter()
+    adapter.block(this)
+    this.adapter = adapter
+    return adapter
+}
+//</editor-fold>
+
+
+//<editor-fold desc="布局管理器">
 fun RecyclerView.linear(
-        @RecyclerView.Orientation orientation: Int = VERTICAL,
-        reverseLayout: Boolean = false
+    @RecyclerView.Orientation orientation: Int = VERTICAL,
+    reverseLayout: Boolean = false
 ): RecyclerView {
     layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.grid(
-        spanCount: Int,
-        @RecyclerView.Orientation orientation: Int = VERTICAL,
-        reverseLayout: Boolean = false
+    spanCount: Int = 1,
+    @RecyclerView.Orientation orientation: Int = VERTICAL,
+    reverseLayout: Boolean = false
 ): RecyclerView {
     layoutManager = HoverGridLayoutManager(context, spanCount, orientation, reverseLayout)
     return this
 }
 
 fun RecyclerView.staggered(
-        spanCount: Int,
-        @RecyclerView.Orientation orientation: Int = VERTICAL
+    spanCount: Int,
+    @RecyclerView.Orientation orientation: Int = VERTICAL
 ): RecyclerView {
     layoutManager = HoverStaggeredGridLayoutManager(spanCount, orientation)
     return this
 }
+//</editor-fold>
 
+//<editor-fold desc="分割线">
+
+/**
+ * 函数配置分割线
+ */
 fun RecyclerView.divider(
-        @DrawableRes drawable: Int,
-        @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL,
-        block: ((Rect, View, RecyclerView, RecyclerView.State) -> Boolean)? = null
+    block: DefaultDecoration.() -> Unit
 ): RecyclerView {
-    val decoration = DefaultDecoration(context).apply {
-        setDrawable(drawable)
-    }
-    block?.let {
-        decoration.onItemOffsets(block)
-    }
-    addItemDecoration(decoration)
+    val itemDecoration = DefaultDecoration(context).apply(block)
+    addItemDecoration(itemDecoration)
     return this
 }
 
+/**
+ * 指定Drawable资源为分割线, 分割线的间距和宽度应在资源文件中配置
+ */
+fun RecyclerView.divider(
+    @DrawableRes drawable: Int
+): RecyclerView {
+    return divider {
+        setDrawable(drawable)
+    }
+}
 
 /**
- *  对话框设置列表
- *
+ * 指定颜色为分割线
+ * @param color 颜色
+ * @param marginStart 左或上间距
+ * @param marginEnd 右或下间距
+ * @param width 分割线宽度
  */
-fun Dialog.setAdapter(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
+fun RecyclerView.dividerColor(
+    @ColorInt color: Int,
+    marginStart: Int = 0,
+    marginEnd: Int = 0,
+    width: Int = 1
+): RecyclerView {
+    return divider {
+        setColor(color)
+        setMargin(marginStart, marginEnd)
+        setWith(width)
+    }
+}
+
+fun RecyclerView.dividerColor(
+    color: String,
+    marginStart: Int = 0,
+    marginEnd: Int = 0,
+    width: Int = 1
+): RecyclerView {
+    return divider {
+        setColor(color)
+        setMargin(marginStart, marginEnd)
+        setWith(width)
+    }
+}
+
+fun RecyclerView.dividerColorRes(
+    @ColorRes color: Int,
+    marginStart: Int = 0,
+    marginEnd: Int = 0,
+    width: Int = 1
+): RecyclerView {
+    return divider {
+        setColorRes(color)
+        setMargin(marginStart, marginEnd)
+        setWith(width)
+    }
+}
+//</editor-fold>
+
+
+//<editor-fold desc="对话框">
+/**
+ *  对话框设置一个列表组件
+ */
+fun Dialog.brv(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
     val context = context
     val recyclerView = RecyclerView(context)
     recyclerView.setup(block)
@@ -124,6 +157,7 @@ fun Dialog.setAdapter(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
     setContentView(recyclerView)
     return this
 }
+//</editor-fold>
 
 
 

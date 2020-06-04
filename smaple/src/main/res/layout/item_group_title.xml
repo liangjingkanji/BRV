@@ -7,7 +7,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.mod.GroupModel" />
+            type="com.drake.brv.sample.model.GroupModel" />
     </data>
 
     <LinearLayout
@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_collapse" />
+            android:src="@{m.expandIcon}" />
 
         <TextView
             android:textSize="16dp"
