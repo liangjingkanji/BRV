@@ -283,7 +283,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // <editor-fold desc="头布局">
 
     // 头布局的数据模型
-    var headers = listOf<Any?>()
+    var headers: List<Any?> = mutableListOf()
         set(value) {
             field = value.toMutableList()
             notifyDataSetChanged()
@@ -342,7 +342,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // <editor-fold desc="脚布局">
 
 
-    var footers = listOf<Any?>()
+    var footers: List<Any?> = mutableListOf()
         set(value) {
 
             field = value.toMutableList()
