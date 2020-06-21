@@ -46,15 +46,20 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     var index = startIndex // 分页索引
-    var state: StateLayout? = null // 可以指定缺省页
-    var rv: RecyclerView? = null // 可以指定rv
+    var contentView: View? = null
+    var stateLayout: StateLayout? = null // 可以指定缺省页
 
     // 监听onBindViewHolder事件
     var onBindViewHolderListener = object : OnBindViewHolderListener {
-        override fun onBindViewHolder(rv: RecyclerView, adapter: BindingAdapter, holder: BindingAdapter.BindingViewHolder, position: Int) {
+        override fun onBindViewHolder(
+            rv: RecyclerView,
+            adapter: BindingAdapter,
+            holder: BindingAdapter.BindingViewHolder,
+            position: Int
+        ) {
             if (mEnableLoadMore && !mFooterNoMoreData && preloadIndex != -1 && (adapter.itemCount - preloadIndex <= position)) {
                 post {
-                    if (getState() == RefreshState.None) {
+                    if (state == RefreshState.None) {
                         notifyStateChanged(RefreshState.Loading)
                         onLoadMore(this@PageRefreshLayout)
                     }
@@ -68,7 +73,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var trigger = false
     private var realEnableLoadMore = false
     private var realEnableRefresh = false
-    private var contentView: View? = null
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
 
@@ -96,14 +100,21 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.PageRefreshLayout)
 
         try {
-            stateEnabled = attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+            stateEnabled =
+                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
-            mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull, mEnableLoadMoreWhenContentNotFull)
+            mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
+                R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
+                mEnableLoadMoreWhenContentNotFull
+            )
 
-            emptyLayout = attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
-            errorLayout = attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
-            loadingLayout = attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
+            emptyLayout =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+            errorLayout =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+            loadingLayout =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
         } finally {
             attributes.recycle()
         }
@@ -112,7 +123,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         if (upFetchEnabled) {
-            rv?.scaleY = -1F
+            contentView?.scaleY = -1F
             layout.scaleY = -1F
             refreshFooter?.view?.scaleY = -1F
         }
@@ -146,7 +157,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val rv = contentView
 
         if (rv is RecyclerView) {
-            this.rv = rv
             rv.addOnLayoutChangeListener(OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
                 val adapter = rv.adapter
                 if (adapter is BindingAdapter) {
@@ -184,12 +194,12 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun addData(data: List<Any?>?, hasMore: BindingAdapter.() -> Boolean = { true }) {
 
-        val rv = this.rv
-                ?: throw UnsupportedOperationException("PageRefreshLayout require content RecyclerView")
+        val rv = contentView as? RecyclerView
+            ?: throw UnsupportedOperationException("PageRefreshLayout require content RecyclerView")
 
 
         val adapter = rv.adapter as? BindingAdapter
-                ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
+            ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
 
         val isRefreshState = getState() == RefreshState.Refreshing
 
@@ -217,17 +227,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     // <editor-fold desc="生命周期">
 
     fun onError(block: View.(Any?) -> Unit): PageRefreshLayout {
-        state?.onError(block)
+        stateLayout?.onError(block)
         return this
     }
 
     fun onEmpty(block: View.(Any?) -> Unit): PageRefreshLayout {
-        state?.onEmpty(block)
+        stateLayout?.onEmpty(block)
         return this
     }
 
     fun onLoading(block: View.(Any?) -> Unit): PageRefreshLayout {
-        state?.onLoading(block)
+        stateLayout?.onLoading(block)
         return this
     }
 
@@ -315,10 +325,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             }
 
             if (finishInflate) {
-                if (value && state == null) {
+                if (value && stateLayout == null) {
                     replaceStateLayout()
                 } else if (!value) {
-                    state?.showContent()
+                    stateLayout?.showContent()
                 }
             }
 
@@ -328,17 +338,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     var emptyLayout = View.NO_ID
         set(value) {
             field = value
-            state?.emptyLayout = value
+            stateLayout?.emptyLayout = value
         }
     var errorLayout = View.NO_ID
         set(value) {
             field = value
-            state?.errorLayout = value
+            stateLayout?.errorLayout = value
         }
     var loadingLayout = View.NO_ID
         set(value) {
             field = value
-            state?.loadingLayout = value
+            stateLayout?.loadingLayout = value
         }
 
     /**
@@ -346,12 +356,12 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 并且500ms内防重复点击
      */
     fun setRetryIds(@IdRes vararg ids: Int): PageRefreshLayout {
-        state?.setRetryIds(*ids)
+        stateLayout?.setRetryIds(*ids)
         return this
     }
 
     fun showEmpty(tag: Any? = null) {
-        if (stateEnabled) state?.showEmpty(tag)
+        if (stateEnabled) stateLayout?.showEmpty(tag)
         finish()
     }
 
@@ -364,18 +374,18 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     fun showError(tag: Any? = null, force: Boolean = false) {
         if (stateEnabled && (force || !loaded)) {
             loaded = false
-            state?.showError(tag)
+            stateLayout?.showError(tag)
         }
         finish(false)
     }
 
     fun showLoading(tag: Any? = null, refresh: Boolean = true) {
-        if (stateEnabled) state?.showLoading(tag, refresh)
+        if (stateEnabled) stateLayout?.showLoading(tag, refresh)
     }
 
     fun showContent(hasMore: Boolean = false) {
         if (trigger && stateChanged) return
-        if (stateEnabled) state?.showContent()
+        if (stateEnabled) stateLayout?.showContent()
         finish(hasMore = hasMore)
     }
 
@@ -424,12 +434,12 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             return
         }
 
-        state = StateLayout(context)
+        stateLayout = StateLayout(context)
 
-        state?.apply {
+        stateLayout?.apply {
             this@PageRefreshLayout.removeView(contentView)
             addView(contentView)
-            state!!.setContentView(contentView!!)
+            stateLayout!!.setContentView(contentView!!)
             setRefreshContent(this)
 
             emptyLayout = emptyLayout
