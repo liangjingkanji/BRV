@@ -79,16 +79,28 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     var upFetchEnabled = false
         set(value) {
+            if (value == field) return
             field = value
-            setEnableRefresh(false)
-            setEnableNestedScroll(false)
-            setEnableAutoLoadMore(true)
-            setEnableScrollContentWhenLoaded(true)
-            setScrollBoundaryDecider(object : SimpleBoundaryDecider() {
-                override fun canLoadMore(content: View?): Boolean {
-                    return super.canRefresh(content)
-                }
-            })
+            if (field) {
+                setEnableRefresh(false)
+                setEnableNestedScroll(false)
+                setEnableAutoLoadMore(true)
+                setEnableScrollContentWhenLoaded(true)
+                setScrollBoundaryDecider(object : SimpleBoundaryDecider() {
+                    override fun canLoadMore(content: View?): Boolean {
+                        return super.canRefresh(content)
+                    }
+                })
+                layout.scaleY = -1F
+                contentView?.scaleY = -1F
+                refreshFooter?.view?.scaleY = -1F
+            } else {
+                setEnableNestedScroll(false)
+                setScrollBoundaryDecider(SimpleBoundaryDecider())
+                layout.scaleY = 1F
+                contentView?.scaleY = 1F
+                refreshFooter?.view?.scaleY = 1F
+            }
         }
 
     // <editor-fold desc="构造函数">
@@ -123,8 +135,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         if (upFetchEnabled) {
-            contentView?.scaleY = -1F
             layout.scaleY = -1F
+            contentView?.scaleY = -1F
             refreshFooter?.view?.scaleY = -1F
         }
     }

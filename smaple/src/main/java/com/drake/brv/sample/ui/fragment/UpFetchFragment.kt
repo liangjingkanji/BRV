@@ -16,7 +16,11 @@ import kotlinx.android.synthetic.main.fragment_up_fetch.*
  */
 class UpFetchFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_up_fetch, container, false)
     }
 
