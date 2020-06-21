@@ -55,14 +55,19 @@
         android:name="com.drake.brv.sample.ui.fragment.HoverHeaderFragment"
         android:label="悬停"
         tools:layout="@layout/fragment_hover_header" />
-    <!--    <fragment-->
-    <!--        android:id="@+id/tree_structure"-->
-    <!--        android:name="com.drake.brv.sample.ui.fragment.TreeStructureFragment"-->
-    <!--        android:label="树状结构"-->
-    <!--        tools:layout="@layout/fragment_tree_structure" />-->
     <fragment
         android:id="@+id/grid_divider"
         android:name="com.drake.brv.sample.ui.fragment.DividerFragment"
         android:label="分割线"
         tools:layout="@layout/fragment_divider" />
+    <fragment
+        android:id="@+id/preload"
+        android:name="com.drake.brv.sample.ui.fragment.PreloadFragment"
+        android:label="预加载"
+        tools:layout="@layout/fragment_preload" />
+    <fragment
+        android:id="@+id/up_fetch"
+        android:name="com.drake.brv.sample.ui.fragment.UpFetchFragment"
+        android:label="预拉取"
+        tools:layout="@layout/fragment_up_fetch" />
 </navigation>

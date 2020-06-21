@@ -14,10 +14,6 @@
         android:id="@+id/hover"
         android:icon="@drawable/ic_hover_header"
         android:title="悬停" />
-    <!--    <item-->
-    <!--        android:id="@+id/tree_structure"-->
-    <!--        android:icon="@drawable/ic_tree_structure"-->
-    <!--        android:title="树状结构" />-->
     <item
         android:id="@+id/grid_divider"
         android:icon="@drawable/ic_tree_structure"
@@ -54,4 +50,12 @@
         android:id="@+id/state"
         android:icon="@drawable/ic_state"
         android:title="缺省状态" />
+    <item
+        android:id="@+id/preload"
+        android:icon="@drawable/ic_preload"
+        android:title="预加载" />
+    <item
+        android:id="@+id/up_fetch"
+        android:icon="@drawable/ic_up_fetch"
+        android:title="预拉取" />
 </menu>

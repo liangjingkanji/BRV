@@ -11,7 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="600px"
-        android:background="#4CAF50">
+        android:background="#40b883">
 
         <FrameLayout
             android:id="@+id/item"
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
-            android:background="@drawable/bg_card"
+            android:background="@color/white"
             android:foreground="?selectableItemBackgroundBorderless">
 
             <TextView

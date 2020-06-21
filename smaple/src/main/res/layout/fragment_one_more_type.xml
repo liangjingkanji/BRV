@@ -1,20 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
   ~ Project：BRV
   ~ Author：Nathan
   ~ Date：8/24/19 2:35 AM
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.OneMoreTypeFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="单一的数据类型集合通过判断字段构建出多类型列表"
+        android:textColor="@color/textDescription"
+        android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_one_more_type"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</FrameLayout>
+</LinearLayout>

@@ -23,13 +23,22 @@ import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
 
 
 val RecyclerView.bindingAdapter
-    get() = adapter as BindingAdapter
+    get() = adapter as? BindingAdapter ?: throw NullPointerException("BindingAdapter is null")
 
 var RecyclerView.models
     get() = bindingAdapter.models
     set(value) {
         bindingAdapter.models = value
     }
+
+/**
+ * 添加数据
+ * @param models 被添加的数据
+ * @param animation 添加数据是否显示动画
+ */
+fun RecyclerView.addModels(models: List<Any?>?, animation: Boolean = true) {
+    bindingAdapter.addModels(models, animation)
+}
 
 
 //<editor-fold desc="配置列表">

@@ -24,12 +24,7 @@ import kotlinx.android.synthetic.main.fragment_header_footer.*
 class HeaderFooterFragment : Fragment() {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_header_footer, container, false)
     }
 
@@ -44,18 +39,15 @@ class HeaderFooterFragment : Fragment() {
              * 所以本质上他们都是一组多类型而已, 我分出来只是为了方便替换Models而不影响Header和Footer
              */
 
-            addType<Header>(R.layout.item_multi_type_simple)
-            addType<Footer>(R.layout.item_multi_type_simple)
+            addType<Header>(R.layout.item_multi_type_header)
+            addType<Footer>(R.layout.item_multi_type_footer)
         }.models = getData()
 
         initToolbar()
     }
 
     private fun getData(): List<Model> {
-        return listOf(
-            Model(),
-            Model()
-        )
+        return listOf(Model(), Model())
     }
 
     var index = 0
@@ -71,10 +63,10 @@ class HeaderFooterFragment : Fragment() {
             when (it.itemId) {
                 R.id.menu_add_header -> adapter.addHeader(Header(), animation = true)
                 R.id.menu_remove_header -> adapter.removeHeaderAt(animation = true)  // 删除头布局
-                R.id.menu_clear_header -> adapter.clearHeader() // 清除头布局
-                R.id.menu_add_footer -> adapter.addFooter(Footer())  // 添加脚布局
-                R.id.menu_remove_footer -> adapter.removeFooterAt()  // 删除脚布局
-                R.id.menu_clear_footer -> adapter.clearFooter(true)  // 清除脚布局
+                R.id.menu_clear_header -> adapter.clearHeader(animation = true) // 清除头布局
+                R.id.menu_add_footer -> adapter.addFooter(Footer(), animation = true)  // 添加脚布局
+                R.id.menu_remove_footer -> adapter.removeFooterAt(animation = true)  // 删除脚布局
+                R.id.menu_clear_footer -> adapter.clearFooter(animation = true)  // 清除脚布局
             }
             true
         }
@@ -83,8 +75,6 @@ class HeaderFooterFragment : Fragment() {
 
     class Header
     class Footer
-
-
 }
 
 

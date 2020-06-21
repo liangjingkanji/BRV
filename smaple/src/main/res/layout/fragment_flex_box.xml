@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
   ~ Project：BRV
   ~ Author：Nathan
@@ -8,9 +7,9 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.fragment.FlexBoxFragment">
 
     <TextView
@@ -18,7 +17,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
-        android:text="标签实现就是如此简单"
+        android:text="通过FlexBoxLayout框架快速实现自动伸缩的标签"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />
 

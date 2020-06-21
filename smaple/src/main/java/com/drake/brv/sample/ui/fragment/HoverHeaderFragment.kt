@@ -10,7 +10,6 @@ import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.HoverHeaderModel
 import com.drake.brv.sample.model.Model
-import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -32,6 +31,13 @@ class HoverHeaderFragment : Fragment() {
             addType<HoverHeaderModel>(R.layout.item_hover_header)
             models = getData()
 
+            // 点击事件
+            onClick(R.id.item) {
+                when (itemViewType) {
+                    R.layout.item_hover_header -> toast("悬停条目")
+                    else -> toast("普通条目")
+                }
+            }
 
             // 可选项, 粘性监听器
             onHoverAttachListener = object : OnHoverAttachListener {
@@ -42,43 +48,13 @@ class HoverHeaderFragment : Fragment() {
                 override fun detachHover(v: View) {
                     ViewCompat.setElevation(v, 0F)
                 }
-
             }
 
-        }
-
-        // 点击事件
-        rv_hover.bindingAdapter.onClick(R.id.item) {
-            when (itemViewType) {
-                R.layout.item_hover_header -> toast("悬停条目")
-                else -> toast("普通条目")
-            }
         }
     }
 
     private fun getData(): List<Any> {
-        return listOf(
-                HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-                HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-                HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model()
-        )
+        return listOf(HoverHeaderModel(), Model(), Model(), Model(), HoverHeaderModel(), Model(), Model(), Model(), HoverHeaderModel(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model())
     }
 
 }

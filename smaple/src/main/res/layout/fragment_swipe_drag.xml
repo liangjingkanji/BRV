@@ -12,12 +12,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.SwipeDragFragment">
 
-
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
-        android:paddingLeft="16dp"
+        android:paddingLeft="20dp"
         android:text="左右侧滑删除, 长按拖拽"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />

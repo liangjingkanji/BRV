@@ -39,7 +39,7 @@ class StateLayoutFragment : Fragment() {
 
         rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
-            addType<DoubleItemModel>(R.layout.item_multi_type_double)
+            addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }.models = getData()
 
         val state = state()

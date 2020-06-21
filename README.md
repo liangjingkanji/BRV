@@ -10,8 +10,7 @@
 - 通用适配器, 无需继承
 - 快速实现常见需求
 - 刷新还是添加数据都无闪屏
-
-
+- Demo示例代码不过百行
 
 ### 需求
 
@@ -47,16 +46,18 @@
 
 - 下拉刷新 | 上拉加载 (PageRefreshLayout)
 
+    - 指定预拉取索引(UpFetch)
+    - 指定预加载索引(Preload)
+
 - 多状态缺省页 (PageRefreshLayout)
 
 - 自动分页加载 (PageRefreshLayout)
 
 - 扩展
-  - 伸缩布局 (FlexboxLayoutManager)
+  - 伸缩布局 ([FlexboxLayoutManager](https://github.com/google/flexbox-layout))
   
-  - 自动化网络请求 (KalleExtension)
+  - 自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于Kalle|协程 实现自动化的并发网络请求
   
-    该网络请求基于Kalle|RxJava 实现自动化的网络请求
 
 
 
@@ -89,13 +90,15 @@ implementation 'com.github.liangjingkanji:BRV:1.2.14'
 
 ## 预览
 
+**首页**
+
+<img src="https://i.imgur.com/lZXNqXE.jpg" alt="home" style="zoom: 25%;" />
 
 
 
+**功能界面**
 
-![home](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvgb7unj308m0io762.jpg)![flex](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvl80unj308m0ioabb.jpg)![header](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvso45sj308m0iomye.jpg)
-
-
+![flex](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvl80unj308m0ioabb.jpg)![header](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mvso45sj308m0iomye.jpg)
 
 ![footer](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mrpvtgbg308m0iong7.gif)![check_mode](https://tva1.sinaimg.cn/large/006y8mN6gy1g73msf5g9qg308m0iotdk.gif)![footer](https://tva1.sinaimg.cn/large/006y8mN6gy1g73msnitazg308m0iong7.gif)![refresh](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mt2hy6xg308m0iox3o.gif)![state](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mtayt2tg308k0ijgqy.gif)![swipe_drag](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mthtdd4g308m0iojx4.gif)
 

@@ -39,7 +39,7 @@ fun View.page(
     pageRefreshLayout.apply {
         setEnableLoadMore(loadMoreEnabled)
         this.stateEnabled = stateEnabled
-        init()
+        initialize()
     }
 
     return pageRefreshLayout

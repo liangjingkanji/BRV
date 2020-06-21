@@ -12,6 +12,15 @@
     android:orientation="vertical"
     tools:context=".ui.fragment.HeaderFooterFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="支持动画的头布局脚布局"
+        android:textColor="@color/textDescription"
+        android:textSize="12dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_header_footer"
         android:layout_width="match_parent"

@@ -21,10 +21,7 @@ import kotlinx.android.synthetic.main.fragment_one_more_type.*
 
 class OneMoreTypeFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_one_more_type, container, false)
     }
@@ -36,34 +33,15 @@ class OneMoreTypeFragment : Fragment() {
         rv_one_more_type.linear().setup {
             addType<OneMoreTypeModel> {
                 when (type) {
-                    0 -> R.layout.item_multi_type_simple
-                    else -> R.layout.item_multi_type_double
+                    0 -> R.layout.item_multi_type_one
+                    else -> R.layout.item_multi_type_two
                 }
             }
         }.models = getData()
     }
 
     private fun getData(): List<OneMoreTypeModel> {
-        return listOf(
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0)
-        )
+        return listOf(OneMoreTypeModel(0), OneMoreTypeModel(0), OneMoreTypeModel(1), OneMoreTypeModel(1), OneMoreTypeModel(0), OneMoreTypeModel(0), OneMoreTypeModel(1), OneMoreTypeModel(1), OneMoreTypeModel(0), OneMoreTypeModel(0), OneMoreTypeModel(0), OneMoreTypeModel(1), OneMoreTypeModel(0), OneMoreTypeModel(0), OneMoreTypeModel(0), OneMoreTypeModel(1), OneMoreTypeModel(0), OneMoreTypeModel(0))
     }
 
 }

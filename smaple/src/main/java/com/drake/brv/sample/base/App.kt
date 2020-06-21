@@ -22,11 +22,8 @@ class App : Application() {
         super.onCreate()
 
 
-        /**
-         * 初始化BindingAdapter的默认绑定ID
-         */
+        // 初始化BindingAdapter的默认绑定ID
         BindingAdapter.modelId = BR.m
-
 
         /**
          *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
@@ -44,16 +41,10 @@ class App : Application() {
             }
         }
 
-
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
-            MaterialHeader(
-                context
-            )
+            MaterialHeader(context)
+            // ClassicsHeader(context)
         }
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
-            ClassicsFooter(
-                context
-            )
-        }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(context) }
     }
 }

@@ -24,10 +24,7 @@ import kotlinx.android.synthetic.main.fragment_multi_type.*
 
 class MultiTypeFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_multi_type, container, false)
     }
@@ -36,19 +33,13 @@ class MultiTypeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-        /**
-         * 请查看Application的初始化
-         */
-
         rv_multi_type.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
-            addType<DoubleItemModel>(R.layout.item_multi_type_double)
+            addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }.models = getData()
 
         // 点击事件
         rv_multi_type.bindingAdapter.onClick(R.id.item) {
-
             when (itemViewType) {
                 R.layout.item_multi_type_simple -> toast("类型1")
                 else -> toast("类型2")
@@ -56,23 +47,8 @@ class MultiTypeFragment : Fragment() {
         }
     }
 
-    private fun getData(): List<Any> {
-        return listOf(
-            Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
-            DoubleItemModel(),
-            Model(),
-            Model(),
-            Model()
-        )
+
+    private fun getData(): MutableList<Any> {
+        return mutableListOf(Model(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model(), Model(), DoubleItemModel(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model())
     }
-
-
 }

@@ -7,4 +7,6 @@
 
 package com.drake.brv.sample.model
 
-class Model
+import com.drake.brv.item.ItemPosition
+
+class Model(override var itemPosition: Int = 0) : ItemPosition

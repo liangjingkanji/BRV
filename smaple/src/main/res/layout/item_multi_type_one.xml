@@ -5,7 +5,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.Model" />
+            type="com.drake.brv.sample.model.OneMoreTypeModel" />
     </data>
 
     <LinearLayout

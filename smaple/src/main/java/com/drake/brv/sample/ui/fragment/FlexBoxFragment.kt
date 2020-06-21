@@ -21,11 +21,7 @@ import kotlinx.android.synthetic.main.fragment_flex_box.*
 
 class FlexBoxFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_flex_box, container, false)
     }
 
@@ -35,7 +31,6 @@ class FlexBoxFragment : Fragment() {
 
         /**
          * Google开源项目-flexBox-layout
-         *
          * 更多使用方法查看项目地址: https://github.com/google/flexbox-layout
          */
         rv.layoutManager = FlexboxLayoutManager(activity)
@@ -46,14 +41,7 @@ class FlexBoxFragment : Fragment() {
     }
 
     private fun getData(): List<FlexTagModel> {
-        return listOf(
-            FlexTagModel("吴彦祖"),
-            FlexTagModel("金城武"),
-            FlexTagModel("Amber Gao"),
-            FlexTagModel("设计师"),
-            FlexTagModel("肥宅"),
-            FlexTagModel("不识妻美刘强东")
-        )
+        return listOf(FlexTagModel("吴彦祖"), FlexTagModel("金城武"), FlexTagModel("Amber Gao"), FlexTagModel("设计师"), FlexTagModel("肥宅"), FlexTagModel("不识妻美刘强东"))
     }
 
 }

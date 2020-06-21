@@ -10,8 +10,10 @@ package com.drake.brv
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.View.OnLayoutChangeListener
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
+import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnMultiStateListener
 import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateConfig.errorLayout
@@ -21,6 +23,7 @@ import com.scwang.smart.refresh.layout.api.RefreshComponent
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import com.scwang.smart.refresh.layout.simple.SimpleBoundaryDecider
 
 
 /**
@@ -29,6 +32,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
  * 功能:
  * - 下拉刷新
  * - 上拉加载
+ * - 预加载(含下拉预加载)
  * - 分页加载
  * - 添加数据
  * - 缺省状态页
@@ -36,59 +40,52 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 @Suppress("UNUSED_PARAMETER")
 open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
-
-    var emptyLayout = View.NO_ID
-        set(value) {
-            field = value
-            state?.emptyLayout = value
-        }
-    var errorLayout = View.NO_ID
-        set(value) {
-            field = value
-            state?.errorLayout = value
-        }
-    var loadingLayout = View.NO_ID
-        set(value) {
-            field = value
-            state?.loadingLayout = value
-        }
-
-    var index = startIndex // 分页索引
-    var loaded = false // 已加载, 已加载后将无法显示错误页面
-
     companion object {
-        var startIndex = 1
+        var startIndex = 1 // 全局分页初始索引
+        var preloadIndex = 3 // 全局预加载索引
     }
 
-    var stateEnabled = true // 启用缺省页
-        set(value) {
+    var index = startIndex // 分页索引
+    var state: StateLayout? = null // 可以指定缺省页
+    var rv: RecyclerView? = null // 可以指定rv
 
-            if (!value && !mEnableLoadMore) {
-                setEnableLoadMore(value)
-            }
-
-            if (finishInflate) {
-                if (value && state == null) {
-                    replaceStateLayout()
-                } else if (!value) {
-                    state?.showContent()
+    // 监听onBindViewHolder事件
+    var onBindViewHolderListener = object : OnBindViewHolderListener {
+        override fun onBindViewHolder(rv: RecyclerView, adapter: BindingAdapter, holder: BindingAdapter.BindingViewHolder, position: Int) {
+            if (mEnableLoadMore && !mFooterNoMoreData && preloadIndex != -1 && (adapter.itemCount - preloadIndex <= position)) {
+                post {
+                    if (getState() == RefreshState.None) {
+                        notifyStateChanged(RefreshState.Loading)
+                        onLoadMore(this@PageRefreshLayout)
+                    }
                 }
             }
-
-            field = value
         }
-
+    }
 
     private var stateChanged = false
     private var finishInflate = false
     private var trigger = false
-    private var hasMore = true
-    private var adapter: BindingAdapter? = null
-    private var autoEnabledLoadMoreState = false
+    private var realEnableLoadMore = false
+    private var realEnableRefresh = false
     private var contentView: View? = null
-    private var state: StateLayout? = null
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
+
+
+    var upFetchEnabled = false
+        set(value) {
+            field = value
+            setEnableRefresh(false)
+            setEnableNestedScroll(false)
+            setEnableAutoLoadMore(true)
+            setEnableScrollContentWhenLoaded(true)
+            setScrollBoundaryDecider(object : SimpleBoundaryDecider() {
+                override fun canLoadMore(content: View?): Boolean {
+                    return super.canRefresh(content)
+                }
+            })
+        }
 
     // <editor-fold desc="构造函数">
 
@@ -99,42 +96,37 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.PageRefreshLayout)
 
         try {
-
-            stateEnabled =
-                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+            stateEnabled = attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
-            mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
-                R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
-                mEnableLoadMoreWhenContentNotFull
-            )
+            mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull, mEnableLoadMoreWhenContentNotFull)
 
-            emptyLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
-            errorLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
-            loadingLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
+            emptyLayout = attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+            errorLayout = attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+            loadingLayout = attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
         } finally {
             attributes.recycle()
         }
     }
 
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        init()
-        finishInflate = true
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (upFetchEnabled) {
+            rv?.scaleY = -1F
+            layout.scaleY = -1F
+            refreshFooter?.view?.scaleY = -1F
+        }
     }
 
-
-    internal fun init() {
-
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+    internal fun initialize() {
         setOnRefreshLoadMoreListener(this)
-        autoEnabledLoadMoreState = mEnableLoadMore
 
-        if (autoEnabledLoadMoreState) {
-            setEnableLoadMore(false)
+        realEnableLoadMore = mEnableLoadMore
+        realEnableRefresh = mEnableRefresh
+
+        if (realEnableLoadMore) {
+            super.setEnableLoadMore(false)
         }
 
         if (contentView == null) {
@@ -150,32 +142,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (stateEnabled) {
             replaceStateLayout()
         }
-    }
 
-    private fun replaceStateLayout() {
+        val rv = contentView
 
-        if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
-            stateEnabled = false
-            return
-        }
-
-        state = StateLayout(context)
-
-        state?.apply {
-            this@PageRefreshLayout.removeView(contentView)
-            addView(contentView)
-            state!!.setContentView(contentView!!)
-            setRefreshContent(this)
-
-            emptyLayout = emptyLayout
-            errorLayout = errorLayout
-            loadingLayout = loadingLayout
-
-            onRefresh {
-                setEnableRefresh(false)
-                notifyStateChanged(RefreshState.Refreshing)
-                onRefresh(this@PageRefreshLayout)
-            }
+        if (rv is RecyclerView) {
+            this.rv = rv
+            rv.addOnLayoutChangeListener(OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+                val adapter = rv.adapter
+                if (adapter is BindingAdapter) {
+                    adapter.onBindList.add(onBindViewHolderListener)
+                }
+            })
         }
     }
 
@@ -185,67 +162,53 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     // <editor-fold desc="刷新数据">
 
     /**
+     * 指定列表位置(倒序索引)显示自动预加载
+     */
+    var preloadIndex = PageRefreshLayout.preloadIndex
+
+    /**
      * 触发刷新 (不包含下拉动画)
      */
     fun refresh() {
-        notifyStateChanged(RefreshState.Refreshing)
-        onRefresh(this)
-    }
-
-
-    /**
-     * 设置[errorLayout]中的视图点击后会执行[StateLayout.showLoading]
-     * 并且500ms内防重复点击
-     */
-    fun setRetryIds(@IdRes vararg ids: Int): PageRefreshLayout {
-        state?.setRetryIds(*ids)
-        return this
+        if (getState() == RefreshState.None) {
+            notifyStateChanged(RefreshState.Refreshing)
+            onRefresh(this)
+        }
     }
 
     /**
      * 直接接受数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
      * @param data 数据集
-     * @param bindingAdapter 指定你想要添加数据的[BindingAdapter], 如果RecyclerView属于PageRefreshLayout的直接子View则不需要传入此参数
      * @param hasMore 在函数参数中返回布尔类型来判断是否存在更多页
      */
-    fun addData(
-        data: List<Any?>?,
-        bindingAdapter: BindingAdapter? = null,
-        hasMore: BindingAdapter.() -> Boolean = { false }
-    ) {
+    fun addData(data: List<Any?>?, hasMore: BindingAdapter.() -> Boolean = { true }) {
 
-        if (contentView == null) {
-            throw UnsupportedOperationException("PageRefreshLayout require least one child view")
-        }
+        val rv = this.rv
+                ?: throw UnsupportedOperationException("PageRefreshLayout require content RecyclerView")
 
-        adapter =
-            bindingAdapter ?: adapter ?: (contentView as RecyclerView).adapter as? BindingAdapter
 
-        if (adapter == null) {
-            throw UnsupportedOperationException("PageRefreshLayout require direct child is RecyclerView or specify BindingAdapter")
-        }
+        val adapter = rv.adapter as? BindingAdapter
+                ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
 
         val isRefreshState = getState() == RefreshState.Refreshing
 
-        adapter?.let {
-            if (isRefreshState) {
-                it.models = data
-
-                if (data.isNullOrEmpty()) {
-                    showEmpty()
-                    return
-                }
-
-            } else {
-                it.addModels(data)
+        if (isRefreshState) {
+            adapter.models = data
+            if (data.isNullOrEmpty()) {
+                showEmpty()
+                return
             }
+        } else {
+            adapter.addModels(data)
         }
 
-        this.hasMore = adapter!!.hasMore()
+        if (isRefreshState) index = startIndex
+
+        val hasMoreResult = adapter.hasMore()
         index += 1
 
-        if (isRefreshState) showContent() else finish(true)
+        if (isRefreshState) showContent(hasMoreResult) else finish(true, hasMoreResult)
     }
 
     // </editor-fold>
@@ -289,18 +252,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         return this
     }
 
-    override fun autoRefresh(): Boolean {
-        return super.autoRefresh()
-    }
-
     // </editor-fold>
 
 
     /**
      * 关闭下拉加载|上拉刷新
-     * @param success Boolean 刷新结果 true: 成功 false: 失败
+     * @param success Boolean 刷新/加载是否成功
+     * @param hasMore 是否存在分页, 如果不存在分页当布局不满一页时会关闭Footer
      */
-    fun finish(success: Boolean = true) {
+    fun finish(success: Boolean = true, hasMore: Boolean = false) {
 
         if (trigger) {
             stateChanged = true
@@ -313,25 +273,23 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         }
 
         if (currentState == RefreshState.Refreshing) {
-            finishRefresh(success)
-            setEnableRefresh(true)
-            setNoMoreData(!hasMore)
-
+            if (hasMore) finishRefresh(success) else finishRefreshWithNoMoreData()
+            if (realEnableRefresh) super.setEnableRefresh(true)
             if (!mEnableLoadMoreWhenContentNotFull) {
-                setEnableLoadMoreWhenContentNotFull(hasMore)
+                setEnableLoadMoreWhenContentNotFull(hasMore || !mFooterNoMoreData)
             }
         } else {
             if (hasMore) finishLoadMore(success) else finishLoadMoreWithNoMoreData()
         }
 
-
-        if (currentState != RefreshState.Loading && autoEnabledLoadMoreState) {
-            setEnableLoadMore(success)
+        if (currentState != RefreshState.Loading && realEnableLoadMore) {
+            super.setEnableLoadMore(success)
         }
     }
 
     /**
-     * 用于网络请求的触发器
+     * 用于网络请求的触发器, 作用于暂停/继续缺省状态变化
+     * 开发者无需关心该函数
      */
     fun trigger(): Boolean {
         trigger = !trigger
@@ -339,9 +297,58 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         return trigger
     }
 
-
     // <editor-fold desc="缺省页">
 
+    /**
+     * 标记是否已加载, 已加载后将不再显示错误页面
+     */
+    var loaded = false
+
+    /**
+     * 启用缺省页
+     */
+    var stateEnabled = true
+        set(value) {
+
+            if (!value && !mEnableLoadMore) {
+                super.setEnableLoadMore(value)
+            }
+
+            if (finishInflate) {
+                if (value && state == null) {
+                    replaceStateLayout()
+                } else if (!value) {
+                    state?.showContent()
+                }
+            }
+
+            field = value
+        }
+
+    var emptyLayout = View.NO_ID
+        set(value) {
+            field = value
+            state?.emptyLayout = value
+        }
+    var errorLayout = View.NO_ID
+        set(value) {
+            field = value
+            state?.errorLayout = value
+        }
+    var loadingLayout = View.NO_ID
+        set(value) {
+            field = value
+            state?.loadingLayout = value
+        }
+
+    /**
+     * 设置[errorLayout]中的视图点击后会执行[StateLayout.showLoading]
+     * 并且500ms内防重复点击
+     */
+    fun setRetryIds(@IdRes vararg ids: Int): PageRefreshLayout {
+        state?.setRetryIds(*ids)
+        return this
+    }
 
     fun showEmpty(tag: Any? = null) {
         if (stateEnabled) state?.showEmpty(tag)
@@ -366,14 +373,32 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (stateEnabled) state?.showLoading(tag, refresh)
     }
 
-    fun showContent() {
+    fun showContent(hasMore: Boolean = false) {
         if (trigger && stateChanged) return
-
         if (stateEnabled) state?.showContent()
-        finish()
+        finish(hasMore = hasMore)
     }
 
     // </editor-fold>
+
+    //<editor-fold desc="覆写函数">
+
+    override fun setEnableLoadMore(enabled: Boolean): RefreshLayout {
+        realEnableLoadMore = enabled
+        return super.setEnableLoadMore(enabled)
+    }
+
+    override fun setEnableRefresh(enabled: Boolean): RefreshLayout {
+        realEnableRefresh = enabled
+        return super.setEnableRefresh(enabled)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        initialize()
+        finishInflate = true
+    }
+
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         if (onLoadMore == null) {
@@ -384,10 +409,39 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        index = startIndex
-
         setNoMoreData(false)
         onRefresh?.invoke(this)
+    }
+    //</editor-fold>
+
+    /**
+     * 替换成缺省页
+     */
+    private fun replaceStateLayout() {
+
+        if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
+            stateEnabled = false
+            return
+        }
+
+        state = StateLayout(context)
+
+        state?.apply {
+            this@PageRefreshLayout.removeView(contentView)
+            addView(contentView)
+            state!!.setContentView(contentView!!)
+            setRefreshContent(this)
+
+            emptyLayout = emptyLayout
+            errorLayout = errorLayout
+            loadingLayout = loadingLayout
+
+            onRefresh {
+                if (realEnableRefresh) super.setEnableRefresh(false)
+                notifyStateChanged(RefreshState.Refreshing)
+                onRefresh(this@PageRefreshLayout)
+            }
+        }
     }
 
 }

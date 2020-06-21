@@ -5,7 +5,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.Model" />
+            type="com.drake.brv.sample.ui.fragment.HeaderFooterFragment.Header" />
     </data>
 
     <LinearLayout
@@ -21,7 +21,6 @@
             android:foreground="?selectableItemBackgroundBorderless">
 
             <TextView
-                android:text="@{String.valueOf(m.itemPosition)}"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
