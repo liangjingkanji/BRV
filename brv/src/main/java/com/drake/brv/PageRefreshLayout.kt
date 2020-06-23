@@ -213,7 +213,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val adapter = rv.adapter as? BindingAdapter
             ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
 
-        val isRefreshState = getState() == RefreshState.Refreshing
+        val isRefreshState = state == RefreshState.Refreshing
 
         if (isRefreshState) {
             adapter.models = data
