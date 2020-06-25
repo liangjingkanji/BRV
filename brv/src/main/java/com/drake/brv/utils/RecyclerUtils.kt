@@ -121,7 +121,7 @@ fun RecyclerView.dividerColor(
     return divider {
         setColor(color)
         setMargin(marginStart, marginEnd)
-        setWith(width)
+        setDivider(width)
     }
 }
 
@@ -134,7 +134,7 @@ fun RecyclerView.dividerColor(
     return divider {
         setColor(color)
         setMargin(marginStart, marginEnd)
-        setWith(width)
+        setDivider(width)
     }
 }
 
@@ -147,7 +147,7 @@ fun RecyclerView.dividerColorRes(
     return divider {
         setColorRes(color)
         setMargin(marginStart, marginEnd)
-        setWith(width)
+        setDivider(width)
     }
 }
 //</editor-fold>
