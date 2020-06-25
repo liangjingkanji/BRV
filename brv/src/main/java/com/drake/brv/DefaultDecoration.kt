@@ -178,12 +178,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      * 设置分割线宽度
      * 如果使用[setDrawable]则无效
      */
-    fun setWith(height: Int = 1, pixel: Boolean = false) {
+    fun setDivider(width: Int = 1, pixel: Boolean = false) {
         if (pixel) {
-            this.size = height
+            this.size = width
         } else {
             val density = context.resources.displayMetrics.density
-            this.size = (density * height).roundToInt()
+            this.size = (density * width).roundToInt()
         }
     }
 
@@ -204,7 +204,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     //</editor-fold>
 
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
 
         val layoutManager = parent.layoutManager ?: return
 
@@ -254,19 +259,28 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 }
 
                 val spanGroupCount = when (layoutManager) {
-                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(state.itemCount - 1, spanCount) + 1
+                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(
+                        state.itemCount - 1,
+                        spanCount
+                    ) + 1
                     is StaggeredGridLayoutManager -> ceil(state.itemCount / spanCount.toFloat()).toInt()
                     else -> 1
                 }
 
                 val spanIndex = when (layoutManager) {
-                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanIndex(position, spanCount)
+                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanIndex(
+                        position,
+                        spanCount
+                    )
                     is StaggeredGridLayoutManager -> (layoutManager.findViewByPosition(position)!!.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
                     else -> 0
                 }
 
                 val spanGroupIndex = when (layoutManager) {
-                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(position, spanCount)
+                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(
+                        position,
+                        spanCount
+                    )
                     is StaggeredGridLayoutManager -> ceil((position + 1) / spanCount.toFloat()).toInt() - 1
                     else -> 0
                 }
@@ -331,7 +345,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      */
     private fun adjustOrientation(layoutManager: RecyclerView.LayoutManager) {
         if (layoutManager !is GridLayoutManager && layoutManager is LinearLayoutManager) {
-            orientation = if ((layoutManager as? LinearLayoutManager)?.orientation == RecyclerView.VERTICAL) Orientation.HORIZONTAL else Orientation.VERTICAL
+            orientation =
+                if ((layoutManager as? LinearLayoutManager)?.orientation == RecyclerView.VERTICAL) Orientation.HORIZONTAL else Orientation.VERTICAL
         } else if (layoutManager is StaggeredGridLayoutManager) {
             orientation = Orientation.GRID
         }
@@ -378,7 +393,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 val decoratedBounds = Rect()
                 parent.getDecoratedBoundsWithMargins(child, decoratedBounds)
 
-                val firstBottom = if (intrinsicHeight == -1) decoratedBounds.top + size else decoratedBounds.top + intrinsicHeight
+                val firstBottom =
+                    if (intrinsicHeight == -1) decoratedBounds.top + size else decoratedBounds.top + intrinsicHeight
                 val firstTop = decoratedBounds.top
 
                 val bottom = decoratedBounds.bottom
@@ -390,11 +406,17 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     paint.style = Paint.Style.FILL
 
                     if (startVisible && edge.top) {
-                        val firstRect = Rect(parent.paddingLeft, firstTop, parent.width - parent.paddingRight, firstBottom)
+                        val firstRect = Rect(
+                            parent.paddingLeft,
+                            firstTop,
+                            parent.width - parent.paddingRight,
+                            firstBottom
+                        )
                         canvas.drawRect(firstRect, paint)
                     }
 
-                    val rect = Rect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
+                    val rect =
+                        Rect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
                     canvas.drawRect(rect, paint)
                 }
 
@@ -452,7 +474,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 val decoratedBounds = Rect()
                 parent.getDecoratedBoundsWithMargins(child, decoratedBounds)
 
-                val firstRight = if (intrinsicWidth == -1) decoratedBounds.left + size else decoratedBounds.left + intrinsicWidth
+                val firstRight =
+                    if (intrinsicWidth == -1) decoratedBounds.left + size else decoratedBounds.left + intrinsicWidth
                 val firstLeft = decoratedBounds.left
 
                 val right = (decoratedBounds.right + child.translationX).roundToInt()
@@ -464,11 +487,17 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     paint.style = Paint.Style.FILL
 
                     if (startVisible && edge.left) {
-                        val firstRect = Rect(firstLeft, parent.paddingTop, firstRight, parent.height - parent.paddingBottom)
+                        val firstRect = Rect(
+                            firstLeft,
+                            parent.paddingTop,
+                            firstRight,
+                            parent.height - parent.paddingBottom
+                        )
                         canvas.drawRect(firstRect, paint)
                     }
 
-                    val rect = Rect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
+                    val rect =
+                        Rect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
                     canvas.drawRect(rect, paint)
                 }
 
@@ -524,7 +553,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
             divider?.apply {
                 val layoutParams = child.layoutParams as RecyclerView.LayoutParams
-                val bounds = Rect(child.left + layoutParams.leftMargin, child.top + layoutParams.topMargin, child.right + layoutParams.rightMargin, child.bottom + layoutParams.bottomMargin)
+                val bounds = Rect(
+                    child.left + layoutParams.leftMargin,
+                    child.top + layoutParams.topMargin,
+                    child.right + layoutParams.rightMargin,
+                    child.bottom + layoutParams.bottomMargin
+                )
 
 
                 // top
@@ -535,19 +569,39 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     setBounds(bounds.left, bounds.top - height, bounds.right + width, bounds.top)
                     draw(canvas)
                 } else if (!edge.top || (startVisible && edge.top)) {
-                    setBounds(bounds.left - width, bounds.top - height, bounds.right + width, bounds.top)
+                    setBounds(
+                        bounds.left - width,
+                        bounds.top - height,
+                        bounds.right + width,
+                        bounds.top
+                    )
                     draw(canvas)
                 }
 
                 // bottom
                 if (!endVisible && edge.right) {
-                    setBounds(bounds.left - width, bounds.bottom, bounds.right, bounds.bottom + height)
+                    setBounds(
+                        bounds.left - width,
+                        bounds.bottom,
+                        bounds.right,
+                        bounds.bottom + height
+                    )
                     draw(canvas)
                 } else if (!endVisible && edge.left) {
-                    setBounds(bounds.left, bounds.bottom, bounds.right + width, bounds.bottom + height)
+                    setBounds(
+                        bounds.left,
+                        bounds.bottom,
+                        bounds.right + width,
+                        bounds.bottom + height
+                    )
                     draw(canvas)
                 } else if (!edge.bottom || (startVisible && edge.bottom)) {
-                    setBounds(bounds.left - width, bounds.bottom, bounds.right + width, bounds.bottom + height)
+                    setBounds(
+                        bounds.left - width,
+                        bounds.bottom,
+                        bounds.right + width,
+                        bounds.bottom + height
+                    )
                     draw(canvas)
                 }
 
@@ -592,7 +646,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 when (layoutManager) {
                     is StaggeredGridLayoutManager -> {
                         val spanCount = layoutManager.spanCount
-                        val spanIndex = (layoutManager.findViewByPosition(position)!!.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex + 1
+                        val spanIndex =
+                            (layoutManager.findViewByPosition(position)!!.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex + 1
 
                         if (layoutManager.orientation == RecyclerView.VERTICAL) {
                             left = spanIndex == 1
@@ -616,7 +671,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                         if (layoutManager.orientation == RecyclerView.VERTICAL) {
                             left = spanIndex == 1
                             right = spanIndex + spanSize - 1 == spanCount || index == itemCount
-                            top = index <= spanCount && spanGroupIndex == spanSizeLookup.getSpanGroupIndex(position - 1, spanCount)
+                            top =
+                                index <= spanCount && spanGroupIndex == spanSizeLookup.getSpanGroupIndex(
+                                    position - 1,
+                                    spanCount
+                                )
                             bottom = index > itemCount - spanCount
                         } else {
                             left = spanGroupIndex == 0

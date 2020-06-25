@@ -38,7 +38,7 @@ class DividerFragment : Fragment() {
         rv_grid.divider {
             orientation = Orientation.GRID
             setColorRes(R.color.dividerDecoration)
-            setWith(30, true)
+            setDivider(30, true)
             startVisible = true // 网格布局中水平方向首尾显示分割线
             endVisible = true // 网格布局中垂直方向首尾显示分割线
         }.setup {
