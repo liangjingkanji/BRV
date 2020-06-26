@@ -48,6 +48,7 @@ public class HoverLinearLayoutManager extends LinearLayoutManager {
 
     private int mPendingScrollPosition = RecyclerView.NO_POSITION;
     private int mPendingScrollOffset = 0;
+    private boolean scrollEnabled = true;
 
     public HoverLinearLayoutManager(Context context) {
         super(context);
@@ -59,6 +60,21 @@ public class HoverLinearLayoutManager extends LinearLayoutManager {
 
     public HoverLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public HoverLinearLayoutManager setScrollEnabled(boolean enabled) {
+        scrollEnabled = enabled;
+        return this;
+    }
+
+    @Override
+    public boolean canScrollHorizontally() {
+        return super.canScrollHorizontally() && scrollEnabled;
+    }
+
+    @Override
+    public boolean canScrollVertically() {
+        return super.canScrollVertically() && scrollEnabled;
     }
 
     /**

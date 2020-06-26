@@ -192,7 +192,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 触发刷新 (不包含下拉动画)
      */
     fun refresh() {
-        if (getState() == RefreshState.None) {
+        if (state == RefreshState.None) {
             notifyStateChanged(RefreshState.Refreshing)
             onRefresh(this)
         }

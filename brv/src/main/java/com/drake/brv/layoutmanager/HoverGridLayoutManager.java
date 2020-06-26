@@ -47,6 +47,7 @@ public class HoverGridLayoutManager extends GridLayoutManager {
 
     private int mPendingScrollPosition = RecyclerView.NO_POSITION;
     private int mPendingScrollOffset = 0;
+    private boolean scrollEnabled = true;
 
     public HoverGridLayoutManager(Context context, int spanCount) {
         super(context, spanCount);
@@ -58,6 +59,21 @@ public class HoverGridLayoutManager extends GridLayoutManager {
 
     public HoverGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public HoverGridLayoutManager setScrollEnabled(boolean enabled) {
+        scrollEnabled = enabled;
+        return this;
+    }
+
+    @Override
+    public boolean canScrollHorizontally() {
+        return super.canScrollHorizontally() && scrollEnabled;
+    }
+
+    @Override
+    public boolean canScrollVertically() {
+        return super.canScrollVertically() && scrollEnabled;
     }
 
     /**

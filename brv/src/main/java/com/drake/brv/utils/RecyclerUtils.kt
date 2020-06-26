@@ -57,26 +57,37 @@ fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAda
 //<editor-fold desc="布局管理器">
 fun RecyclerView.linear(
     @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
+    reverseLayout: Boolean = false,
+    scrollEnabled: Boolean = true
 ): RecyclerView {
-    layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout)
+    layoutManager = HoverLinearLayoutManager(
+        context,
+        orientation,
+        reverseLayout
+    ).setScrollEnabled(scrollEnabled)
     return this
 }
 
 fun RecyclerView.grid(
     spanCount: Int = 1,
     @RecyclerView.Orientation orientation: Int = VERTICAL,
-    reverseLayout: Boolean = false
+    reverseLayout: Boolean = false,
+    scrollEnabled: Boolean = true
 ): RecyclerView {
-    layoutManager = HoverGridLayoutManager(context, spanCount, orientation, reverseLayout)
+    layoutManager =
+        HoverGridLayoutManager(context, spanCount, orientation, reverseLayout).setScrollEnabled(
+            scrollEnabled
+        )
     return this
 }
 
 fun RecyclerView.staggered(
     spanCount: Int,
-    @RecyclerView.Orientation orientation: Int = VERTICAL
+    @RecyclerView.Orientation orientation: Int = VERTICAL,
+    scrollEnabled: Boolean = true
 ): RecyclerView {
-    layoutManager = HoverStaggeredGridLayoutManager(spanCount, orientation)
+    layoutManager =
+        HoverStaggeredGridLayoutManager(spanCount, orientation).setScrollEnabled(scrollEnabled)
     return this
 }
 //</editor-fold>
