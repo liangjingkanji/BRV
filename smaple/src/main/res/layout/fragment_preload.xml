@@ -12,7 +12,7 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="可以指定开始预加载的列表位置"
+        android:text="具备预加载能力, 让用户不再等待"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />
 

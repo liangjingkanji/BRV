@@ -10,6 +10,7 @@
 package com.drake.brv
 
 
+import android.content.Context
 import android.util.NoSuchPropertyException
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ import com.drake.brv.listener.DefaultItemTouchCallback
 import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.listener.throttleClick
+import com.drake.brv.utils.BRV
 
 /**
  * < Android上最强大的RecyclerView框架 >
@@ -68,12 +70,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         则应在Application中的[onCreate]函数内设置:
             BindingAdapter.modelId = BR.m
         */
-        var modelId: Int = -1
+        var modelId: Int = BRV.modelId
     }
 
 
     // <editor-fold desc="生命周期">
-    private var onBind: (BindingViewHolder.() -> Boolean)? = null
+    private var onBind: (BindingViewHolder.() -> Unit)? = null
     private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
@@ -86,7 +88,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * [onBindViewHolder]回调
      * @return true表示不使用DataBinding, false则使用(默认)
      */
-    fun onBind(block: BindingViewHolder.() -> Boolean) {
+    fun onBind(block: BindingViewHolder.() -> Unit) {
         onBind = block
     }
 
@@ -102,15 +104,11 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="覆写函数">
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+    private var context: Context? = null
 
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            viewType,
-            parent,
-            false
-        )
-            ?: return BindingViewHolder(parent.getView(viewType))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), viewType, parent, false)
+                              ?: return BindingViewHolder(parent.getView(viewType))
 
         return BindingViewHolder(viewDataBinding)
     }
@@ -123,11 +121,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         holder.bind(getModel(position))
     }
 
-    override fun onBindViewHolder(
-        holder: BindingViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
+    override fun onBindViewHolder(holder: BindingViewHolder, position: Int, payloads: MutableList<Any>) {
         if (payloads.isNotEmpty()) {
             onPayload?.invoke(holder, payloads[0])
         } else {
@@ -140,13 +134,16 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
         return (typePool[modelClass]?.invoke(model, position)
-            ?: throw NoSuchPropertyException("Please add item model type : ${model.javaClass.simpleName}"))
+                ?: throw NoSuchPropertyException("Please add item model type : ${model.javaClass.simpleName}"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         this.rv = recyclerView
+        if (context == null) {
+            context = recyclerView.context
+        }
         if (touchEnable) itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
@@ -464,11 +461,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
         }
 
-    private fun flat(
-        list: MutableList<Any?>,
-        expand: Boolean? = null,
-        @IntRange(from = -1) depth: Int = 0
-    ): MutableList<Any?> {
+    private fun flat(list: MutableList<Any?>, expand: Boolean? = null, @IntRange(from = -1) depth: Int = 0): MutableList<Any?> {
 
         if (list.isEmpty()) return list
         val newList = ArrayList(list)
@@ -696,10 +689,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun setChecked(@IntRange(from = 0) position: Int, checked: Boolean) {
 
-        if ((checkedPosition.contains(position) && checked) || (!checked && !checkedPosition.contains(
-                position
-            ))
-        ) return
+        if ((checkedPosition.contains(position) && checked) || (!checked && !checkedPosition.contains(position))) return
 
         val itemViewType = getItemViewType(position)
 
@@ -755,11 +745,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * @param depth 递归展开子项的深度, 如等于-1则代表展开所有子项, 0表示仅展开当前
      * @return 展开后增加的条目数量
      */
-    fun expand(
-        @IntRange(from = 0) position: Int,
-        scrollTop: Boolean = false,
-        @IntRange(from = -1) depth: Int = 0
-    ): Int {
+    fun expand(@IntRange(from = 0) position: Int, scrollTop: Boolean = false, @IntRange(from = -1) depth: Int = 0): Int {
         val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
         return holder.expand(scrollTop, depth)
     }
@@ -781,11 +767,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * @param depth 递归展开子项的深度, 如等于-1则代表展开所有子项, 0表示仅展开当前
      * @return 展开或折叠后变动的条目数量
      */
-    fun expandOrCollapse(
-        @IntRange(from = 0) position: Int,
-        scrollTop: Boolean = false,
-        @IntRange(from = -1) depth: Int = 0
-    ): Int {
+    fun expandOrCollapse(@IntRange(from = 0) position: Int, scrollTop: Boolean = false, @IntRange(from = -1) depth: Int = 0): Int {
         val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
         return holder.expandOrCollapse(scrollTop, depth)
     }
@@ -794,11 +776,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     inner class BindingViewHolder : RecyclerView.ViewHolder {
 
-        private var viewDataBinding: ViewDataBinding? = null
         lateinit var _data: Any
-
+            private set
+        var context: Context = this@BindingAdapter.context!!
         val adapter: BindingAdapter = this@BindingAdapter
         val modelPosition get() = layoutPosition - headerCount
+
+        private var viewDataBinding: ViewDataBinding? = null
 
         constructor(itemView: View) : super(itemView)
 
@@ -840,14 +824,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
             if (model is ItemBind) {
                 model.onBind(this)
-                return
             }
 
-            onBind?.apply {
-                val isReturn = onBind!!.invoke(this@BindingViewHolder)
-                if (isReturn) return
-            }
-
+            onBind?.invoke(this@BindingViewHolder)
             viewDataBinding?.setVariable(modelId, model)
             viewDataBinding?.executePendingBindings()
         }
@@ -857,6 +836,11 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
          * 返回匹配泛型的数据绑定对象ViewDataBinding
          */
         fun <B : ViewDataBinding> getBinding(): B = viewDataBinding as B
+
+        /**
+         * 查找ItemView上的视图
+         */
+        fun <V : View> findView(@IdRes id: Int): V = itemView.findViewById(id)
 
         /**
          * 返回数据模型
@@ -893,9 +877,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                         if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
                     val sublistFlat = flat(sublist, true, depth)
                     (this@BindingAdapter.models as MutableList).addAll(
-                        layoutPosition + 1,
-                        sublistFlat
-                    )
+                            layoutPosition + 1,
+                            sublistFlat
+                                                                      )
                     if (expandAnimationEnabled) {
                         notifyItemChanged(layoutPosition)
                         notifyItemRangeInserted(layoutPosition + 1, sublistFlat.size)
@@ -904,8 +888,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                     }
                     if (scrollTop) {
                         rv?.postDelayed({
-                            rv?.smoothScrollToPosition(layoutPosition)
-                        }, 200)
+                                            rv?.smoothScrollToPosition(layoutPosition)
+                                        }, 200)
                     }
                     sublistFlat.size
                 }

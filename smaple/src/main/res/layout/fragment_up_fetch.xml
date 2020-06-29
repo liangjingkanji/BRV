@@ -12,7 +12,7 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="可以指定开始预加载的列表位置"
+        android:text="应用于类似聊天室下拉加载更多的场景"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />
 
@@ -25,8 +25,8 @@
             android:id="@+id/rv_up_fetch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:reverseLayout="true"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="true" />
 
     </com.drake.brv.PageRefreshLayout>
 

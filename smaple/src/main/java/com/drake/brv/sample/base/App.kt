@@ -8,9 +8,9 @@
 package com.drake.brv.sample.base
 
 import android.app.Application
-import com.drake.brv.BindingAdapter
 import com.drake.brv.sample.BR
 import com.drake.brv.sample.R
+import com.drake.brv.utils.BRV
 import com.drake.statelayout.StateConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -23,7 +23,7 @@ class App : Application() {
 
 
         // 初始化BindingAdapter的默认绑定ID
-        BindingAdapter.modelId = BR.m
+        BRV.modelId = BR.m
 
         /**
          *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
@@ -43,8 +43,11 @@ class App : Application() {
 
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
             MaterialHeader(context)
-            // ClassicsHeader(context)
         }
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(context) }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+            ClassicsFooter(
+                    context
+                          )
+        }
     }
 }

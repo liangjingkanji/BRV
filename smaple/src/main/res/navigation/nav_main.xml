@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main.xml"
-    app:startDestination="@id/group">
+    app:startDestination="@id/normal">
 
     <fragment
         android:id="@+id/multi_type"
@@ -70,4 +70,9 @@
         android:name="com.drake.brv.sample.ui.fragment.UpFetchFragment"
         android:label="预拉取"
         tools:layout="@layout/fragment_up_fetch" />
+    <fragment
+        android:id="@+id/normal"
+        android:name="com.drake.brv.sample.ui.fragment.NormalFragment"
+        android:label="普通列表"
+        tools:layout="@layout/fragment_normal" />
 </navigation>

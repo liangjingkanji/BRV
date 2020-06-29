@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.GroupFragment">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.NormalFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="可递归展开/折叠/悬停/展开置顶/可选动画的分组"
+        android:text="不使用DataBinding创建双向数据绑定列表"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_group"
-        app:layoutManager="com.drake.brv.layoutmanager.HoverLinearLayoutManager"
+        android:id="@+id/rv_normal"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

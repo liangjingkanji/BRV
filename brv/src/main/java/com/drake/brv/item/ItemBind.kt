@@ -14,5 +14,5 @@ import com.drake.brv.BindingAdapter
  * 该接口进行UI操作不符合MVVM架构, 因为Model中不允许出现View引用
  */
 interface ItemBind {
-    fun onBind(vh: BindingAdapter.BindingViewHolder)
+    fun onBind(holder: BindingAdapter.BindingViewHolder)
 }

@@ -7,6 +7,10 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/normal"
+        android:icon="@drawable/ic_group"
+        android:title="普通" />
+    <item
         android:id="@+id/group"
         android:icon="@drawable/ic_group"
         android:title="分组" />

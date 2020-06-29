@@ -4,6 +4,8 @@
 
 配合异步网络任务库[Net](https://github.com/liangjingkanji/Net)预计可为项目减少70%代码
 
+
+
 任何框架问题加群回复: [752854893](https://jq.qq.com/?_wv=1027&k=vWsXSNBJ)
 
 
@@ -15,7 +17,7 @@
 - 快速实现常见需求
 - 刷新还是添加数据都无闪屏
 - Demo示例代码不过百行
-- 可配合DataBinding实现MVVM架构
+- 可配合DataBinding快速实现MVVM架构(也可以不使用DataBinding)
 
 ### 需求
 
@@ -89,7 +91,7 @@ allprojects {
 module 的 build.gradle
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.3.5'
+implementation 'com.github.liangjingkanji:BRV:1.3.6'
 ```
 
 
@@ -116,7 +118,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
       
-        BindingAdapter.modelId = BR.m // 推荐在Application中进行初始化或使用之前即可
+        BRV.modelId = BR.m // 推荐在Application中进行初始化或使用之前即可
     }
 }
 ```

@@ -28,9 +28,9 @@ class RefreshFragment : Fragment() {
     private val total = 2
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+                             ): View? {
 
         return inflater.inflate(R.layout.fragment_refresh, container, false)
     }
@@ -47,16 +47,12 @@ class RefreshFragment : Fragment() {
 
         page.onRefresh {
 
-            postDelayed({
-
-                // 模拟网络请求, 创建假的数据集
+            postDelayed({ // 模拟网络请求, 创建假的数据集
                 val data = getData()
-
                 addData(data) {
                     index < total // 判断是否有更多页
                 }
-
-            }, 1000)
+                        }, 2000)
 
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
 
@@ -69,18 +65,8 @@ class RefreshFragment : Fragment() {
     }
 
     private fun getData(): List<Any> {
-        return listOf(
-            Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
-            Model(),
-            Model(), Model(),
-            Model(), Model(),
-            Model(), Model(),
-            Model(), Model(),
-            Model(), Model(),
-            Model()
-        )
+        return listOf(Model(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model(),
+                      Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model())
     }
 
 
@@ -93,7 +79,7 @@ class RefreshFragment : Fragment() {
                 R.id.menu_pull_refresh -> page.autoRefresh() // 下拉刷新
                 R.id.menu_refresh -> page.refresh() // 静默刷新
                 R.id.menu_content -> page.showContent() // 加载成功
-                R.id.menu_error -> page.showError(force = true) // 加载错误
+                R.id.menu_error -> page.showError(force = true) // 强制加载错误
                 R.id.menu_empty -> page.showEmpty() // 空数据
                 R.id.menu_refresh_success -> page.finish() // 刷新成功
                 R.id.menu_refresh_fail -> page.finish(false) // 刷新失败

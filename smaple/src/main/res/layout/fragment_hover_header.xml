@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="简单完美支持点击事件的悬停列表"
+        android:text="简单支持任意Item任意点击事件的悬停列表"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />
 
