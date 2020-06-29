@@ -24,7 +24,11 @@ import kotlinx.android.synthetic.main.fragment_multi_type.*
 
 class MultiTypeFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_multi_type, container, false)
     }
@@ -49,6 +53,20 @@ class MultiTypeFragment : Fragment() {
 
 
     private fun getData(): MutableList<Any> {
-        return mutableListOf(Model(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model(), Model(), DoubleItemModel(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model())
+        return mutableListOf(
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            DoubleItemModel(),
+            Model(),
+            Model(),
+            Model()
+        )
     }
 }
