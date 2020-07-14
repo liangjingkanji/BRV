@@ -1,8 +1,8 @@
 /*
  * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
  * Project：BRV
- * Author：Drake
- * Date：9/11/19 6:49 PM
+ * Author：drake
+ * Date：7/15/20 3:20 AM
  */
 
 package com.drake.brv.sample.ui.fragment
@@ -27,10 +27,9 @@ class RefreshFragment : Fragment() {
 
     private val total = 2
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-                             ): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_refresh, container, false)
     }
@@ -39,34 +38,37 @@ class RefreshFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }
 
+        /*
+         * 关于自动化分页加载请查看我的网络请求库 Net : https://github.com/liangjingkanji/Net
+         */
         page.onRefresh {
-
             postDelayed({ // 模拟网络请求, 创建假的数据集
                 val data = getData()
                 addData(data) {
                     index < total // 判断是否有更多页
                 }
-                        }, 2000)
+                // addData(data, {
+                //     true // 此处判断是否存在下一页
+                // }, {
+                //     false // 此处判断是否显示空布局
+                // })
+            }, 2000)
 
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
 
         }.autoRefresh()
 
-        /*
-         * 关于自动化分页加载请查看我的网络请求库 Net : https://github.com/liangjingkanji/Net
-         */
         initToolbar(page)
     }
 
     private fun getData(): List<Any> {
         return listOf(Model(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model(),
-                      Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model())
+                Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model())
     }
 
 

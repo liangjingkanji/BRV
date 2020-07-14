@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+ * Project：BRV
+ * Author：drake
+ * Date：7/15/20 3:20 AM
+ */
+
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
@@ -17,9 +24,9 @@ import kotlinx.android.synthetic.main.fragment_preload.*
 class PreloadFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_preload, container, false)
     }

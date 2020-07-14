@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+ * Project：BRV
+ * Author：drake
+ * Date：7/15/20 3:20 AM
+ */
+
 apply plugin: "com.android.library"
 
 apply plugin: "kotlin-android"
@@ -42,12 +49,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.1"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 
-
     compileOnly "androidx.recyclerview:recyclerview:$rv_version"
-//    api 'com.github.liangjingkanji:RefreshLayout:1.0'
     api 'com.scwang.smart:refresh-layout-kernel:2.0.0'
-    api "com.github.liangjingkanji:StateLayout:1.0.11"
+    api "com.github.liangjingkanji:StateLayout:1.0.12"
     api 'com.scwang.smart:refresh-footer-classics:2.0.0'
     api 'com.scwang.smart:refresh-header-material:2.0.0'
-
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2018,天下网络科技有限公司 All rights reserved.
-  ~ Project：TX2
-  ~ Author：Nathan
-  ~ Date：5/26/19 10:32 AM
+  ~ Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
+  ~ Project：BRV
+  ~ Author：drake
+  ~ Date：7/15/20 3:20 AM
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
