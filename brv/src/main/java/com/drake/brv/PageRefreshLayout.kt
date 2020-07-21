@@ -53,10 +53,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     // 监听onBindViewHolder事件
     var onBindViewHolderListener = object : OnBindViewHolderListener {
         override fun onBindViewHolder(
-                rv: RecyclerView,
-                adapter: BindingAdapter,
-                holder: BindingAdapter.BindingViewHolder,
-                position: Int
+            rv: RecyclerView,
+            adapter: BindingAdapter,
+            holder: BindingAdapter.BindingViewHolder,
+            position: Int
         ) {
             if (mEnableLoadMore && !mFooterNoMoreData && preloadIndex != -1 && (adapter.itemCount - preloadIndex <= position)) {
                 post {
@@ -114,20 +114,20 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         try {
             stateEnabled =
-                    attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
-                    R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
-                    mEnableLoadMoreWhenContentNotFull
+                R.styleable.SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull,
+                mEnableLoadMoreWhenContentNotFull
             )
 
             emptyLayout =
-                    attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
             errorLayout =
-                    attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
             loadingLayout =
-                    attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
         } finally {
             attributes.recycle()
         }
@@ -205,21 +205,26 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param hasMore 在函数参数中返回布尔类型来判断是否还存在下一页数据, 默认值true表示始终存在
      * @param isEmpty 返回true表示数据为空, 将显示缺省页 -> 空布局, 默认以[data.isNullOrEmpty()]则为空
      */
-    fun addData(data: List<Any?>?,
-                hasMore: BindingAdapter.() -> Boolean = { true },
-                isEmpty: () -> Boolean = { data.isNullOrEmpty() }) {
+    fun addData(
+        data: List<Any?>?,
+        hasMore: BindingAdapter.() -> Boolean = { true },
+        isEmpty: () -> Boolean = { data.isNullOrEmpty() }
+    ) {
 
         val rv = contentView as? RecyclerView
-                 ?: throw UnsupportedOperationException("PageRefreshLayout require content RecyclerView")
+            ?: throw UnsupportedOperationException("PageRefreshLayout require content RecyclerView")
 
         val adapter = rv.adapter as? BindingAdapter
-                      ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
+            ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
 
         val isRefreshState = state == RefreshState.Refreshing
 
         if (isRefreshState) {
             adapter.models = data
-            if (isEmpty()) return
+            if (isEmpty()) {
+                showEmpty()
+                return
+            }
         } else {
             adapter.addModels(data)
         }
