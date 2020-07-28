@@ -61,7 +61,28 @@ class HoverHeaderFragment : Fragment() {
     }
 
     private fun getData(): List<Any> {
-        return listOf(HoverHeaderModel(), Model(), Model(), Model(), HoverHeaderModel(), Model(), Model(), Model(), HoverHeaderModel(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model())
+        return listOf(
+            HoverHeaderModel(),
+            Model(),
+            Model(),
+            Model(),
+            HoverHeaderModel(),
+            Model(),
+            Model(),
+            Model(),
+            HoverHeaderModel(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model(),
+            Model()
+        )
     }
 
 }

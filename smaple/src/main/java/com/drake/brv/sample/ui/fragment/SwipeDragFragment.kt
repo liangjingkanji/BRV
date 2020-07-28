@@ -52,10 +52,10 @@ class SwipeDragFragment : Fragment() {
         return listOf(
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL),
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL),
-            SwipeDragModel(SwipeType.NONE, DragType.NONE), // 不支持拖拽 | 不支持侧滑
-            SwipeDragModel(SwipeType.RIGHT, DragType.NONE), // 不支持拖拽
+            SwipeDragModel(SwipeType.NONE, DragType.NONE), /* 不支持拖拽 | 不支持侧滑*/
+            SwipeDragModel(SwipeType.RIGHT, DragType.NONE), /* 不支持拖拽*/
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL),
-            SwipeDragModel(SwipeType.NONE, DragType.ALL), // 不支持侧滑
+            SwipeDragModel(SwipeType.NONE, DragType.ALL), /* 不支持侧滑*/
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL),
             SwipeDragModel(SwipeType.RIGHT, DragType.ALL)
         )

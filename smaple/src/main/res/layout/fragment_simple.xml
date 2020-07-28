@@ -10,19 +10,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragment.NormalFragment">
+    tools:context=".ui.fragment.SimpleFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="不使用DataBinding创建双向数据绑定列表"
+        android:text="支持三种方式绑定列表数据"
         android:textColor="@color/textDescription"
         android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_normal"
+        android:id="@+id/rv_simple"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

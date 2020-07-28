@@ -25,7 +25,11 @@ import kotlinx.android.synthetic.main.fragment_group.*
 
 class GroupFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_group, container, false)
     }
@@ -44,7 +48,8 @@ class GroupFragment : Fragment() {
             onClick {
                 when (itemViewType) {
                     R.layout.item_nested_group_title, R.layout.item_group_title -> {
-                        val changeCount = if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"
+                        val changeCount =
+                            if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"
                         toast(changeCount)
                     }
                 }
@@ -61,7 +66,8 @@ class GroupFragment : Fragment() {
                 // 第二个分组存在嵌套分组
                 if (i == 0) {
                     val nestedGroupModel = GroupModel().apply {
-                        itemSublist = listOf(NestedGroupModel(), NestedGroupModel(), NestedGroupModel())
+                        itemSublist =
+                            listOf(NestedGroupModel(), NestedGroupModel(), NestedGroupModel())
                     }
                     add(nestedGroupModel)
                     continue

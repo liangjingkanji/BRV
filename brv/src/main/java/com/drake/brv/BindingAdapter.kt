@@ -732,7 +732,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var onExpand: (BindingViewHolder.(Boolean) -> Unit)? = null
 
     // 分组展开和折叠是否启用动画
-    var expandAnimationEnabled: Boolean = true
+    var expandAnimationEnabled = true
 
     fun onExpand(block: BindingViewHolder.(Boolean) -> Unit) {
         this.onExpand = block
@@ -898,7 +898,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
         /**
          * 折叠子项
-         * @param depth 递归展开子项的深度, 如等于-1则代表展开所有子项, 0表示仅展开当前
+         * @param depth 递归折叠子项的深度, 如等于-1则代表展开所有子项, 0表示仅展开当前
          * @return 折叠后减少的条目数量
          */
         fun collapse(@IntRange(from = -1) depth: Int = 0): Int {

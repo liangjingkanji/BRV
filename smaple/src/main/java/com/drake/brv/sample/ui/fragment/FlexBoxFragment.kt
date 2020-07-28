@@ -21,7 +21,11 @@ import kotlinx.android.synthetic.main.fragment_flex_box.*
 
 class FlexBoxFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_flex_box, container, false)
     }
 
@@ -41,7 +45,13 @@ class FlexBoxFragment : Fragment() {
     }
 
     private fun getData(): List<FlexTagModel> {
-        return listOf(FlexTagModel("吴彦祖"), FlexTagModel("金城武"), FlexTagModel("Amber Gao"), FlexTagModel("设计师"), FlexTagModel("肥宅"), FlexTagModel("不识妻美刘强东"))
+        return listOf(
+            FlexTagModel("吴彦祖"),
+            FlexTagModel("金城武"),
+            FlexTagModel("Amber Gao"),
+            FlexTagModel("设计师"),
+            FlexTagModel("肥宅"),
+            FlexTagModel("不识妻美刘强东")
+        )
     }
-
 }

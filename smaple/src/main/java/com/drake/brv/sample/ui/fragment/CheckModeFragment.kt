@@ -22,7 +22,11 @@ import kotlinx.android.synthetic.main.fragment_check_mode.*
 
 class CheckModeFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_check_mode, container, false)
     }
 
@@ -128,22 +132,9 @@ class CheckModeFragment : Fragment() {
     }
 
     private fun getData(): List<CheckModel> {
-        return listOf(
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel(),
-                CheckModel()
-        )
+        return mutableListOf<CheckModel>().apply {
+            for (i in 0..9) add(CheckModel())
+        }
     }
 
 

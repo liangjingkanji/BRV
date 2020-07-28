@@ -9,7 +9,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main.xml"
-    app:startDestination="@id/normal">
+    app:startDestination="@id/simple">
 
     <fragment
         android:id="@+id/multi_type"
@@ -77,8 +77,8 @@
         android:label="预拉取"
         tools:layout="@layout/fragment_up_fetch" />
     <fragment
-        android:id="@+id/normal"
-        android:name="com.drake.brv.sample.ui.fragment.NormalFragment"
-        android:label="普通列表"
-        tools:layout="@layout/fragment_normal" />
+        android:id="@+id/simple"
+        android:name="com.drake.brv.sample.ui.fragment.SimpleFragment"
+        android:label="简单列表"
+        tools:layout="@layout/fragment_simple" />
 </navigation>

@@ -27,9 +27,11 @@ class RefreshFragment : Fragment() {
 
     private val total = 2
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_refresh, container, false)
     }
@@ -67,8 +69,14 @@ class RefreshFragment : Fragment() {
     }
 
     private fun getData(): List<Any> {
-        return listOf(Model(), DoubleItemModel(), DoubleItemModel(), Model(), Model(), Model(),
-                Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model(), Model())
+        return mutableListOf<Any>().apply {
+            for (i in 0..9) {
+                when (i) {
+                    1, 2 -> add(DoubleItemModel())
+                    else -> add(Model())
+                }
+            }
+        }
     }
 
 

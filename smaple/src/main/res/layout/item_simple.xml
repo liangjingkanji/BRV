@@ -20,7 +20,7 @@
 
         <TextView
             tools:text="2"
-            android:id="@+id/tv_normal"
+            android:id="@+id/tv_simple"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
