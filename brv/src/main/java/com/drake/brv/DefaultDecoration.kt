@@ -1,8 +1,17 @@
 /*
- * Copyright (C) 2018, Umbrella CompanyLimited All rights reserved.
- * Project：BRV
- * Author：drake
- * Date：7/15/20 3:20 AM
+ * Copyright (C) 2018 Drake, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.drake.brv
@@ -33,12 +42,11 @@ import kotlin.math.roundToInt
 /**
  * 最强大的分割线工具
  *
- * 完全功能需要配合[BindingAdapter]使用
  * 1. 分隔图片
  * 2. 分隔颜色
  * 3. 分隔间距
  * 4. 回调函数判断间隔
- * 5. 首尾是否显示分隔线, 可以展示表格效果
+ * 5. 首尾是否显示分隔线, 可以展 示表格效果
  * 6. 类型池来指定是否显示分割线
  * 7. 支持全部的LayoutManager, 竖向/横向/网格分割线
  * 8. 优于其他框架, 完美支持均布网格分隔物

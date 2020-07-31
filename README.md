@@ -1,16 +1,18 @@
 ## BRV
 
-[![](https://jitpack.io/v/liangjingkanji/BRV.svg)](https://jitpack.io/#liangjingkanji/BRV) ![](https://img.shields.io/badge/license-MIT-green) <a href="https://jq.qq.com/?_wv=1027&k=vWsXSNBJ"><img src="https://img.shields.io/badge/QQ群-752854893-blue"/></a>
-
-
 
 <p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
 
-<p align="center"><strong>可能是最强大的RecyclerView框架</strong></p>
+<p align="center"><strong>可能是最强大的RecyclerView框架</strong></p><br>
+
+<p align="center">
+<a href="https://jitpack.io/#liangjingkanji/BRV"><img src="https://jitpack.io/v/liangjingkanji/BRV.svg"/></a>
+<img src="https://img.shields.io/badge/license-MIT-green"/>
+<a href="https://jq.qq.com/?_wv=1027&k=vWsXSNBJ"><img src="https://img.shields.io/badge/QQ群-752854893-blue"/></a>
+</p>
 
 
-
-<p align="center"><a href="http://127.0.0.1:8000/multi_type/">使用文档</a></p>
+<p align="center"><a href="http://github.io.liangjingkanji/brv/">使用文档</a></p>
 
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
@@ -19,15 +21,15 @@
 
 ### 特点
 
-1.  简洁代码
-2.  功能全面
-3.  文档详细
-4.  非侵入式
-5.  不创建任何文件
-6.  刷新不闪屏
-7.  数据双向绑定
-8.  DSL作用域
-9.  高扩展性
+-   简洁代码
+-   功能全面
+-   文档详细
+-   非侵入式
+-   不创建任何文件
+-   刷新不闪屏
+-   数据双向绑定
+-   DSL作用域
+-   高扩展性
 
 ### 功能
 
@@ -54,6 +56,25 @@
 - [ ] 无限划动
 
 
+
+在项目根目录的 build.gradle 添加仓库
+
+```groovy
+allprojects {
+    repositories {
+        // ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+
+
+在 module 的 build.gradle 添加依赖
+
+```groovy
+implementation 'com.github.liangjingkanji:BRV:1.3.7'
+```
 
 
 
