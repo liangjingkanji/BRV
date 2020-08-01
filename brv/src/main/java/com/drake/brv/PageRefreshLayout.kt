@@ -102,7 +102,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                     }
                 })
                 layout.scaleY = -1F
-                contentView?.scaleY = -1F
+                mRefreshContent.view.scaleY = -1F
                 refreshFooter?.view?.scaleY = -1F
             } else {
                 setEnableNestedScroll(false)
@@ -216,8 +216,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun addData(
         data: List<Any?>?,
-        hasMore: BindingAdapter.() -> Boolean = { true },
-        isEmpty: () -> Boolean = { data.isNullOrEmpty() }
+        isEmpty: () -> Boolean = { data.isNullOrEmpty() },
+        hasMore: BindingAdapter.() -> Boolean = { true }
     ) {
 
         val rv = contentView as? RecyclerView
@@ -237,8 +237,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } else {
             adapter.addModels(data)
         }
-
-        if (isRefreshState) index = startIndex
 
         val hasMoreResult = adapter.hasMore()
         index += 1
@@ -443,6 +441,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         setNoMoreData(false)
+        index = startIndex
         onRefresh?.invoke(this)
     }
     //</editor-fold>

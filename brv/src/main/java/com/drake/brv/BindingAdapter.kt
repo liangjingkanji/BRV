@@ -273,7 +273,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // </editor-fold>
 
 
-    // <editor-fold desc="动画">
+    // <editor-fold desc="列表动画">
 
     private var itemAnimation: ItemAnimation = AlphaItemAnimation()
     private var lastPosition = -1
@@ -453,7 +453,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     // </editor-fold>
 
 
-    // <editor-fold desc="Model">
+    // <editor-fold desc="数据">
 
     // 数据模型数量(不包含头布局和脚布局)
     val modelCount: Int
@@ -576,7 +576,6 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     //<editor-fold desc="切换模式">
     var toggleMode = false // 是否开启切换模式
         private set
-
 
     /**
      * 切换模式, 切换模式为遍历每个item
@@ -783,14 +782,6 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         return holder.expand(scrollTop, depth)
     }
 
-    fun expandAll() {
-
-    }
-
-    fun collapseAll() {
-
-    }
-
     /**
      * 折叠
      * @param position 指定position的条目折叠
@@ -908,7 +899,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             val itemExpand = getModelOrNull<ItemExpand>()
 
             val realPosition =
-                if (findParentPosition() != previousExpandPosition) {
+                if (singleExpandMode && findParentPosition() != previousExpandPosition) {
                     if (layoutPosition > previousExpandPosition) {
                         layoutPosition - adapter.collapse(previousExpandPosition)
                     } else {

@@ -12,7 +12,8 @@
 </p>
 
 
-<p align="center"><a href="http://github.io.liangjingkanji/brv/">使用文档</a></p>
+
+<p align="center"><a href="http://127.0.0.1:8000/multi_type/">使用文档</a></p>
 
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
@@ -73,7 +74,7 @@ allprojects {
 在 module 的 build.gradle 添加依赖
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.3.8'
+implementation 'com.github.liangjingkanji:BRV:1.3.6'
 ```
 
 

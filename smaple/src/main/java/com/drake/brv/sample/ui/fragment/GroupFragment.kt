@@ -54,8 +54,6 @@ class GroupFragment : Fragment() {
             addType<Model>(R.layout.item_multi_type_simple)
             addFastClickable(R.id.item)
 
-            singleExpandMode = true
-
             onClick {
                 when (itemViewType) {
                     R.layout.item_nested_group_title, R.layout.item_group_title -> {

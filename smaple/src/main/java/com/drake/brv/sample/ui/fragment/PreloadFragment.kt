@@ -33,9 +33,9 @@ import kotlinx.android.synthetic.main.fragment_preload.*
 class PreloadFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_preload, container, false)
     }
@@ -54,7 +54,7 @@ class PreloadFragment : Fragment() {
             postDelayed({
                 val data = getData()
                 addData(data) {
-                    index <= 4
+                    index <= 3
                 }
             }, 1000)
         }.showLoading() //  加载中(缺省页)

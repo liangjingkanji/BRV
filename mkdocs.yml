@@ -1,0 +1,53 @@
+site_name: BRV
+site_author: drake
+site_description: BRV框架文档
+copyright: Copyright &copy; 2016 - 2020 Drake
+
+repo_name: BRV
+repo_url: https://github.com/liangjingkanji/BRV
+
+extra_css:
+  - css/extra.css
+
+docs_dir: 'docs'
+
+theme:
+  name: material
+  custom_dir: docs/material
+
+  font:
+    text: JetBrains Mono
+    code: JetBrains Mono
+  language: zh
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 介绍: 'index.md'
+  - 截图: 'screenshot.md'
+  - 使用: 'use.md'
+  - 多类型: 'multi_type.md'
+  - 监听事件: 'listener.md'
+  - 头脚布局: 'header_footer.md'
+  - 分组: 'group.md'
+  - 悬停: 'hover.md'
+  - 分割线: 'divider.md'
+  - 下拉刷新/上拉加载: 'refresh.md'
+  - 缺省页: 'state.md'
+  - 拉取更多: 'upfetch.md'
+  - 切换模式: 'toggle.md'
+  - 选择模式: 'checked.md'
+  - 伸缩布局: 'flexbox.md'
+  - 拖拽/侧滑: 'drag_swipe.md'
+  - 快捷函数: 'ktx.md'
+  - 网络请求: 'net.md'
