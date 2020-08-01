@@ -12,7 +12,7 @@
 </p>
 
 
-<p align="center"><a href="http://github.io.liangjingkanji/brv/">使用文档</a></p>
+<p align="center"><a href="http://liangjingkanji.github.io/BRV/">使用文档</a></p>
 
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>

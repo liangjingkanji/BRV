@@ -34,7 +34,6 @@ markdown_extensions:
 
 nav:
   - 介绍: 'index.md'
-  - 截图: 'screenshot.md'
   - 使用: 'use.md'
   - 多类型: 'multi_type.md'
   - 监听事件: 'listener.md'
