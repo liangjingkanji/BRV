@@ -6,7 +6,7 @@
 <p align="center">
     <strong>可能是最强大的RecyclerView框架</strong>
     <br>
-    <img src="https://i.imgur.com/BWfU8rt.jpg" width="50%"/>
+    <img src="https://i.imgur.com/G7WYYXb.jpg" width="50%"/>
 </p>
 
 <br>
