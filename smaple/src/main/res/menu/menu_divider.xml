@@ -15,9 +15,22 @@
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="LinearLayoutManager 垂直" />
-    <item android:title="LinearLayoutManager 水平" />
-    <item android:title="GridLayoutManager 垂直" />
-    <item android:title="GridLayoutManager 水平" />
-    <item android:title="GridLayoutManager 网格" />
+    <item
+        android:id="@+id/linearHorizontalFragment"
+        android:title="线性列表-水平分割线" />
+    <item
+        android:id="@+id/linearVerticalDividerFragment"
+        android:title="线性列表-垂直分割线" />
+    <item
+        android:id="@+id/gridHorizontalDividerFragment"
+        android:title="网格列表-水平分割线" />
+    <item
+        android:id="@+id/gridVerticalDividerFragment"
+        android:title="网格列表-垂直分割线" />
+    <item
+        android:id="@+id/gridDividerFragment"
+        android:title="网格列表-网格分割线" />
+    <item
+        android:id="@+id/staggeredDividerFragment"
+        android:title="交错列表-网格分割线" />
 </menu>

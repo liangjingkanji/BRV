@@ -1,91 +1,136 @@
-## BRV
+## 创建一个简单的列表
 
-
-<p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
-
-<p align="center"><strong>可能是最强大的RecyclerView框架</strong></p><br>
-
-<p align="center">
-<a href="https://jitpack.io/#liangjingkanji/BRV"><img src="https://jitpack.io/v/liangjingkanji/BRV.svg"/></a>
-<img src="https://img.shields.io/badge/license-MIT-green"/>
-<a href="https://jq.qq.com/?_wv=1027&k=vWsXSNBJ"><img src="https://img.shields.io/badge/QQ群-752854893-blue"/></a>
-</p>
+```kotlin
+rv_simple.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+}.models = getData()
+```
 
 
 
-<p align="center"><a href="http://127.0.0.1:8000/multi_type/">使用文档</a></p>
+## 列表填充数据
 
-
-<p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
-
-
-
-### 特点
-
--   简洁代码
--   功能全面
--   文档详细
--   非侵入式
--   不创建任何文件
--   刷新不闪屏
--   数据双向绑定
--   DSL作用域
--   高扩展性
-
-### 功能
-
-- [x] 多类型
-- [x] 单一数据模型一对多
-- [x] 多数据模型
-- [x] 添加头布局和脚布局
-- [x] 点击(防抖动)/长按事件
-- [x] 分组(展开折叠/递归层次/展开置顶)
-- [x] 悬停
-- [x] 分割线/均布间隔(支持官方全部的`LayoutManager`)
-- [x] 切换模式
-- [x] 选择模式(多选/单选/全选/取消全选/反选)
-- [x] 拖拽位置
-- [x] 侧滑删除
-- [x] 下拉刷新 | 上拉加载, 扩展SmartRefreshLayout即兼容其所有功能
-- [x] 预拉取索引(UpFetch) | 预加载索引(Preload)
-- [x] 缺省页
-- [x] 自动分页加载
-- [x] 伸缩布局 ([FlexboxLayoutManager](https://github.com/google/flexbox-layout))
-- [x] 可扩展自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于协程实现自动化的并发网络请求
-
-- [ ] 划动多选
-- [ ] 无限划动
+BRV支持三种方式, 灵活使用; 这里提及的Model就等同于数据类/JavaBean/POJO
 
 
 
-在项目根目录的 build.gradle 添加仓库
+### 函数回调
 
-```groovy
-allprojects {
-    repositories {
-        // ...
-        maven { url 'https://jitpack.io' }
+在`onBind`函数中填充数据
+
+```kotlin
+rv_simple.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+    onBind {
+        findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
+    }
+}.models = getData()
+```
+
+
+
+
+
+### 实现接口
+
+通过为Model实现接口`ItemBind`, 实现函数`onBind`, 在该函数中填充数据; 这种方式在很多框架中被应用, 例如BRVAH, 但是我不推荐这种视图在Model中绑定的方式, 因为Model应当只存储数据和计算逻辑, 不应包含任何UI
+
+```kotlin
+class SimpleModel(var name: String = "BRV") : ItemBind {
+
+    override fun onBind(holder: BindingAdapter.BindingViewHolder) {
+        val appName = holder.context.getString(R.string.app_name)
+        holder.findView<TextView>(R.id.tv_simple).text = appName + itemPosition
     }
 }
 ```
 
 
 
-在 module 的 build.gradle 添加依赖
+
+
+### DataBinding
+
+通过DataBinding数据绑定形式自动填充数据, 推荐, 这是代码量最少最灵活的一种方式
+
+
+
+第一步启用DataBinding, 在module中的build.gradle文件中
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.3.6'
+android {
+	/.../
+    dataBinding {
+        enabled = true
+    }
+}
 ```
 
 
 
-## MIT
+第二部应当在Application中注册一个全局的ID(记住在`AndroidManifest`注册该Application)
 
-```
-Copyright (C) 2018 Drake, Inc.
+```kotlin
+class App : Application() {
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    override fun onCreate() {
+        super.onCreate()
+
+        // 初始化BindingAdapter的默认绑定ID
+        BRV.modelId = BR.m
+    }
+}
 ```
+
+
+
+第三步, 在Item的布局文件中创建变量, 然后绑定变量到视图控件上
+
+```xml hl_lines="24"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.SimpleModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/item"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_card"
+            android:foreground="?selectableItemBackgroundBorderless">
+
+            <TextView
+				android:id="@+id/tv_simple"
+                android:text="@{String.valueOf(m.name)}"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>
+```
+选中行是databinding使用方法
+
+这种方式创建列表无需处理数据
+
+```kotlin
+rv_simple.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+}.models = getData()
+```
+
+
+
+别看文档中第三种方式复杂, 实际第三种方式代码量最少, 同时最解耦
 

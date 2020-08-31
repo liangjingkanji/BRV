@@ -16,59 +16,63 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/simple"
-        android:icon="@drawable/ic_group"
+        android:id="@+id/simpleFragment"
+        android:icon="@drawable/ic_list"
         android:title="简单列表" />
     <item
-        android:id="@+id/group"
+        android:id="@+id/groupFragment"
         android:icon="@drawable/ic_group"
         android:title="分组" />
     <item
-        android:id="@+id/hover"
+        android:id="@+id/hoverHeaderFragment"
         android:icon="@drawable/ic_hover_header"
         android:title="悬停" />
     <item
-        android:id="@+id/grid_divider"
+        android:id="@+id/nav_divider.xml"
         android:icon="@drawable/ic_tree_structure"
         android:title="分割线" />
     <item
-        android:id="@+id/refresh"
+        android:id="@+id/refreshFragment"
         android:icon="@drawable/ic_refresh"
         android:title="刷新列表" />
     <item
-        android:id="@+id/multi_type"
+        android:id="@+id/multiTypeFragment"
         android:icon="@drawable/ic_multi_type"
         android:title="多类型" />
     <item
-        android:id="@+id/one_more_multi_type"
+        android:id="@+id/oneMoreTypeFragment"
         android:icon="@drawable/ic_one_more"
         android:title="一对多" />
     <item
-        android:id="@+id/header_footer"
+        android:id="@+id/headerFooterFragment"
         android:icon="@drawable/ic_head_footer"
         android:title="头|脚布局" />
     <item
-        android:id="@+id/check_mode"
+        android:id="@+id/checkModeFragment"
         android:icon="@drawable/ic_check_mode"
         android:title="选择模式" />
     <item
-        android:id="@+id/flex_box"
+        android:id="@+id/flexBoxFragment"
         android:icon="@drawable/ic_flex_box"
         android:title="伸缩布局" />
     <item
-        android:id="@+id/swipe_drag"
-        android:icon="@drawable/ic_touch"
-        android:title="侧滑|拖拽" />
+        android:id="@+id/swipeFragment"
+        android:icon="@drawable/ic_swipe"
+        android:title="侧滑" />
     <item
-        android:id="@+id/state"
+        android:id="@+id/dragFragment"
+        android:icon="@drawable/ic_touch"
+        android:title="拖拽" />
+    <item
+        android:id="@+id/stateLayoutFragment"
         android:icon="@drawable/ic_state"
         android:title="缺省状态" />
     <item
-        android:id="@+id/preload"
+        android:id="@+id/preloadFragment"
         android:icon="@drawable/ic_preload"
         android:title="预加载" />
     <item
-        android:id="@+id/up_fetch"
+        android:id="@+id/upFetchFragment"
         android:icon="@drawable/ic_up_fetch"
         android:title="预拉取" />
 </menu>

@@ -17,12 +17,8 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import android.view.*
 import androidx.fragment.app.Fragment
-import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
@@ -47,15 +43,13 @@ class RefreshFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
 
         rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }
 
-        /*
-         * 关于自动化分页加载请查看我的网络请求库 Net : https://github.com/liangjingkanji/Net
-         */
         page.onRefresh {
             postDelayed({ // 模拟网络请求, 创建假的数据集
                 val data = getData()
@@ -70,10 +64,7 @@ class RefreshFragment : Fragment() {
             }, 2000)
 
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
-
         }.autoRefresh()
-
-        initToolbar(page)
     }
 
     private fun getData(): List<Any> {
@@ -87,25 +78,22 @@ class RefreshFragment : Fragment() {
         }
     }
 
-
-    private fun initToolbar(page: PageRefreshLayout) {
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.inflateMenu(R.menu.menu_refresh)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_loading -> page.showLoading()  // 加载中
-                R.id.menu_pull_refresh -> page.autoRefresh() // 下拉刷新
-                R.id.menu_refresh -> page.refresh() // 静默刷新
-                R.id.menu_content -> page.showContent() // 加载成功
-                R.id.menu_error -> page.showError(force = true) // 强制加载错误
-                R.id.menu_empty -> page.showEmpty() // 空数据
-                R.id.menu_refresh_success -> page.finish() // 刷新成功
-                R.id.menu_refresh_fail -> page.finish(false) // 刷新失败
-                R.id.menu_no_load_more -> page.finishLoadMoreWithNoMoreData() // 没有更多数据
-            }
-            true
-        }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_refresh, menu)
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_loading -> page.showLoading()  // 加载中
+            R.id.menu_pull_refresh -> page.autoRefresh() // 下拉刷新
+            R.id.menu_refresh -> page.refresh() // 静默刷新
+            R.id.menu_content -> page.showContent() // 加载成功
+            R.id.menu_error -> page.showError(force = true) // 强制加载错误
+            R.id.menu_empty -> page.showEmpty() // 空数据
+            R.id.menu_refresh_success -> page.finish() // 刷新成功
+            R.id.menu_refresh_fail -> page.finish(false) // 刷新失败
+            R.id.menu_no_load_more -> page.finishLoadMoreWithNoMoreData() // 没有更多数据
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

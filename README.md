@@ -3,17 +3,23 @@
 
 <p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
 
-<p align="center"><strong>可能是最强大的RecyclerView框架</strong></p><br>
+<p align="center">
+    <strong>可能是最强大的RecyclerView框架</strong>
+    <br>
+    <img src="https://i.imgur.com/BWfU8rt.jpg" width="50%"/>
+</p>
+
+<br>
 
 <p align="center">
 <a href="https://jitpack.io/#liangjingkanji/BRV"><img src="https://jitpack.io/v/liangjingkanji/BRV.svg"/></a>
+<img src="https://img.shields.io/badge/language-kotlin-orange.svg"/>
 <img src="https://img.shields.io/badge/license-Apache-blue"/>
 <a href="https://jq.qq.com/?_wv=1027&k=vWsXSNBJ"><img src="https://img.shields.io/badge/QQ群-752854893-blue"/></a>
 </p>
 
 
 <p align="center"><a href="http://liangjingkanji.github.io/BRV/">使用文档</a></p>
-
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
 
@@ -23,13 +29,14 @@
 
 -   简洁代码
 -   功能全面
--   文档详细
 -   非侵入式
 -   不创建任何文件
 -   刷新不闪屏
--   数据双向绑定
+-   数据双向绑定(DataBinding)
 -   DSL作用域
 -   高扩展性
+-   文档详细
+-   Demo简单
 
 ### 功能
 
@@ -38,7 +45,7 @@
 - [x] 多数据模型
 - [x] 添加头布局和脚布局
 - [x] 点击(防抖动)/长按事件
-- [x] 分组(展开折叠/递归层次/展开置顶)
+- [x] 分组(展开折叠/递归层次/展开置顶/单一展开模式)
 - [x] 悬停
 - [x] 分割线/均布间隔(支持官方全部的`LayoutManager`)
 - [x] 切换模式
@@ -52,8 +59,6 @@
 - [x] 伸缩布局 ([FlexboxLayoutManager](https://github.com/google/flexbox-layout))
 - [x] 可扩展自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于协程实现自动化的并发网络请求
 
-- [ ] 划动多选
-- [ ] 无限划动
 
 
 

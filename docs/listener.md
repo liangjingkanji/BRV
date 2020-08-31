@@ -19,12 +19,11 @@ fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Uni
 ```
 
 
-
 ## 示例
 
 通过使用Item的布局文件中的控件id可以设置点击事件或者长按事件
 
-```
+```kotlin
 rv_normal.linear().setup {
     
     addType<NormalModel>(R.layout.item_multi_type_normal)

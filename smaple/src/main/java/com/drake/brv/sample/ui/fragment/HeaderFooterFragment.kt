@@ -17,10 +17,7 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.Model
@@ -39,6 +36,7 @@ class HeaderFooterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
 
         rv_header_footer.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
@@ -51,35 +49,27 @@ class HeaderFooterFragment : Fragment() {
             addType<Header>(R.layout.item_multi_type_header)
             addType<Footer>(R.layout.item_multi_type_footer)
         }.models = getData()
-
-        initToolbar()
     }
 
     private fun getData(): List<Model> {
         return listOf(Model(), Model())
     }
 
-    var index = 0
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_header_footer, menu)
+    }
 
-
-    private fun initToolbar() {
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val adapter = rv_header_footer.bindingAdapter
-
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.inflateMenu(R.menu.menu_header_footer)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_add_header -> adapter.addHeader(Header(), animation = true)
-                R.id.menu_remove_header -> adapter.removeHeaderAt(animation = true)  // 删除头布局
-                R.id.menu_clear_header -> adapter.clearHeader(animation = true) // 清除头布局
-                R.id.menu_add_footer -> adapter.addFooter(Footer(), animation = true)  // 添加脚布局
-                R.id.menu_remove_footer -> adapter.removeFooterAt(animation = true)  // 删除脚布局
-                R.id.menu_clear_footer -> adapter.clearFooter(animation = true)  // 清除脚布局
-            }
-            true
+        when (item.itemId) {
+            R.id.menu_add_header -> adapter.addHeader(Header(), animation = true)
+            R.id.menu_remove_header -> adapter.removeHeaderAt(animation = true)  // 删除头布局
+            R.id.menu_clear_header -> adapter.clearHeader(animation = true) // 清除头布局
+            R.id.menu_add_footer -> adapter.addFooter(Footer(), animation = true)  // 添加脚布局
+            R.id.menu_remove_footer -> adapter.removeFooterAt(animation = true)  // 删除脚布局
+            R.id.menu_clear_footer -> adapter.clearFooter(animation = true)  // 清除脚布局
         }
-
+        return super.onOptionsItemSelected(item)
     }
 
     class Header

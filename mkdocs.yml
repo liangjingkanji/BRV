@@ -15,38 +15,43 @@ theme:
   name: material
   custom_dir: docs/material
 
-  font:
-    text: JetBrains Mono
-    code: JetBrains Mono
+  palette:
+    scheme: 'drake'
+
+  font: false
+
   language: zh
 
 markdown_extensions:
   - toc:
       permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.tabbed
 
-  - pymdownx.tasklist:
-      custom_checkbox: true
-
 nav:
-  - 介绍: 'index.md'
-  - 使用: 'use.md'
-  - 多类型: 'multi_type.md'
-  - 监听事件: 'listener.md'
-  - 头脚布局: 'header_footer.md'
-  - 分组: 'group.md'
-  - 悬停: 'hover.md'
-  - 分割线: 'divider.md'
-  - 下拉刷新/上拉加载: 'refresh.md'
-  - 缺省页: 'state.md'
-  - 拉取更多: 'upfetch.md'
-  - 切换模式: 'toggle.md'
-  - 选择模式: 'checked.md'
-  - 伸缩布局: 'flexbox.md'
-  - 拖拽/侧滑: 'drag_swipe.md'
-  - 快捷函数: 'ktx.md'
-  - 网络请求: 'net.md'
+  - 使用: index.md
+  - 多类型: multi_type.md
+  - 监听事件: listener.md
+  - 头脚布局: header_footer.md
+  - 分组: group.md
+  - 悬停: hover.md
+  - 分割线:
+      - 线性列表: divider-linear.md
+      - 网格列表: divider-grid.md
+      - 瀑布流列表: divider-staggerd.md
+  - 缺省页: state.md
+  - 下拉刷新/上拉加载: refresh.md
+  - 拉取更多: upfetch.md
+  - 切换模式: toggle.md
+  - 选择模式: checked.md
+  - 伸缩布局: flexbox.md
+  - 拖拽: drag.md
+  - 侧滑: swipe.md
+  - 扩展函数: extension.md
+  - 网络请求: net.md
+  - 1.x文档: api/brv/index.md

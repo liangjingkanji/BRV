@@ -37,13 +37,15 @@ import com.scwang.smart.refresh.layout.simple.SimpleBoundaryDecider
 
 
 /**
- * 扩展SmartRefreshLayout
+ * 扩展SmartRefreshLayout的功能
  *
  * 功能:
  * - 下拉刷新u
  * - 上拉加载
- * - 预加载(含下拉预加载)
- * - 分页加载
+ * - 拉取
+ * - 预加载
+ * - 预拉取
+ * - 自动分页
  * - 添加数据
  * - 缺省状态页
  */

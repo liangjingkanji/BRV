@@ -20,31 +20,25 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.drake.brv.sample.R
-import com.drake.statusbar.immersiveDark
+import com.drake.statusbar.darkMode
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_drawer_content.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
+        darkMode(true)
 
-        immersiveDark(toolbar)
-
-        fragment_nav.findNavController().addOnDestinationChangedListener { _, destination, _ ->
-            toolbar.title = destination.label
-            toolbar.menu.clear()
-        }
-
-        toolbar.setNavigationOnClickListener { drawer.openDrawer(GravityCompat.START) }
-        nav.setupWithNavController(fragment_nav.findNavController())
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return false
+        toolbar.setupWithNavController(
+            nav.findNavController(),
+            AppBarConfiguration(nav_view.menu, drawer)
+        )
+        nav_view.setupWithNavController(nav.findNavController())
     }
 
     override fun onBackPressed() {

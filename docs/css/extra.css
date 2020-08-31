@@ -1,7 +1,110 @@
-.md-typeset {
-	font-size: 12px !important;
+:root > * {
+    --md-code-fg-color:                #A9B7C6;
+    --md-code-bg-color:                #2b2b2b;
+    --md-code-hl-color:                #214283;
+    --md-code-hl-number-color:         #82AAFF;
+    --md-code-hl-special-color:        #A9B7C6;
+    --md-code-hl-function-color:       #FFE64C;
+    --md-code-hl-constant-color:       hsla(250, 70%, 64%, 1);
+    --md-code-hl-keyword-color:        #CC7832;
+    --md-code-hl-string-color:         #6A8759;
+    --md-code-hl-name-color:           var(--md-code-fg-color);
+    --md-code-hl-operator-color:       #A9B7C6;
+    --md-code-hl-punctuation-color:    #A9B7C6;
+    --md-code-hl-comment-color:        #787878;
+    --md-code-hl-generic-color:        #A9B7C6;
+    --md-code-hl-variable-color:       #A9B7C6;
+
+    --highlighting-color:  #d63200;
+    --highlighting-color-opacity:  #d6320022;
+    --md-admonition-fg-color: #333333;
 }
 
-body {
-	-webkit-font-smoothing: auto !important;
+[data-md-color-scheme="drake"] {
+    --md-primary-fg-color:        #d63200;
+    --md-primary-fg-color--light: #d63200;
+    --md-primary-fg-color--dark:  #d63200;
+    --md-accent-fg-color:        #d63200;
+    --md-accent-fg-color--light: #d63200;
+    --md-accent-fg-color--dark:  #d63200;
+}
+
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/eot/JetBrainsMono-Regular.eot') format('embedded-opentype'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff/JetBrainsMono-Regular.woff') format('woff'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, input {
+    font-family: "JetBrains Mono", -apple-system, Helvetica, Arial, sans-serif;
+}
+
+pre, code, kbd {
+    font-family: "JetBrains Mono", Consolas, Menlo, monospace;
+}
+
+* {
+    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.md-typeset, .md-nav__item {
+    color: var(--md-admonition-fg-color) !important;
+    font-size: 12px !important;
+}
+.md-typeset code {
+    font-size: inherit;
+}
+.md-typeset .admonition, .md-typeset details {
+    font-size: inherit;
+}
+
+.md-typeset .admonition, .md-typeset details {
+    border-left: .2rem solid var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color) !important;
+}
+.md-typeset .note>.admonition-title::before, .md-typeset .note>summary::before {
+    background-color: var(--md-primary-fg-color);
+}
+.md-typeset .note>.admonition-title, .md-typeset .note>summary {
+    background-color: var(--highlighting-color-opacity);
+}
+
+p code, article > code, li > code, td > code, th > code, a > code {
+    background-color: rgb(0,0,0,0) !important;
+    color: var(--highlighting-color) !important;
+    margin: 0 2px;
+}
+
+.md-content a {
+    color: var(--highlighting-color) !important;
+    text-decoration: underline;
+    margin: 0 2px;
+}
+
+h1, h2, h3, h4, h5, h6, .md-header-nav__title {
+    font-weight: bold !important;
+}
+
+.md-typeset code {
+    border-radius: 2px !important;
+    border: none !important;
+}
+
+.md-typeset pre>code {
+    padding: 0.8em 0.8em;
+}
+
+img {
+    border-radius: 2px;
+    margin: 4px 0;
+}
+
+.md-typeset .tabbed-set>input:checked+label {
+    margin-bottom: 4px;
 }

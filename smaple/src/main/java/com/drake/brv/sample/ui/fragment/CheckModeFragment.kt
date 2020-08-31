@@ -39,7 +39,6 @@ class CheckModeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_check_mode, container, false)
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 

@@ -1,4 +1,5 @@
-要求配和Google的开源项目[flexbox-layout](https://github.com/google/flexbox-layout)
+
+BRV对于伸缩布局的实现可以自行添加Google开源库 [flexbox-layout](https://github.com/google/flexbox-layout)
 
 添加依赖
 
@@ -12,6 +13,9 @@ dependencies {
 
 然后创建列表
 
+
+<img src="https://i.imgur.com/DJcEZ0j.png" width="50%"/>
+
 ```kotlin
 rv.layoutManager = FlexboxLayoutManager(activity)
 
@@ -21,5 +25,3 @@ rv.setup {
 ```
 
 
-
-<img src="https://i.imgur.com/ppWt6gH.png" alt="image-20200801192305799" width="50%" />

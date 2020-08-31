@@ -21,14 +21,14 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.BindingAdapter
-import com.drake.brv.item.ItemTouchable
+import com.drake.brv.item.ItemDrag
+import com.drake.brv.item.ItemSwipe
 import java.util.*
 
 /**
  * 默认实现拖拽替换和侧滑删除
  */
 open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelper.Callback() {
-
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val layoutPosition = viewHolder.layoutPosition
@@ -37,34 +37,28 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
     }
 
     override fun getMovementFlags(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder
     ): Int {
-
         var drag = 0
         var swipe = 0
-
         if (viewHolder is BindingAdapter.BindingViewHolder) {
             val model = viewHolder.getModel<Any>()
-
-            if (model is ItemTouchable) {
-                drag = model.itemDrag
-                swipe = model.itemSwipe
-            }
+            if (model is ItemDrag) drag = model.itemOrientationDrag
+            if (model is ItemSwipe) swipe = model.itemOrientationSwipe
         }
-
         return makeMovementFlags(drag, swipe)
     }
 
 
     override fun onChildDraw(
-            c: Canvas,
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            dX: Float,
-            dY: Float,
-            actionState: Int,
-            isCurrentlyActive: Boolean
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
     ) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
@@ -75,13 +69,13 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
                 swipeView.translationX = dX
             } else {
                 super.onChildDraw(
-                        c,
-                        recyclerView,
-                        viewHolder,
-                        dX,
-                        dY,
-                        actionState,
-                        isCurrentlyActive
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
                 )
             }
         } else {
@@ -97,16 +91,16 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
      * 拖拽替换成功
      */
     open fun onDrag(
-            source: BindingAdapter.BindingViewHolder,
-            target: BindingAdapter.BindingViewHolder
+        source: BindingAdapter.BindingViewHolder,
+        target: BindingAdapter.BindingViewHolder
     ) {
 
     }
 
     override fun onMove(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
     ): Boolean {
 
         val currentPosition = recyclerView.getChildLayoutPosition(viewHolder.itemView)
@@ -115,12 +109,12 @@ open class DefaultItemTouchCallback(var adapter: BindingAdapter) : ItemTouchHelp
         if (target is BindingAdapter.BindingViewHolder) {
 
             val model = target.getModel<Any>()
-            if (model is ItemTouchable && model.itemDrag != 0) {
+            if (model is ItemDrag && model.itemOrientationDrag != 0) {
                 adapter.notifyItemMoved(currentPosition, targetPosition)
                 Collections.swap(
-                        adapter.models,
-                        currentPosition - adapter.headerCount,
-                        targetPosition - adapter.headerCount
+                    adapter.models,
+                    currentPosition - adapter.headerCount,
+                    targetPosition - adapter.headerCount
                 )
 
                 onDrag(viewHolder as BindingAdapter.BindingViewHolder, target)

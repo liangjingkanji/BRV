@@ -152,7 +152,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
         return (typePool[modelClass]?.invoke(model, position)
-            ?: throw NoSuchPropertyException("Please add item model type : ${model.javaClass.simpleName}"))
+            ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -162,7 +162,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         if (context == null) {
             context = recyclerView.context
         }
-        if (touchEnable) itemTouchHelper.attachToRecyclerView(recyclerView)
+        itemTouchHelper?.attachToRecyclerView(recyclerView)
     }
 
 
@@ -203,23 +203,14 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private val longClickableIds = ArrayList<Int>()
 
     // 自定义ItemTouchHelper即可设置该属性
-    var itemTouchHelper = ItemTouchHelper(DefaultItemTouchCallback(this))
+    var itemTouchHelper: ItemTouchHelper? = ItemTouchHelper(DefaultItemTouchCallback(this))
+        set(value) {
+            if (value == null) field?.attachToRecyclerView(null) else value.attachToRecyclerView(rv)
+            field = value
+        }
 
     // 防抖间隔时间, 单位毫秒
     var clickPeriod: Long = 500
-
-    // 是否启用触控
-    var touchEnable = false
-        set(value) {
-            field = value
-            if (value) {
-                rv?.apply {
-                    itemTouchHelper.attachToRecyclerView(this)
-                }
-            } else {
-                itemTouchHelper.attachToRecyclerView(null)
-            }
-        }
 
     /**
      * 添加点击事件
@@ -863,7 +854,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
 
             onBind?.invoke(this@BindingViewHolder)
-            viewDataBinding?.setVariable(modelId, model)
+            try {
+                viewDataBinding?.setVariable(modelId, model)
+            } catch (e: Exception) {
+                val message =
+                    "${e.message} at file(${context.resources.getResourceEntryName(itemViewType)}.xml:0)"
+                Exception(message).printStackTrace()
+            }
             viewDataBinding?.executePendingBindings()
         }
 

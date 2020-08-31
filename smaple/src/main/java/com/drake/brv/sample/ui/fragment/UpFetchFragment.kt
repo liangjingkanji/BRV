@@ -17,7 +17,6 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,6 @@ class UpFetchFragment : Fragment() {
             // 模拟网络请求2秒后成功
             postDelayed({
                 val data = getData()
-                Log.d("日志", "网络请求")
                 addData(data) { index <= 2 }
             }, 1000)
         }.showLoading() //  加载中(缺省页)

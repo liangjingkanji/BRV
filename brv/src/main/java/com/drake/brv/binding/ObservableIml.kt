@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.drake.brv
+package com.drake.brv.binding
 
 import androidx.databinding.Bindable
 import androidx.databinding.Observable

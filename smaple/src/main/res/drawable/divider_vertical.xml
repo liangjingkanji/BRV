@@ -15,6 +15,6 @@
   -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/colorPrimary" />
-    <size android:width="5px" />
+    <solid android:color="@color/dividerDecoration" />
+    <size android:width="5dp" />
 </shape>

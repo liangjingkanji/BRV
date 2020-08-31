@@ -18,18 +18,16 @@ package com.drake.brv.utils
 
 import android.app.Dialog
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.drake.brv.BindingAdapter
 import com.drake.brv.DefaultDecoration
+import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
-
 
 val RecyclerView.bindingAdapter
     get() = adapter as? BindingAdapter ?: throw NullPointerException("BindingAdapter is null")
@@ -64,6 +62,13 @@ fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAda
 
 
 //<editor-fold desc="布局管理器">
+
+/**
+ * 创建[HoverLinearLayoutManager]  线性列表
+ * @param orientation 列表方向
+ * @param reverseLayout 是否反转列表
+ * @param scrollEnabled 是否允许滚动
+ */
 fun RecyclerView.linear(
     @RecyclerView.Orientation orientation: Int = VERTICAL,
     reverseLayout: Boolean = false,
@@ -77,6 +82,13 @@ fun RecyclerView.linear(
     return this
 }
 
+/**
+ * 创建[HoverGridLayoutManager] 网格列表
+ * @param spanCount 网格跨度数量
+ * @param orientation 列表方向
+ * @param reverseLayout 是否反转
+ * @param scrollEnabled 是否允许滚动
+ */
 fun RecyclerView.grid(
     spanCount: Int = 1,
     @RecyclerView.Orientation orientation: Int = VERTICAL,
@@ -90,6 +102,12 @@ fun RecyclerView.grid(
     return this
 }
 
+/**
+ * 创建[HoverStaggeredGridLayoutManager] 交错列表
+ * @param orientation 列表方向
+ * @param spanCount 网格跨度数量
+ * @param scrollEnabled 是否允许滚动
+ */
 fun RecyclerView.staggered(
     spanCount: Int,
     @RecyclerView.Orientation orientation: Int = VERTICAL,
@@ -105,6 +123,7 @@ fun RecyclerView.staggered(
 
 /**
  * 函数配置分割线
+ * 具体配置参数查看[DefaultDecoration]
  */
 fun RecyclerView.divider(
     block: DefaultDecoration.() -> Unit
@@ -116,58 +135,16 @@ fun RecyclerView.divider(
 
 /**
  * 指定Drawable资源为分割线, 分割线的间距和宽度应在资源文件中配置
+ * @param drawable 描述分割线的drawable
+ * @param orientation 分割线方向, 仅[androidx.recyclerview.widget.GridLayoutManager]需要使用此参数, 其他LayoutManager都是根据其方向自动推断
  */
 fun RecyclerView.divider(
-    @DrawableRes drawable: Int
+    @DrawableRes drawable: Int,
+    orientation: DividerOrientation = DividerOrientation.HORIZONTAL
 ): RecyclerView {
     return divider {
         setDrawable(drawable)
-    }
-}
-
-/**
- * 指定颜色为分割线
- * @param color 颜色
- * @param marginStart 左或上间距
- * @param marginEnd 右或下间距
- * @param width 分割线宽度
- */
-fun RecyclerView.dividerColor(
-    @ColorInt color: Int,
-    marginStart: Int = 0,
-    marginEnd: Int = 0,
-    width: Int = 1
-): RecyclerView {
-    return divider {
-        setColor(color)
-        setMargin(marginStart, marginEnd)
-        setDivider(width)
-    }
-}
-
-fun RecyclerView.dividerColor(
-    color: String,
-    marginStart: Int = 0,
-    marginEnd: Int = 0,
-    width: Int = 1
-): RecyclerView {
-    return divider {
-        setColor(color)
-        setMargin(marginStart, marginEnd)
-        setDivider(width)
-    }
-}
-
-fun RecyclerView.dividerColorRes(
-    @ColorRes color: Int,
-    marginStart: Int = 0,
-    marginEnd: Int = 0,
-    width: Int = 1
-): RecyclerView {
-    return divider {
-        setColorRes(color)
-        setMargin(marginStart, marginEnd)
-        setDivider(width)
+        this.orientation = orientation
     }
 }
 //</editor-fold>
@@ -175,7 +152,7 @@ fun RecyclerView.dividerColorRes(
 
 //<editor-fold desc="对话框">
 /**
- *  对话框设置一个列表组件
+ *  快速为对话框创建一个列表
  */
 fun Dialog.brv(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
     val context = context

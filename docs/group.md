@@ -1,8 +1,17 @@
 
+<p align="center"><img src="https://i.imgur.com/DQdEHQG.gif" width="50%"/></p>
 
-### 使用
+## 特点
 
-分组要求Model实现[ItemExpand](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/item/ItemExpand.kt)
+- 展开/折叠
+- 动画
+- 递归展开/折叠
+- 展开后置顶
+- 列表始终仅展开一个分组
+- 查找上层分组
+
+## 使用
+要求Model实现[ItemExpand](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/item/ItemExpand.kt)
 
 ```kotlin
 class GroupModel : ItemExpand {
@@ -16,8 +25,6 @@ class GroupModel : ItemExpand {
     override var itemSublist: List<Any?>? = listOf(Model(), Model(), Model(), Model())
 }
 ```
-
-可能你的数据结构不存在
 
 
 
@@ -37,13 +44,9 @@ rv_group.linear().setup {
 }.models = getData()
 ```
 
+## 分组相关函数
 
-
-
-
-### 函数
-
-[BindingAdapter](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/BindingAdapter.kt)控制展开和折叠
+[BindingAdapter] 分组相关函数
 
 ```kotlin
 var expandAnimationEnabled = true
@@ -72,4 +75,17 @@ fun expandOrCollapse(
     ): Int
 // 展开或者折叠指定条目(根据当前条目状态决定是折叠/展开)
 ```
+<br>
+[BindingViewHolder] 分组相关函数
 
+```kotlin
+fun expand(scrollTop: Boolean = true, @IntRange(from = -1) depth: Int = 0): Int
+fun collapse(@IntRange(from = -1) depth: Int = 0): Int
+fun expandOrCollapse(scrollTop: Boolean = false, @IntRange(from = -1) depth: Int = 0): Int
+// 展开和折叠
+
+fun findParentPosition(): Int
+// 查找上层分组索引位置, 如果没有返回-1
+fun findParentViewHolder(): BindingViewHolder?
+// 查找上层分组ViewHolder, 如果没有返回Null
+```

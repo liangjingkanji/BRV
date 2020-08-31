@@ -1,15 +1,16 @@
-BRV的下拉刷新和上拉加载扩展自 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout), 支持其所有特性
+<img src="https://i.imgur.com/LZh90KX.gif" width="50%"/>
 
-![refresh](https://tva1.sinaimg.cn/large/006y8mN6gy1g73mt2hy6xg308m0iox3o.gif)
+[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
+而BRV的下拉刷新和上拉加载正是扩展的SmartRefreshLayout , 支持其所有特性并且还增加了新的功能.
 
 
-
+<br>
 本库已引入SmartRefreshLayout, 无需再次引入
-
 ```groovy
-implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
+api 'com.scwang.smart:refresh-layout-kernel:2.0.0'
+api 'com.scwang.smart:refresh-footer-classics:2.0.0'
+api 'com.scwang.smart:refresh-header-material:2.0.0'
 ```
-
 
 
 SmartRefreshLayout的指定的刷新头和刷新脚布局请分别依赖(其库如此设计)
@@ -17,8 +18,6 @@ SmartRefreshLayout的指定的刷新头和刷新脚布局请分别依赖(其库�
 可选配置的刷新头布局和脚布局
 
 ```groovy
-implementation 'androidx.appcompat:appcompat:1.0.0'                 //必须 1.0.0 以上
-
 implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
 implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
 implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
@@ -29,17 +28,13 @@ implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲�
 implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载 (内置)
 ```
 
-
-
+## 初始化
 刷新布局要求必须先初始化, 推荐在Application中
 
 ```
 SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(this) }
 SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
 ```
-
-
-
 
 
 ## PageRefreshLayout
@@ -53,11 +48,30 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
 5.  拉取加载更多
 6.  预加载 / 预拉取
 
-### 创建方式
+### 包住RecyclerView
 
 支持两种方式创建, 推荐布局包裹, 
 
+=== "布局包裹"
 
+    ```xml
+    <com.drake.brv.PageRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:id="@+id/page"
+        app:stateEnabled="true"
+        android:layout_height="match_parent"
+        tools:context="com.drake.brv.sample.fragment.RefreshFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </com.drake.brv.PageRefreshLayout>
+    ```
 
 === "代码包裹"
 
@@ -65,27 +79,24 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
     val page = rv.page()
     ```
 
-=== "布局包裹"
+### 创建列表
+```kotlin
+rv.linear().setup {
+    addType<Model>(R.layout.item_multi_type_simple)
+    addType<DoubleItemModel>(R.layout.item_multi_type_two)
+}
 
-    ```xml
-    <com.drake.brv.PageRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:id="@+id/page"
-    app:stateEnabled="true"
-    android:layout_height="match_parent"
-    tools:context="com.drake.brv.sample.fragment.RefreshFragment">
-    
-    <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-    
-    </com.drake.brv.PageRefreshLayout>
-    ```
+page.onRefresh {
+    postDelayed({ // 模拟网络请求2秒后成功, 创建假的数据集
+        val data = getData()
+        addData(data) {
+            index < total // 判断是否有更多页
+        }
+    }, 2000)
+}.autoRefresh()
+```
 
-
+1. `onRefresh`即每次刷新/上拉加载都会执行的函数
 
 ### 监听状态
 
@@ -101,9 +112,7 @@ page.onLoadMore {
 }
 ```
 
-1.  如果`onLoadMore` 不调用则上拉加载同样也会回调`onRefresh`函数, 因为下拉刷新和上拉加载在一般接口中定义只是分页字段不一样
-2.  
-
+1.  如果不调用`onLoadMore`则上拉加载同样也会执行`onRefresh`函数, 因为下拉刷新和上拉加载在项目中一般是同一个接口只是分页字段值不同而已
 
 
 ### 缺省页

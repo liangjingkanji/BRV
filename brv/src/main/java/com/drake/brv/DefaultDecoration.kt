@@ -23,7 +23,6 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -34,7 +33,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.drake.brv.annotaion.Orientation
+import com.drake.brv.DefaultDecoration.Edge.Companion.computeEdge
+import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.item.ItemExpand
 import kotlin.math.ceil
 import kotlin.math.roundToInt
@@ -51,16 +51,22 @@ import kotlin.math.roundToInt
  * 7. 支持全部的LayoutManager, 竖向/横向/网格分割线
  * 8. 优于其他框架, 完美支持均布网格分隔物
  * 9. 支持分组条目的分割线
+ *
+ * @property startVisible 在[GridLayoutManager]/[StaggeredGridLayoutManager]中控制上下是否显示分割线, 在[LinearLayoutManager]中控制顶部是否显示分割线
+ * @property endVisible 在[GridLayoutManager]/[StaggeredGridLayoutManager]中控制左右是否显示分割线, 在[LinearLayoutManager]中控制底部是否显示分割线
+ * @property expandVisible 控制[ItemExpand.itemExpand]为true的情况下是否显示分割线, 但当你配置[onEnabled]后则无效, 因为此字段为其默认实现所用
+ * @property orientation 分割线的方向, 仅支持[GridLayoutManager], 其他LayoutManager都是根据其方向自动适应
+ * @property typePool 集合内包含的类型才显示分割线
  */
 class DefaultDecoration constructor(private val context: Context) : RecyclerView.ItemDecoration() {
 
     /**
-     * 第一个条目之前是否显示分割线, 当处于[Orientation.GRID] 时水平方向顶端和末端是否显示分割线
+     * 第一个条目之前是否显示分割线, 当处于[DividerOrientation.GRID] 时水平方向顶端和末端是否显示分割线
      */
     var startVisible = false
 
     /**
-     * 最后一个条目是否显示分割线, 当处于[Orientation.GRID] 时垂直方向顶端和末端是否显示分割线
+     * 最后一个条目是否显示分割线, 当处于[DividerOrientation.GRID] 时垂直方向顶端和末端是否显示分割线
      */
     var endVisible = false
 
@@ -69,12 +75,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      */
     var expandVisible = false
 
-    /**
-     * 当使用[LinearLayoutManager]或[StaggeredGridLayoutManager]时该属性无需设置
-     * [LinearLayoutManager]仅根据[LinearLayoutManager.getOrientation]来自动指定分割线方向
-     * [StaggeredGridLayoutManager]仅可使用网格[Orientation.GRID]分割线
-     */
-    var orientation = Orientation.HORIZONTAL
+    var orientation = DividerOrientation.HORIZONTAL
 
     private var size = 1
     private var marginStart = 0
@@ -83,23 +84,24 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     //<editor-fold desc="类型">
 
-    /**
-     * 集合内包含的类型才显示分割线
-     */
     var typePool: MutableList<Int>? = null
 
     private var onEnabled: (BindingAdapter.BindingViewHolder.() -> Boolean)? = null
 
     /**
-     * 根据[BindingAdapter.BindingViewHolder]来判断是否启用分割线
+     * 根据回调函数来决定是否启用分割线
+     *
+     * @param block 函数返回值决定参数[BindingAdapter.BindingViewHolder]对应的Item是否启用分割线
      */
-    fun onEnabled(enabled: BindingAdapter.BindingViewHolder.() -> Boolean) {
-        this.onEnabled = enabled
+    fun onEnabled(block: BindingAdapter.BindingViewHolder.() -> Boolean) {
+        this.onEnabled = block
     }
 
     /**
      * 添加类型后只允许该类型的条目显示分割线
      * 从未添加类型则默认为允许全部条目显示分割线
+     *
+     * @param typeArray 布局Id, 对应[BindingAdapter.addType]中的参数
      */
     fun addType(@LayoutRes vararg typeArray: Int) {
         if (typePool == null) {
@@ -115,15 +117,16 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     //</editor-fold>
 
     //<editor-fold desc="图片">
+
     /**
-     * 设置图片
+     * 将图片作为分割线, 图片宽高即分割线宽高
      */
     fun setDrawable(drawable: Drawable) {
         divider = drawable
     }
 
     /**
-     * 自定义分隔物
+     * 将图片作为分割线, 图片宽高即分割线宽高
      */
     fun setDrawable(@DrawableRes drawableRes: Int) {
         val drawable = ContextCompat.getDrawable(context, drawableRes)
@@ -134,14 +137,18 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     //<editor-fold desc="颜色">
     /**
-     * 设置颜色
+     * 设置分割线颜色, 如果不设置分割线宽度[setDivider]则分割线宽度默认为1px
+     * 所谓分割线宽度指的是分割线的粗细, 而非水平宽度
      */
     fun setColor(@ColorInt color: Int) {
         divider = ColorDrawable(color)
     }
 
     /**
-     * 设置十六进制的颜色值
+     * 设置分割线颜色, 如果不设置分割线宽度[setDivider]则分割线宽度默认为1px
+     * 所谓分割线宽度指的是分割线的粗细, 而非水平宽度
+     *
+     * @param color 16进制的颜色值字符串
      */
     fun setColor(color: String) {
         val parseColor = Color.parseColor(color)
@@ -149,7 +156,10 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     }
 
     /**
-     * 设置颜色资源文件
+     * 设置分割线颜色, 如果不设置分割线宽度[setDivider]则分割线宽度默认为1px
+     * 所谓分割线宽度指的是分割线的粗细, 而非水平宽度
+     *
+     * @param color 颜色资源Id
      */
     fun setColorRes(@ColorRes color: Int) {
         val colorRes = ContextCompat.getColor(context, color)
@@ -160,12 +170,20 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     /**
      * 分割线背景色
-     * 分割线有时候会存在间距或属于虚线, 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
+     * 分割线有时候会存在间距(例如配置[setMargin])或属于虚线, 这个时候暴露出来的是RecyclerView的背景色, 所以我们可以设置一个背景色来调整
+     * 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
      */
     fun setBackground(@ColorInt color: Int) {
         background = color
     }
 
+    /**
+     * 分割线背景色
+     * 分割线有时候会存在间距(例如配置[setMargin])或属于虚线, 这个时候暴露出来的是RecyclerView的背景色, 所以我们可以设置一个背景色来调整
+     * 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
+     *
+     * @param colorString 颜色的16进制字符串
+     */
     fun setBackground(colorString: String) {
         try {
             background = Color.parseColor(colorString)
@@ -174,6 +192,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
         }
     }
 
+    /**
+     * 分割线背景色
+     * 分割线有时候会存在间距(例如配置[setMargin])或属于虚线, 这个时候暴露出来的是RecyclerView的背景色, 所以我们可以设置一个背景色来调整
+     * 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
+     *
+     */
     fun setBackgroundRes(@ColorRes color: Int) {
         background = ContextCompat.getColor(context, color)
     }
@@ -185,9 +209,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     /**
      * 设置分割线宽度
      * 如果使用[setDrawable]则无效
+     * @param width 分割线的尺寸 (分割线垂直时为宽, 水平时为高 )
+     * @param dp 是否单位为dp, 默认为false即使用像素单位
      */
-    fun setDivider(width: Int = 1, pixel: Boolean = false) {
-        if (pixel) {
+    fun setDivider(width: Int = 1, dp: Boolean = false) {
+        if (!dp) {
             this.size = width
         } else {
             val density = context.resources.displayMetrics.density
@@ -197,10 +223,13 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     /**
      * 设置分隔左右或上下间距, 依据分割线为垂直或者水平决定具体方向间距
-     * 未设置分割线颜色[setColor]或者图片[setDrawable]同样有效
+     *
+     * @param start 分割线为水平则是左间距, 垂直则为上间距
+     * @param end 分割线为水平则是右间距, 垂直则为下间距
+     * @param dp 是否单位为dp, 默认为true即使用dp单位
      */
-    fun setMargin(start: Int = 0, end: Int = 0, pixel: Boolean = false) {
-        if (pixel) {
+    fun setMargin(start: Int = 0, end: Int = 0, dp: Boolean = true) {
+        if (!dp) {
             this.marginStart = start
             this.marginEnd = end
         } else {
@@ -212,6 +241,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     //</editor-fold>
 
 
+    //<editor-fold desc="覆写">
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -248,17 +278,17 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
         adjustOrientation(layoutManager)
 
         when (orientation) {
-            Orientation.HORIZONTAL -> {
+            DividerOrientation.HORIZONTAL -> {
                 val top = if (startVisible && edge.top) height else 0
                 val bottom = if ((endVisible && edge.bottom) || !edge.bottom) height else 0
                 outRect.set(0, top, 0, bottom)
             }
-            Orientation.VERTICAL -> {
+            DividerOrientation.VERTICAL -> {
                 val left = if (startVisible && edge.left) width else 0
                 val right = if ((endVisible && edge.right) || !edge.right) width else 0
                 outRect.set(left, 0, right, 0)
             }
-            Orientation.GRID -> {
+            DividerOrientation.GRID -> {
 
                 val spanCount = when (layoutManager) {
                     is GridLayoutManager -> layoutManager.spanCount
@@ -335,6 +365,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
         }
     }
 
+
     override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         val layoutManager = parent.layoutManager
         if (layoutManager == null || divider == null) return
@@ -342,11 +373,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
         adjustOrientation(layoutManager)
 
         when (orientation) {
-            Orientation.HORIZONTAL -> drawHorizontal(canvas, parent)
-            Orientation.VERTICAL -> drawVertical(canvas, parent)
-            Orientation.GRID -> drawGrid(canvas, parent)
+            DividerOrientation.HORIZONTAL -> drawHorizontal(canvas, parent)
+            DividerOrientation.VERTICAL -> drawVertical(canvas, parent)
+            DividerOrientation.GRID -> drawGrid(canvas, parent)
         }
     }
+    //</editor-fold>
 
     /**
      * 自动调整不同布局管理器应该对应的[orientation]
@@ -354,9 +386,9 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     private fun adjustOrientation(layoutManager: RecyclerView.LayoutManager) {
         if (layoutManager !is GridLayoutManager && layoutManager is LinearLayoutManager) {
             orientation =
-                if ((layoutManager as? LinearLayoutManager)?.orientation == RecyclerView.VERTICAL) Orientation.HORIZONTAL else Orientation.VERTICAL
+                if ((layoutManager as? LinearLayoutManager)?.orientation == RecyclerView.VERTICAL) DividerOrientation.HORIZONTAL else DividerOrientation.VERTICAL
         } else if (layoutManager is StaggeredGridLayoutManager) {
-            orientation = Orientation.GRID
+            orientation = DividerOrientation.GRID
         }
     }
 
@@ -387,13 +419,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 if (!enabled) continue@loop
             }
 
-            Log.d("日志", "(DefaultDecoration.kt:372)    ")
-
             val position = parent.getChildAdapterPosition(child)
             val layoutManager = parent.layoutManager ?: return
             val edge = computeEdge(position, layoutManager)
 
-            if (orientation != Orientation.GRID && !endVisible && edge.bottom) {
+            if (orientation != DividerOrientation.GRID && !endVisible && edge.bottom) {
                 continue@loop
             }
 
@@ -471,10 +501,9 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
             val position = parent.getChildAdapterPosition(child)
             val layoutManager = parent.layoutManager ?: return
-
             val edge = computeEdge(position, layoutManager)
 
-            if (orientation != Orientation.GRID && !endVisible && edge.right) {
+            if (orientation != DividerOrientation.GRID && !endVisible && edge.right) {
                 continue@loop
             }
 
@@ -568,13 +597,22 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     child.bottom + layoutParams.bottomMargin
                 )
 
-
                 // top
-                if (!endVisible && edge.right) {
-                    setBounds(bounds.left - width, bounds.top - height, bounds.right, bounds.top)
+                if (!endVisible && !edge.top && edge.right) {
+                    setBounds(
+                        bounds.left - width,
+                        bounds.top - height,
+                        bounds.right - marginEnd,
+                        bounds.top
+                    )
                     draw(canvas)
-                } else if (!endVisible && edge.left) {
-                    setBounds(bounds.left, bounds.top - height, bounds.right + width, bounds.top)
+                } else if (!endVisible && !edge.top && edge.left) {
+                    setBounds(
+                        bounds.left + marginStart,
+                        bounds.top - height,
+                        bounds.right + width,
+                        bounds.top
+                    )
                     draw(canvas)
                 } else if (!edge.top || (startVisible && edge.top)) {
                     setBounds(
@@ -587,17 +625,17 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 }
 
                 // bottom
-                if (!endVisible && edge.right) {
+                if (!endVisible && !edge.bottom && edge.right) {
                     setBounds(
                         bounds.left - width,
                         bounds.bottom,
-                        bounds.right,
+                        bounds.right - marginEnd,
                         bounds.bottom + height
                     )
                     draw(canvas)
-                } else if (!endVisible && edge.left) {
+                } else if (!endVisible && !edge.bottom && edge.left) {
                     setBounds(
-                        bounds.left,
+                        bounds.left + marginStart,
                         bounds.bottom,
                         bounds.right + width,
                         bounds.bottom + height
@@ -614,13 +652,45 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 }
 
                 // left
-                if (!edge.left || (endVisible && edge.left)) {
+                if (edge.top && !endVisible) {
+                    setBounds(
+                        bounds.left - width,
+                        bounds.top + marginStart,
+                        bounds.left,
+                        bounds.bottom
+                    )
+                    draw(canvas)
+                } else if (edge.bottom && !endVisible) {
+                    setBounds(
+                        bounds.left - width,
+                        bounds.top,
+                        bounds.left,
+                        bounds.bottom - marginEnd
+                    )
+                    draw(canvas)
+                } else if (!edge.left || (endVisible && edge.left)) {
                     setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom)
                     draw(canvas)
                 }
 
                 // right
-                if (!edge.right || (endVisible && edge.right)) {
+                if (edge.top && !endVisible) {
+                    setBounds(
+                        bounds.right,
+                        bounds.top + marginStart,
+                        bounds.right + width,
+                        bounds.bottom
+                    )
+                    draw(canvas)
+                } else if (edge.bottom && !endVisible) {
+                    setBounds(
+                        bounds.right,
+                        bounds.top,
+                        bounds.right + width,
+                        bounds.bottom - marginEnd
+                    )
+                    draw(canvas)
+                } else if (!edge.right || (endVisible && edge.right)) {
                     setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom)
                     draw(canvas)
                 }
@@ -632,77 +702,92 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     /**
      * 列表条目是否靠近边缘的结算结果
+     *
+     * @param left 是否靠左
+     * @param right 是否靠左
+     * @param top 是否靠顶
+     * @param bottom 是否靠底
      */
     data class Edge(
         var left: Boolean = false,
         var top: Boolean = false,
         var right: Boolean = false,
         var bottom: Boolean = false
-    )
+    ) {
 
-    companion object {
+        companion object {
 
-        /**
-         * 计算指定条目的边缘位置
-         */
-        fun computeEdge(position: Int, layoutManager: RecyclerView.LayoutManager): Edge {
+            /**
+             * 计算指定条目的边缘位置
+             * @param position 指定计算的Item索引
+             * @param layoutManager 当前列表的LayoutManager
+             */
+            fun computeEdge(
+                position: Int,
+                layoutManager: RecyclerView.LayoutManager
+            ): Edge {
 
-            val index = position + 1
-            val itemCount = layoutManager.itemCount
+                val index = position + 1
+                val itemCount = layoutManager.itemCount
 
-            return Edge().apply {
-                when (layoutManager) {
-                    is StaggeredGridLayoutManager -> {
-                        val spanCount = layoutManager.spanCount
-                        val spanIndex =
-                            (layoutManager.findViewByPosition(position)!!.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex + 1
+                return Edge().apply {
+                    when (layoutManager) {
+                        is StaggeredGridLayoutManager -> {
+                            val spanCount = layoutManager.spanCount
+                            val spanIndex =
+                                (layoutManager.findViewByPosition(position)!!.layoutParams
+                                        as StaggeredGridLayoutManager.LayoutParams).spanIndex + 1
 
-                        if (layoutManager.orientation == RecyclerView.VERTICAL) {
-                            left = spanIndex == 1
-                            right = spanIndex == spanCount
-                            top = index <= spanCount
-                            bottom = index > itemCount - spanCount
-                        } else {
-                            left = index <= spanCount
-                            right = index > itemCount - spanCount
-                            top = spanIndex == 1
-                            bottom = spanIndex == spanCount
+                            if (layoutManager.orientation == RecyclerView.VERTICAL) {
+                                left = spanIndex == 1
+                                right = spanIndex == spanCount
+                                top = index <= spanCount
+                                bottom = index > itemCount - spanCount
+                            } else {
+                                left = index <= spanCount
+                                right = index > itemCount - spanCount
+                                top = spanIndex == 1
+                                bottom = spanIndex == spanCount
+                            }
                         }
-                    }
-                    is GridLayoutManager -> {
-                        val spanSizeLookup = layoutManager.spanSizeLookup
-                        val spanCount = layoutManager.spanCount
-                        val spanGroupIndex = spanSizeLookup.getSpanGroupIndex(position, spanCount)
-                        val spanIndex = spanSizeLookup.getSpanIndex(position, spanCount) + 1
-                        val spanSize = spanSizeLookup.getSpanSize(position)
+                        is GridLayoutManager -> {
+                            val spanSizeLookup = layoutManager.spanSizeLookup
+                            val spanCount = layoutManager.spanCount
+                            val spanGroupIndex =
+                                spanSizeLookup.getSpanGroupIndex(position, spanCount)
+                            val maxSpanGroupIndex = ceil(itemCount / spanCount.toFloat()).toInt()
+                            val spanIndex = spanSizeLookup.getSpanIndex(position, spanCount) + 1
+                            val spanSize = spanSizeLookup.getSpanSize(position)
 
-                        if (layoutManager.orientation == RecyclerView.VERTICAL) {
-                            left = spanIndex == 1
-                            right = spanIndex + spanSize - 1 == spanCount || index == itemCount
-                            top =
-                                index <= spanCount && spanGroupIndex == spanSizeLookup.getSpanGroupIndex(
-                                    position - 1,
-                                    spanCount
-                                )
-                            bottom = index > itemCount - spanCount
-                        } else {
-                            left = spanGroupIndex == 0
-                            right = index > itemCount - spanCount
-                            top = spanIndex == 1
-                            bottom = spanIndex + spanSize - 1 == spanCount
+                            if (layoutManager.orientation == RecyclerView.VERTICAL) {
+                                left = spanIndex == 1
+                                right = spanIndex + spanSize - 1 == spanCount
+                                top =
+                                    index <= spanCount && spanGroupIndex == spanSizeLookup.getSpanGroupIndex(
+                                        position - 1,
+                                        spanCount
+                                    )
+                                bottom = spanGroupIndex == maxSpanGroupIndex - 1
+
+                            } else {
+                                left = spanGroupIndex == 0
+                                right = spanGroupIndex == maxSpanGroupIndex - 1
+                                top = spanIndex == 1
+                                bottom = spanIndex + spanSize - 1 == spanCount
+                            }
                         }
-                    }
-                    is LinearLayoutManager -> {
-                        if (layoutManager.orientation == RecyclerView.VERTICAL) {
-                            left = true
-                            right = true
-                            top = index == 1
-                            bottom = index == itemCount
-                        } else {
-                            left = index == 1
-                            right = index == itemCount
-                            top = true
-                            bottom = true
+                        is LinearLayoutManager -> {
+                            if (layoutManager.orientation == RecyclerView.VERTICAL) {
+                                left = true
+                                right = true
+                                top = index == 1
+                                bottom = index == itemCount
+                            } else {
+                                left = index == 1
+                                right = index == itemCount
+                                top = true
+                                bottom = true
+                            }
                         }
                     }
                 }

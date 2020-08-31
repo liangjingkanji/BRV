@@ -17,18 +17,13 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import com.drake.statelayout.StateLayout
-import com.drake.statelayout.state
 import kotlinx.android.synthetic.main.fragment_state_layout.*
 
 
@@ -38,22 +33,18 @@ class StateLayoutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_state_layout, container, false)
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        setHasOptionsMenu(true)
         rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }.models = getData()
 
-        val state = state()
-
-        initToolbar(state)
     }
 
     private fun getData(): List<Any> {
@@ -74,19 +65,20 @@ class StateLayoutFragment : Fragment() {
         )
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_state, menu)
+    }
 
-    private fun initToolbar(state: StateLayout) {
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        toolbar.inflateMenu(R.menu.menu_state)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_loading -> state.showLoading()  // 加载中
-                R.id.menu_content -> state.showContent() // 加载成功
-                R.id.menu_error -> state.showError() // 加载错误
-                R.id.menu_empty -> state.showEmpty() // 加载失败
-            }
-            true
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_loading -> state.showLoading()  // 加载中
+            R.id.menu_content -> state.showContent() // 加载成功
+            R.id.menu_error -> state.showError() // 加载错误
+            R.id.menu_empty -> state.showEmpty() // 加载失败
         }
+        return super.onOptionsItemSelected(item)
     }
 
 }

@@ -24,15 +24,33 @@
     android:orientation="vertical"
     tools:openDrawer="start">
 
-    <include layout="@layout/layout_drawer_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="56dp" />
+
+        <fragment
+            android:id="@+id/nav"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="false"
+            app:navGraph="@navigation/nav_main" />
+
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/nav"
-        app:headerLayout="@layout/layout_drawer_nav_header"
         android:layout_gravity="start"
+        app:headerLayout="@layout/layout_drawer_nav_header"
         app:menu="@menu/menu_main" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
