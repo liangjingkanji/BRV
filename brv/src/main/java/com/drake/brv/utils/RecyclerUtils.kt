@@ -154,7 +154,7 @@ fun RecyclerView.divider(
 /**
  *  快速为对话框创建一个列表
  */
-fun Dialog.brv(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
+fun Dialog.setup(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
     val context = context
     val recyclerView = RecyclerView(context)
     recyclerView.setup(block)

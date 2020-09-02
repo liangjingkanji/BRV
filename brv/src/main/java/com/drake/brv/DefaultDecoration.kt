@@ -297,28 +297,19 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 }
 
                 val spanGroupCount = when (layoutManager) {
-                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(
-                        state.itemCount - 1,
-                        spanCount
-                    ) + 1
+                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(state.itemCount - 1, spanCount) + 1
                     is StaggeredGridLayoutManager -> ceil(state.itemCount / spanCount.toFloat()).toInt()
                     else -> 1
                 }
 
                 val spanIndex = when (layoutManager) {
-                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanIndex(
-                        position,
-                        spanCount
-                    )
+                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanIndex(position, spanCount)
                     is StaggeredGridLayoutManager -> (layoutManager.findViewByPosition(position)!!.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
                     else -> 0
                 }
 
                 val spanGroupIndex = when (layoutManager) {
-                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(
-                        position,
-                        spanCount
-                    )
+                    is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanGroupIndex(position, spanCount)
                     is StaggeredGridLayoutManager -> ceil((position + 1) / spanCount.toFloat()).toInt() - 1
                     else -> 0
                 }
