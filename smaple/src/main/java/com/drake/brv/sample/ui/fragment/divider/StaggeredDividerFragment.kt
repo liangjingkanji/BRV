@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DividerModel
 import com.drake.brv.utils.divider
@@ -40,8 +41,12 @@ class StaggeredDividerFragment : BaseDividerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        rv.staggered(3).divider(R.drawable.divider_horizontal).setup {
-            addType<DividerModel>(R.layout.item_divider_horizontal)
+        rv.staggered(3, RecyclerView.VERTICAL).divider {
+            setDrawable(R.drawable.divider_horizontal)
+            startVisible = true
+            endVisible = true
+        }.setup {
+            addType<DividerModel>(R.layout.item_divider_vertical)
             onBind {
                 // 设置动态高度
                 val layoutParams = itemView.layoutParams

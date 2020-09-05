@@ -31,19 +31,17 @@ import kotlinx.android.synthetic.main.fragment_grid_divider.*
 
 class GridVerticalDividerFragment : BaseDividerFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_grid_vertical_divider, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        rv.grid(3, RecyclerView.HORIZONTAL)
-            .divider(R.drawable.divider_vertical, DividerOrientation.VERTICAL).setup {
-            addType<DividerModel>(R.layout.item_divider_vertical)
+        rv.grid(3, RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical, DividerOrientation.VERTICAL).setup {
+            addType<DividerModel>(R.layout.item_divider_horizontal)
         }.models = getData()
     }
 

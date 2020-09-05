@@ -24,8 +24,8 @@
     </data>
 
     <FrameLayout
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:background="#40b883">
 
         <FrameLayout

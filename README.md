@@ -6,6 +6,8 @@
 <p align="center">
     <strong>可能是最强大的RecyclerView框架</strong>
     <br>
+    <p align="center"><a href="http://liangjingkanji.github.io/BRV/">使用文档</a></p>
+    <br>
     <img src="https://i.imgur.com/G7WYYXb.jpg" width="50%"/>
 </p>
 
@@ -19,10 +21,7 @@
 </p>
 
 
-<p align="center"><a href="http://liangjingkanji.github.io/BRV/">使用文档</a></p>
-
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
-
 
 
 ### 特点
@@ -78,7 +77,7 @@ allprojects {
 在 module 的 build.gradle 添加依赖
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.3.9'
+implementation 'com.github.liangjingkanji:BRV:1.3.10'
 ```
 
 

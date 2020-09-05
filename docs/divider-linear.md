@@ -45,3 +45,26 @@ rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
 - 如果水平分割线, 则Drawable的宽度值无效(实际宽度值为RecyclerView的宽)
 - 如果垂直分割线, 则Drawable的高度值无效(实际分割线高度为RecyclerView高度)
 
+
+## 边缘分割线
+
+| 字段 | 描述 |
+|-|-|
+| [startVisible](api/brv/com.drake.brv/-default-decoration/start-visible.md) | 是否显示首部分割线 |
+| [endVisible](api/brv/com.drake.brv/-default-decoration/end-visible.md) | 是否显示尾部分割线 |
+| [includeVisible](api/brv/com.drake.brv/-default-decoration/include-visible.md) | 是否显示首尾分割线 |
+
+<img src="https://i.imgur.com/Z1vsVjW.png" width="40%"/>
+
+通过两个字段可以控制首尾是否显示分割线
+
+```kotlin hl_lines="3 4"
+rv.linear().divider {
+    setDrawable(R.drawable.divider_horizontal)
+    startVisible = true
+    endVisible = true
+}.setup {
+    addType<DividerModel>(R.layout.item_divider_horizontal)
+}.models = getData()
+```
+

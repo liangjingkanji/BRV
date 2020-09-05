@@ -117,29 +117,25 @@ page.onLoadMore {
 
 ### 缺省页
 
-触发刷新状态(两者都会回调函数onRefresh)
+触发刷新状态(都会回调函数onRefresh)
 
-1. `autoRefesh`  下拉刷新
-2. `showLoading`  加载Loading缺省页, 当然得先设置`loadingLayout`(或者读取`StateConfig`全局缺省页配置)
-3. `refresh` 静默刷新, 不会触发任何动画
+| 函数 | 描述 |
+|-|-|
+| autoRefresh | 显示下拉刷新动画 |
+| showLoading | 显示加载中缺省页, 当然得先设置`loadingLayout`(或者读取`StateConfig`全局缺省页配置) |
+| refresh | 静默刷新(无动画) |
 
-
-
-这3种方式都会导致索引`index=startIndex`重置.
-
-
+!!! note
+    这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
 
 缺省页状态控制
 
-```
-showEmpty()
-showError()
-showContent
-showLoading()
-```
-
-
-
+| 函数 | 描述 |
+|-|-|
+| showLoading | 显示加载中缺省页 |
+| showEmpty | 显示空缺省页 |
+| showError | 显示错误缺省页 |
+| showContent | 显示内容页 |
 
 
 **配置全局缺省页**
@@ -148,9 +144,9 @@ showLoading()
 
 ```kotlin
 /**
-         *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
-         *  具体查看 https://github.com/liangjingkanji/StateLayout
-         */
+ *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
+ *  具体查看 https://github.com/liangjingkanji/StateLayout
+ */
 StateConfig.apply {
   emptyLayout = R.layout.layout_empty
   errorLayout = R.layout.layout_error
@@ -212,7 +208,7 @@ pageLayout.onRefresh {
   // 下拉刷新和上拉加载都会执行这个网络请求, 除非另外设置onLoadMore
   get("/path") {
       param("key", "value")
-      param("page", pageLayout.index) // 这里使用框架提供的属性
+      param("page", index) // 这里使用框架提供的属性
   }.page(this) {
     // 该回调函数参数返回一个布尔类型用于判断是否存在下一页, 决定上拉加载的状态. 以及当前属于刷新还是加载更多条目
     addData(data){ adapter.itemCount < data.count // 这里是判断是否由更多页, 具体逻辑根据接口定义 } 
@@ -220,7 +216,5 @@ pageLayout.onRefresh {
 }
 ```
 
-
-
-这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).  
+这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).
 

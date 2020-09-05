@@ -29,10 +29,9 @@ import kotlinx.android.synthetic.main.fragment_linear_horizontal_divider.*
 
 class LinearHorizontalDividerFragment : BaseDividerFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_linear_horizontal_divider, container, false)
     }
 
@@ -40,13 +39,13 @@ class LinearHorizontalDividerFragment : BaseDividerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         rv.linear().divider(R.drawable.divider_horizontal).setup {
-            addType<DividerModel>(R.layout.item_divider_horizontal)
+            addType<DividerModel>(R.layout.item_divider_vertical)
         }.models = getData()
     }
 
     fun getData(): MutableList<Any> {
         return mutableListOf<Any>().apply {
-            for (i in 0..10) {
+            for (i in 0..3) {
                 add(DividerModel())
             }
         }

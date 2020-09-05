@@ -43,8 +43,9 @@ class GridDividerFragment : BaseDividerFragment() {
         rv.grid(3).divider {
             setDrawable(R.drawable.divider_horizontal)
             orientation = DividerOrientation.GRID
+            includeVisible = true
         }.setup {
-            addType<DividerModel>(R.layout.item_divider_horizontal)
+            addType<DividerModel>(R.layout.item_divider_vertical)
         }.models = getData()
     }
 
