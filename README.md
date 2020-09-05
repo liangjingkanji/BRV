@@ -78,7 +78,7 @@ allprojects {
 在 module 的 build.gradle 添加依赖
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.3.8'
+implementation 'com.github.liangjingkanji:BRV:1.3.9'
 ```
 
 
