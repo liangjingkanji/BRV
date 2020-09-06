@@ -1,0 +1,22 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:com.drake.brv.listener$throttleClick(android.view.View, kotlin.Long, kotlin.Function1((android.view.View, kotlin.Unit)))com.drake.brv.listener/android.view.-view/throttle-click.md
+$dokka.location:com.drake.brv.utils$addModels(androidx.recyclerview.widget.RecyclerView, kotlin.collections.List((kotlin.Any)), kotlin.Boolean)com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/add-models.md
+$dokka.location:com.drake.brv.utils$bindingAdapter#androidx.recyclerview.widget.RecyclerViewcom.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/binding-adapter.md
+$dokka.location:com.drake.brv.utils$divider(androidx.recyclerview.widget.RecyclerView, kotlin.Function1((com.drake.brv.DefaultDecoration, kotlin.Unit)))com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/divider.md
+$dokka.location:com.drake.brv.utils$divider(androidx.recyclerview.widget.RecyclerView, kotlin.Int, com.drake.brv.annotaion.DividerOrientation)com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/divider.md
+$dokka.location:com.drake.brv.utils$grid(androidx.recyclerview.widget.RecyclerView, kotlin.Int, kotlin.Int, kotlin.Boolean, kotlin.Boolean)com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/grid.md
+$dokka.location:com.drake.brv.utils$linear(androidx.recyclerview.widget.RecyclerView, kotlin.Int, kotlin.Boolean, kotlin.Boolean)com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/linear.md
+$dokka.location:com.drake.brv.utils$models#androidx.recyclerview.widget.RecyclerViewcom.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/models.md
+$dokka.location:com.drake.brv.utils$page(android.view.View, kotlin.Boolean, kotlin.Boolean)com.drake.brv.utils/android.view.-view/page.md
+$dokka.location:com.drake.brv.utils$setup(android.app.Dialog, kotlin.Function2((com.drake.brv.BindingAdapter, androidx.recyclerview.widget.RecyclerView, kotlin.Unit)))com.drake.brv.utils/android.app.-dialog/setup.md
+$dokka.location:com.drake.brv.utils$setup(androidx.recyclerview.widget.RecyclerView, kotlin.Function2((com.drake.brv.BindingAdapter, androidx.recyclerview.widget.RecyclerView, kotlin.Unit)))com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/setup.md
+$dokka.location:com.drake.brv.utils$staggered(androidx.recyclerview.widget.RecyclerView, kotlin.Int, kotlin.Int, kotlin.Boolean)com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/staggered.md
+com.drake.brv
+com.drake.brv.animation
+com.drake.brv.annotaion
+com.drake.brv.binding
+com.drake.brv.item
+com.drake.brv.layoutmanager
+com.drake.brv.listener
+com.drake.brv.utils

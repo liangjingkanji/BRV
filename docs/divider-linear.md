@@ -1,6 +1,6 @@
 ## 水平分割线
 
-<p align="center"><img src="https://i.imgur.com/tZUyUIZ.png" width="40%" /></p>
+<img src="https://i.imgur.com/tZUyUIZ.png" width="40%" />
 
 创建一个`drawable`文件来描述分隔线, 其具备复用的特点
 
@@ -23,7 +23,7 @@ rv_grid.linear().divider(R.drawable.divider_horizontal).setup {
 
 ## 垂直分割线
 
-<p align="center"><img src="https://i.imgur.com/6AvAiAJ.png" width="40%"/></p>
+<img src="https://i.imgur.com/6AvAiAJ.png" width="40%"/>
 
 创建Drawable作为分隔线
 ```xml

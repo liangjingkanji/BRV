@@ -1,22 +1,12 @@
 ## 函数
 
-```kotlin
-fun addClickable(@IdRes vararg id: Int)
-// 防抖动, 500毫秒内无法重复点击
-
-fun addFastClickable(@IdRes vararg id: Int)
-// 不存在防抖动, 可以快速点击
-
-fun addLongClickable(@IdRes vararg id: Int)
-// 长按事件
-
-fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit)
-// 点击事件回调
-// id: 即将调用addClickable先添加Id再设置监听函数
-
-fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit)
-// 长按事件回调
-```
+| 函数 | 描述 |
+|-|-|
+| [addClickable](api/brv/com.drake.brv/-binding-adapter/add-clickable.md) | 添加需要监听点击事件的视图Id (500毫秒防抖动) |
+| [addFastClickable](api/brv/com.drake.brv/-binding-adapter/add-fast-clickable.md) | 添加需要监听点击事件的视图Id |
+| [addLongClickable](api/brv/com.drake.brv/-binding-adapter/add-long-clickable.md) | 添加需要监听长按事件的视图Id |
+| [onClick](api/brv/com.drake.brv/-binding-adapter/on-click.md) | 添加点击事件监听器, 同时支持参数添加Id |
+| [onLongClick](api/brv/com.drake.brv/-binding-adapter/on-long-click.md) | 添加长按事件监听器, 同时支持参数添加Id |
 
 
 ## 示例

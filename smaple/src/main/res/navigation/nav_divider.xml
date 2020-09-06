@@ -18,7 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_divider.xml"
-    app:startDestination="@id/staggeredDividerFragment">
+    app:startDestination="@id/linearHorizontalFragment">
 
     <fragment
         android:id="@+id/linearHorizontalFragment"

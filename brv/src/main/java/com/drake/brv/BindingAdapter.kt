@@ -60,8 +60,9 @@ import com.drake.brv.utils.BRV
  * 强大的选择状态 [setChecked] (切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
  * 遵守高内聚低耦合原则, 支持功能配合使用, 代码简洁函数分组
  *
+ * @property itemTouchHelper 等效于[RecyclerView.addItemDecoration]设置
+ *
  */
-
 @Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
@@ -223,7 +224,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 添加点击事件(未使用防抖)
+     * 指定Id的视图将被监听点击事件(未使用防抖)
      */
     fun addFastClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -232,7 +233,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 添加长按事件
+     * 指定Id的视图将被监听长按事件
      */
     fun addLongClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -242,6 +243,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     /**
      * 点击事件回调
+     * @param id 添加监听点击事件视图的Id, 等效于[addClickable]
      */
     fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
         for (i in id) {
@@ -252,6 +254,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     /**
      * 长按点击事件回调
+     * @param id 添加监听长按事件视图的Id, 等效于[addLongClickable]
      */
     fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
         for (i in id) {
