@@ -30,6 +30,7 @@ rv.linear().setup {
 
 }.models = data
 ```
+当前`addType`的大括号内的`this`就是你指定的泛型, 所以我们直接通过`Model.age`来判断返回不同的多类型
 
 
 

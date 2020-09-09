@@ -57,7 +57,7 @@ class CheckModeFragment : Fragment() {
                 if (!toggleMode && it == R.id.item) {
                     return@onClick
                 }
-                var checked = (getModel() as CheckModel).checked
+                var checked = getModel<CheckModel>().checked
                 if (it == R.id.item) checked = !checked
                 setChecked(adapterPosition, checked)
             }
