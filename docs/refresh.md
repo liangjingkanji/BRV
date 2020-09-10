@@ -2,7 +2,12 @@
 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
 而BRV的下拉刷新和上拉加载正是扩展的SmartRefreshLayout , 支持其所有特性并且还增加了新的功能.
+<br>
 
+!!! note
+    如果需要更多的下拉刷新或者上拉加载的自定义需求请查看[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)的使用文档 <br>
+
+    本框架中的`PageRefreshLayout`继承自`SmartRefreshLayout`, 故拥有其所有特性
 
 <br>
 本库已引入SmartRefreshLayout, 无需再次引入
@@ -18,7 +23,6 @@ SmartRefreshLayout的指定的刷新头和刷新脚布局请分别依赖(其库�
 可选配置的刷新头布局和脚布局
 
 ```groovy
-implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
 implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
 implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
 implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
