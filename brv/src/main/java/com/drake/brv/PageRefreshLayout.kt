@@ -24,6 +24,7 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnMultiStateListener
+import com.drake.brv.utils.bindingAdapter
 import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateConfig.errorLayout
 import com.drake.statelayout.StateLayout
@@ -210,37 +211,38 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     /**
-     * 直接接受数据, 自动判断当前属于下拉刷新还是上拉加载更多
+     * 自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
+     * 此函数每次调用会导致[index]递增或者下拉刷新会导致[index]等于[startIndex]
      * @param data 数据集
+     * @param adapter 假设PageRefreshLayout不能直接包裹RecyclerView, 然后也想使用自动分页, 请指定此参数, 因为自动分页需要[BindingAdapter]实例
      * @param hasMore 在函数参数中返回布尔类型来判断是否还存在下一页数据, 默认值true表示始终存在
      * @param isEmpty 返回true表示数据为空, 将显示缺省页 -> 空布局, 默认以[data.isNullOrEmpty()]则为空
      */
-    fun addData(
-        data: List<Any?>?,
-        isEmpty: () -> Boolean = { data.isNullOrEmpty() },
-        hasMore: BindingAdapter.() -> Boolean = { true }
-    ) {
+    fun addData(data: List<Any?>?,
+                adapter: BindingAdapter? = null,
+                isEmpty: () -> Boolean = { data.isNullOrEmpty() },
+                hasMore: BindingAdapter.() -> Boolean = { true }) {
 
-        val rv = contentView as? RecyclerView
-            ?: throw UnsupportedOperationException("PageRefreshLayout require content RecyclerView")
-
-        val adapter = rv.adapter as? BindingAdapter
-            ?: throw UnsupportedOperationException("RecyclerView require use BindingAdapter")
+        val adjustAdapter = when {
+            adapter != null -> adapter
+            contentView is RecyclerView -> (contentView as RecyclerView).bindingAdapter
+            else -> throw UnsupportedOperationException("Use parameter [adapter] on [addData] function or PageRefreshLayout direct wrap RecyclerView")
+        }
 
         val isRefreshState = state == RefreshState.Refreshing
 
         if (isRefreshState) {
-            adapter.models = data
+            adjustAdapter.models = data
             if (isEmpty()) {
                 showEmpty()
                 return
             }
         } else {
-            adapter.addModels(data)
+            adjustAdapter.addModels(data)
         }
 
-        val hasMoreResult = adapter.hasMore()
+        val hasMoreResult = adjustAdapter.hasMore()
         index += 1
 
         if (isRefreshState) showContent(hasMoreResult) else finish(true, hasMoreResult)

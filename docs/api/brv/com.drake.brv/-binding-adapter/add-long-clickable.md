@@ -4,5 +4,5 @@
 
 `fun addLongClickable(@IdRes vararg id: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-添加长按事件
+指定Id的视图将被监听长按事件
 

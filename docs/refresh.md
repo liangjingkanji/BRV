@@ -208,17 +208,21 @@ page.apply {
 // 设置分页加载第一页的索引, 默认=1, 触发刷新会重置索引. 如果需要修改在Application设置一次即可
 // PageRefreshLayout.startIndex = 1
 
-pageLayout.onRefresh { 
-  // 下拉刷新和上拉加载都会执行这个网络请求, 除非另外设置onLoadMore
-  get("/path") {
-      param("key", "value")
-      param("page", index) // 这里使用框架提供的属性
-  }.page(this) {
-    // 该回调函数参数返回一个布尔类型用于判断是否存在下一页, 决定上拉加载的状态. 以及当前属于刷新还是加载更多条目
-    addData(data){ adapter.itemCount < data.count // 这里是判断是否由更多页, 具体逻辑根据接口定义 } 
-  }
+// 下拉刷新和上拉加载都会执行onRefresh, 除非另外设置onLoadMore
+pageLayout.onRefresh {
+    scope {
+        val data = Get<String>("/path").await()
+        addData(data.list){
+            // 该回调函数参数返回一个布尔类型用于判断是否存在下一页, 决定上拉加载是否关闭
+            adapter.itemCount < data.count // 这里是判断是否由更多页, 具体逻辑根据接口定义
+        }
+    }
 }
 ```
 
 这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).
+<br>
+
+!!! note
+    假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/brv/com.drake.brv/-page-refresh-layout/add-data.md)函数指定参数adapter来使用自动分页, 否则将抛出异常
 

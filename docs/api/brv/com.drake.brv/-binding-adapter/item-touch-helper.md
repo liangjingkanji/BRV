@@ -3,3 +3,9 @@
 # itemTouchHelper
 
 `var itemTouchHelper: ItemTouchHelper?`
+
+等效于[RecyclerView.addItemDecoration](#)设置
+
+### Property
+
+`itemTouchHelper` - 等效于[RecyclerView.addItemDecoration](#)设置

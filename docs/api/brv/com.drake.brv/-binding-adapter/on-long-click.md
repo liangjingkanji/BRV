@@ -6,3 +6,6 @@
 
 长按点击事件回调
 
+### Parameters
+
+`id` - 添加监听长按事件视图的Id, 等效于[addLongClickable](add-long-clickable.md)

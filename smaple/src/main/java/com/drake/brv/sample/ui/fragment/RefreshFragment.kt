@@ -56,12 +56,12 @@ class RefreshFragment : Fragment() {
                 addData(data) {
                     index < total // 判断是否有更多页
                 }
-                // addData(data, {
+                // addData(data, rv.bindingAdapter, isEmpty = {
                 //     true // 此处判断是否存在下一页
-                // }, {
+                // }, hasMore = {
                 //     false // 此处判断是否显示空布局
                 // })
-            }, 2000)
+                        }, 2000)
 
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
         }.autoRefresh()

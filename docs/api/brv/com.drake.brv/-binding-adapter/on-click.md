@@ -6,3 +6,6 @@
 
 点击事件回调
 
+### Parameters
+
+`id` - 添加监听点击事件视图的Id, 等效于[addClickable](add-clickable.md)
