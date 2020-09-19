@@ -33,10 +33,10 @@ class RefreshFragment : Fragment() {
     private val total = 2
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+                             ): View? {
         return inflater.inflate(R.layout.fragment_refresh, container, false)
     }
 
@@ -51,17 +51,20 @@ class RefreshFragment : Fragment() {
         }
 
         page.onRefresh {
-            postDelayed({ // 模拟网络请求, 创建假的数据集
+
+            val runnable = { // 模拟网络请求, 创建假的数据集
                 val data = getData()
                 addData(data) {
                     index < total // 判断是否有更多页
                 }
+
                 // addData(data, rv.bindingAdapter, isEmpty = {
                 //     true // 此处判断是否存在下一页
                 // }, hasMore = {
                 //     false // 此处判断是否显示空布局
                 // })
-                        }, 2000)
+            }
+            postDelayed(runnable, 2000)
 
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
         }.autoRefresh()

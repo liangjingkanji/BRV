@@ -7,6 +7,9 @@
 | [addLongClickable](api/brv/com.drake.brv/-binding-adapter/add-long-clickable.md) | 添加需要监听长按事件的视图Id |
 | [onClick](api/brv/com.drake.brv/-binding-adapter/on-click.md) | 添加点击事件监听器, 同时支持参数添加Id |
 | [onLongClick](api/brv/com.drake.brv/-binding-adapter/on-long-click.md) | 添加长按事件监听器, 同时支持参数添加Id |
+| [onBind](api/brv/com.drake.brv/-binding-adapter/on-bind.md) | 对应Adapter的`onBindViewHolder`函数回调, 用于处理数据绑定 |
+| [onCreate](api/brv/com.drake.brv/-binding-adapter/on-create.md) | 对应Adapter的`onCreateViewHolder`函数回调, 用于创建Item的视图 |
+| [listBind](api/brv/com.drake.brv/-binding-adapter/list-bind.md.md) | 一个`onBindViewHolder`监听器的集合, 一般用于其他框架来监听扩展, 使用者一般不需要使用 |
 
 
 ## 示例

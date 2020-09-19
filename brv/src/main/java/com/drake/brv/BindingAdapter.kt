@@ -67,6 +67,7 @@ import com.drake.brv.utils.BRV
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
     var rv: RecyclerView? = null
+    var listBind = mutableSetOf<OnBindViewHolderListener>()
 
     companion object {
         /*
@@ -85,21 +86,27 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     // <editor-fold desc="生命周期">
+    private var onCreate: (BindingViewHolder.() -> Unit)? = null
     private var onBind: (BindingViewHolder.() -> Unit)? = null
     private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onChecked: ((position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? = null
     private var onToggle: ((position: Int, toggleModel: Boolean, end: Boolean) -> Unit)? = null
-    internal var onBindList = mutableSetOf<OnBindViewHolderListener>()
 
 
     /**
-     * [onBindViewHolder]回调
-     * @return true表示不使用DataBinding, false则使用(默认)
+     * [onBindViewHolder]执行时回调
      */
     fun onBind(block: BindingViewHolder.() -> Unit) {
         onBind = block
+    }
+
+    /**
+     * [onCreateViewHolder]执行时回调
+     */
+    fun onCreate(block: BindingViewHolder.() -> Unit) {
+        onCreate = block
     }
 
     /**
@@ -117,15 +124,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            viewType,
-            parent,
-            false
-        )
-            ?: return BindingViewHolder(parent.getView(viewType))
-
-        return BindingViewHolder(viewDataBinding)
+        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), viewType, parent, false)
+        val viewHolder = if (viewDataBinding == null) BindingViewHolder(parent.getView(viewType)) else BindingViewHolder(viewDataBinding)
+        onCreate?.invoke(viewHolder)
+        return viewHolder
     }
 
     fun ViewGroup.getView(@LayoutRes layout: Int): View {
@@ -844,7 +846,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         internal fun bind(model: Any) {
             this._data = model
 
-            onBindList.forEach {
+            listBind.forEach {
                 it.onBindViewHolder(rv!!, adapter, this, adapterPosition)
             }
 
