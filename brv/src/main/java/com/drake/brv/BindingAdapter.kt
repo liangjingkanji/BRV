@@ -719,10 +719,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         if (checked) checkedPosition.add(position)
         else checkedPosition.remove(Integer.valueOf(position))
 
-        onChecked?.invoke(position, checked, isCheckedAll())
         if (singleMode && checked && checkedPosition.size > 1) {
             setChecked(checkedPosition[0], false)
         }
+        onChecked?.invoke(position, checked, isCheckedAll())
     }
 
     /**
