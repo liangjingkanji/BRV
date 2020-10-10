@@ -9,7 +9,7 @@
     <br>
     <a href="http://liangjingkanji.github.io/BRV/">使用文档</a>
     <br>
-    <img src="https://i.imgur.com/G7WYYXb.jpg" width="50%"/>
+    <img src="https://i.imgur.com/G7WYYXb.jpg" width="40%"/>
 </p>
 
 <br>

@@ -16,7 +16,8 @@ theme:
   custom_dir: docs/material
 
   palette:
-    scheme: 'drake'
+    scheme: drake
+    primary: white
 
   font: false
 

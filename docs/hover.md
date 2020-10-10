@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/Mt0m2Sy.gif" width="50%"/></p>
+<p align="center"><img src="https://i.imgur.com/Mt0m2Sy.gif" width="40%"/></p>
 
 通过实现接口`ItemHover`
 
@@ -49,15 +49,7 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
 }
 ```
 
-<br>
-!!! tip
-    不同于大部分悬停框架, BRV无需特殊处理支持全部的点击事件
-
-
-
-
-
-
+> 不同于大部分悬停框架, BRV无需特殊处理支持全部的点击事件
 
 [BindingAdapter] 判断当前位置是否属于悬停
 

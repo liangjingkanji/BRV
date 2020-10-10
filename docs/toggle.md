@@ -6,7 +6,7 @@ BRV提供一个切换事件的触发和监听, 相当于会提供一个回调函
 <br>
 一般用于切换列表的编辑模式
 
-<img src="https://i.imgur.com/0uYZkXB.gif" width="50%"/>
+<img src="https://i.imgur.com/0uYZkXB.gif" width="40%"/>
 
 <br>
 

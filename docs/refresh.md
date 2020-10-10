@@ -1,13 +1,11 @@
-<img src="https://i.imgur.com/LZh90KX.gif" width="50%"/>
+<img src="https://i.imgur.com/LZh90KX.gif" width="40%"/>
 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
 而BRV的下拉刷新和上拉加载正是扩展的SmartRefreshLayout , 支持其所有特性并且还增加了新的功能.
 <br>
 
-!!! note
-    如果需要更多的下拉刷新或者上拉加载的自定义需求请查看[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)的使用文档 <br>
-
-    本框架中的`PageRefreshLayout`继承自`SmartRefreshLayout`, 故拥有其所有特性
+> 如果需要更多的下拉刷新或者上拉加载的自定义需求请查看[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)的使用文档 <br>
+  本框架中的`PageRefreshLayout`继承自`SmartRefreshLayout`, 故拥有其所有特性
 
 <br>
 本库已引入SmartRefreshLayout, 无需再次引入
@@ -129,8 +127,7 @@ page.onLoadMore {
 | showLoading | 显示加载中缺省页, 当然得先设置`loadingLayout`(或者读取`StateConfig`全局缺省页配置) |
 | refresh | 静默刷新(无动画) |
 
-!!! note
-    这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
+> 这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
 
 缺省页状态控制
 
@@ -222,7 +219,5 @@ pageLayout.onRefresh {
 
 这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).
 <br>
-
-!!! note
-    假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/brv/com.drake.brv/-page-refresh-layout/add-data.md)函数指定参数adapter来使用自动分页, 否则将抛出异常
+> 假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/brv/com.drake.brv/-page-refresh-layout/add-data.md)函数指定参数adapter来使用自动分页, 否则将抛出异常
 

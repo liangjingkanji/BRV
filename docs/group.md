@@ -1,5 +1,5 @@
 
-<p align="center"><img src="https://i.imgur.com/DQdEHQG.gif" width="50%"/></p>
+<p align="center"><img src="https://i.imgur.com/DQdEHQG.gif" width="40%"/></p>
 
 ## 特点
 

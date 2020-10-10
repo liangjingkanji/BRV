@@ -2,7 +2,7 @@
 
 ## 水平分割线
 
-<img src="https://i.imgur.com/jXdKlpQ.png" width="50%"/>
+<img src="https://i.imgur.com/jXdKlpQ.png" width="40%"/>
 
 ```kotlin
 rv.grid(3).divider(R.drawable.divider_horizontal).setup {
@@ -24,7 +24,7 @@ rv.grid(3, RecyclerView.HORIZONTAL)
 
 ## 网格分割线
 
-<img src="https://i.imgur.com/udblR3G.png" width="50%"/>
+<img src="https://i.imgur.com/udblR3G.png" width="40%"/>
 
 ```kotlin
 rv.grid(3).divider {

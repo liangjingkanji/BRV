@@ -14,7 +14,7 @@ BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/l
 
 <br>
 
-<img src="https://i.imgur.com/ndxXOkl.gif" width="50%"/>
+<img src="https://i.imgur.com/ndxXOkl.gif" width="40%"/>
 
 
 ## 使用
@@ -55,7 +55,5 @@ state.showContent() // 加载成功
 state.showError() // 加载错误
 state.showEmpty() // 加载失败
 ```
-<br>
 
-!!! Tip
-    StateLayout缺省页库非常推荐使用, BRV也暴露集成的缺省页库给开发者使用, [使用文档](https://liangjingkanji.github.io/StateLayout)
+> StateLayout缺省页库非常推荐使用, BRV也暴露集成的缺省页库给开发者使用, [使用文档](https://liangjingkanji.github.io/StateLayout)
