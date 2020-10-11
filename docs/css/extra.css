@@ -34,10 +34,31 @@
     --md-typeset-a-color:           #d63200 !important;
 }
 
+/*字体渲染*/
+body, input {
+    font-family: "JetBrains Mono", -apple-system, Helvetica, Arial, sans-serif;
+}
+pre, code, kbd {
+    font-family: "JetBrains Mono", SFMono-Regular, Consolas, Menlo, monospace;
+}
+* {
+    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+}
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/eot/JetBrainsMono-Regular.eot') format('embedded-opentype'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff/JetBrainsMono-Regular.woff') format('woff'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*布局*/
 .md-grid {
     max-width: 150em !important;
-    margin-left: 5em;
 }
 
 /*表格*/
@@ -45,13 +66,10 @@
     display: block;
     padding: 0 .8rem;
     margin: 1em 0;
-    line-height: 1.3;
 }
-
 table tr:nth-child(2n), thead {
     background-color: #fafafa;
 }
-
 .md-typeset table:not([class]) {
     border-collapse: collapse;
     border-spacing: 0px;
@@ -61,7 +79,6 @@ table tr:nth-child(2n), thead {
     display: table;
     box-shadow:none;
 }
-
 .md-typeset table:not([class]) th {
     border: 1px solid #dfe2e5;
     background-color: #f2f2f2;
@@ -69,19 +86,8 @@ table tr:nth-child(2n), thead {
     font-weight: bold;
     color: var(--md-typeset-color);
 }
-
 .md-typeset table:not([class]) td {
     border: 1px solid #dfe2e5;
-}
-
-@font-face{
-    font-family: 'JetBrains Mono';
-    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/eot/JetBrainsMono-Regular.eot') format('embedded-opentype'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff/JetBrainsMono-Regular.woff') format('woff'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 /*引用*/
@@ -93,11 +99,9 @@ table tr:nth-child(2n), thead {
     border-left: none;
     margin: 2em 0;
 }
-
 .md-typeset blockquote p {
     margin: 0 0 !important;
 }
-
 .md-typeset blockquote:before {
     display: block;
     position: absolute;
@@ -115,7 +119,6 @@ table tr:nth-child(2n), thead {
     line-height: 1.8;
     font-size: 12px;
 }
-
 .md-typeset pre {
     line-height: 1.5;
 }
@@ -134,21 +137,6 @@ table tr:nth-child(2n), thead {
     margin-bottom: .8em;
 }
 
-/*字体渲染*/
-body, input {
-    font-family: "JetBrains Mono", -apple-system, Helvetica, Arial, sans-serif;
-}
-
-pre, code, kbd {
-    font-family: "JetBrains Mono", SFMono-Regular, Consolas, Menlo, monospace;
-}
-
-* {
-    -webkit-font-feature-settings: "liga" on, "calt" on;
-    -webkit-font-smoothing: subpixel-antialiased;
-    text-rendering: optimizeLegibility;
-}
-
 /*侧边导航*/
 .md-nav__item .md-nav__link--active {
     color: var(--drake-highlight);
@@ -161,10 +149,9 @@ pre, code, kbd {
 /*代码块*/
 .md-typeset code {
     font-size: inherit;
-        border-radius: 2px !important;
-        border: none !important;
+    border-radius: 2px !important;
+    border: none !important;
 }
-
 .md-typeset pre>code {
     padding: 0.8em 0.8em;
 }
@@ -191,22 +178,6 @@ img {
 /*编辑按钮*/
 .md-typeset .md-content__button {
     color: var(--md-default-fg-color--lighter) !important;
-}
-
-/*警告*/
-.md-typeset .admonition, .md-typeset details {
-    font-size: inherit;
-}
-
-.md-typeset .admonition, .md-typeset details {
-    border-left: .2rem solid var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color) !important;
-}
-.md-typeset .note>.admonition-title::before, .md-typeset .note>summary::before {
-    background-color: var(--md-primary-fg-color);
-}
-.md-typeset .note>.admonition-title, .md-typeset .note>summary {
-    background-color: var(--drake-highlight-opacity);
 }
 
 /*标题*/
