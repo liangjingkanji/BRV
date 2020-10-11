@@ -120,7 +120,7 @@ table tr:nth-child(2n), thead {
     font-size: 12px;
 }
 .md-typeset pre {
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 /*标签*/
@@ -142,8 +142,20 @@ table tr:nth-child(2n), thead {
     color: var(--drake-highlight);
     font-weight:500;
 }
-.md-nav__title {
+.md-nav__title[for="__drawer"] {
     display: none;
+}
+div .md-source__fact {
+    display: none;
+}
+.md-source__icon+.md-source__repository {
+    margin-left: -1em;
+    padding-left: 0;
+    font-weight: 500;
+}
+.md-nav__link {
+    font-size: 12px;
+    line-height: 1.6;
 }
 
 /*代码块*/

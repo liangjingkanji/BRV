@@ -8,7 +8,7 @@ rv_simple.linear().setup {
 
 
 
-## 列表填充数据
+## 列表填充数据的三种方式
 
 BRV支持三种方式, 灵活使用; 这里提及的Model就等同于数据类/JavaBean/POJO
 

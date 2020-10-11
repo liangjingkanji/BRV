@@ -3,7 +3,7 @@ site_author: drake
 site_description: BRV框架文档
 copyright: Copyright &copy; 2016 - 2020 Drake
 
-repo_name: BRV
+repo_name: GitHub
 repo_url: https://github.com/liangjingkanji/BRV
 
 extra_css:
