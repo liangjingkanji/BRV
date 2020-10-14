@@ -35,25 +35,22 @@
 }
 
 /*字体渲染*/
+@font-face{
+    font-family: 'Plex Mono';
+    src: url('https://gitlab.com/liangjingkanji/fonts/-/raw/master/fonts/output/PlexMono.otf') format('embedded-opentype'),
+    font-weight: normal;
+    font-style: normal;
+}
 body, input {
-    font-family: "JetBrains Mono", -apple-system, Helvetica, Arial, sans-serif;
+    font-family: "Plex Mono", -apple-system, Helvetica, Arial, sans-serif;
 }
 pre, code, kbd {
-    font-family: "JetBrains Mono", SFMono-Regular, Consolas, Menlo, monospace;
+    font-family: "Plex Mono", SFMono-Regular, Consolas, Menlo, monospace;
 }
 * {
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
-}
-@font-face{
-    font-family: 'JetBrains Mono';
-    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/eot/JetBrainsMono-Regular.eot') format('embedded-opentype'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff/JetBrainsMono-Regular.woff') format('woff'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 /*布局*/

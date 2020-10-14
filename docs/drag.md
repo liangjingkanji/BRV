@@ -6,6 +6,17 @@
 data class DragModel(override var itemOrientationDrag: Int = ItemOrientation.ALL) : ItemDrag
 ```
 
+> 注意如果你的数据模型被Gson反序列化后, 会删除所有的字段初始化值
+
+这里我们可以重写访问函数来解决问题, 让该值固定返回
+
+```kotlin hl_lines="3"
+class DragModel() : ItemDrag {
+    override var itemOrientationDrag: Int = 0
+        get() = ItemOrientation.ALL // 只会返回该值
+}
+```
+
 ## ItemOrientation
 
 该类包含拖拽可配置的方向
