@@ -23,7 +23,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.drake.brv.sample.R
-import com.drake.statusbar.darkMode
+import com.drake.statusbar.immersive
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        darkMode(true)
+        immersive(toolbar, true)
 
         toolbar.setupWithNavController(
             nav.findNavController(),
