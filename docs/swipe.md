@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/bkqLY6b.gif" width="40%"/>
+<img src="https://i.imgur.com/bkqLY6b.gif" width="250"/>
 
 
 为数据模型实现接口`ItemSwipe`即可开启拖拽功能

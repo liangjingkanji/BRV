@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/XOAv59E.gif" width="40%"/>
+<img src="https://i.imgur.com/XOAv59E.gif" width="250"/>
 
 可编辑/多选列表在开发中很常见, BRV可以短短几行代码就可以实现一个选择模式: [详细Demo](https://github.com/liangjingkanji/BRV/blob/master/smaple/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
 
@@ -53,7 +53,7 @@
 
 > 学完如何创建一个多选列表后可以查看函数学习更复杂的功能配置
 
-<img src="https://i.imgur.com/dPKZUVY.png" width="70%"/>
+<img src="https://i.imgur.com/fZ7RDtX.png" width="600"/>
 
 
 ## 函数

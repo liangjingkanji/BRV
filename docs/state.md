@@ -14,7 +14,7 @@ BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/l
 
 <br>
 
-<img src="https://i.imgur.com/ndxXOkl.gif" width="40%"/>
+<img src="https://i.imgur.com/ndxXOkl.gif" width="250"/>
 
 
 ## 使用

@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/LZh90KX.gif" width="40%"/>
+<img src="https://i.imgur.com/LZh90KX.gif" width="250"/>
 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
 而BRV的下拉刷新和上拉加载正是扩展的SmartRefreshLayout , 支持其所有特性并且还增加了新的功能.

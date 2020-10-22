@@ -1,6 +1,6 @@
 瀑布流分割线
 
-<img src="https://i.imgur.com/Xa5QKbA.png" width="40%"/>
+<img src="https://i.imgur.com/Xa5QKbA.png" width="250"/>
 
 
 ```kotlin

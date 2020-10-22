@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             AppBarConfiguration(nav_view.menu, drawer)
         )
         nav_view.setupWithNavController(nav.findNavController())
+
     }
 
     override fun onBackPressed() {

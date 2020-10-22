@@ -2,7 +2,7 @@
 
 ## 水平分割线
 
-<img src="https://i.imgur.com/jXdKlpQ.png" width="40%"/>
+<img src="https://i.imgur.com/jXdKlpQ.png" width="250"/>
 
 ```kotlin
 rv.grid(3).divider(R.drawable.divider_horizontal).setup {
@@ -13,7 +13,7 @@ rv.grid(3).divider(R.drawable.divider_horizontal).setup {
 
 ## 垂直分割线
 
-<img src="https://i.imgur.com/RInJ0qL.png" width="40%"/>
+<img src="https://i.imgur.com/RInJ0qL.png" width="250"/>
 ```kotlin
 rv.grid(3, RecyclerView.HORIZONTAL)
   .divider(R.drawable.divider_vertical, DividerOrientation.VERTICAL)
@@ -24,7 +24,7 @@ rv.grid(3, RecyclerView.HORIZONTAL)
 
 ## 网格分割线
 
-<img src="https://i.imgur.com/udblR3G.png" width="40%"/>
+<img src="https://i.imgur.com/udblR3G.png" width="250"/>
 
 ```kotlin
 rv.grid(3).divider {
@@ -47,7 +47,7 @@ rv.grid(3).divider {
 
 ### 1) 上下
 
-<img src="https://i.imgur.com/ujjSdw4.png" width="40%"/>
+<img src="https://i.imgur.com/ujjSdw4.png" width="250"/>
 
 ```kotlin hl_lines="4"
 rv.grid(3).divider {
@@ -62,7 +62,7 @@ rv.grid(3).divider {
 
 ### 2) 左右
 
-<img src="https://i.imgur.com/aCczxuD.png" width="40%"/>
+<img src="https://i.imgur.com/aCczxuD.png" width="250"/>
 
 ```kotlin hl_lines="4"
 rv.grid(3).divider {
@@ -76,7 +76,7 @@ rv.grid(3).divider {
 
 ### 3) 四周
 
-<img src="https://i.imgur.com/d7H3Nz2.png" width="40%"/>
+<img src="https://i.imgur.com/d7H3Nz2.png" width="250"/>
 
 ```kotlin hl_lines="4 5"
 rv.grid(3).divider {

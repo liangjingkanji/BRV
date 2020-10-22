@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/Mt0m2Sy.gif" width="40%"/></p>
+<p align="center"><img src="https://i.imgur.com/Mt0m2Sy.gif" width="250"/></p>
 
 通过实现接口`ItemHover`
 

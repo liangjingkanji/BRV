@@ -1,4 +1,4 @@
-Net是一个第三方的强大的网络请求/异步任务框架, 非常优秀的设计
+Net是一个第三方的强大的网络请求/异步任务框架, 非常优秀的设计, BRV可以和Net联动扩展功能
 
 首先引用[Net](https://github.com/liangjingkanji/Net/)依赖库
 

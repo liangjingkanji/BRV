@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/do7ffV1.gif" width="40%"/>
+<img src="https://i.imgur.com/do7ffV1.gif" width="250"/>
 
 为数据模型实现接口`ItemDrag`即可开启拖拽功能
 
