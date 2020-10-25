@@ -17,7 +17,9 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.Model
@@ -27,12 +29,7 @@ import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_header_footer.*
 
 
-class HeaderFooterFragment : Fragment() {
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_header_footer, container, false)
-    }
+class HeaderFooterFragment : Fragment(R.layout.fragment_header_footer) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

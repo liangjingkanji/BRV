@@ -17,9 +17,6 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.OneMoreTypeModel
@@ -28,17 +25,7 @@ import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_one_more_type.*
 
 
-class OneMoreTypeFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_one_more_type, container, false)
-    }
-
+class OneMoreTypeFragment : Fragment(R.layout.fragment_one_more_type) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

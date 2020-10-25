@@ -17,9 +17,6 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
@@ -30,15 +27,7 @@ import kotlinx.android.synthetic.main.fragment_preload.*
 /**
  * 指定预加载, 默认反序3 开始预加载, 可设置全局变量 [PageRefreshLayout.preloadIndex]
  */
-class PreloadFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_preload, container, false)
-    }
+class PreloadFragment : Fragment(R.layout.fragment_preload) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

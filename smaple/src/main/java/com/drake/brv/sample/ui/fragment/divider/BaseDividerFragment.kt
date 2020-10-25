@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
@@ -28,7 +29,7 @@ import com.drake.brv.sample.R
 /**
  * 创建菜单
  */
-open class BaseDividerFragment : Fragment() {
+open class BaseDividerFragment(@LayoutRes contentLayoutId: Int = 0) : Fragment(contentLayoutId) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

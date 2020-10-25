@@ -17,9 +17,7 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.CheckModel
@@ -29,15 +27,7 @@ import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_check_mode.*
 
 
-class CheckModeFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_check_mode, container, false)
-    }
+class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

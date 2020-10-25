@@ -17,7 +17,9 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DoubleItemModel
@@ -27,15 +29,7 @@ import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_state_layout.*
 
 
-class StateLayoutFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_state_layout, container, false)
-    }
-
+class StateLayoutFragment : Fragment(R.layout.fragment_state_layout) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

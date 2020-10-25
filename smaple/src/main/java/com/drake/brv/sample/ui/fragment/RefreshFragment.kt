@@ -17,7 +17,9 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DoubleItemModel
@@ -28,18 +30,9 @@ import com.drake.tooltip.toast
 import kotlinx.android.synthetic.main.fragment_refresh.*
 
 
-class RefreshFragment : Fragment() {
+class RefreshFragment : Fragment(R.layout.fragment_refresh) {
 
     private val total = 2
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-                             ): View? {
-        return inflater.inflate(R.layout.fragment_refresh, container, false)
-    }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

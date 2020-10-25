@@ -17,9 +17,6 @@
 package com.drake.brv.sample.ui.fragment.divider
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DividerModel
@@ -28,15 +25,7 @@ import com.drake.brv.utils.setup
 import com.drake.brv.utils.staggered
 import kotlinx.android.synthetic.main.fragment_staggered_divider.*
 
-class StaggeredDividerFragment : BaseDividerFragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_staggered_divider, container, false)
-    }
+class StaggeredDividerFragment : BaseDividerFragment(R.layout.fragment_staggered_divider) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

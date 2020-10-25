@@ -17,9 +17,6 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DoubleItemModel
@@ -31,17 +28,7 @@ import com.drake.tooltip.toast
 import kotlinx.android.synthetic.main.fragment_multi_type.*
 
 
-class MultiTypeFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_multi_type, container, false)
-    }
-
+class MultiTypeFragment : Fragment(R.layout.fragment_multi_type) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

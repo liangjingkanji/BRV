@@ -17,9 +17,6 @@
 package com.drake.brv.sample.ui.fragment.divider
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.DividerModel
@@ -28,14 +25,7 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import kotlinx.android.synthetic.main.fragment_linear_vertical_divider.*
 
-class LinearVerticalDividerFragment : BaseDividerFragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_linear_vertical_divider, container, false)
-    }
+class LinearVerticalDividerFragment : BaseDividerFragment(R.layout.fragment_linear_vertical_divider) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
