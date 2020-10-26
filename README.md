@@ -9,8 +9,9 @@
     <br>
     <a href="http://liangjingkanji.github.io/BRV/">使用文档</a>
     <br>
-    <img src="https://i.imgur.com/G7WYYXb.jpg" width="250"/>
+    <img src="https://i.imgur.com/G7WYYXb.jpg" width="350"/>
 </p>
+
 
 <br>
 
