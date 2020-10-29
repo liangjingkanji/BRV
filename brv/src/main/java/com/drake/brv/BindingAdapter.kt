@@ -86,7 +86,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     // <editor-fold desc="生命周期">
-    private var onCreate: (BindingViewHolder.() -> Unit)? = null
+    private var onCreate: (BindingViewHolder.(viewType: Int) -> Unit)? = null
     private var onBind: (BindingViewHolder.() -> Unit)? = null
     private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
@@ -105,12 +105,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     /**
      * [onCreateViewHolder]执行时回调
      */
-    fun onCreate(block: BindingViewHolder.() -> Unit) {
+    fun onCreate(block: BindingViewHolder.(viewType: Int) -> Unit) {
         onCreate = block
     }
 
     /**
-     * 增量更新回调
+     * 增量更新回调, 和[onBind]等效
+     * @param block 参数model等同于[BindingViewHolder.getModel]
      */
     fun onPayload(block: BindingViewHolder.(model: Any) -> Unit) {
         onPayload = block
@@ -124,9 +125,17 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), viewType, parent, false)
-        val viewHolder = if (viewDataBinding == null) BindingViewHolder(parent.getView(viewType)) else BindingViewHolder(viewDataBinding)
-        onCreate?.invoke(viewHolder)
+        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
+            LayoutInflater.from(parent.context),
+            viewType,
+            parent,
+            false
+        )
+        val viewHolder =
+            if (viewDataBinding == null) BindingViewHolder(parent.getView(viewType)) else BindingViewHolder(
+                viewDataBinding
+            )
+        onCreate?.invoke(viewHolder, viewType)
         return viewHolder
     }
 
