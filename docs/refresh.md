@@ -197,11 +197,9 @@ page.apply {
 
 ### 刷新数据
 
-前面提到 PageRefreshLayout 支持自动分页加载
+前面提到 PageRefreshLayout 支持自动分页加载, 自动分页不需要你调用`rv.models`函数去设置数据, 使用`addData`即可
 
-
-
-```kotlin
+```kotlin hl_lines="8"
 // 设置分页加载第一页的索引, 默认=1, 触发刷新会重置索引. 如果需要修改在Application设置一次即可
 // PageRefreshLayout.startIndex = 1
 

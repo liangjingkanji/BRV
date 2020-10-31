@@ -25,6 +25,7 @@
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
 
+搜索文件: `nav_main` 打开即可查看和跳转侧滑菜单所有功能界面 (任何疑问点击QQ群作者一对一解答)
 
 ### 特点
 
