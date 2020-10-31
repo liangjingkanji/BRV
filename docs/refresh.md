@@ -119,7 +119,9 @@ page.onLoadMore {
 
 ### 缺省页
 
-触发刷新状态(都会回调函数onRefresh)
+PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
+
+拥有三个函数可以触发刷新状态(都会回调函数onRefresh)
 
 | 函数 | 描述 |
 |-|-|
@@ -200,8 +202,8 @@ page.apply {
 前面提到 PageRefreshLayout 支持自动分页加载, 自动分页不需要你调用`rv.models`函数去设置数据, 使用`addData`即可
 
 ```kotlin hl_lines="8"
-// 设置分页加载第一页的索引, 默认=1, 触发刷新会重置索引. 如果需要修改在Application设置一次即可
-// PageRefreshLayout.startIndex = 1
+//
+//
 
 // 下拉刷新和上拉加载都会执行onRefresh, 除非另外设置onLoadMore
 pageLayout.onRefresh {
@@ -213,6 +215,17 @@ pageLayout.onRefresh {
         }
     }
 }
+```
+
+大部分情况后端定义分页字段第一页为1, 但是可能存在部分后端定义为0, 这里我们可以在Application中设置`index`的初始值即第一页的字段
+
+```kotlin
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        PageRefreshLayout.startIndex = 1 // startIndex即index变量的初始值
+    }
 ```
 
 这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).
