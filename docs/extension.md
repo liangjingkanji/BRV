@@ -2,20 +2,12 @@
 
 提供一些`BindingAdapter`常用的调用
 
-```kotlin
-fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAdapter
-// 创建一个BindingAdapter在闭包中进行配置
-
-fun RecyclerView.addModels(models: List<Any?>?, animation: Boolean = true)
-// 等效于[BindingAdapter.addModels]添加数据
-
-var RecyclerView.models
-// 等效于[BindingAdapter.models]添加数据
-
-val RecyclerView.bindingAdapter
-// 等效于`adapter as? BindingAdapter`添加数据
-
-```
+| 函数 | 描述 |
+|-|-|
+| bindingAdapter | 如果Adapter是[BindingAdapter]则返回对象, 否则抛出异常 |
+| models | 数据模型集合, 需要执行`notify*`函数手动刷新列表 |
+| mutable | 可增删的[models]数据模型集合, 需要执行`notify*`函数手动刷新列表 |
+| addModels | 添加数据, 自动刷新列表 |
 
 ## 布局管理器
 
