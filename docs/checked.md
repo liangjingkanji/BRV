@@ -58,30 +58,17 @@
 
 ## 函数
 
-```kotlin
-fun allChecked()
-// 全选
-
-fun allChecked(isAllChecked: Boolean)
-// 全选或者全部取消全选
-
-fun clearChecked()
-// 取消全选
-
-fun reverseChecked() 
-// 反选
-
-fun setChecked(@IntRange(from = 0) position: Int, checked: Boolean)
-// 设置某个item的选择状态
-
-fun toggleChecked(@IntRange(from = 0) position: Int)
-// 切换某个item的选择状态
-
-fun <M> getCheckedModels(): List<M>
-
-fun setCheckableType(@LayoutRes vararg checkableItemType: Int)
-// 设置哪些type允许进入选择状态
-
-val checkedCount: Int
-```
+| 函数 | 描述 |
+|-|-|
+| allChecked | 全选或者全部取消全选 |
+| singleMode | 是否为单选模式 |
+| isCheckedAll | 是否被全选 |
+| checkedReverse | 反选 |
+| setChecked | 指定位置的条目是否选中 |
+| checkedSwitch | 切换选中状态 |
+| setCheckableType | 指定的type才允许选中 |
+| getCheckedModels | 得到选择的数据模型集合 |
+| checkedPosition | 被选择的item的position集合 |
+| checkedCount | 已选择数量 |
+| onChecked | 选择回调 |
 
