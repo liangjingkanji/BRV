@@ -29,14 +29,33 @@ import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
 
+//<editor-fold desc="数据集">
+/**
+ * 如果Adapter是[BindingAdapter]则返回对象, 否则抛出异常
+ * @exception NullPointerException
+ */
 val RecyclerView.bindingAdapter
-    get() = adapter as? BindingAdapter ?: throw NullPointerException("RecyclerView has no BindingAdapter")
+    get() = adapter as? BindingAdapter
+        ?: throw NullPointerException("RecyclerView has no BindingAdapter")
 
+/**
+ * 数据模型集合
+ */
 var RecyclerView.models
     get() = bindingAdapter.models
     set(value) {
         bindingAdapter.models = value
     }
+
+/**
+ * 可增删的[models]数据模型集合
+ */
+var RecyclerView.mutable
+    get() = bindingAdapter.models as ArrayList
+    set(value) {
+        bindingAdapter.models = value
+    }
+//</editor-fold>
 
 /**
  * 添加数据
@@ -46,7 +65,6 @@ var RecyclerView.models
 fun RecyclerView.addModels(models: List<Any?>?, animation: Boolean = true) {
     bindingAdapter.addModels(models, animation)
 }
-
 
 //<editor-fold desc="配置列表">
 /**

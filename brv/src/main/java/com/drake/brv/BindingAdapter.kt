@@ -483,6 +483,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
         }
 
+    // 可增删的数据模型集合
+    var mutable
+        get() = models as ArrayList
+        set(value) {
+            models = value
+        }
+
     private fun flat(
         list: MutableList<Any?>,
         expand: Boolean? = null,
