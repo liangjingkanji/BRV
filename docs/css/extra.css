@@ -36,21 +36,19 @@
 
 /*字体渲染*/
 @font-face{
-    font-family: 'Plex Mono';
-    src: url('https://gitlab.com/liangjingkanji/fonts/-/raw/master/fonts/output/PlexMono.otf') format('embedded-opentype'),
+    font-family: 'JetBrains Mono';
+    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.eot') format('embedded-opentype'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff') format('woff'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
-body, input {
-    font-family: "Plex Mono", -apple-system, Helvetica, Arial, sans-serif;
-}
-pre, code, kbd {
-    font-family: "Plex Mono", SFMono-Regular, Consolas, Menlo, monospace;
 }
 * {
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
+    font-family: 'JetBrains Mono' !important;
 }
 
 /*布局*/
