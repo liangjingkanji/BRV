@@ -823,8 +823,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     inner class BindingViewHolder : RecyclerView.ViewHolder {
 
-        lateinit var _data: Any
-            private set
+        lateinit var _data: Any private set
         var context: Context = this@BindingAdapter.context!!
         val adapter: BindingAdapter = this@BindingAdapter
         val modelPosition get() = layoutPosition - headerCount
@@ -835,7 +834,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
         constructor(viewDataBinding: ViewDataBinding) : super(viewDataBinding.root) {
             this.viewDataBinding = viewDataBinding
+        }
 
+        init {
             for (i in 0 until clickableIds.size()) {
                 val view = itemView.findViewById<View>(clickableIds.keyAt(i)) ?: continue
                 if (clickableIds.valueAt(i)) {
