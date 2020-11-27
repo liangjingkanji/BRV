@@ -41,12 +41,17 @@ rv.linear().setup {
   addType<Model>(R.layout.item)
 
   itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback(this) {
-	// 这里可以重写函数
-    override fun onMoved(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, fromPos: Int, target: RecyclerView.ViewHolder, toPos: Int, x: Int, y: Int) {
-        super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y)
 
+    /**
+     * 当拖拽动作完成且松开手指时触发
+     */
+    open fun onDrag(
+        source: BindingAdapter.BindingViewHolder,
+        target: BindingAdapter.BindingViewHolder
+    ) {
         // 这是拖拽交换后回调, 这里可以同步服务器
     }
+
   })
 
 }.models = data
