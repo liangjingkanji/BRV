@@ -34,7 +34,7 @@ class DragModel() : ItemDrag {
 
 ## 自定义
 
-如果想要扩展ItemTouchHelper可以给BindingAdapter的变量`itemTouchHelper`赋值
+如果想要扩展ItemTouchHelper或监听可以给BindingAdapter的变量`itemTouchHelper`赋值
 
 ```kotlin
 rv.linear().setup {
@@ -56,3 +56,5 @@ rv.linear().setup {
 
 }.models = data
 ```
+
+> `DefaultItemTouchCallback`是BRV内部的触摸事件处理, 你可以覆写他或者直接`ItemTouchHelper.Callback`
