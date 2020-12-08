@@ -132,9 +132,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             false
         )
         val viewHolder =
-            if (viewDataBinding == null) BindingViewHolder(parent.getView(viewType)) else BindingViewHolder(
-                viewDataBinding
-            )
+                if (viewDataBinding == null) BindingViewHolder(parent.getView(viewType)) else BindingViewHolder(
+                    viewDataBinding
+                )
         onCreate?.invoke(viewHolder, viewType)
         return viewHolder
     }
@@ -164,7 +164,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
         return (typePool[modelClass]?.invoke(model, position)
-            ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
+                ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -326,7 +326,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     fun addHeader(model: Any?, @IntRange(from = -1) index: Int = -1, animation: Boolean = false) {
 
         if (index == -1) {
-            (headers as MutableList).add(model)
+            (headers as MutableList).add(0, model)
             if (animation) notifyItemInserted(0)
         } else if (index <= headerCount) {
             (headers as MutableList).add(index, model)
@@ -364,7 +364,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     fun isHeader(@IntRange(from = 0) position: Int): Boolean =
-        (headerCount > 0 && position < headerCount)
+            (headerCount > 0 && position < headerCount)
 
     // </editor-fold>
 
@@ -452,7 +452,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     fun isFooter(@IntRange(from = 0) position: Int): Boolean =
-        (footerCount > 0 && position >= headerCount + modelCount && position < itemCount)
+            (footerCount > 0 && position >= headerCount + modelCount && position < itemCount)
 
     // </editor-fold>
 
@@ -512,7 +512,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
                 val itemSublist = item.itemSublist
                 val sublist: MutableList<Any?>? =
-                    if (itemSublist is ArrayList) itemSublist else itemSublist?.toMutableList()
+                        if (itemSublist is ArrayList) itemSublist else itemSublist?.toMutableList()
                 if (!sublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
                     val nestedList = flat(sublist, expand, nextDepth)
                     list.addAll(nestedList)
@@ -523,7 +523,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     fun isModel(@IntRange(from = 0) position: Int): Boolean =
-        !(isHeader(position) || isFooter(position))
+            !(isHeader(position) || isFooter(position))
 
     /**
      * 根据索引返回数据模型, 如果不存在该模型则返回Null
@@ -722,8 +722,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     fun setChecked(@IntRange(from = 0) position: Int, checked: Boolean) {
 
         if ((checkedPosition.contains(position) && checked) || (!checked && !checkedPosition.contains(
-                position
-            ))
+                    position
+                ))
         ) return
 
         val itemViewType = getItemViewType(position)
@@ -879,7 +879,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                 viewDataBinding?.setVariable(modelId, model)
             } catch (e: Exception) {
                 val message =
-                    "${e.message} at file(${context.resources.getResourceEntryName(itemViewType)}.xml:0)"
+                        "${e.message} at file(${context.resources.getResourceEntryName(itemViewType)}.xml:0)"
                 Exception(message).printStackTrace()
             }
             viewDataBinding?.executePendingBindings()
@@ -917,14 +917,14 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             val itemExpand = getModelOrNull<ItemExpand>()
 
             val realPosition =
-                if (singleExpandMode && findParentPosition() != previousExpandPosition) {
-                    if (layoutPosition > previousExpandPosition) {
-                        layoutPosition - adapter.collapse(previousExpandPosition)
-                    } else {
-                        adapter.collapse(previousExpandPosition)
-                        layoutPosition
-                    }
-                } else layoutPosition
+                    if (singleExpandMode && findParentPosition() != previousExpandPosition) {
+                        if (layoutPosition > previousExpandPosition) {
+                            layoutPosition - adapter.collapse(previousExpandPosition)
+                        } else {
+                            adapter.collapse(previousExpandPosition)
+                            layoutPosition
+                        }
+                    } else layoutPosition
 
             onExpand?.invoke(this, true)
 
@@ -938,7 +938,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                     0
                 } else {
                     val sublist =
-                        if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
+                            if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
                     val sublistFlat = flat(sublist, true, depth)
 
                     (this@BindingAdapter.models as MutableList).addAll(
@@ -953,8 +953,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                     }
                     if (scrollTop) {
                         rv?.postDelayed({
-                            rv?.smoothScrollToPosition(realPosition)
-                        }, 200)
+                                            rv?.smoothScrollToPosition(realPosition)
+                                        }, 200)
                     }
                     previousExpandPosition = realPosition
                     sublistFlat.size
@@ -981,7 +981,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
                     0
                 } else {
                     val sublist =
-                        if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
+                            if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
                     val sublistFlat = flat(sublist, false, depth)
                     (this@BindingAdapter.models as MutableList).removeAll(sublistFlat)
                     if (expandAnimationEnabled) {
