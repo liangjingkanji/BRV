@@ -326,7 +326,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     fun addHeader(model: Any?, @IntRange(from = -1) index: Int = -1, animation: Boolean = false) {
 
         if (index == -1) {
-            (headers as MutableList).add(0,model)
+            (headers as MutableList).add(0, model)
             if (animation) notifyItemInserted(0)
         } else if (index <= headerCount) {
             (headers as MutableList).add(index, model)
