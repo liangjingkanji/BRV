@@ -567,7 +567,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             val realModels = this.models as MutableList
             realModels.addAll(flat(data))
             if (animation) {
-                notifyItemRangeInserted(headerCount + modelCount, realModels.size)
+                notifyItemRangeInserted(headerCount + modelCount - data.size, data.size)
             } else {
                 notifyDataSetChanged()
             }
