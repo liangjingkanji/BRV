@@ -867,7 +867,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
 
             if (model is ItemPosition) {
-                model.itemPosition = layoutPosition
+                model.itemPosition = modelPosition
             }
 
             if (model is ItemBind) {
