@@ -1,6 +1,6 @@
 <img src="https://i.imgur.com/XOAv59E.gif" width="250"/>
 
-可编辑/多选列表在开发中很常见, BRV可以短短几行代码就可以实现一个选择模式: [详细Demo](https://github.com/liangjingkanji/BRV/blob/master/smaple/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
+可编辑/多选列表在开发中很常见, BRV可以短短几行代码就可以实现一个选择模式: [Demo](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
 
 ## 多选列表
 
