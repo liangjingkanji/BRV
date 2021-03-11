@@ -1,5 +1,7 @@
 ## BRV
 
+[![Join the chat at https://gitter.im/liangjingkanji/brv](https://badges.gitter.im/liangjingkanji/brv.svg)](https://gitter.im/liangjingkanji/brv?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 <p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
 
