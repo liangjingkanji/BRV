@@ -191,3 +191,21 @@ h1, h2, h3, h4, h5, h6, .md-header-nav__title {
     font-weight: bold !important;
     color: #273849;
 }
+.md-typeset h1 {
+    text-align: center;
+    font-size: 1.45em;
+    color:#273849;
+}
+.md-typeset h2 {
+    display: inline-block;
+    font-size: 1.45em;
+}
+h2:after {
+    display: block;
+    content: '';
+    height: 2px;
+    margin-top: 4px;
+    background-color:#273849;
+    border-radius: 2px;
+    margin-right: 1.1em;
+}
