@@ -36,8 +36,9 @@
 
 /*字体渲染*/
 @font-face{
-    font-family: 'PT Code';
-    src: url('https://raw.githubusercontent.com/liangjingkanji/PTCode/master/font/PTCode-Regular.ttf') format('truetype');
+    font-family: 'JetBrains Mono';
+    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -45,7 +46,7 @@
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
-    font-family: 'PT Code' !important;
+    font-family: 'JetBrains Mono' !important;
 }
 
 /*布局*/
@@ -185,6 +186,9 @@ img {
 .md-typeset .md-content__button {
     color: var(--md-default-fg-color--lighter) !important;
 }
+.md-icon svg {
+    width: 14px;
+}
 
 /*标题*/
 h1, h2, h3, h4, h5, h6, .md-header-nav__title {
@@ -208,4 +212,20 @@ h2:after {
     background-color:#273849;
     border-radius: 2px;
     margin-right: 1.1em;
+}
+
+/*清单*/
+.md-typeset [type=checkbox]:checked+.task-list-indicator:before {
+    background-color: #43A047;
+}
+.md-typeset .task-list-indicator:before {
+    background-color: #c7c7c7;
+}
+.md-typeset .task-list-control {
+    margin-right: 8px;
+}
+
+/*复制图标*/
+.md-clipboard:after {
+    background-color: #4d4d4d;
 }

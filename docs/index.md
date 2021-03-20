@@ -109,6 +109,8 @@ android {
 
 注意要先创建`<layout>`布局中的变量`m`, `BR.m`才能被生成, 如果依然没有生成请`make project`(即AndroidStudio顶部工具栏的小锤子图标)或`build project`
 
+> m 可以是任何其他的名称, model或者sb都可以, 这里只是作者习惯性的简写变量名
+
 ```kotlin
 class App : Application() {
 
