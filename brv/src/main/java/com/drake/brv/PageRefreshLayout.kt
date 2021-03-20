@@ -472,9 +472,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             stateLayout!!.setContentView(contentView!!)
             setRefreshContent(this)
 
-            emptyLayout = emptyLayout
-            errorLayout = errorLayout
-            loadingLayout = loadingLayout
+            emptyLayout = this@PageRefreshLayout.emptyLayout
+            errorLayout = this@PageRefreshLayout.errorLayout
+            loadingLayout = this@PageRefreshLayout.loadingLayout
 
             onRefresh {
                 if (realEnableRefresh) super.setEnableRefresh(false)
