@@ -126,7 +126,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         try {
             stateEnabled =
-                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+                    attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
@@ -135,11 +135,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             )
 
             emptyLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+                    attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
             errorLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+                    attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
             loadingLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
+                    attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
         } finally {
             attributes.recycle()
         }
@@ -219,10 +219,12 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param hasMore 在函数参数中返回布尔类型来判断是否还存在下一页数据, 默认值true表示始终存在
      * @param isEmpty 返回true表示数据为空, 将显示缺省页 -> 空布局, 默认以[data.isNullOrEmpty()]则为空
      */
-    fun addData(data: List<Any?>?,
-                adapter: BindingAdapter? = null,
-                isEmpty: () -> Boolean = { data.isNullOrEmpty() },
-                hasMore: BindingAdapter.() -> Boolean = { true }) {
+    fun addData(
+        data: List<Any?>?,
+        adapter: BindingAdapter? = null,
+        isEmpty: () -> Boolean = { data.isNullOrEmpty() },
+        hasMore: BindingAdapter.() -> Boolean = { true }
+    ) {
 
         val adjustAdapter = when {
             adapter != null -> adapter
@@ -455,7 +457,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     private fun replaceStateLayout() {
 
-        if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID) {
+        if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID &&
+            StateConfig.emptyLayout == View.NO_ID && emptyLayout == View.NO_ID &&
+            StateConfig.loadingLayout == View.NO_ID && loadingLayout == View.NO_ID) {
             stateEnabled = false
             return
         }
