@@ -54,9 +54,7 @@ class App : Application() {
             MaterialHeader(context)
         }
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
-            ClassicsFooter(
-                    context
-                          )
+            ClassicsFooter(context)
         }
     }
 }

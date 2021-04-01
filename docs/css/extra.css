@@ -36,9 +36,8 @@
 
 /*字体渲染*/
 @font-face{
-    font-family: 'JetBrains Mono';
-    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+    font-family: 'PT Code';
+    src: url('https://raw.githubusercontent.com/liangjingkanji/PTCode/master/font/PTCode-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -46,7 +45,7 @@
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono' !important;
+    font-family: 'PT Code' !important;
 }
 
 /*布局*/
