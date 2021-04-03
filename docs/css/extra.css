@@ -162,6 +162,12 @@ div .md-source__fact {
 .md-typeset pre>code {
     padding: 0.8em 0.8em;
 }
+code span::selection {
+    background: #214283;
+}
+.highlight code::selection {
+    background: #214283;
+}
 
 /*代码片段*/
 p code, article > code, li > code, td > code, th > code, a > code {
