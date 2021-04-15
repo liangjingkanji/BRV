@@ -15,11 +15,11 @@
     --md-code-hl-generic-color:        #A9B7C6;
     --md-code-hl-variable-color:       #A9B7C6;
 
-    --md-typeset-color: #000000;
+    --md-typeset-color: #333333;
     --drake-highlight:  #d63200;
     --drake-accent: #e95f59;
     --drake-highlight-opacity:  #d6320022;
-    --md-admonition-fg-color: #000000;
+    --md-admonition-fg-color: #333333;
 }
 
 [data-md-color-scheme="drake"] {
@@ -46,7 +46,6 @@
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
-    text-shadow: #00000020 0px 0px 1px !important;
     font-family: 'JetBrains Mono' !important;
 }
 
