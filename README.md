@@ -26,7 +26,9 @@
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
 
-搜索文件: `nav_main` 打开即可查看和跳转侧滑菜单所有功能界面 (任何疑问点击QQ群作者一对一解答)
+
+
+欢迎贡献代码/编辑使用文档. 本项目将一直保持维护
 
 ### 特点
 
@@ -43,24 +45,24 @@
 
 ### 功能
 
-- [x] 多类型
-- [x] 单一数据模型一对多
-- [x] 多数据模型
-- [x] 添加头布局和脚布局
-- [x] 点击(防抖动)/长按事件
-- [x] 分组(展开折叠/递归层次/展开置顶/单一展开模式)
-- [x] 悬停
-- [x] 分割线/均布间隔(支持官方全部的`LayoutManager`)
-- [x] 切换模式
-- [x] 选择模式(多选/单选/全选/取消全选/反选)
-- [x] 拖拽位置
-- [x] 侧滑删除
-- [x] 下拉刷新 | 上拉加载, 扩展SmartRefreshLayout即兼容其所有功能
-- [x] 预拉取索引(UpFetch) | 预加载索引(Preload)
-- [x] 缺省页
-- [x] 自动分页加载
-- [x] 伸缩布局 ([FlexboxLayoutManager](https://github.com/google/flexbox-layout))
-- [x] 可扩展自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于协程实现自动化的并发网络请求
+- 多类型
+- 单一数据模型一对多
+- 多数据模型
+- 添加头布局和脚布局
+- 点击(防抖动)/长按事件
+- 分组(展开折叠/递归层次/展开置顶/单一展开模式)
+- 悬停
+- 分割线/均布间隔(支持官方全部的`LayoutManager`)
+- 切换模式
+- 选择模式(多选/单选/全选/取消全选/反选)
+- 拖拽位置
+- 侧滑删除
+- 下拉刷新 | 上拉加载, 扩展SmartRefreshLayout即兼容其所有功能
+- 预拉取索引(UpFetch) | 预加载索引(Preload)
+- 缺省页
+- 自动分页加载
+- 扩展伸缩布局 ([FlexboxLayoutManager](https://github.com/google/flexbox-layout))
+- 扩展自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于协程实现自动化的并发网络请求
 
 
 

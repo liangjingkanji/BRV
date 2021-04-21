@@ -48,6 +48,7 @@
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
     font-family: 'JetBrains Mono' !important;
+    text-shadow: #33333333 0px 0px 1px !important;
 }
 
 /*布局*/
@@ -235,4 +236,9 @@ h2:after {
 /*复制图标*/
 .md-clipboard:after {
     background-color: #4d4d4d;
+}
+
+/*头部*/
+.md-ellipsis {
+    font-weight: bolder;
 }
