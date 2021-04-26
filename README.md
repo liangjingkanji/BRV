@@ -7,7 +7,7 @@
     <strong>可能是最强大的RecyclerView框架</strong>
     <br>
     <br>
-    <a href="http://liangjingkanji.github.io/BRV/">使用文档</a>
+    <a href="http://liangjingkanji.github.io/BRV/">使用文档</a> | <a href="https://coding-pages-bucket-3558162-8706000-16641-587681-1252757332.cos-website.ap-shanghai.myqcloud.com/">备用访问</a>
     <br>
     <img src="https://i.imgur.com/G7WYYXb.jpg" width="350"/>
 </p>
