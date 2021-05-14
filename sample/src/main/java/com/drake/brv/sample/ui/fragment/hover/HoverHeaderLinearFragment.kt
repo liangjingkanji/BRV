@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.drake.brv.sample.ui.fragment
+package com.drake.brv.sample.ui.fragment.hover
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.HoverHeaderModel
@@ -30,11 +29,9 @@ import com.drake.tooltip.toast
 import kotlinx.android.synthetic.main.fragment_hover_header.*
 
 
-class HoverHeaderFragment : Fragment(R.layout.fragment_hover_header) {
+class HoverHeaderLinearFragment : BaseHoverFragment(R.layout.fragment_hover_header) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         rv_hover.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
@@ -51,11 +48,11 @@ class HoverHeaderFragment : Fragment(R.layout.fragment_hover_header) {
             // 可选项, 粘性监听器
             onHoverAttachListener = object : OnHoverAttachListener {
                 override fun attachHover(v: View) {
-                    ViewCompat.setElevation(v, 10F)
+                    ViewCompat.setElevation(v, 10F) // 悬停时显示阴影
                 }
 
                 override fun detachHover(v: View) {
-                    ViewCompat.setElevation(v, 0F)
+                    ViewCompat.setElevation(v, 0F) // 非悬停时隐藏阴影
                 }
             }
 
@@ -86,5 +83,4 @@ class HoverHeaderFragment : Fragment(R.layout.fragment_hover_header) {
             Model()
         )
     }
-
 }

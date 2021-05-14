@@ -57,3 +57,22 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
 fun isHover(position: Int): Boolean
 ```
 
+## 网格悬停
+
+Demo截图
+
+<img src="https://i.imgur.com/OJUv7w7.png" width="250"/>
+
+可以看到图片中悬停的item比普通的item要宽两倍, 这里需要确定悬停的Item的动态`SpanSize`, 所以不能直接使用`grid(3)`而是需要手动创建`HoverGridLayoutManager`
+
+```kotlin
+val layoutManager = HoverGridLayoutManager(requireContext(), 2)
+layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+    override fun getSpanSize(position: Int): Int {
+        return if(rv_hover.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
+    }
+}
+rv_hover.layoutManager = layoutManager
+```
+
+

@@ -66,11 +66,6 @@
         android:label="刷新列表"
         tools:layout="@layout/fragment_refresh" />
     <fragment
-        android:id="@+id/hoverHeaderFragment"
-        android:name="com.drake.brv.sample.ui.fragment.HoverHeaderFragment"
-        android:label="悬停"
-        tools:layout="@layout/fragment_hover_header" />
-    <fragment
         android:id="@+id/preloadFragment"
         android:name="com.drake.brv.sample.ui.fragment.PreloadFragment"
         android:label="预加载"
@@ -87,6 +82,9 @@
         tools:layout="@layout/fragment_simple" />
 
     <include app:graph="@navigation/nav_divider" />
+
+    <include app:graph="@navigation/nav_hover_header" />
+
     <fragment
         android:id="@+id/dragFragment"
         android:name="com.drake.brv.sample.ui.fragment.DragFragment"
