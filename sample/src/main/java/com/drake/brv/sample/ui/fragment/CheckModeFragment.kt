@@ -126,6 +126,7 @@ class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
         // 切换选择模式
         tv_manage.setOnClickListener {
             adapter.toggle()
+            // rv_check_mode.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
         }
     }
 

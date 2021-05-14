@@ -51,12 +51,26 @@
 
 <br>
 
+## 默认选择
+
+如果你想默认选中某些Item, 应当使用`setChecked`函数去设置, 而不是直接在Model中设置`isChecked`属性为true(这是不会触发选中回调的)
+
+例如在Demo中就有这么一行代码默认选中第一个Item
+
+```kotlin
+// 切换选择模式
+tv_manage.setOnClickListener {
+    adapter.toggle()
+    rv_check_mode.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
+}
+```
+
+## 函数
+
 > 学完如何创建一个多选列表后可以查看函数学习更复杂的功能配置
 
 <img src="https://i.imgur.com/fZ7RDtX.png" width="600"/>
 
-
-## 函数
 
 | 函数 | 描述 |
 |-|-|
