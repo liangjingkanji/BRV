@@ -52,8 +52,11 @@
 }
 
 /*布局*/
+.md-content {
+    max-width: 49.5rem;
+}
 .md-grid {
-    max-width: 120em !important;
+    max-width: 80rem;
 }
 
 /*表格*/
