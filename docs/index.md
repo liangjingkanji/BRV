@@ -104,10 +104,15 @@ android {
 ```
 选中行是databinding使用方法
 
-第三步, 应当在Application中注册一个全局的ID(记住在`AndroidManifest`注册该Application)
+第三步, 应当在Application中注册一个全局的ID (别忘记在`AndroidManifest`注册该Application)
 <br>
 
-注意要先创建`<layout>`布局中的变量`m`, `BR.m`才能被生成, 如果依然没有生成请`make project`(即AndroidStudio顶部工具栏的小锤子图标)或`build project`
+1. 注意要先创建`<layout>`布局中的变量`m`, `BR.m`才能被生成 <br>
+   <img src="https://i.imgur.com/mnTUXKY.png" width="450"/>
+2. 导包注意导入你所在module的BR <br>
+   <img src="https://i.imgur.com/qpdLiM0.png" width="450"/>
+2. 如果依然没有生成请`make project`(即图中绿色小锤子图标) <br>
+   <img src="https://i.imgur.com/r9yceVQ.png" width="150"/>
 
 > m 可以是任何其他的名称, model或者sb都可以, 这里只是作者习惯性的简写变量名
 
