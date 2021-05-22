@@ -44,9 +44,9 @@ android {
         }
     }
 
-    dokka {
-        outputFormat = 'gfm'
-        outputDirectory = "$rootDir/docs/api"
+    dokkaHtml {
+        outputDirectory.set(file("$rootDir/docs/api"))
+        moduleName.set("BRV")
     }
 
     buildFeatures.dataBinding = true
