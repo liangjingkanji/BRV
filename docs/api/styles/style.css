@@ -94,7 +94,7 @@ html ::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-bottom: 1px solid #DADFE6;
     padding: 11px 3px;
-    font-size: 14px;
+    font-size: 12px;
     color: var(--average-color);
     outline: none;
     margin: 0 8px;
@@ -288,11 +288,11 @@ code.paragraph {
     padding: 8px 32px 8px 8px;
     box-sizing: border-box;
     white-space: pre-wrap;
-    font-weight: bold;
+    font-weight: normal;
     position: relative;
     line-height: 24px;
-    font-family: JetBrains Mono, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-    font-size: 14px;
+    font-family: JetBrains Mono, HYZhengYuan, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-size: 12px;
     min-height: 43px;
 }
 
@@ -444,11 +444,11 @@ code.paragraph {
 }
 
 body, table {
-    font-family: 'Inter', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'JetBrains Mono', "HYZhengYuan", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #F4F4F4;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 24px;
     margin: 0;
 }
@@ -504,7 +504,7 @@ h1 {
 
 
 h1.cover {
-    font-size: 60px;
+    font-size: 32px;
     line-height: 64px;
     letter-spacing: -1.5px;
 
@@ -803,7 +803,7 @@ td.content {
     text-decoration: none;
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 12px;
     color: #282E34;
 }
 
