@@ -43,12 +43,18 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face{
+    font-family: 'HYZhengYuan';
+    src: local('HYZhengYuan'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono' !important;
-    text-shadow: #33333333 0px 0px 1px !important;
+    font-family: 'JetBrains Mono', "HYZhengYuan" !important;
 }
 
 /*布局*/
