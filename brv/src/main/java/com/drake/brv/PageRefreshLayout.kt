@@ -469,7 +469,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         stateLayout?.apply {
             this@PageRefreshLayout.removeView(contentView)
             addView(contentView)
-            stateLayout!!.setContentView(contentView!!)
+            setContentView(contentView!!)
             setRefreshContent(this)
 
             emptyLayout = this@PageRefreshLayout.emptyLayout
