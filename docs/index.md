@@ -138,6 +138,6 @@ rv_simple.linear().setup {
 
 别看文档中第三种方式复杂, 实际第三种方式代码量最少, 同时最解耦
 
-> 使用DataBinding可以使用或者参考我的常用自定义属性:  [DataBindingComponent.kt](https://github.com/liangjingkanji/Engine/blob/master/engine/src/main/java/com/drake/engine/databinding/DataBindingComponent.kt)<br>
-> 你可以复制文件或者依赖仓库
+> 使用DataBinding可以复制或者引用我的常用自定义属性:  [DataBindingComponent.kt](https://github.com/liangjingkanji/Engine/blob/master/engine/src/main/java/com/drake/engine/databinding/DataBindingComponent.kt)<br>
+> 如果你想更加了解DataBinding请阅读[DataBinding最全使用说明](https://juejin.cn/post/6844903549223059463/)
 
