@@ -37,6 +37,7 @@ markdown_extensions:
 nav:
   - 使用: index.md
   - 多类型: multi_type.md
+  - 数据刷新: refresh-data.md
   - 监听事件: listener.md
   - 头脚布局: header_footer.md
   - 分组: group.md
