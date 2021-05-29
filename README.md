@@ -28,10 +28,9 @@
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
 
 
+## 特点
 
-欢迎贡献代码/编辑使用文档. 本项目将一直保持维护
-
-### 特点
+欢迎贡献代码/编辑使用文档. 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目也将一直保持维护状态
 
 -   简洁代码
 -   功能全面
@@ -44,7 +43,7 @@
 -   文档详细
 -   Demo简单
 
-### 功能
+## 功能
 
 - 多类型
 - 单一数据模型一对多
@@ -66,7 +65,7 @@
 - 扩展自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于协程实现自动化的并发网络请求
 
 
-
+## 安装
 
 在项目根目录的 build.gradle 添加仓库
 
