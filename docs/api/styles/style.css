@@ -98,6 +98,11 @@ html ::-webkit-scrollbar-thumb {
     color: var(--average-color);
     outline: none;
     margin: 0 8px;
+    font-family: "JetBrains Mono", "HYZhengYuan";
+}
+
+.breadcrumbs {
+    font-family: "JetBrains Mono", "HYZhengYuan";
 }
 
 .section-tab:hover {
@@ -378,6 +383,7 @@ code.paragraph {
     position: relative;
     user-select: none; /* there's a weird bug with text selection */
     padding: 8px 0;
+    font-family: "JetBrains Mono", "HYZhengYuan";
 }
 
 .sideMenuPart a {
@@ -517,7 +523,7 @@ h1.cover {
 
 h2 {
     color: #393939;
-    font-size: 31px;
+    font-size: 20px;
     line-height: 40px;
     letter-spacing: -0.5px;
 }
@@ -1108,6 +1114,7 @@ td.content {
 
 .footer > span {
     padding: 0 16px;
+    font-family: "JetBrains Mono", "HYZhengYuan";
 }
 
 .footer a {
@@ -1153,7 +1160,7 @@ div.runnablesample {
 
 @media screen and (max-width: 1119px) {
     h1.cover {
-        font-size: 48px;
+        font-size: 32px;
         line-height: 48px;
         padding-bottom: 8px;
     }

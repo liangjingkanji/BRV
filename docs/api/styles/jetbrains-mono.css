@@ -6,3 +6,10 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face{
+    font-family: 'HYZhengYuan';
+    src: local('HYZhengYuan'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -22,8 +22,6 @@ apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 28
-
-
     defaultConfig {
         applicationId "com.drake.brv.sample"
         minSdkVersion 21
