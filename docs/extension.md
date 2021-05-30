@@ -36,9 +36,9 @@
 
 | 函数 | 描述 |
 |-|-|
-| [linear](brv/com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/linear.md) | 使用`LinearLayoutManager`创建线性列表 |
-| [grid](api/brv/com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/grid.md) | 使用`GridLayoutManager`创建网格列表 |
-| [staggered]((brv/com.drake.brv.utils/androidx.recyclerview.widget.-recycler-view/staggered.md)) | 使用`StaggeredLayoutManager`创建瀑布流列表 |
+| [linear](api/-b-r-v/com.drake.brv.utils/grid.html) | 使用`LinearLayoutManager`创建线性列表 |
+| [grid](api/-b-r-v/com.drake.brv.utils/grid.html) | 使用`GridLayoutManager`创建网格列表 |
+| [staggered](api/-b-r-v/com.drake.brv.utils/staggered.html) | 使用`StaggeredLayoutManager`创建瀑布流列表 |
 
 
 
@@ -51,7 +51,7 @@ rv.linear().divider(R.drawable.divider_horizontal).setup {
     addType<DividerModel>(R.layout.item_divider_horizontal)
 }.models = getData()
 ```
-扩展函数实际上就是使用的[DefaultDecoration](docs/api/brv/com.drake.brv/-default-decoration/index.md)来创建对象
+扩展函数实际上就是使用的[DefaultDecoration](api/-b-r-v/com.drake.brv/-default-decoration/index.html)来创建对象
 
 
 ## 对话框

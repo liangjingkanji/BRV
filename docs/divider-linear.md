@@ -50,9 +50,9 @@ rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
 
 | 字段 | 描述 |
 |-|-|
-| [startVisible](api/brv/com.drake.brv/-default-decoration/start-visible.md) | 是否显示首部分割线 |
-| [endVisible](api/brv/com.drake.brv/-default-decoration/end-visible.md) | 是否显示尾部分割线 |
-| [includeVisible](api/brv/com.drake.brv/-default-decoration/include-visible.md) | 是否显示首尾分割线 |
+| [startVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-2091559976%2FProperties%2F-900954490) | 是否显示首部分割线 |
+| [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | 是否显示尾部分割线 |
+| [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | 是否显示首尾分割线 |
 
 <img src="https://i.imgur.com/Z1vsVjW.png" width="250"/>
 

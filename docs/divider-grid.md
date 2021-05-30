@@ -41,9 +41,9 @@ rv.grid(3).divider {
 
 | 字段 | 描述 |
 |-|-|
-| [startVisible](api/brv/com.drake.brv/-default-decoration/start-visible.md) | 是否显示上下边缘分割线 |
-| [endVisible](api/brv/com.drake.brv/-default-decoration/end-visible.md) | 是否显示左右边缘分割线 |
-| [includeVisible](api/brv/com.drake.brv/-default-decoration/include-visible.md) | 是否显示周围分割线 |
+| [startVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-2091559976%2FProperties%2F-900954490) | 是否显示上下边缘分割线 |
+| [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | 是否显示左右边缘分割线 |
+| [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | 是否显示周围分割线 |
 
 ### 1) 上下
 

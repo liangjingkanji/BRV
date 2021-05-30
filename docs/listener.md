@@ -2,14 +2,14 @@
 
 | 函数 | 描述 |
 |-|-|
-| [addClickable](api/brv/com.drake.brv/-binding-adapter/add-clickable.md) | 添加需要监听点击事件的视图Id (500毫秒防抖动) |
-| [addFastClickable](api/brv/com.drake.brv/-binding-adapter/add-fast-clickable.md) | 添加需要监听点击事件的视图Id |
-| [addLongClickable](api/brv/com.drake.brv/-binding-adapter/add-long-clickable.md) | 添加需要监听长按事件的视图Id |
-| [onClick](api/brv/com.drake.brv/-binding-adapter/on-click.md) | 添加点击事件监听器, 同时支持参数添加Id |
-| [onLongClick](api/brv/com.drake.brv/-binding-adapter/on-long-click.md) | 添加长按事件监听器, 同时支持参数添加Id |
-| [onBind](api/brv/com.drake.brv/-binding-adapter/on-bind.md) | 对应Adapter的`onBindViewHolder`函数回调, 每次显示Item都会触发回调, 用于处理数据绑定 |
-| [onCreate](api/brv/com.drake.brv/-binding-adapter/on-create.md) | 对应Adapter的`onCreateViewHolder`函数回调, 用于创建Item的视图 |
-| [listBind](api/brv/com.drake.brv/-binding-adapter/list-bind.md) | 一个`onBindViewHolder`监听器的集合, 一般用于其他框架来监听扩展, 使用者一般不需要使用 |
+| [addClickable](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#-418380515%2FFunctions%2F-900954490) | 添加需要监听点击事件的视图Id (500毫秒防抖动) |
+| [addFastClickable](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#717762977%2FFunctions%2F-900954490) | 添加需要监听点击事件的视图Id |
+| [addLongClickable](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#1688979329%2FFunctions%2F-900954490) | 添加需要监听长按事件的视图Id |
+| [onClick](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#-273659380%2FFunctions%2F-900954490) | 添加点击事件监听器, 同时支持参数添加Id |
+| [onLongClick](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#1487040368%2FFunctions%2F-900954490) | 添加长按事件监听器, 同时支持参数添加Id |
+| [onBind](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#-2089117998%2FFunctions%2F-900954490) | 对应Adapter的`onBindViewHolder`函数回调, 每次显示Item都会触发回调, 用于处理数据绑定 |
+| [onCreate](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#1726394510%2FFunctions%2F-900954490) | 对应Adapter的`onCreateViewHolder`函数回调, 用于创建Item的视图 |
+| [listBind](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#-1936794380%2FProperties%2F-900954490) | 一个`onBindViewHolder`监听器的集合, 一般用于其他框架来监听扩展, 使用者一般不需要使用 |
 
 ## 示例
 

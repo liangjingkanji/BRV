@@ -230,5 +230,5 @@ class App : Application() {
 
 这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).
 <br>
-> 假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/brv/com.drake.brv/-page-refresh-layout/add-data.md)函数指定参数adapter来使用自动分页, 否则将抛出异常
+> 假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/-b-r-v/com.drake.brv/-page-refresh-layout/index.html#-704450894%2FFunctions%2F-900954490)函数指定参数adapter来使用自动分页, 否则将抛出异常
 
