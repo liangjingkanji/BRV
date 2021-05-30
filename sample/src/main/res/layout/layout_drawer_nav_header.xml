@@ -50,8 +50,9 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textSize="12dp"
+                    android:autoLink="web"
                     android:textStyle="italic"
-                    android:text="github.com/liangjingkanji/BRV"
+                    android:text="liangjingkanji.github.io/BRV/"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
