@@ -32,6 +32,15 @@ android {
 
     }
 
+    signingConfigs {
+        signed {
+            storeFile file("../signed")
+            storePassword "s73dfyUxkjuq"
+            keyAlias "key0"
+            keyPassword "s73dfyUxkjuq"
+        }
+    }
+
     androidExtensions {
         experimental = true
     }
@@ -39,6 +48,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.signed
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
