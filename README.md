@@ -27,21 +27,20 @@
 
 <p align="center"><img src="https://i.imgur.com/lZXNqXE.jpg" align="center" width="30%;" /></p>
 
+本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目也将一直保持维护状态
 
-## 特点
+<br>
+<p align="center"><strong>欢迎贡献代码/问题</strong></p>
+<br>
 
-欢迎贡献代码/编辑使用文档. 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目也将一直保持维护状态
-
--   简洁代码
--   功能全面
--   非侵入式
--   不创建任何文件
+-   优雅的函数设计
+-   详细的使用文档
+-   简单的示例代码
+-   高内聚低耦合
 -   刷新不闪屏
--   数据双向绑定(DataBinding)
--   DSL作用域
--   高扩展性
--   文档详细
--   Demo简单
+-   双向数据绑定(DataBinding)
+
+<br>
 
 ## 功能
 
