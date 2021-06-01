@@ -11,17 +11,31 @@
 | [onCreate](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#1726394510%2FFunctions%2F-900954490) | 对应Adapter的`onCreateViewHolder`函数回调, 用于创建Item的视图 |
 | [listBind](api/-b-r-v/com.drake.brv/-binding-adapter/index.html#-1936794380%2FProperties%2F-900954490) | 一个`onBindViewHolder`监听器的集合, 一般用于其他框架来监听扩展, 使用者一般不需要使用 |
 
+> 使用onCreate获取itemViewType在作用域中使用`it`, 而不是其`iteViewType`.
+
+这是因为在onCreateViewHolder期间的ViewHolder的itemViewType实际上是没有值的. 而onCreate就是对应的`onCreateViewHolder`
+
+```kotlin
+rv_simple.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+    onCreate {
+        when(it){
+            R.layout.item_simple -> {
+                // 特殊处理
+            }
+        }
+    }
+}.models = getData()
+```
+
 ## 示例
 
 通过使用Item的布局文件中的控件id可以设置点击事件或者长按事件
 
 ```kotlin
-rv_normal.linear().setup {
-    
-    addType<NormalModel>(R.layout.item_multi_type_normal)
-    
+rv_simple.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
     addClickable(R.id.item)
-    
     onClick {
         // Item设置点击事件, 就要给Item的根布局设置一个id, 这里设置的是R.id.item
     }
