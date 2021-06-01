@@ -38,6 +38,9 @@ class SimpleFragment : Fragment(R.layout.fragment_simple) {
             R.id.tv_simple.onClick {
                 toast("点击Text")
             }
+            onClick(R.id.tv_simple, R.id.item) {
+                toast("onClick")
+            }
         }.models = getData()
     }
 
