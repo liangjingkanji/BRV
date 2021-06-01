@@ -21,7 +21,6 @@ package com.drake.brv
 
 import android.content.Context
 import android.util.NoSuchPropertyException
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,18 +46,18 @@ import com.drake.brv.utils.BRV
 /**
  * < Android上最强大的RecyclerView框架 >
  *
- * 一行代码添加多类型 [addType]
- * 数据模型可以为任何对象 [models]
- * 通过接口实现来扩展功能 [com.drake.brv.item]
- * 快速添加触摸事件(防抖点击/快速点击/长按/选择/侧滑/拖拽)
- * 强大的分组/展开/折叠/粘性头部/递归深度/动画/组position [expandOrCollapse]
- * 自定义列表动画 [setAnimation] 默认动画 [com.drake.brv.animation]
- * 头布局/脚布局 [addHeader] [addFooter]
- * 快速设置分隔物
- * 缺省页 [PageRefreshLayout]
- * 下拉刷新/上拉加载/自动分页加载 [PageRefreshLayout]
- * 强大的选择状态 [setChecked] (切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
- * 遵守高内聚低耦合原则, 支持功能配合使用, 代码简洁函数分组
+ * 1. 一行代码添加多类型 [addType]
+ * 2. 数据模型可以为任何对象 [models]
+ * 3. 通过接口实现来扩展功能 [com.drake.brv.item]
+ * 4. 快速添加触摸事件(防抖点击/快速点击/长按/选择/侧滑/拖拽)
+ * 5. 强大的分组/展开/折叠/粘性头部/递归深度/动画/组position [expandOrCollapse]
+ * 6. 自定义列表动画 [setAnimation] 默认动画 [com.drake.brv.animation]
+ * 7. 头布局/脚布局 [addHeader] [addFooter]
+ * 8. 快速设置分隔物
+ * 9. 缺省页 [PageRefreshLayout]
+ * 10. 下拉刷新/上拉加载/自动分页加载 [PageRefreshLayout]
+ * 11. 强大的选择状态 [setChecked] (切换模式/多选/单选/全选/取消全选/反选/选中数据集/选中数量/单选和多选模式切换)
+ * 12. 遵守高内聚低耦合原则, 支持功能配合使用, 代码简洁函数分组
  *
  * @property itemTouchHelper 等效于[RecyclerView.addItemDecoration]设置
  *
@@ -210,8 +209,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     // <editor-fold desc="触摸事件">
-    private val clickableIds = SparseBooleanArray()
-    private val longClickableIds = ArrayList<Int>()
+    private val clickListeners = HashMap<Int, Pair<(BindingViewHolder.(Int) -> Unit)?, Boolean>>()
+    private val longClickListeners = HashMap<Int, (BindingViewHolder.(Int) -> Unit)?>()
 
     // 自定义ItemTouchHelper即可设置该属性
     var itemTouchHelper: ItemTouchHelper? = ItemTouchHelper(DefaultItemTouchCallback(this))
@@ -229,7 +228,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun addClickable(@IdRes vararg id: Int) {
         for (i in id) {
-            clickableIds.put(i, false)
+            clickListeners[i] = Pair(null, false)
         }
     }
 
@@ -238,16 +237,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun addFastClickable(@IdRes vararg id: Int) {
         for (i in id) {
-            clickableIds.put(i, true)
-        }
-    }
-
-    /**
-     * 指定Id的视图将被监听长按事件
-     */
-    fun addLongClickable(@IdRes vararg id: Int) {
-        for (i in id) {
-            longClickableIds.add(i)
+            clickListeners[i] = Pair(null, true)
         }
     }
 
@@ -257,9 +247,18 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
         for (i in id) {
-            clickableIds.put(i, false)
+            clickListeners[i] = Pair(null, false)
         }
         onClick = block
+    }
+
+    /**
+     * 指定Id的视图将被监听长按事件
+     */
+    fun addLongClickable(@IdRes vararg id: Int) {
+        for (i in id) {
+            longClickListeners[i] = null
+        }
     }
 
     /**
@@ -268,11 +267,22 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      */
     fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
         for (i in id) {
-            longClickableIds.add(i)
+            longClickListeners[i] = null
         }
         onLongClick = block
     }
 
+    fun @receiver:IdRes Int.onClick(listener: BindingViewHolder.(Int) -> Unit) {
+        clickListeners[this] = Pair(listener, false)
+    }
+
+    fun @receiver:IdRes Int.onFastClick(listener: BindingViewHolder.(Int) -> Unit) {
+        clickListeners[this] = Pair(listener, true)
+    }
+
+    fun @receiver:IdRes Int.onLongClick(listener: BindingViewHolder.(Int) -> Unit) {
+        longClickListeners[this] = listener
+    }
 
     // </editor-fold>
 
@@ -836,23 +846,22 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
 
         init {
-            for (i in 0 until clickableIds.size()) {
-                val view = itemView.findViewById<View>(clickableIds.keyAt(i)) ?: continue
-                if (clickableIds.valueAt(i)) {
-                    view.setOnClickListener {
-                        onClick?.invoke(this@BindingViewHolder, view.id)
+            for (clickListener in clickListeners) {
+                val view = itemView.findViewById<View>(clickListener.key) ?: continue
+                if (clickListener.value.second) {
+                    view.throttleClick(clickPeriod) {
+                        (clickListener.value.first ?: onClick)?.invoke(this@BindingViewHolder, id)
                     }
                 } else {
-                    view.throttleClick(clickPeriod) {
-                        onClick?.invoke(this@BindingViewHolder, view.id)
+                    view.setOnClickListener {
+                        (clickListener.value.first ?: onClick)?.invoke(this, it.id)
                     }
                 }
             }
-
-            for (longClickableId in longClickableIds) {
-                val view = itemView.findViewById<View>(longClickableId) ?: continue
+            for (longClickListener in longClickListeners) {
+                val view = itemView.findViewById<View>(longClickListener.key) ?: continue
                 view.setOnLongClickListener {
-                    onLongClick?.invoke(this, view.id)
+                    (longClickListener.value ?: onLongClick)?.invoke(this, it.id)
                     true
                 }
             }

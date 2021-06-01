@@ -17,23 +17,26 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.drake.tooltip.toast
 import kotlinx.android.synthetic.main.fragment_simple.*
 
 class SimpleFragment : Fragment(R.layout.fragment_simple) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         rv_simple.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
             onBind {
                 findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
+            }
+            R.id.tv_simple.onClick {
+                toast("点击Text")
             }
         }.models = getData()
     }
