@@ -28,7 +28,7 @@ rv_simple.linear().setup {
 }.models = getData()
 ```
 
-## 示例
+## 点击事件
 
 通过使用Item的布局文件中的控件id可以设置点击事件或者长按事件
 
@@ -65,7 +65,21 @@ rv_normal.linear().setup {
 }.models = getData()
 ```
 
-## 嵌套
+还有一种更简单的添加点击事件的函数
+
+```kotlin
+rv_simple.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+    R.id.tv_simple.onClick {
+        toast("点击Text")
+    }
+    R.id.item.onLongClick {
+        toast("点击Item")
+    }
+}.models = getData()
+```
+
+## RV嵌套
 
 在使用rv嵌套rv时应当在onCreate回调中为内嵌的rv设置视图使用`rv.setup`, 在onBind中绑定数据使用`rv.models`
 
