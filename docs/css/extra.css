@@ -20,6 +20,7 @@
     --drake-accent: #e95f59;
     --drake-highlight-opacity:  #d6320022;
     --md-admonition-fg-color: #333333;
+    --drake-font-size: 12px;
 }
 
 [data-md-color-scheme="drake"] {
@@ -82,7 +83,7 @@ table tr:nth-child(2n), thead {
     text-align: left;
     display: table;
     box-shadow:none;
-    font-size: 12px;
+    font-size: var(--drake-font-size);
 }
 .md-typeset table:not([class]) th {
     border: 1px solid #dfe2e5;
@@ -122,7 +123,7 @@ table tr:nth-child(2n), thead {
 /*字间距*/
 .md-typeset {
     line-height: 1.8;
-    font-size: 12px;
+    font-size: var(--drake-font-size);
 }
 .md-typeset pre {
     line-height: 1.6;
@@ -133,7 +134,7 @@ table tr:nth-child(2n), thead {
     border-bottom: 2px solid transparent;
     color: var(--md-typeset-color);
     line-height: 1.3;
-    font-size: 12px;
+    font-size: var(--drake-font-size);
     margin-bottom: .8em;
     font-weight:normal;
 }
@@ -160,7 +161,7 @@ div .md-source__fact {
     font-weight: 500;
 }
 .md-nav__link {
-    font-size: 12px;
+    font-size: var(--drake-font-size);
     line-height: 1.6;
 }
 
@@ -182,7 +183,7 @@ code span::selection {
 
 /*代码片段*/
 p code, article > code, li > code, td > code, th > code, a > code {
-    background-color: rgb(0,0,0,0) !important;
+    background-color: transparent !important;
     color: var(--drake-highlight) !important;
     padding: 0 2px !important;
 }
@@ -250,4 +251,33 @@ h2:after {
 /*头部*/
 .md-ellipsis {
     font-weight: bolder;
+}
+
+/*折叠块*/
+/*标题展开状态*/
+.md-typeset .admonition-title, .md-typeset summary {
+    border-left: none;
+    margin: 0;
+}
+/*标题背景*/
+.md-typeset .abstract>.admonition-title, .md-typeset .abstract>summary, .md-typeset .summary>.admonition-title, .md-typeset .summary>summary, .md-typeset .tldr>.admonition-title, .md-typeset .tldr>summary {
+    background-color: #f2f2f2;
+    border: 1px solid #dfe2e5;
+    font-weight: bold;
+}
+/*内容展开状态*/
+.md-typeset .admonition, .md-typeset details {
+    border-left: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: var(--drake-font-size);
+}
+/*标题栏左侧图标*/
+.md-typeset .abstract>.admonition-title:before, .md-typeset .abstract>summary:before, .md-typeset .summary>.admonition-title:before, .md-typeset .summary>summary:before, .md-typeset .tldr>.admonition-title:before, .md-typeset .tldr>summary:before {
+    background-color: var(--md-admonition-fg-color);
+    top: .5rem;
+}
+/*箭头图标*/
+.md-typeset summary:after {
+    top: .5rem;
 }
