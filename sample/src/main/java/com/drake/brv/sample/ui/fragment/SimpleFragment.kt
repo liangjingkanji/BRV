@@ -36,10 +36,7 @@ class SimpleFragment : Fragment(R.layout.fragment_simple) {
                 findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
             }
             R.id.tv_simple.onClick {
-                toast("点击Text")
-            }
-            onClick(R.id.tv_simple, R.id.item) {
-                toast("onClick")
+                toast("点击文本")
             }
         }.models = getData()
     }

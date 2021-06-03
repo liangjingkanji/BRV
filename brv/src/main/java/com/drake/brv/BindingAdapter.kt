@@ -225,7 +225,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     /**
      * 添加点击事件
      * 默认500ms防抖, 修改[clickPeriod]属性可以全局设置间隔时间, 单位毫秒
+     * 默认会回调最后一个onClick监听函数
      */
+    @Deprecated(
+        "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖",
+        ReplaceWith("onClick(*id){  }"),
+        DeprecationLevel.WARNING
+    )
     fun addClickable(@IdRes vararg id: Int) {
         for (i in id) {
             clickListeners[i] = Pair(null, false)
@@ -234,7 +240,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     /**
      * 指定Id的视图将被监听点击事件(未使用防抖)
+     * 默认会回调最后一个onClick监听函数
      */
+    @Deprecated(
+        "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖",
+        ReplaceWith("onFastClick(*id){  }"),
+        DeprecationLevel.WARNING
+    )
     fun addFastClickable(@IdRes vararg id: Int) {
         for (i in id) {
             clickListeners[i] = Pair(null, true)
@@ -242,19 +254,14 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
-     * 点击事件回调
-     * @param id 添加监听点击事件视图的Id, 等效于[addClickable]
-     */
-    fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
-        for (i in id) {
-            clickListeners[i] = Pair(null, false)
-        }
-        onClick = block
-    }
-
-    /**
      * 指定Id的视图将被监听长按事件
+     * 默认会回调最后一个onLongClick监听函数
      */
+    @Deprecated(
+        "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖",
+        ReplaceWith("onLongClick(*id){  }"),
+        DeprecationLevel.WARNING
+    )
     fun addLongClickable(@IdRes vararg id: Int) {
         for (i in id) {
             longClickListeners[i] = null
@@ -262,12 +269,31 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     }
 
     /**
+     * 监听指定Id控件的点击事件, 包含防抖动
+     */
+    fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
+        for (i in id) {
+            clickListeners[i] = Pair(block, false)
+        }
+        onClick = block
+    }
+
+    /**
+     * 监听指定Id控件的点击事件
+     */
+    fun onFastClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
+        for (i in id) {
+            clickListeners[i] = Pair(block, true)
+        }
+        onClick = block
+    }
+
+    /**
      * 长按点击事件回调
-     * @param id 添加监听长按事件视图的Id, 等效于[addLongClickable]
      */
     fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
         for (i in id) {
-            longClickListeners[i] = null
+            longClickListeners[i] = block
         }
         onLongClick = block
     }
