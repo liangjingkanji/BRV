@@ -268,7 +268,6 @@ $dokka.location:com.drake.brv/BindingAdapter/isHeader/#kotlin.Int/PointingToDecl
 $dokka.location:com.drake.brv/BindingAdapter/isHover/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/is-hover.html
 $dokka.location:com.drake.brv/BindingAdapter/isModel/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/is-model.html
 $dokka.location:com.drake.brv/BindingAdapter/itemTouchHelper/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/item-touch-helper.html
-$dokka.location:com.drake.brv/BindingAdapter/listBind/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/list-bind.html
 $dokka.location:com.drake.brv/BindingAdapter/modelCount/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/model-count.html
 $dokka.location:com.drake.brv/BindingAdapter/models/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/models.html
 $dokka.location:com.drake.brv/BindingAdapter/mutable/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/mutable.html
@@ -276,13 +275,18 @@ $dokka.location:com.drake.brv/BindingAdapter/onAttachedToRecyclerView/#androidx.
 $dokka.location:com.drake.brv/BindingAdapter/onBind/#kotlin.Function1[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-bind.html
 $dokka.location:com.drake.brv/BindingAdapter/onBindViewHolder/#com.drake.brv.BindingAdapter.BindingViewHolder#kotlin.Int#kotlin.collections.MutableList[kotlin.Any]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-bind-view-holder.html
 $dokka.location:com.drake.brv/BindingAdapter/onBindViewHolder/#com.drake.brv.BindingAdapter.BindingViewHolder#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-bind-view-holder.html
+$dokka.location:com.drake.brv/BindingAdapter/onBindViewHolders/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-bind-view-holders.html
 $dokka.location:com.drake.brv/BindingAdapter/onChecked/#kotlin.Function3[kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-checked.html
 $dokka.location:com.drake.brv/BindingAdapter/onClick/#kotlin.IntArray#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-click.html
+$dokka.location:com.drake.brv/BindingAdapter/onClick/kotlin.Int#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-click.html
 $dokka.location:com.drake.brv/BindingAdapter/onCreate/#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-create.html
 $dokka.location:com.drake.brv/BindingAdapter/onCreateViewHolder/#android.view.ViewGroup#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-create-view-holder.html
 $dokka.location:com.drake.brv/BindingAdapter/onExpand/#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Boolean,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-expand.html
+$dokka.location:com.drake.brv/BindingAdapter/onFastClick/#kotlin.IntArray#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-fast-click.html
+$dokka.location:com.drake.brv/BindingAdapter/onFastClick/kotlin.Int#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-fast-click.html
 $dokka.location:com.drake.brv/BindingAdapter/onHoverAttachListener/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-hover-attach-listener.html
 $dokka.location:com.drake.brv/BindingAdapter/onLongClick/#kotlin.IntArray#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-long-click.html
+$dokka.location:com.drake.brv/BindingAdapter/onLongClick/kotlin.Int#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-long-click.html
 $dokka.location:com.drake.brv/BindingAdapter/onPayload/#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Any,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-payload.html
 $dokka.location:com.drake.brv/BindingAdapter/onToggle/#kotlin.Function3[kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-toggle.html
 $dokka.location:com.drake.brv/BindingAdapter/onViewAttachedToWindow/#com.drake.brv.BindingAdapter.BindingViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-view-attached-to-window.html
