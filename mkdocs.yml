@@ -36,9 +36,10 @@ markdown_extensions:
 
 nav:
   - 使用: index.md
-  - 多类型: multi_type.md
+  - 多类型: multi-type.md
   - 数据刷新: refresh-data.md
-  - 监听事件: listener.md
+  - 点击事件: click-event.md
+  - 生命周期函数: lifecycle.md
   - 头脚布局: header_footer.md
   - 分组: group.md
   - 悬停: hover.md
