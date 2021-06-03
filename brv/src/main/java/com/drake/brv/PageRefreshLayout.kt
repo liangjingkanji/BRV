@@ -184,7 +184,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             rv.addOnLayoutChangeListener(OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
                 val adapter = rv.adapter
                 if (adapter is BindingAdapter) {
-                    adapter.listBind.add(onBindViewHolderListener)
+                    adapter.onBindViewHolders.add(onBindViewHolderListener)
                 }
             })
         }

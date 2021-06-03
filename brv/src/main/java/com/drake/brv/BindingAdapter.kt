@@ -66,7 +66,7 @@ import com.drake.brv.utils.BRV
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
     var rv: RecyclerView? = null
-    var listBind = mutableSetOf<OnBindViewHolderListener>()
+    var onBindViewHolders = mutableListOf<OnBindViewHolderListener>()
 
     companion object {
         /*
@@ -896,7 +896,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         internal fun bind(model: Any) {
             this._data = model
 
-            listBind.forEach {
+            onBindViewHolders.forEach {
                 it.onBindViewHolder(rv!!, adapter, this, adapterPosition)
             }
 
