@@ -82,7 +82,15 @@ allprojects {
 在 module 的 build.gradle 添加依赖
 
 ```groovy
-implementation 'com.github.liangjingkanji:BRV:1.3.22'
+android {
+    //... 即使你不使用DataBinding也要打开其开关
+    buildFeatures.dataBinding = true
+}
+
+dependencies {
+    //...
+    implementation 'com.github.liangjingkanji:BRV:1.3.22'
+}
 ```
 
 
