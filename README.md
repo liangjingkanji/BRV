@@ -89,7 +89,7 @@ android {
 
 dependencies {
     //...
-    implementation 'com.github.liangjingkanji:BRV:1.3.22'
+    implementation 'com.github.liangjingkanji:BRV:1.3.24'
 }
 ```
 
