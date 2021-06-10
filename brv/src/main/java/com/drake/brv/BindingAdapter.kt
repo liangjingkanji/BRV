@@ -588,14 +588,11 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
      * 添加新的数据
      */
     fun addModels(models: List<Any?>?, animation: Boolean = true) {
-
         if (models.isNullOrEmpty()) return
-
         val data: MutableList<Any?> = when (models) {
             is ArrayList -> models
             else -> models.toMutableList()
         }
-
         if (this.models.isNullOrEmpty()) {
             this.models = flat(data)
             notifyDataSetChanged()
@@ -604,6 +601,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             realModels.addAll(flat(data))
             if (animation) {
                 notifyItemRangeInserted(headerCount + modelCount - data.size, data.size)
+                rv?.post {
+                    rv?.invalidateItemDecorations()
+                }
             } else {
                 notifyDataSetChanged()
             }
