@@ -1,6 +1,3 @@
-## BRV
-
-
 <p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
 
 <p align="center">
