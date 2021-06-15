@@ -42,7 +42,7 @@ rv_simple.linear().setup {
 
     onCreate {
         val rv_nested = findView<RecyclerView>(R.id.rv_check_mode)
-        rv_nested.setup {
+        rv_nested.linear().setup {
             addType<NestedModel>(R.layout.item_simple_nested)
         }
     }
