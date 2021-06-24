@@ -42,6 +42,7 @@ import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.listener.throttleClick
 import com.drake.brv.utils.BRV
+import kotlin.math.min
 
 /**
  * < Android上最强大的RecyclerView框架 >
@@ -685,6 +686,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             return count
         }
 
+    /**
+     * 全局单选模式
+     */
     var singleMode = false
         set(value) {
             field = value
@@ -812,6 +816,26 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         this.onExpand = block
     }
 
+    /**
+     * 判断两个位置的item是否属于同一分组下, 要求这两个位置的item都展开才有效
+     * 如果其中一个item都属于根节点则返回-1, 这种情况不算属于同一分组下
+     */
+    fun isSameGroup(
+        @IntRange(from = 0) position: Int,
+        @IntRange(from = 0) otherPosition: Int
+    ): Boolean {
+        val aModel = models?.getOrNull(otherPosition) ?: return false
+        val bModel = models?.getOrNull(otherPosition) ?: return false
+        for (index in min(position, otherPosition) - 1 downTo 0) {
+            val item = models?.getOrNull(index) ?: break
+            if (item is ItemExpand && item.itemSublist?.contains(aModel) == true
+                && item.itemSublist?.contains(bModel) == true
+            ) {
+                return true
+            }
+        }
+        return false
+    }
 
     /**
      * 展开
