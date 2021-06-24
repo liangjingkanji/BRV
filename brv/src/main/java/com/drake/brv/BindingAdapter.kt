@@ -116,7 +116,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         onPayload = block
     }
 
-    // </editor-fold>1
+    // </editor-fold>
 
 
     // <editor-fold desc="覆写函数">
@@ -812,6 +812,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         this.onExpand = block
     }
 
+
     /**
      * 展开
      * @param position 指定position的条目折叠
@@ -1047,7 +1048,8 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
          * @return -1 表示不存在父项
          */
         fun findParentPosition(): Int {
-            this@BindingAdapter.models?.forEachIndexed { index, item ->
+            for (index in layoutPosition - 1 downTo 0) {
+                val item = models?.getOrNull(index) ?: break
                 if (item is ItemExpand && item.itemSublist?.contains(_data) == true) {
                     return index
                 }
@@ -1060,12 +1062,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
          * @return null表示不存在父项
          */
         fun findParentViewHolder(): BindingViewHolder? {
-            this@BindingAdapter.models?.forEachIndexed { index, item ->
-                if (item is ItemExpand && item.itemSublist?.contains(_data) == true) {
-                    return rv?.findViewHolderForLayoutPosition(index) as? BindingViewHolder
-                }
-            }
-            return null
+            return rv?.findViewHolderForLayoutPosition(findParentPosition()) as? BindingViewHolder
         }
 
         //</editor-fold>
