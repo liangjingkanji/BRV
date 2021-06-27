@@ -46,46 +46,21 @@ rv_group.linear().setup {
 
 ## 分组相关函数
 
-[BindingAdapter] 分组相关函数
+| BindingAdapter的函数 | 描述 |
+|-|-|
+| expandAnimationEnabled | 展开是否显示渐隐动画, 默认true |
+| singleExpandMode | 是否只允许一个分组展开(即展开当前分组就折叠上个分组), 默认false |
+| onExpand | 展开回调监听 |
+| expand | 展开指定条目 |
+| collapse | 折叠指定条目 |
+| expandOrCollapse | 展开或者折叠指定条目(根据当前条目状态决定是折叠/展开) |
+| isSameGroup | 指定两个索引是否处于相同分组 |
 
-```kotlin
-var expandAnimationEnabled = true
-// 展开折叠是否存在动画
 
-var singleExpandMode = false
-// 是否只允许一个分组展开(即展开当前分组就折叠上个分组)
-
-fun onExpand(block: BindingViewHolder.(Boolean) -> Unit)
-// 展开回调监听
-
-fun expand(
-        @IntRange(from = 0) position: Int, // 指定条目位置
-        scrollTop: Boolean = false, // 展开后是否在列表中移动置顶当前条目
-        @IntRange(from = -1) depth: Int = 0 // 递归级别, -1 表示展开当前条目的所有子列表
-    ): Int
-// 展开指定条目
-
-fun collapse(@IntRange(from = 0) position: Int, @IntRange(from = -1) depth: Int = 0): Int
-// 折叠指定条目
-
-fun expandOrCollapse(
-        @IntRange(from = 0) position: Int,
-        scrollTop: Boolean = false,
-        @IntRange(from = -1) depth: Int = 0
-    ): Int
-// 展开或者折叠指定条目(根据当前条目状态决定是折叠/展开)
-```
-<br>
-[BindingViewHolder] 分组相关函数
-
-```kotlin
-fun expand(scrollTop: Boolean = true, @IntRange(from = -1) depth: Int = 0): Int
-fun collapse(@IntRange(from = -1) depth: Int = 0): Int
-fun expandOrCollapse(scrollTop: Boolean = false, @IntRange(from = -1) depth: Int = 0): Int
-// 展开和折叠
-
-fun findParentPosition(): Int
-// 查找上层分组索引位置, 如果没有返回-1
-fun findParentViewHolder(): BindingViewHolder?
-// 查找上层分组ViewHolder, 如果没有返回Null
-```
+| BindingViewHolder的函数 | 描述 |
+|-|-|
+| expand | 展开指定条目 |
+| collapse | 折叠指定条目 |
+| expandOrCollapse | 展开或者折叠指定条目(根据当前条目状态决定是折叠/展开) |
+| findParentPosition | 查找父项条目的索引(即当前条目属于哪个分组下), 如果没有返回-1 |
+| findParentViewHolder | 查找父项条目ViewHolder, 如果没有返回null |

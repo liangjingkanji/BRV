@@ -1,7 +1,8 @@
-
 缺省页对于一个用户体验良好的应用非常重要
 
 BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/liangjingkanji/StateLayout)来实现列表缺省页
+
+> 已经内嵌在BRV库中, 无需再次依赖StateLayout. 如果你的列表同时包含下拉刷新/上拉加载我建议使用`PageRefreshLayout`替代StateLayout
 
 <br>
 

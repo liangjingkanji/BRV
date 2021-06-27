@@ -50,6 +50,7 @@ nav:
   - 缺省页: state.md
   - 下拉刷新/上拉加载: refresh.md
   - 拉取更多: upfetch.md
+  - 预加载/预拉取: preload.md
   - 切换模式: toggle.md
   - 选择模式: checked.md
   - 伸缩布局: flexbox.md
