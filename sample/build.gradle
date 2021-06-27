@@ -22,15 +22,6 @@ apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 30
-    defaultConfig {
-        applicationId "com.drake.brv.sample"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-    }
 
     signingConfigs {
         signed {
@@ -40,6 +31,15 @@ android {
             keyPassword "s73dfyUxkjuq"
         }
     }
+    defaultConfig {
+        applicationId "com.drake.brv.sample"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.signed
+    }
 
     androidExtensions {
         experimental = true
@@ -48,7 +48,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.signed
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
