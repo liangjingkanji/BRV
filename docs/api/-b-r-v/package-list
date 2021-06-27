@@ -267,6 +267,7 @@ $dokka.location:com.drake.brv/BindingAdapter/isFooter/#kotlin.Int/PointingToDecl
 $dokka.location:com.drake.brv/BindingAdapter/isHeader/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/is-header.html
 $dokka.location:com.drake.brv/BindingAdapter/isHover/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/is-hover.html
 $dokka.location:com.drake.brv/BindingAdapter/isModel/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/is-model.html
+$dokka.location:com.drake.brv/BindingAdapter/isSameGroup/#kotlin.Int#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/is-same-group.html
 $dokka.location:com.drake.brv/BindingAdapter/itemTouchHelper/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/item-touch-helper.html
 $dokka.location:com.drake.brv/BindingAdapter/modelCount/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/model-count.html
 $dokka.location:com.drake.brv/BindingAdapter/models/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/models.html
