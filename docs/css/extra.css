@@ -36,13 +36,13 @@
 }
 
 /*字体渲染*/
-@font-face{
-    font-family: 'JetBrains Mono';
-    src: local('JetBrains Mono'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+@font-face {
+	font-family: 'Iosevka SS05';
+	src: local('Iosevka SS05 Medium'),
+	     url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-ss05-medium.woff2') format('woff2');
+	font-display: swap;
+	font-weight: normal;
+	font-style: normal;
 }
 @font-face{
     font-family: 'HYZhengYuan';
@@ -55,7 +55,7 @@
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
     text-rendering: optimizeLegibility;
-    font-family: 'JetBrains Mono', "HYZhengYuan" !important;
+    font-family: 'Iosevka SS05', "HYZhengYuan" !important;
 }
 
 /*布局*/
