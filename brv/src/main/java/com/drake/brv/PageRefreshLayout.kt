@@ -126,7 +126,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         try {
             stateEnabled =
-                    attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+                attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
@@ -135,11 +135,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             )
 
             emptyLayout =
-                    attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
             errorLayout =
-                    attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
             loadingLayout =
-                    attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
         } finally {
             attributes.recycle()
         }
@@ -406,8 +406,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         finish(false)
     }
 
+    /**
+     * 有网则显示加载中缺省页, 无网络直接显示错误缺省页
+     * @param tag 传递参数将被[onLoading]接收
+     * @param refresh 是否回调[onRefresh]
+     */
     fun showLoading(tag: Any? = null, refresh: Boolean = true) {
-        if (stateEnabled) stateLayout?.showLoading(tag, refresh)
+        if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh)
     }
 
     fun showContent(hasMore: Boolean = false) {
@@ -459,7 +464,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID &&
             StateConfig.emptyLayout == View.NO_ID && emptyLayout == View.NO_ID &&
-            StateConfig.loadingLayout == View.NO_ID && loadingLayout == View.NO_ID) {
+            StateConfig.loadingLayout == View.NO_ID && loadingLayout == View.NO_ID
+        ) {
             stateEnabled = false
             return
         }
