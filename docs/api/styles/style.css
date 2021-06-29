@@ -98,11 +98,11 @@ html ::-webkit-scrollbar-thumb {
     color: var(--average-color);
     outline: none;
     margin: 0 8px;
-    font-family: "JetBrains Mono", "HYZhengYuan";
+    font-family: "Iosevka SS05", "HYZhengYuan";
 }
 
 .breadcrumbs {
-    font-family: "JetBrains Mono", "HYZhengYuan";
+    font-family: "Iosevka SS05", "HYZhengYuan";
 }
 
 .section-tab:hover {
@@ -296,7 +296,7 @@ code.paragraph {
     font-weight: normal;
     position: relative;
     line-height: 24px;
-    font-family: JetBrains Mono, HYZhengYuan, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family: Iosevka SS05, HYZhengYuan, Bitstream Vera Sans Mono, Lucida Console, Terminal;
     font-size: 12px;
     min-height: 43px;
 }
@@ -383,7 +383,7 @@ code.paragraph {
     position: relative;
     user-select: none; /* there's a weird bug with text selection */
     padding: 8px 0;
-    font-family: "JetBrains Mono", "HYZhengYuan";
+    font-family: "Iosevka SS05", "HYZhengYuan";
 }
 
 .sideMenuPart a {
@@ -450,7 +450,7 @@ code.paragraph {
 }
 
 body, table {
-    font-family: 'JetBrains Mono', "HYZhengYuan", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Iosevka SS05', "HYZhengYuan", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #F4F4F4;
     font-style: normal;
     font-weight: normal;
@@ -477,14 +477,14 @@ td:first-child {
 
 .keyword {
     color: black;
-    font-family: JetBrains Mono, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family: Iosevka SS05, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
     font-size: 12px;
 }
 
 .identifier {
     color: darkblue;
     font-size: 12px;
-    font-family: JetBrains Mono, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family: Iosevka SS05, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
 }
 
 .brief {
@@ -1114,7 +1114,7 @@ td.content {
 
 .footer > span {
     padding: 0 16px;
-    font-family: "JetBrains Mono", "HYZhengYuan";
+    font-family: "Iosevka SS05", "HYZhengYuan";
 }
 
 .footer a {

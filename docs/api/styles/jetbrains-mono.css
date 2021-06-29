@@ -1,10 +1,10 @@
-@font-face{
-    font-family: 'JetBrains Mono';
-    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/web/JetBrainsMono-Regular.eot') format('embedded-opentype'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+@font-face {
+	font-family: 'Iosevka SS05';
+	src: local('Iosevka SS05 Medium'),
+	     url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-ss05-medium.woff2') format('woff2');
+	font-display: swap;
+	font-weight: normal;
+	font-style: normal;
 }
 @font-face{
     font-family: 'HYZhengYuan';
