@@ -1,3 +1,6 @@
+## 1.3.26
+fixed #20 修复shoLoading缺省页参数错误
+
 ## 1.3.25
 1. 新增函数isSampleGroup来判断两个位置的item是否处于同一分组下
 1.  组查询父项findParentPosition的性能
