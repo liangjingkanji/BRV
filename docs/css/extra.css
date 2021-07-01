@@ -54,6 +54,7 @@
 * {
     -webkit-font-feature-settings: "liga" on, "calt" on;
     -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
     text-rendering: optimizeLegibility;
     font-family: 'Iosevka SS05', "HYZhengYuan" !important;
 }
