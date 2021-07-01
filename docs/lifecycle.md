@@ -28,7 +28,7 @@ rv_simple.linear().setup {
 }.models = getData()
 ```
 
-> 在onCreate中获取想要itemViewType, 需要在作用域中使用`it`, 而不是其`iteViewType`字段. <br>
+> 在onCreate中获取想要itemViewType, 需要在作用域中使用`it`, 而不是其`itemViewType`字段. <br>
 > 这是因为在onCreateViewHolder期间的ViewHolder的itemViewType实际上是没有值的. 而onCreate就是对应的`onCreateViewHolder`
 
 
