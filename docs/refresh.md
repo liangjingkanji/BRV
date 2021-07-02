@@ -141,9 +141,9 @@ PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
 | showContent | 显示内容页 |
 
 
-**配置全局缺省页**
+#### 全局缺省页配置
 
-这块代码和StateLayout公用
+全局缺省页配置和StateLayout共享, 因为PageRefreshLayout就是内嵌StateLayout
 
 ```kotlin
 /**
@@ -163,29 +163,35 @@ StateConfig.apply {
 
 
 
-单例缺省页配置支持两种方式
+#### 单例缺省页配置
 
-1. XML
+单例就是某个布局某个缺省状态页面不想使用全局配置的缺省页. 那么就为这个布局单独指定特殊的缺省页
 
-```xml
-<com.drake.brv.PageRefreshLayout 
-    .....
-    app:error_layout="@layout/layout_error"
-    app:empty_layout="@layout/layout_empty"
-    app:loading_layout="@layout/layout_loading">
-```
+无需全部单独指定, 可只指定加载中单例或者错误页面单例
 
+=== "XML指定"
 
+    ```xml hl_lines="3 4 5"
+    <com.drake.brv.PageRefreshLayout
+        .....
+        app:error_layout="@layout/layout_error"
+        app:empty_layout="@layout/layout_empty"
+        app:loading_layout="@layout/layout_loading">
 
-2. 代码
+        <!--RecyclerView代码-->
 
-```kotlin
-page.apply {
-    loadingLayout = R.layout.layout_loading
-    emptyLayout = R.layout.layout_empty
-    errorLayout = R.layout.layout_error
-}
-```
+    </com.drake.brv.PageRefreshLayout>
+    ```
+
+=== "代码指定"
+
+    ```kotlin
+    page.apply {
+        loadingLayout = R.layout.layout_loading
+        emptyLayout = R.layout.layout_empty
+        // errorLayout = R.layout.layout_error
+    }
+    ```
 
 
 
@@ -193,7 +199,9 @@ page.apply {
 
 
 
-想要使用缺省页又要求缺省页不遮盖头布局, 头布局请使用`CoordinatorLayout`实现. 注意使用`NestedScrollView`会导致rv一次性加载完item内存消耗大.
+因为头布局属于列表的一部分, 而缺省页会覆盖整个列表. 那么想要使用缺省页又不想影响列表的头布局, 那头布局请使用`CoordinatorLayout`实现.
+
+> 注意如果使用`NestedScrollView`嵌套Rv实现会导致RV一次性加载完item内存消耗大. 而CoordinatorLayout嵌套RV不会
 
 
 
