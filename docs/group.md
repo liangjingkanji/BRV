@@ -26,6 +26,8 @@ class GroupModel : ItemExpand {
 }
 ```
 
+> 当你要修改分组下的子项itemSublist时请使用类型强转将其转成可变集合后修改 <br>
+> 例(itemModel.itemSublist as ArrayList).add或者remove等修改分组集合
 
 
 创建列表
