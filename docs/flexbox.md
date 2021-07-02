@@ -5,7 +5,7 @@ BRV对于伸缩布局的实现可以自行添加Google开源库 [flexbox-layout]
 
 ```groovy
 dependencies {
-    implementation 'com.google.android:flexbox:2.0.1'
+    implementation 'com.google.android:flexbox:3.0.0'
 }
 ```
 

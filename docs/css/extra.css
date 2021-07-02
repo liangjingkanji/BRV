@@ -37,18 +37,35 @@
 
 /*字体渲染*/
 @font-face {
-	font-family: 'Iosevka SS05';
-	src: local('Iosevka SS05 Medium'),
-	     url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-ss05-medium.woff2') format('woff2');
-	font-display: swap;
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'Iosevka';
+    src: local('Iosevka Medium'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-medium.woff2') format('woff2');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Iosevka';
+    src: local('Iosevka-bold'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-medium.woff2') format('woff2');
+    font-display: swap;
+    font-weight: bold;
+    font-style: normal;
 }
 @font-face{
     font-family: 'HYZhengYuan';
     src: local('HYZhengYuan'),
          url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan.ttf') format('truetype');
+    font-display: swap;
     font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'HYZhengYuan';
+    src: local('HYZhengYuan-75W'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan.ttf') format('truetype');
+    font-display: swap;
+    font-weight: bold;
     font-style: normal;
 }
 * {
@@ -56,7 +73,7 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     text-rendering: optimizeLegibility;
-    font-family: 'Iosevka SS05', "HYZhengYuan" !important;
+    font-family: 'Iosevka', "HYZhengYuan" !important;
 }
 
 /*布局*/
@@ -251,7 +268,7 @@ h2:after {
 
 /*头部*/
 .md-ellipsis {
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 /*折叠块*/
