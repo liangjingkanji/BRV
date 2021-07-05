@@ -28,7 +28,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="可递归展开/折叠/悬停/展开置顶/可选动画的分组"
-        android:textColor="@color/textDescription"
+        android:textColor="@color/textSecond"
         android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -27,7 +27,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="通过FlexBoxLayout框架快速实现自动伸缩的标签"
-        android:textColor="@color/textDescription"
+        android:textColor="@color/textSecond"
         android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView

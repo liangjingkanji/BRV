@@ -19,6 +19,7 @@ package com.drake.brv.sample.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -33,12 +34,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setSupportActionBar(toolbar)
         immersive(toolbar, true)
 
-        toolbar.setupWithNavController(
-            nav.findNavController(),
-            AppBarConfiguration(nav_view.menu, drawer)
-        )
-        nav_view.setupWithNavController(nav.findNavController())
+        val navController = nav.findNavController()
+        toolbar.setupWithNavController(navController, AppBarConfiguration(nav_view.menu, drawer))
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            toolbar.subtitle =
+                (destination as FragmentNavigator.Destination).className.substringAfterLast('.')
+        }
+
+        nav_view.setupWithNavController(navController)
     }
 
     override fun onBackPressed() {

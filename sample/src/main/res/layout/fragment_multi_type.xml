@@ -28,7 +28,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="一行代码创建多类型"
-        android:textColor="@color/textDescription"
+        android:textColor="@color/textSecond"
         android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView

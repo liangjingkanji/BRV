@@ -27,7 +27,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="简单支持任意Item任意点击事件的悬停列表"
-        android:textColor="@color/textDescription"
+        android:textColor="@color/textSecond"
         android:textSize="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView

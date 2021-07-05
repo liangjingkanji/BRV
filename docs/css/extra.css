@@ -73,7 +73,7 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     text-rendering: optimizeLegibility;
-    font-family: 'Iosevka', "HYZhengYuan" !important;
+    font-family: 'Iosevka', "HYZhengYuan", monospace !important;
 }
 
 /*布局*/
