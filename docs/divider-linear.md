@@ -68,3 +68,25 @@ rv.linear().divider {
 }.models = getData()
 ```
 
+## 四周全包裹
+
+<img src="https://i.imgur.com/vtPI13V.png" width="250"/>
+
+这种分割线属于网格分割线, 要求使用`DividerOrientation.GRID`, 但LinearLayoutManager并不支持
+
+这里有两种解决办法
+
+1. 使用spanCount为1的GridLayoutManager等效
+1. 在rv两侧单独使用`View`绘制两条分割线
+
+推荐第一种办法, 示例代码如下:
+
+```kotlin
+rv.grid().divider{
+    setDrawable(R.drawable.divider_horizontal)
+    orientation = DividerOrientation.GRID
+    includeVisible = true
+}.setup {
+    addType<DividerModel>(R.layout.item_divider_vertical)
+}.models = getData()
+```
