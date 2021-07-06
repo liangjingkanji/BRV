@@ -16,37 +16,33 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentMultiTypeBinding
 import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.drake.engine.base.EngineFragment
 import com.drake.tooltip.toast
-import kotlinx.android.synthetic.main.fragment_multi_type.*
 
 
-class MultiTypeFragment : Fragment(R.layout.fragment_multi_type) {
+class MultiTypeFragment : EngineFragment<FragmentMultiTypeBinding>(R.layout.fragment_multi_type) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv_multi_type.linear().setup {
+    override fun initView() {
+        binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }.models = getData()
 
         // 点击事件
-        rv_multi_type.bindingAdapter.onClick(R.id.item) {
+        binding.rv.bindingAdapter.onClick(R.id.item) {
             when (itemViewType) {
                 R.layout.item_multi_type_simple -> toast("类型1")
                 else -> toast("类型2")
             }
         }
     }
-
 
     private fun getData(): MutableList<Any> {
         return mutableListOf(
@@ -64,5 +60,8 @@ class MultiTypeFragment : Fragment(R.layout.fragment_multi_type) {
             Model(),
             Model()
         )
+    }
+
+    override fun initData() {
     }
 }

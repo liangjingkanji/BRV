@@ -16,24 +16,23 @@
 
 package com.drake.brv.sample.ui.fragment.divider
 
-import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentGridVerticalDividerBinding
 import com.drake.brv.sample.model.DividerModel
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_grid_divider.*
 
-class GridVerticalDividerFragment : BaseDividerFragment(R.layout.fragment_grid_vertical_divider) {
+class GridVerticalDividerFragment :
+    BaseDividerFragment<FragmentGridVerticalDividerBinding>(R.layout.fragment_grid_vertical_divider) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv.grid(3, RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical, DividerOrientation.VERTICAL).setup {
-            addType<DividerModel>(R.layout.item_divider_horizontal)
-        }.models = getData()
+    override fun initView() {
+        binding.rv.grid(3, RecyclerView.HORIZONTAL)
+            .divider(R.drawable.divider_vertical, DividerOrientation.VERTICAL).setup {
+                addType<DividerModel>(R.layout.item_divider_horizontal)
+            }.models = getData()
     }
 
     fun getData(): MutableList<Any> {
@@ -42,5 +41,8 @@ class GridVerticalDividerFragment : BaseDividerFragment(R.layout.fragment_grid_v
                 add(DividerModel())
             }
         }
+    }
+
+    override fun initData() {
     }
 }

@@ -16,35 +16,35 @@
 
 package com.drake.brv.sample.ui.fragment.hover
 
-import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentHoverHeaderBinding
 import com.drake.brv.sample.model.HoverHeaderModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
-import kotlinx.android.synthetic.main.fragment_hover_header.*
 
 
-class HoverHeaderGridFragment : BaseHoverFragment(R.layout.fragment_hover_header) {
+class HoverHeaderGridFragment :
+    BaseHoverFragment<FragmentHoverHeaderBinding>(R.layout.fragment_hover_header) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun initView() {
         setHasOptionsMenu(true)
 
         val layoutManager = HoverGridLayoutManager(requireContext(), 2)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return if (rv_hover.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
+                return if (binding.rv.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
             }
         }
-        rv_hover.layoutManager = layoutManager
+        binding.rv.layoutManager = layoutManager
 
-        rv_hover.setup {
+        binding.rv.setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
             models = getData()
@@ -93,6 +93,9 @@ class HoverHeaderGridFragment : BaseHoverFragment(R.layout.fragment_hover_header
             Model(),
             Model()
         )
+    }
+
+    override fun initData() {
     }
 
 }

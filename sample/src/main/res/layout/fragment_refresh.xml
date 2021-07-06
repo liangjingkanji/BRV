@@ -35,31 +35,35 @@
 </com.drake.brv.PageRefreshLayout>-->
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="一旦刷新数据成功后下拉刷新不会再会显示错误页面"
-        android:textColor="@color/textSecond"
-        android:textSize="12dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.drake.brv.PageRefreshLayout
-        android:id="@+id/page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="一旦刷新数据成功后下拉刷新不会再会显示错误页面"
+            android:textColor="@color/textSecond"
+            android:textSize="12dp" />
 
-    </com.drake.brv.PageRefreshLayout>
+        <com.drake.brv.PageRefreshLayout
+            android:id="@+id/page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.drake.brv.PageRefreshLayout>
+
+    </LinearLayout>
+</layout>

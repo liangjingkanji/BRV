@@ -16,29 +16,27 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentPreloadBinding
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_preload.*
+import com.drake.engine.base.EngineFragment
+
 
 /**
  * 指定预加载, 默认反序3 开始预加载, 可设置全局变量 [PageRefreshLayout.preloadIndex]
  */
-class PreloadFragment : Fragment(R.layout.fragment_preload) {
+class PreloadFragment : EngineFragment<FragmentPreloadBinding>(R.layout.fragment_preload) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv_pre_load.setup {
+    override fun initView() {
+        binding.rv.setup {
             addType<Model>(R.layout.item_multi_type_simple)
         }
 
         // page.preloadIndex = 4 // 自定义列表倒数第4个开始预加载, 默认为3
 
-        page.onRefresh {
+        binding.page.onRefresh {
             // 模拟网络请求2秒后成功
             postDelayed({
                 val data = getData()
@@ -58,5 +56,8 @@ class PreloadFragment : Fragment(R.layout.fragment_preload) {
                 add(Model())
             }
         }
+    }
+
+    override fun initData() {
     }
 }

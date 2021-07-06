@@ -14,27 +14,31 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.GroupFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:text="可递归展开/折叠/悬停/展开置顶/可选动画的分组"
-        android:textColor="@color/textSecond"
-        android:textSize="12dp" />
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.GroupFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_group"
-        app:layoutManager="com.drake.brv.layoutmanager.HoverLinearLayoutManager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="可递归展开/折叠/悬停/展开置顶/可选动画的分组"
+            android:textColor="@color/textSecond"
+            android:textSize="12dp" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            app:layoutManager="com.drake.brv.layoutmanager.HoverLinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

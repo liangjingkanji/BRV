@@ -16,34 +16,32 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentRefreshBinding
 import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.drake.engine.base.EngineFragment
 import com.drake.tooltip.toast
-import kotlinx.android.synthetic.main.fragment_refresh.*
 
 
-class RefreshFragment : Fragment(R.layout.fragment_refresh) {
+class RefreshFragment : EngineFragment<FragmentRefreshBinding>(R.layout.fragment_refresh) {
 
     private val total = 2
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initView() {
         setHasOptionsMenu(true)
 
-        rv.linear().setup {
+        binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }
 
-        page.onRefresh {
+        binding.page.onRefresh {
 
             val runnable = { // 模拟网络请求, 创建假的数据集
                 val data = getData()
@@ -51,7 +49,7 @@ class RefreshFragment : Fragment(R.layout.fragment_refresh) {
                     index < total // 判断是否有更多页
                 }
 
-                // addData(data, rv.bindingAdapter, isEmpty = {
+                // addData(data, binding.rv.bindingAdapter, isEmpty = {
                 //     true // 此处判断是否存在下一页
                 // }, hasMore = {
                 //     false // 此处判断是否显示空布局
@@ -80,16 +78,19 @@ class RefreshFragment : Fragment(R.layout.fragment_refresh) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_loading -> page.showLoading()  // 加载中
-            R.id.menu_pull_refresh -> page.autoRefresh() // 下拉刷新
-            R.id.menu_refresh -> page.refresh() // 静默刷新
-            R.id.menu_content -> page.showContent() // 加载成功
-            R.id.menu_error -> page.showError(force = true) // 强制加载错误
-            R.id.menu_empty -> page.showEmpty() // 空数据
-            R.id.menu_refresh_success -> page.finish() // 刷新成功
-            R.id.menu_refresh_fail -> page.finish(false) // 刷新失败
-            R.id.menu_no_load_more -> page.finishLoadMoreWithNoMoreData() // 没有更多数据
+            R.id.menu_loading -> binding.page.showLoading()  // 加载中
+            R.id.menu_pull_refresh -> binding.page.autoRefresh() // 下拉刷新
+            R.id.menu_refresh -> binding.page.refresh() // 静默刷新
+            R.id.menu_content -> binding.page.showContent() // 加载成功
+            R.id.menu_error -> binding.page.showError(force = true) // 强制加载错误
+            R.id.menu_empty -> binding.page.showEmpty() // 空数据
+            R.id.menu_refresh_success -> binding.page.finish() // 刷新成功
+            R.id.menu_refresh_fail -> binding.page.finish(false) // 刷新失败
+            R.id.menu_no_load_more -> binding.page.finishLoadMoreWithNoMoreData() // 没有更多数据
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun initData() {
     }
 }

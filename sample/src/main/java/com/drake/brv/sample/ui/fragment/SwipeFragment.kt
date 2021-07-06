@@ -16,23 +16,20 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.annotaion.ItemOrientation
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentSwipeBinding
 import com.drake.brv.sample.model.SwipeModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_swipe.*
+import com.drake.engine.base.EngineFragment
 
 
-class SwipeFragment : Fragment(R.layout.fragment_swipe) {
+class SwipeFragment : EngineFragment<FragmentSwipeBinding>(R.layout.fragment_swipe) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun initView() {
         // 侧滑删除会改变数据的内容
-        rv.linear().setup {
+        binding.rv.linear().setup {
             addType<SwipeModel>(R.layout.item_swipe)
         }.models = getData()
     }
@@ -48,6 +45,9 @@ class SwipeFragment : Fragment(R.layout.fragment_swipe) {
             SwipeModel(ItemOrientation.NONE), // 不支持侧滑
             SwipeModel()
         )
+    }
+
+    override fun initData() {
     }
 
 }

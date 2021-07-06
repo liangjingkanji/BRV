@@ -16,21 +16,19 @@
 
 package com.drake.brv.sample.ui.fragment.divider
 
-import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentLinearVerticalDividerBinding
 import com.drake.brv.sample.model.DividerModel
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_linear_vertical_divider.*
 
-class LinearVerticalDividerFragment : BaseDividerFragment(R.layout.fragment_linear_vertical_divider) {
+class LinearVerticalDividerFragment :
+    BaseDividerFragment<FragmentLinearVerticalDividerBinding>(R.layout.fragment_linear_vertical_divider) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
+    override fun initView() {
+        binding.rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
             addType<DividerModel>(R.layout.item_divider_horizontal)
         }.models = getData()
     }
@@ -41,5 +39,8 @@ class LinearVerticalDividerFragment : BaseDividerFragment(R.layout.fragment_line
                 add(DividerModel())
             }
         }
+    }
+
+    override fun initData() {
     }
 }

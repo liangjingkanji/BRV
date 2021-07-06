@@ -16,22 +16,20 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.annotaion.ItemOrientation
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentDragBinding
 import com.drake.brv.sample.model.DragModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_drag.*
+import com.drake.engine.base.EngineFragment
 
-class DragFragment : Fragment(R.layout.fragment_drag) {
+class DragFragment : EngineFragment<FragmentDragBinding>(R.layout.fragment_drag) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initView() {
 
         // 侧滑删除会改变数据的内容
-        rv.linear().setup {
+        binding.rv.linear().setup {
             addType<DragModel>(R.layout.item_drag)
         }.models = getData()
     }
@@ -47,5 +45,8 @@ class DragFragment : Fragment(R.layout.fragment_drag) {
             DragModel(),
             DragModel()
         )
+    }
+
+    override fun initData() {
     }
 }

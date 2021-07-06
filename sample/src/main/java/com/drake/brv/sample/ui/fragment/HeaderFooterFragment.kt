@@ -16,27 +16,26 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentHeaderFooterBinding
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_header_footer.*
+import com.drake.engine.base.EngineFragment
 import java.util.*
 
 
-class HeaderFooterFragment : Fragment(R.layout.fragment_header_footer) {
+class HeaderFooterFragment :
+    EngineFragment<FragmentHeaderFooterBinding>(R.layout.fragment_header_footer) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initView() {
         setHasOptionsMenu(true)
 
-        rv_header_footer.linear().setup {
+        binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
 
             /**
@@ -58,7 +57,7 @@ class HeaderFooterFragment : Fragment(R.layout.fragment_header_footer) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val adapter = rv_header_footer.bindingAdapter
+        val adapter = binding.rv.bindingAdapter
         when (item.itemId) {
             R.id.menu_add_header -> adapter.addHeader(Header(), animation = true)
             R.id.menu_remove_header -> adapter.removeHeaderAt(animation = true)  // 删除头布局
@@ -93,7 +92,11 @@ class HeaderFooterFragment : Fragment(R.layout.fragment_header_footer) {
     }
 
     class Header
+
     class Footer
+
+    override fun initData() {
+    }
 }
 
 

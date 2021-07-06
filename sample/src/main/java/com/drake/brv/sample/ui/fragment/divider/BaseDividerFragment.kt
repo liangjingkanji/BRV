@@ -21,15 +21,17 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.drake.brv.sample.R
+import com.drake.engine.base.EngineFragment
 
 /**
  * 创建菜单
  */
-open class BaseDividerFragment(@LayoutRes contentLayoutId: Int = 0) : Fragment(contentLayoutId) {
+abstract class BaseDividerFragment<B : ViewDataBinding>(@LayoutRes contentLayoutId: Int = 0) :
+    EngineFragment<B>(contentLayoutId) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

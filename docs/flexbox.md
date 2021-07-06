@@ -14,7 +14,7 @@ dependencies {
 然后创建列表
 
 
-<img src="https://i.imgur.com/DJcEZ0j.png" width="250"/>
+<img src="https://i.imgur.com/vyRLzrS.png" width="250"/>
 
 ```kotlin
 rv.layoutManager = FlexboxLayoutManager(activity)

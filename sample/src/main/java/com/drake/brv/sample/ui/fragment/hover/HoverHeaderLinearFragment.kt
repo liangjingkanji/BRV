@@ -16,23 +16,23 @@
 
 package com.drake.brv.sample.ui.fragment.hover
 
-import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentHoverHeaderBinding
 import com.drake.brv.sample.model.HoverHeaderModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
-import kotlinx.android.synthetic.main.fragment_hover_header.*
 
 
-class HoverHeaderLinearFragment : BaseHoverFragment(R.layout.fragment_hover_header) {
+class HoverHeaderLinearFragment :
+    BaseHoverFragment<FragmentHoverHeaderBinding>(R.layout.fragment_hover_header) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        rv_hover.linear().setup {
+    override fun initView() {
+        binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
             models = getData()
@@ -82,5 +82,8 @@ class HoverHeaderLinearFragment : BaseHoverFragment(R.layout.fragment_hover_head
             Model(),
             Model()
         )
+    }
+
+    override fun initData() {
     }
 }

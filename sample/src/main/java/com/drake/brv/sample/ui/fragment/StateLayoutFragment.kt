@@ -16,25 +16,24 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentStateLayoutBinding
 import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_state_layout.*
+import com.drake.engine.base.EngineFragment
 
 
-class StateLayoutFragment : Fragment(R.layout.fragment_state_layout) {
+class StateLayoutFragment :
+    EngineFragment<FragmentStateLayoutBinding>(R.layout.fragment_state_layout) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initView() {
         setHasOptionsMenu(true)
-        rv.linear().setup {
+        binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<DoubleItemModel>(R.layout.item_multi_type_two)
         }.models = getData()
@@ -59,20 +58,23 @@ class StateLayoutFragment : Fragment(R.layout.fragment_state_layout) {
         )
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_state, menu)
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_loading -> state.showLoading()  // 加载中
-            R.id.menu_content -> state.showContent() // 加载成功
-            R.id.menu_error -> state.showError() // 加载错误
-            R.id.menu_empty -> state.showEmpty() // 加载失败
+            R.id.menu_loading -> binding.state.showLoading()  // 加载中
+            R.id.menu_content -> binding.state.showContent() // 加载成功
+            R.id.menu_error -> binding.state.showError() // 加载错误
+            R.id.menu_empty -> binding.state.showEmpty() // 加载失败
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun initData() {
     }
 
 }

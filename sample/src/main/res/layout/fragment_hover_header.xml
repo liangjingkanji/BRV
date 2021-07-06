@@ -14,25 +14,29 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragment.hover.HoverHeaderLinearFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:text="简单支持任意Item任意点击事件的悬停列表"
-        android:textColor="@color/textSecond"
-        android:textSize="12dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.hover.HoverHeaderLinearFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_hover"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="简单支持任意Item任意点击事件的悬停列表"
+            android:textColor="@color/textSecond"
+            android:textSize="12dp" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

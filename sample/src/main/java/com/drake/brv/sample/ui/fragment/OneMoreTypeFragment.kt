@@ -16,21 +16,19 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentOneMoreTypeBinding
 import com.drake.brv.sample.model.OneMoreTypeModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_one_more_type.*
+import com.drake.engine.base.EngineFragment
 
 
-class OneMoreTypeFragment : Fragment(R.layout.fragment_one_more_type) {
+class OneMoreTypeFragment :
+    EngineFragment<FragmentOneMoreTypeBinding>(R.layout.fragment_one_more_type) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv_one_more_type.linear().setup {
+    override fun initView() {
+        binding.rv.linear().setup {
             addType<OneMoreTypeModel> {
                 when (type) {
                     0 -> R.layout.item_multi_type_one
@@ -61,6 +59,9 @@ class OneMoreTypeFragment : Fragment(R.layout.fragment_one_more_type) {
             OneMoreTypeModel(0),
             OneMoreTypeModel(0)
         )
+    }
+
+    override fun initData() {
     }
 
 }

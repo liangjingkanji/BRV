@@ -16,9 +16,7 @@
 
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
-apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
-
 
 android {
     compileSdkVersion 30
@@ -39,10 +37,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.signed
-    }
-
-    androidExtensions {
-        experimental = true
     }
 
     buildTypes {
@@ -83,7 +77,8 @@ dependencies {
 
     implementation "com.github.liangjingkanji:StatusBar:1.1.1"
     implementation "com.github.liangjingkanji:debugkit:1.2.11"
-    implementation 'com.github.liangjingkanji:Tooltip:1.1.0'
+    implementation 'com.github.liangjingkanji:Tooltip:1.1.3'
+    implementation 'com.github.liangjingkanji:Engine:0.0.25'
 
     implementation "androidx.recyclerview:recyclerview:$rv_version"
     implementation "com.google.android:flexbox:1.1.0"

@@ -25,7 +25,7 @@ rv_simple.linear().setup {
 onClick参数是可变长度. 可以指定多个Id, 并且存在覆盖行为.  onFastClick / onLongClick同理
 
 ```kotlin
-rv_normal.linear().setup {
+rv_simple.linear().setup {
     addType<NormalModel>(R.layout.item_multi_type_normal)
 
     onLongClick(R.id.item) {

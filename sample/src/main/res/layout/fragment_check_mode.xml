@@ -14,107 +14,111 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragment.CheckModeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
-
-            <TextView
-                android:id="@+id/tv_checked_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:text="已选择 1/2" />
+        android:orientation="vertical"
+        tools:context=".ui.fragment.CheckModeFragment">
 
 
-            <TextView
-                android:id="@+id/tv_manage"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:text="管理" />
-
-        </FrameLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_check_mode"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="60dp" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
 
-
-    <LinearLayout
-        android:id="@+id/ll_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <CheckBox
-            android:id="@+id/tv_single_mode"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_checked"
-            android:button="@null"
-            android:foreground="?selectableItemBackground"
-            android:gravity="center"
-            android:textColor="@drawable/btn_checked_text"
-            android:text="单选模式" />
+                <TextView
+                    android:id="@+id/tvCheckedCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    tools:text="已选择 1/2" />
 
 
-        <CheckBox
-            android:background="@drawable/btn_checked"
-            android:id="@+id/tv_all_checked"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:button="@null"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:textColor="@drawable/btn_checked_text"
-            android:gravity="center"
-            android:text="全选" />
+                <TextView
+                    android:id="@+id/tv_manage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="管理" />
 
-        <TextView
-            android:id="@+id/tv_reverse_checked"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:text="反选" />
+            </FrameLayout>
 
-        <TextView
-            android:id="@+id/tv_cancel_checked"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="取消选择" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="60dp" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-</FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <CheckBox
+                android:id="@+id/tvSingleMode"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_checked"
+                android:button="@null"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:textColor="@drawable/btn_checked_text"
+                android:text="单选模式" />
+
+
+            <CheckBox
+                android:background="@drawable/btn_checked"
+                android:id="@+id/tvAllChecked"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:textColor="@drawable/btn_checked_text"
+                android:gravity="center"
+                android:text="全选" />
+
+            <TextView
+                android:id="@+id/tvReverseChecked"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="反选" />
+
+            <TextView
+                android:id="@+id/tvCancelChecked"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="取消选择" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

@@ -16,25 +16,22 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.item.ItemExpand
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentGroupBinding
 import com.drake.brv.sample.model.GroupModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.sample.model.NestedGroupModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.drake.engine.base.EngineFragment
 import com.drake.tooltip.toast
-import kotlinx.android.synthetic.main.fragment_group.*
 
 
-class GroupFragment : Fragment(R.layout.fragment_group) {
+class GroupFragment : EngineFragment<FragmentGroupBinding>(R.layout.fragment_group) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv_group.linear().setup {
+    override fun initView() {
+        binding.rv.linear().setup {
 
             // 任何条目都需要添加类型到BindingAdapter中
             addType<GroupModel>(R.layout.item_group_title)
@@ -55,7 +52,6 @@ class GroupFragment : Fragment(R.layout.fragment_group) {
         }.models = getData()
     }
 
-
     private fun getData(): MutableList<GroupModel> {
         return mutableListOf<GroupModel>().apply {
             for (i in 0..4) {
@@ -73,6 +69,9 @@ class GroupFragment : Fragment(R.layout.fragment_group) {
                 add(GroupModel())
             }
         }
+    }
+
+    override fun initData() {
     }
 
 }

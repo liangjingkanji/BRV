@@ -16,39 +16,41 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentFlexBoxBinding
 import com.drake.brv.sample.model.FlexTagModel
 import com.drake.brv.utils.setup
+import com.drake.engine.base.EngineFragment
 import com.google.android.flexbox.FlexboxLayoutManager
-import kotlinx.android.synthetic.main.fragment_flex_box.*
 
 
-class FlexBoxFragment : Fragment(R.layout.fragment_flex_box) {
+class FlexBoxFragment : EngineFragment<FragmentFlexBoxBinding>(R.layout.fragment_flex_box) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun initView() {
         /**
          * Google开源项目-flexBox-layout
          * 更多使用方法查看项目地址: https://github.com/google/flexbox-layout
          */
-        rv.layoutManager = FlexboxLayoutManager(activity)
+        binding.rv.layoutManager = FlexboxLayoutManager(activity)
 
-        rv.setup {
+        binding.rv.setup {
             addType<FlexTagModel>(R.layout.item_flex_tag)
         }.models = getData()
     }
 
     private fun getData(): List<FlexTagModel> {
         return listOf(
-            FlexTagModel("吴彦祖"),
-            FlexTagModel("金城武"),
-            FlexTagModel("Amber Gao"),
-            FlexTagModel("设计师"),
-            FlexTagModel("肥宅"),
-            FlexTagModel("不识妻美刘强东")
+            FlexTagModel("淘宝"),
+            FlexTagModel("微信"),
+            FlexTagModel("QQ"),
+            FlexTagModel("UC浏览器"),
+            FlexTagModel("京东"),
+            FlexTagModel("滴滴"),
+            FlexTagModel("抖音"),
+            FlexTagModel("今日头条")
         )
+    }
+
+    override fun initData() {
     }
 }

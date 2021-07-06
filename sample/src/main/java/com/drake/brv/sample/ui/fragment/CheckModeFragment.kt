@@ -16,23 +16,20 @@
 
 package com.drake.brv.sample.ui.fragment
 
-import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentCheckModeBinding
 import com.drake.brv.sample.model.CheckModel
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_check_mode.*
+import com.drake.engine.base.EngineFragment
 
 
-class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
+class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.fragment_check_mode) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv_check_mode.linear().setup {
+    override fun initView() {
+        binding.rv.linear().setup {
 
             addType<CheckModel>(R.layout.item_check_mode)
 
@@ -60,11 +57,11 @@ class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
                 model.notifyChange()
 
                 // 刷新已选择计数器
-                tv_checked_count.text = "已选择 ${checkedCount}/${modelCount}"
+                binding.tvCheckedCount.text = "已选择 ${checkedCount}/${modelCount}"
 
                 // 全选按钮进行更新
-                tv_all_checked.isChecked = isAllChecked
-                tv_all_checked.isEnabled = !isAllChecked
+                binding.tvAllChecked.isChecked = isAllChecked
+                binding.tvAllChecked.isEnabled = !isAllChecked
             }
 
             // 监听切换模式
@@ -75,14 +72,14 @@ class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
 
                 if (end) {
                     // 管理按钮
-                    tv_manage.text = if (toggleMode) "取消" else "管理"
+                    binding.tvManage.text = if (toggleMode) "取消" else "管理"
 
                     // 显示和隐藏编辑菜单
-                    ll_menu.visibility = if (toggleMode) View.VISIBLE else View.GONE
+                    binding.llMenu.visibility = if (toggleMode) View.VISIBLE else View.GONE
 
                     // 显示/隐藏计数器
-                    tv_checked_count.visibility = if (toggleMode) View.VISIBLE else View.GONE
-                    tv_checked_count.text = "已选择 ${checkedCount}/${modelCount}"
+                    binding.tvCheckedCount.visibility = if (toggleMode) View.VISIBLE else View.GONE
+                    binding.tvCheckedCount.text = "已选择 ${checkedCount}/${modelCount}"
 
                     // 如果取消管理模式则取消全部已选择
                     if (toggleMode) checkedAll(false)
@@ -98,35 +95,35 @@ class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
      * 初始化操作按钮
      */
     private fun initOperation() {
-        val adapter = rv_check_mode.bindingAdapter
+        val adapter = binding.rv.bindingAdapter
 
         // 单选模式切换
-        tv_single_mode.setOnClickListener {
+        binding.tvSingleMode.setOnClickListener {
             adapter.singleMode = !adapter.singleMode
 
             // 单选模式不应该支持全选
-            tv_all_checked.isEnabled = !adapter.singleMode
+            binding.tvAllChecked.isEnabled = !adapter.singleMode
         }
 
         // 反选
-        tv_reverse_checked.setOnClickListener {
+        binding.tvReverseChecked.setOnClickListener {
             adapter.checkedReverse()
         }
 
         // 全选
-        tv_all_checked.setOnClickListener {
+        binding.tvAllChecked.setOnClickListener {
             adapter.checkedAll()
         }
 
         // 取消选择
-        tv_cancel_checked.setOnClickListener {
+        binding.tvCancelChecked.setOnClickListener {
             adapter.checkedAll(false)
         }
 
         // 切换选择模式
-        tv_manage.setOnClickListener {
+        binding.tvManage.setOnClickListener {
             adapter.toggle()
-            // rv_check_mode.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
+            // binding.rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
         }
     }
 
@@ -134,6 +131,9 @@ class CheckModeFragment : Fragment(R.layout.fragment_check_mode) {
         return mutableListOf<CheckModel>().apply {
             for (i in 0..9) add(CheckModel())
         }
+    }
+
+    override fun initData() {
     }
 
 

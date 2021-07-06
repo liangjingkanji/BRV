@@ -16,20 +16,18 @@
 
 package com.drake.brv.sample.ui.fragment.divider
 
-import android.os.Bundle
 import com.drake.brv.sample.R
+import com.drake.brv.sample.databinding.FragmentLinearHorizontalDividerBinding
 import com.drake.brv.sample.model.DividerModel
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import kotlinx.android.synthetic.main.fragment_linear_horizontal_divider.*
 
-class LinearHorizontalDividerFragment : BaseDividerFragment(R.layout.fragment_linear_horizontal_divider) {
+class LinearHorizontalDividerFragment :
+    BaseDividerFragment<FragmentLinearHorizontalDividerBinding>(R.layout.fragment_linear_horizontal_divider) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        rv.linear().divider(R.drawable.divider_horizontal).setup {
+    override fun initView() {
+        binding.rv.linear().divider(R.drawable.divider_horizontal).setup {
             addType<DividerModel>(R.layout.item_divider_vertical)
         }.models = getData()
     }
@@ -40,5 +38,8 @@ class LinearHorizontalDividerFragment : BaseDividerFragment(R.layout.fragment_li
                 add(DividerModel())
             }
         }
+    }
+
+    override fun initData() {
     }
 }
