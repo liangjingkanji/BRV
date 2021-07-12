@@ -22,7 +22,8 @@ import com.drake.brv.item.ItemHover
 import com.drake.brv.item.ItemPosition
 import com.drake.brv.sample.R
 
-class GroupModel : ItemExpand, ItemHover, ItemPosition, BaseObservable() {
+class GroupModel : ItemExpand, ItemHover, ItemPosition,
+    BaseObservable() {
 
     override var itemGroupPosition: Int = 0
     override var itemExpand: Boolean = false
@@ -30,7 +31,16 @@ class GroupModel : ItemExpand, ItemHover, ItemPosition, BaseObservable() {
             field = value
             notifyChange()
         }
-    override var itemSublist: List<Any?>? = listOf(Model(), Model(), Model(), Model())
+
+    // 这种代理方式是为了避免Gson等框架解析Kotlin会覆盖默认值问题: https://liangjingkanji.github.io/BRV/group.html#_2
+    override var itemSublist: List<Any?>?
+        get() = finalList
+        set(value) {
+            finalList = value as List<Model>
+        }
+
+    var finalList: List<Model> = listOf(Model(), Model(), Model(), Model())
+
     override var itemHover: Boolean = true
     override var itemPosition: Int = 0
 
