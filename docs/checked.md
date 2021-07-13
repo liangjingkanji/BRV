@@ -67,10 +67,7 @@ tv_manage.setOnClickListener {
 
 ## 函数
 
-> 学完如何创建一个多选列表后可以查看函数学习更复杂的功能配置
-
-<img src="https://i.imgur.com/fZ7RDtX.png" width="600"/>
-
+支持选择模式的常用函数
 
 | 函数 | 描述 |
 |-|-|

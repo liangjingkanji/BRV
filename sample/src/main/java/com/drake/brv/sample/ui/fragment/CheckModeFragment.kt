@@ -33,12 +33,13 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
 
             addType<CheckModel>(R.layout.item_check_mode)
 
-            // 长按进入编辑模式
+            // 长按列表进入编辑模式
             onLongClick(R.id.item) {
                 toggle()
                 setChecked(adapterPosition, true)
             }
 
+            // 点击列表触发选中
             onClick(R.id.cb, R.id.item) {
                 // 如果当前未处于选择模式下 点击无效
                 if (!toggleMode && it == R.id.item) {
@@ -49,7 +50,7 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
                 setChecked(adapterPosition, checked)
             }
 
-            // 监听选择
+            // 监听列表选中
             onChecked { position, isChecked, isAllChecked ->
 
                 val model = getModel<CheckModel>(position)
@@ -59,16 +60,19 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
                 // 刷新已选择计数器
                 binding.tvCheckedCount.text = "已选择 ${checkedCount}/${modelCount}"
 
-                // 全选按钮进行更新
+                // 更新全选按钮
                 binding.tvAllChecked.isChecked = isAllChecked
                 binding.tvAllChecked.isEnabled = !isAllChecked
             }
 
             // 监听切换模式
             onToggle { position, toggleMode, end ->
+
+                // 刷新列表显示选择按钮
                 val model = getModel<CheckModel>(position)
                 model.visibility = toggleMode
                 model.notifyChange()
+
 
                 if (end) {
                     // 管理按钮
@@ -82,19 +86,19 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
                     binding.tvCheckedCount.text = "已选择 ${checkedCount}/${modelCount}"
 
                     // 如果取消管理模式则取消全部已选择
-                    if (toggleMode) checkedAll(false)
+                    if (!toggleMode) checkedAll(false)
                 }
             }
 
         }.models = getData()
 
-        initOperation()
+        initEditMode()
     }
 
     /**
-     * 初始化操作按钮
+     * 初始化编辑模式视图
      */
-    private fun initOperation() {
+    private fun initEditMode() {
         val adapter = binding.rv.bindingAdapter
 
         // 单选模式切换
@@ -135,6 +139,4 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
 
     override fun initData() {
     }
-
-
 }
