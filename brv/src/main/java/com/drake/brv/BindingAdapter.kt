@@ -66,21 +66,25 @@ import kotlin.math.min
 @Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
+    /** 当前Adapter被setAdapter才不为null */
     var rv: RecyclerView? = null
+
+    /** onBindViewHolder触发监听器集合 */
     var onBindViewHolders = mutableListOf<OnBindViewHolderListener>()
 
     companion object {
-        /*
-        即item的layout布局中的<variable>标签内定义变量名称
-
-        示例:
-            <variable
-                name="m"
-                type="com.drake.brv.sample.mod.CheckModel" />
-
-        则应在Application中的[onCreate]函数内设置:
-            BindingAdapter.modelId = BR.m
-        */
+        /**
+         * 即item的layout布局中的<variable>标签内定义变量名称
+         * 示例:
+         * ```
+         * <variable
+         *      name="m"
+         *      type="com.drake.brv.sample.mod.CheckModel" />
+         * ```
+         * 则应在Application中的onCreate函数内设置:
+         * `BindingAdapter.modelId = BR.m`
+         */
+        @Deprecated("函数优化", ReplaceWith("BR.modelId", "com.drake.brv.utils.BRV"))
         var modelId: Int = BRV.modelId
     }
 
@@ -191,18 +195,15 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="多类型">
 
+    /** 类型池 */
     val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
 
-    /**
-     * 添加多类型
-     */
+    /** 添加多类型 */
     inline fun <reified M> addType(@LayoutRes layout: Int) {
         typePool[M::class.java] = { layout }
     }
 
-    /**
-     * 通过回调函数添加多类型, 一对多多类型
-     */
+    /** 通过回调函数添加多类型, 一对多多类型 */
     inline fun <reified M> addType(noinline block: M.(Int) -> Int) {
         typePool[M::class.java] = block as Any.(Int) -> Int
     }
@@ -213,7 +214,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private val clickListeners = HashMap<Int, Pair<(BindingViewHolder.(Int) -> Unit)?, Boolean>>()
     private val longClickListeners = HashMap<Int, (BindingViewHolder.(Int) -> Unit)?>()
 
-    // 自定义ItemTouchHelper即可设置该属性
+    /** 自定义ItemTouchHelper即可设置该属性 */
     var itemTouchHelper: ItemTouchHelper? = ItemTouchHelper(DefaultItemTouchCallback(this))
         set(value) {
             if (value == null) field?.attachToRecyclerView(null) else value.attachToRecyclerView(rv)
@@ -223,6 +224,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     /** 防抖动点击事件的间隔时间, 单位毫秒 */
     var clickThrottle: Long = BRV.clickThrottle
 
+    /** 防抖动点击事件的间隔时间, 单位毫秒. 本函数已废弃 */
     @Deprecated("Rename to clickThrottle", ReplaceWith("clickThrottle"))
     var clickPeriod: Long
         get() = clickThrottle
@@ -306,14 +308,23 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         onLongClick = block
     }
 
+    /**
+     * 添加点击事件, 点击启用防抖动
+     */
     fun @receiver:IdRes Int.onClick(listener: BindingViewHolder.(Int) -> Unit) {
         clickListeners[this] = Pair(listener, false)
     }
 
+    /**
+     * 添加点击事件
+     */
     fun @receiver:IdRes Int.onFastClick(listener: BindingViewHolder.(Int) -> Unit) {
         clickListeners[this] = Pair(listener, true)
     }
 
+    /**
+     * 添加长按事件
+     */
     fun @receiver:IdRes Int.onLongClick(listener: BindingViewHolder.(Int) -> Unit) {
         longClickListeners[this] = listener
     }
@@ -327,7 +338,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var lastPosition = -1
     private var isFirst = true
 
-    // 是否启用条目动画
+    /** 是否启用条目动画 */
     var animationEnabled = false
 
     /**
@@ -357,16 +368,22 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="头布局">
 
-    // 头布局的数据模型
+    /** 头布局的数据模型 */
     var headers: List<Any?> = mutableListOf()
         set(value) {
             field = value.toMutableList()
             notifyDataSetChanged()
         }
 
-    // 头布局数量
+    /** 头布局数量 */
     val headerCount: Int get() = headers.size
 
+    /**
+     * 添加头布局
+     * @param model 数据
+     * @param index 插入头布局中的索引
+     * @param animation 是否显示动画
+     */
     fun addHeader(model: Any?, @IntRange(from = -1) index: Int = -1, animation: Boolean = false) {
 
         if (index == -1) {
@@ -380,6 +397,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         if (!animation) notifyDataSetChanged()
     }
 
+    /**
+     * 通过数据删除头布局
+     */
     fun removeHeader(model: Any?, animation: Boolean = false) {
         if (headerCount != 0 && headers.contains(model)) {
             val headerIndex = headers.indexOf(model)
@@ -391,7 +411,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-
+    /**
+     * 通过索引删除头布局
+     */
     fun removeHeaderAt(@IntRange(from = 0) index: Int = 0, animation: Boolean = false) {
         if (headerCount <= 0 || headerCount < index) return
         (headers as MutableList).removeAt(index)
@@ -406,7 +428,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-
+    /**
+     * 指定position是否为头布局
+     */
     fun isHeader(@IntRange(from = 0) position: Int): Boolean =
         (headerCount > 0 && position < headerCount)
 
@@ -415,7 +439,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="脚布局">
 
-
+    /**
+     * 全部脚布局数据集合
+     */
     var footers: List<Any?> = mutableListOf()
         set(value) {
 
@@ -430,10 +456,17 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
         }
 
-
+    /**
+     * 脚布局数量
+     */
     val footerCount: Int get() = footers.size
 
-
+    /**
+     * 添加脚布局
+     * @param model 数据模型
+     * @param index 指定插入的脚布局索引
+     * @param animation 是否显示动画
+     */
     fun addFooter(model: Any?, @IntRange(from = -1) index: Int = -1, animation: Boolean = false) {
         if (index == -1) {
             (footers as MutableList).add(model)
@@ -452,6 +485,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+    /**
+     * 通过数据模型删除脚布局
+     */
     fun removeFooter(model: Any?, animation: Boolean = false) {
         if (footerCount != 0 && footers.contains(model)) {
             val footerIndex = headerCount + modelCount + footers.indexOf(model)
@@ -462,6 +498,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+    /**
+     * 通过索引删除脚布局
+     */
     fun removeFooterAt(@IntRange(from = -1) index: Int = -1, animation: Boolean = false) {
 
         if (footerCount <= 0 || footerCount < index) return
@@ -484,6 +523,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
+    /**
+     * 清除全部脚布局
+     */
     fun clearFooter(animation: Boolean = false) {
         if (footers.isNotEmpty()) {
             val footerCount = this.footerCount
@@ -494,7 +536,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         }
     }
 
-
+    /**
+     * 指定position是否为脚布局
+     */
     fun isFooter(@IntRange(from = 0) position: Int): Boolean =
         (footerCount > 0 && position >= headerCount + modelCount && position < itemCount)
 
@@ -503,13 +547,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     // <editor-fold desc="数据">
 
-    // 数据模型数量(不包含头布局和脚布局)
+    /** 数据模型数量(不包含头布局和脚布局) */
     val modelCount: Int
         get() {
             return if (models == null) 0 else models!!.size
         }
 
-    // 数据模型集合
+    /** 数据模型集合 */
     var models: List<Any?>? = null
         set(value) {
             field = when (value) {
@@ -527,13 +571,16 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             }
         }
 
-    // 可增删的数据模型集合
+    /** 可增删的数据模型集合 */
     var mutable
         get() = models as ArrayList
         set(value) {
             models = value
         }
 
+    /**
+     * 扁平化数据. 将折叠分组铺平展开创建列表
+     */
     private fun flat(
         list: MutableList<Any?>,
         expand: Boolean? = null,
@@ -566,6 +613,9 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
         return list
     }
 
+    /**
+     * 指定position是否为models
+     */
     fun isModel(@IntRange(from = 0) position: Int): Boolean =
         !(isHeader(position) || isFooter(position))
 
@@ -620,16 +670,16 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
 
     /**
-     * adapter position  convert to  model position
-     * @receiver Int model of position
-     * @return Int
+     * 对应models中的index
      */
     fun Int.toModelPosition(): Int = this - headerCount
 
     // </editor-fold>
 
     //<editor-fold desc="切换模式">
-    var toggleMode = false // 是否开启切换模式
+
+    /** 是否开启切换模式 */
+    var toggleMode = false
         private set
 
     /**
@@ -674,8 +724,10 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     private var checkableItemTypeList: List<Int>? = null
 
-    val checkedPosition = mutableListOf<Int>() // 已选择的位置
+    /** 已选择条目的position */
+    val checkedPosition = mutableListOf<Int>()
 
+    /** 已选择条目数量 */
     val checkedCount: Int get() = checkedPosition.size
 
     private val checkableCount: Int
@@ -693,9 +745,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             return count
         }
 
-    /**
-     * 全局单选模式
-     */
+    /** 全局单选模式 */
     var singleMode = false
         set(value) {
             field = value
@@ -813,12 +863,13 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private var previousExpandPosition = 0
     private var onExpand: (BindingViewHolder.(Boolean) -> Unit)? = null
 
-    // 分组展开和折叠是否启用动画
+    /** 分组展开和折叠是否启用动画 */
     var expandAnimationEnabled = true
 
-    // 只允许一个条目展开(展开当前条目就会折叠上个条目)
+    /** 只允许一个条目展开(展开当前条目就会折叠上个条目) */
     var singleExpandMode = false
 
+    /** 监听展开分组 */
     fun onExpand(block: BindingViewHolder.(Boolean) -> Unit) {
         this.onExpand = block
     }
@@ -1101,11 +1152,19 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
 
     //<editor-fold desc="悬停">
 
-    // 是否启用条目悬停
+    /**
+     * 是否启用条目悬停
+     */
     var hoverEnabled = true
 
+    /**
+     * 监听开始悬停
+     */
     var onHoverAttachListener: OnHoverAttachListener? = null
 
+    /**
+     * 通过position判断是否启用悬停
+     */
     fun isHover(position: Int): Boolean {
         val model = getModelOrNull<ItemHover>(position)
         return model != null && model.itemHover && hoverEnabled

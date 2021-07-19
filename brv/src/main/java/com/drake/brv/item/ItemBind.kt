@@ -19,8 +19,7 @@ package com.drake.brv.item
 import com.drake.brv.BindingAdapter
 
 /**
- * 推荐使用DataBinding来进行数据绑定[com.drake.brv.BindingAdapter.modelId], 或者函数[com.drake.brv.BindingAdapter.onBind]
- * 该接口进行UI操作不符合MVVM架构, 因为Model中不允许出现View引用
+ * 实现接口进行UI操作不符合MVVM, 因为Model中不允许出现View引用. 并不是太推荐使用
  */
 interface ItemBind {
     fun onBind(holder: BindingAdapter.BindingViewHolder)

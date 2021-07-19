@@ -208,6 +208,7 @@ $dokka.location:com.drake.brv.utils//setup/android.app.Dialog#kotlin.Function2[c
 $dokka.location:com.drake.brv.utils//setup/androidx.recyclerview.widget.RecyclerView#kotlin.Function2[com.drake.brv.BindingAdapter,androidx.recyclerview.widget.RecyclerView,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv.utils/setup.html
 $dokka.location:com.drake.brv.utils//staggered/androidx.recyclerview.widget.RecyclerView#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.utils/staggered.html
 $dokka.location:com.drake.brv.utils/BRV///PointingToDeclaration/-b-r-v/com.drake.brv.utils/-b-r-v/index.html
+$dokka.location:com.drake.brv.utils/BRV/clickThrottle/#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/-b-r-v/click-throttle.html
 $dokka.location:com.drake.brv.utils/BRV/modelId/#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/-b-r-v/model-id.html
 $dokka.location:com.drake.brv////PointingToDeclaration/-b-r-v/com.drake.brv/index.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder///PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/index.html
@@ -247,6 +248,7 @@ $dokka.location:com.drake.brv/BindingAdapter/checkedSwitch/#kotlin.Int/PointingT
 $dokka.location:com.drake.brv/BindingAdapter/clearFooter/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/clear-footer.html
 $dokka.location:com.drake.brv/BindingAdapter/clearHeader/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/clear-header.html
 $dokka.location:com.drake.brv/BindingAdapter/clickPeriod/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/click-period.html
+$dokka.location:com.drake.brv/BindingAdapter/clickThrottle/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/click-throttle.html
 $dokka.location:com.drake.brv/BindingAdapter/collapse/#kotlin.Int#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/collapse.html
 $dokka.location:com.drake.brv/BindingAdapter/expand/#kotlin.Int#kotlin.Boolean#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/expand.html
 $dokka.location:com.drake.brv/BindingAdapter/expandAnimationEnabled/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/expand-animation-enabled.html
