@@ -17,16 +17,23 @@
 package com.drake.brv.utils
 
 object BRV {
-    /*
-    即item的layout布局中的<variable>标签内定义变量名称
 
-    示例:
-    <variable
-        name="m"
-        type="com.drake.brv.sample.mod.CheckModel" />
-
-    则应在Application中的[onCreate]函数内设置:
-    BindingAdapter.modelId = BR.m
-    */
+    /**
+     * 即item的layout布局中的<variable>标签内定义变量名称
+     * 示例:
+     * ```
+     * <variable
+     *      name="m"
+     *      type="com.drake.brv.sample.mod.CheckModel" />
+     * ```
+     * 则应在Application中的onCreate函数内设置:
+     * `BindingAdapter.modelId = BR.m`
+     */
     var modelId: Int = -1
+
+    /**
+     * 防抖动点击事件默认的间隔时间, 单位毫秒
+     * @see com.drake.brv.BindingAdapter.onClick
+     */
+    var clickThrottle: Long = 500
 }

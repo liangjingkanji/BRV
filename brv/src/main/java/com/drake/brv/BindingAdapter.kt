@@ -220,12 +220,19 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             field = value
         }
 
-    // 防抖间隔时间, 单位毫秒
-    var clickPeriod: Long = 500
+    /** 防抖动点击事件的间隔时间, 单位毫秒 */
+    var clickThrottle: Long = BRV.clickThrottle
+
+    @Deprecated("Rename to clickThrottle", ReplaceWith("clickThrottle"))
+    var clickPeriod: Long
+        get() = clickThrottle
+        set(value) {
+            clickThrottle = value
+        }
 
     /**
      * 添加点击事件
-     * 默认500ms防抖, 修改[clickPeriod]属性可以全局设置间隔时间, 单位毫秒
+     * 默认500ms防抖, 修改[clickThrottle]属性可以全局设置间隔时间, 单位毫秒
      * 默认会回调最后一个onClick监听函数
      */
     @Deprecated(
@@ -900,7 +907,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             for (clickListener in clickListeners) {
                 val view = itemView.findViewById<View>(clickListener.key) ?: continue
                 if (clickListener.value.second) {
-                    view.throttleClick(clickPeriod) {
+                    view.throttleClick(clickThrottle) {
                         (clickListener.value.first ?: onClick)?.invoke(this@BindingViewHolder, id)
                     }
                 } else {
