@@ -958,12 +958,12 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
             for (clickListener in clickListeners) {
                 val view = itemView.findViewById<View>(clickListener.key) ?: continue
                 if (clickListener.value.second) {
-                    view.throttleClick(clickThrottle) {
-                        (clickListener.value.first ?: onClick)?.invoke(this@BindingViewHolder, id)
-                    }
-                } else {
                     view.setOnClickListener {
                         (clickListener.value.first ?: onClick)?.invoke(this, it.id)
+                    }
+                } else {
+                    view.throttleClick(clickThrottle) {
+                        (clickListener.value.first ?: onClick)?.invoke(this@BindingViewHolder, id)
                     }
                 }
             }
