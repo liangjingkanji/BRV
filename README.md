@@ -31,35 +31,33 @@
 <p align="center"><strong>欢迎贡献代码/问题</strong></p>
 <br>
 
--   优雅的函数设计
--   详细的使用文档
--   简单的示例代码
 -   高内聚低耦合
 -   刷新不闪屏
 -   双向数据绑定(DataBinding)
+-   无Adapter
+-   自动化
 
 <br>
 
 ## 功能
 
-- 多类型
-- 单一数据模型一对多
-- 多数据模型
+- 快速创建多类型列表
+- 一对多/多对多创建多类型布局
 - 添加头布局和脚布局
 - 点击(防抖动)/长按事件
 - 分组(展开折叠/递归层次/展开置顶/单一展开模式)
 - 悬停
-- 分割线/均布间隔(支持官方全部的`LayoutManager`)
-- 切换模式
+- 快速创建分割线/间隔(支持官方全部的`LayoutManager`)
+- 切换模式(例如切换编辑模式)
 - 选择模式(多选/单选/全选/取消全选/反选)
 - 拖拽位置
 - 侧滑删除
-- 下拉刷新 | 上拉加载, 扩展SmartRefreshLayout即兼容其所有功能
-- 预拉取索引(UpFetch) | 预加载索引(Preload)
-- 缺省页
-- 自动分页加载
-- 扩展伸缩布局 ([FlexboxLayoutManager](https://github.com/google/flexbox-layout))
-- 扩展自动化网络请求 ([Net](https://github.com/liangjingkanji/Net)), 该网络请求基于协程实现自动化的并发网络请求
+- 下拉刷新(Refresh) | 上拉加载(LoadMore) | 下拉加载(UpFetch), 由[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)实现
+- 预加载(Preload)
+- 列表缺省页, 由[StateLayout](https://github.com/liangjingkanji/StateLayout)实现
+- 自动分页加载列表数据
+- 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现Flexbox伸缩布局
+- 可添加[Net](https://github.com/liangjingkanji/Net)(基于协程实现自动化的并发网络请求)实现自动化网络请求
 
 
 ## 安装
