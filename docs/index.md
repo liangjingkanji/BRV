@@ -65,11 +65,11 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
 第一步, 启用DataBinding, 在module中的build.gradle文件中
 
 ```groovy
+apply plugin: "kotlin-kapt" // kapt插件用于生成dataBinding
+
 android {
 	/.../
-    dataBinding {
-        enabled = true
-    }
+    buildFeatures.dataBinding = true
 }
 ```
 

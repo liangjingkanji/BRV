@@ -78,6 +78,8 @@ allprojects {
 在 module 的 build.gradle 添加依赖
 
 ```groovy
+apply plugin: "kotlin-kapt"
+
 android {
     //... 即使你不使用DataBinding也要打开其开关
     buildFeatures.dataBinding = true
