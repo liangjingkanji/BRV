@@ -1,3 +1,5 @@
+> 如果直接绘制item的xml可以实现分割线, 比如你在xml中使用简单的`layout_margin`(设置间距)也能完成你想要的分割线效果, 那么我更建议使用layout_margin
+
 ## 水平分割线
 
 <img src="https://i.imgur.com/tZUyUIZ.png" width="250" />
