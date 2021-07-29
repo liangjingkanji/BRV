@@ -40,7 +40,7 @@ abstract class BaseHoverFragment<B : ViewDataBinding>(@LayoutRes contentLayoutId
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_hover_header, menu)
+        inflater.inflate(R.menu.menu_hover, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

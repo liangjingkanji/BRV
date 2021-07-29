@@ -83,7 +83,7 @@
 
     <include app:graph="@navigation/nav_divider" />
 
-    <include app:graph="@navigation/nav_hover_header" />
+    <include app:graph="@navigation/nav_hover" />
 
     <fragment
         android:id="@+id/dragFragment"

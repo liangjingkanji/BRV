@@ -18,24 +18,44 @@ package com.drake.brv.sample.ui.fragment.hover
 
 import android.view.View
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.FragmentHoverHeaderBinding
+import com.drake.brv.sample.databinding.FragmentHoverBinding
 import com.drake.brv.sample.model.HoverHeaderModel
 import com.drake.brv.sample.model.Model
-import com.drake.brv.utils.linear
-import com.drake.brv.utils.setup
+import com.drake.brv.sample.model.NestedGroupModel
+import com.drake.brv.utils.*
 import com.drake.tooltip.toast
 
 
-class HoverHeaderLinearFragment :
-    BaseHoverFragment<FragmentHoverHeaderBinding>(R.layout.fragment_hover_header) {
+class HoverGridDividerFragment : BaseHoverFragment<FragmentHoverBinding>(R.layout.fragment_hover) {
 
     override fun initView() {
+        setHasOptionsMenu(true)
+
         binding.rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_simple)
+
+            onCreate {
+                if (it == R.layout.item_simple_list) { // 构建嵌套网格列表
+                    findView<RecyclerView>(R.id.rv).divider { // 构建间距
+                        setDivider(20)
+                        includeVisible = true
+                        orientation = DividerOrientation.GRID
+                    }.grid(2).setup {
+                        addType<Model>(R.layout.item_multi_type_simple_none_margin)
+                    }
+                }
+            }
+            onBind {
+                if (itemViewType == R.layout.item_simple_list) { // 为嵌套的网格列表赋值数据
+                    findView<RecyclerView>(R.id.rv).models =
+                        getModel<NestedGroupModel>().itemSublist
+                }
+            }
+            addType<NestedGroupModel>(R.layout.item_simple_list)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
-            models = getData()
 
             // 点击事件
             onClick(R.id.item) {
@@ -55,35 +75,23 @@ class HoverHeaderLinearFragment :
                     ViewCompat.setElevation(v, 0F) // 非悬停时隐藏阴影
                 }
             }
-
-        }
+        }.models = getData()
     }
 
     private fun getData(): List<Any> {
         return listOf(
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
+            NestedGroupModel(),
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
+            NestedGroupModel(),
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model()
+            NestedGroupModel(),
+            HoverHeaderModel(),
+            NestedGroupModel(),
         )
     }
 
     override fun initData() {
     }
+
 }

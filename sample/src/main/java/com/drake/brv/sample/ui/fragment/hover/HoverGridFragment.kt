@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.FragmentHoverHeaderBinding
+import com.drake.brv.sample.databinding.FragmentHoverBinding
 import com.drake.brv.sample.model.HoverHeaderModel
 import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
@@ -30,8 +30,7 @@ import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
 
 
-class HoverHeaderGridFragment :
-    BaseHoverFragment<FragmentHoverHeaderBinding>(R.layout.fragment_hover_header) {
+class HoverGridFragment : BaseHoverFragment<FragmentHoverBinding>(R.layout.fragment_hover) {
 
     override fun initView() {
         setHasOptionsMenu(true)
@@ -47,7 +46,6 @@ class HoverHeaderGridFragment :
         binding.rv.setup {
             addType<Model>(R.layout.item_multi_type_simple)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
-            models = getData()
 
             // 点击事件
             onClick(R.id.item) {
@@ -67,7 +65,7 @@ class HoverHeaderGridFragment :
                     ViewCompat.setElevation(v, 0F) // 非悬停时隐藏阴影
                 }
             }
-        }
+        }.models = getData()
     }
 
     private fun getData(): List<Any> {

@@ -90,3 +90,34 @@ rv.grid(3).divider {
     addType<DividerModel>(R.layout.item_divider_horizontal)
 }.models = getData()
 ```
+
+## 网格悬停均布间隔
+
+这里建议使用嵌套列表完成, 避免分割线出现问题. 这种需求比较常见所以演示实现思路
+
+<img src="https://i.imgur.com/FC8t7ZM.gif" width="250"/>
+
+```kotlin
+binding.rv.linear().setup {
+    onCreate {
+        if (it == R.layout.item_simple_list) { // 构建嵌套网格列表
+            findView<RecyclerView>(R.id.rv).divider { // 构建间距
+                setDivider(20)
+                includeVisible = true
+                orientation = DividerOrientation.GRID
+            }.grid(2).setup {
+                addType<Model>(R.layout.item_multi_type_simple_none_margin)
+            }
+        }
+    }
+    onBind {
+        if (itemViewType == R.layout.item_simple_list) { // 为嵌套的网格列表赋值数据
+            findView<RecyclerView>(R.id.rv).models =
+                getModel<NestedGroupModel>().itemSublist
+        }
+    }
+    addType<NestedGroupModel>(R.layout.item_simple_list)
+    addType<HoverHeaderModel>(R.layout.item_hover_header)
+}.models = getData()
+```
+

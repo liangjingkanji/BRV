@@ -14,29 +14,33 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.Model" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.fragment.hover.HoverHeaderLinearFragment">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <FrameLayout
+            android:id="@+id/item"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:text="简单支持任意Item任意点击事件的悬停列表"
-            android:textColor="@color/textSecond"
-            android:textSize="12dp" />
+            android:layout_height="100dp"
+            android:background="@drawable/bg_card"
+            android:foreground="?selectableItemBackgroundBorderless">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{String.valueOf(m.itemPosition)}" />
+
+        </FrameLayout>
 
     </LinearLayout>
 </layout>

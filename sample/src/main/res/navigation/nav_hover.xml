@@ -18,18 +18,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_hover_header.xml"
-    app:startDestination="@id/hoverHeaderLinearFragment">
+    app:startDestination="@id/hoverLinearFragment">
 
     <fragment
-        android:id="@+id/hoverHeaderGridFragment"
-        android:name="com.drake.brv.sample.ui.fragment.hover.HoverHeaderGridFragment"
+        android:id="@+id/hoverLinearFragment"
+        android:name="com.drake.brv.sample.ui.fragment.hover.HoverGridFragment"
         android:label="列表悬停"
-        tools:layout="@layout/fragment_hover_header" />
+        tools:layout="@layout/fragment_hover" />
 
     <fragment
-        android:id="@+id/hoverHeaderLinearFragment"
-        android:name="com.drake.brv.sample.ui.fragment.hover.HoverHeaderLinearFragment"
+        android:id="@+id/hoverGridFragment"
+        android:name="com.drake.brv.sample.ui.fragment.hover.HoverLinearFragment"
         android:label="网格悬停"
-        tools:layout="@layout/fragment_hover_header" />
+        tools:layout="@layout/fragment_hover" />
+
+    <fragment
+        android:id="@+id/hoverGridDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.hover.HoverGridDividerFragment"
+        android:label="网格悬停均布间距" />
 
 </navigation>
