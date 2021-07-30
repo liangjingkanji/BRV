@@ -36,7 +36,7 @@ class SwipeModel() : ItemDrag {
 
 
 
-## 自定义
+## 自定义侧滑
 
 如果想要扩展ItemTouchHelper可以给BindingAdapter的变量`itemTouchHelper`赋值
 
@@ -56,7 +56,7 @@ rv.linear().setup {
 ```
 
 
-通过给view打上tag标签 `swipe` 可以自定义侧滑将会移动的视图.
+通过给view打上tag标签 `swipe` 可以自定义侧滑将会移动的视图. 这样就可以展示背景后的视图
 ```xml
 <RelativeLayout
         android:layout_width="wrap_content"
@@ -65,3 +65,12 @@ rv.linear().setup {
         android:tag="swipe"/>
 ```
 
+## 侧滑按钮
+
+很多人会问如何实现类似QQ那样的侧滑展示按钮. 这种推荐使用自定义Item的视图对象, 而不是让列表去实现.0
+
+这里推荐第三方库: [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout)
+
+<img src="https://github.com/st235/SwipeToActionLayout/raw/master/images/showcase.gif" width="50%"/>
+
+> 这种交互效果属于iOS的官方效果, 不推荐Android抄袭
