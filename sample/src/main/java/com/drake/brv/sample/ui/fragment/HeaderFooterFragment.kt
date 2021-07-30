@@ -40,7 +40,7 @@ class HeaderFooterFragment :
 
             /**
              * BRV的数据集 = Header + Footer + Models
-             * 所以本质上他们都是一组多类型而已, 我分出来只是为了方便替换Models而不影响Header和Footer
+             * 所以本质上他们都是一组多类型而已, 分出来只是为了方便替换Models而不影响Header和Footer
              */
 
             addType<Header>(R.layout.item_multi_type_header)
