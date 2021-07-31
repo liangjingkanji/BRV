@@ -19,7 +19,7 @@ package com.drake.brv.listener
 import android.view.View
 
 
-fun View.throttleClick(period: Long = 500, block: View.() -> Unit) {
+internal fun View.throttleClick(period: Long = 500, block: View.() -> Unit) {
     setOnClickListener(ThrottleClickListener(period, block))
 }
 
