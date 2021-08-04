@@ -1,15 +1,15 @@
 @font-face {
-    font-family: 'Iosevka Curly';
-    src: local('Iosevka Curly Medium'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-curly/iosevka-curly-medium.woff2') format('woff2');
+    font-family: 'Iosevka SS16';
+    src: local('Iosevka SS16 Medium'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-ss16/iosevka-ss16-medium.woff2') format('woff2');
     font-display: swap;
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Iosevka Curly';
-    src: local('Iosevka Curly Bold'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-curly/iosevka-curly-bold.woff2') format('woff2');
+    font-family: 'Iosevka SS16';
+    src: local('Iosevka SS16 Bold'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-ss16/iosevka-ss16-bold.woff2') format('woff2');
     font-display: swap;
     font-weight: bold;
     font-style: normal;
