@@ -1,3 +1,8 @@
+## 1.3.30
+1. 更新依赖SmartRefreshLayout至2.0.3
+1. 更新依赖StateLayout至1.2.0
+2. 添加缺省页onContent监听
+
 ## 1.3.29
 隐藏内部函数 throttleClick
 
