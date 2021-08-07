@@ -176,7 +176,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } else return
 
         if (stateEnabled) {
-            replaceStateLayout()
+            initStateLayout()
         }
 
         val rv = contentView
@@ -270,6 +270,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         return this
     }
 
+    fun onContent(block: View.(Any?) -> Unit): PageRefreshLayout {
+        stateLayout?.onContent(block)
+        return this
+    }
+
     fun onRefresh(block: PageRefreshLayout.() -> Unit): PageRefreshLayout {
         onRefresh = block
         return this
@@ -355,7 +360,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             field = value
             if (finishInflate) {
                 if (field && stateLayout == null) {
-                    replaceStateLayout()
+                    initStateLayout()
                 } else if (!field) {
                     stateLayout?.showContent()
                 }
@@ -415,9 +420,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh)
     }
 
-    fun showContent(hasMore: Boolean = false) {
+    fun showContent(hasMore: Boolean = false, tag: Any? = null) {
         if (trigger && stateChanged) return
-        if (stateEnabled) stateLayout?.showContent()
+        if (stateEnabled) stateLayout?.showContent(tag)
         finish(hasMore = hasMore)
     }
 
@@ -460,7 +465,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     /**
      * 替换成缺省页
      */
-    private fun replaceStateLayout() {
+    private fun initStateLayout() {
 
         if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID &&
             StateConfig.emptyLayout == View.NO_ID && emptyLayout == View.NO_ID &&
@@ -470,19 +475,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             return
         }
 
-        stateLayout = StateLayout(context)
-
-        stateLayout?.apply {
-            this@PageRefreshLayout.removeView(contentView)
-            addView(contentView)
-            setContentView(contentView!!)
+        stateLayout = StateLayout(context).let {
+            removeView(contentView)
+            it.addView(contentView)
+            it.setContentView(contentView!!)
             setRefreshContent(this)
 
-            emptyLayout = this@PageRefreshLayout.emptyLayout
-            errorLayout = this@PageRefreshLayout.errorLayout
-            loadingLayout = this@PageRefreshLayout.loadingLayout
+            it.emptyLayout = emptyLayout
+            it.errorLayout = errorLayout
+            it.loadingLayout = loadingLayout
 
-            onRefresh {
+            it.onRefresh {
                 if (realEnableRefresh) super.setEnableRefresh(false)
                 if (realEnableLoadMore) super.setEnableLoadMore(false)
                 notifyStateChanged(RefreshState.Refreshing)
