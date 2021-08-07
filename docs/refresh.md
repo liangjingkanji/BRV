@@ -1,3 +1,5 @@
+本章内容看似多实则代码很简练, 只是为避免介绍不够详细
+
 <img src="https://i.imgur.com/LZh90KX.gif" width="250"/>
 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
@@ -50,7 +52,7 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
 5.  拉取加载更多
 6.  预加载 / 预拉取
 
-### 包住RecyclerView
+### 声明
 
 支持两种方式创建, 推荐布局包裹, 
 
@@ -131,7 +133,7 @@ PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
 
 > 这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
 
-缺省页状态控制
+缺省页状态控制(一般情况下都是框架内部自动控制)
 
 | 函数 | 描述 |
 |-|-|
@@ -169,7 +171,7 @@ StateConfig.apply {
 
 无需全部单独指定, 可只指定加载中单例或者错误页面单例
 
-=== "XML指定"
+=== "布局声明"
 
     ```xml hl_lines="3 4 5"
     <com.drake.brv.PageRefreshLayout
@@ -183,7 +185,7 @@ StateConfig.apply {
     </com.drake.brv.PageRefreshLayout>
     ```
 
-=== "代码指定"
+=== "代码声明"
 
     ```kotlin
     page.apply {

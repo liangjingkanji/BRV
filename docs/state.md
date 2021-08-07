@@ -2,16 +2,26 @@
 
 BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/liangjingkanji/StateLayout)来实现列表缺省页
 
-> 已经内嵌在BRV库中, 无需再次依赖StateLayout. 如果你的列表同时包含下拉刷新/上拉加载我建议使用`PageRefreshLayout`替代StateLayout
+> 已经内嵌在BRV库中, 无需再次依赖StateLayout. 如果你的列表同时包含下拉刷新/上拉加载我建议使用[PageRefreshLayout](refresh.md)替代StateLayout
 
 <br>
 
 主要特点
 
-- [x] 全局配置/单例配置
-- [x] 生命周期
-- [x] 代码/布局创建缺省页
-- [x] 点击重试
+- [x] 优雅的函数设计
+- [x] 局部缺省页
+- [x] 布局或代码声明皆可
+- [x] 全局/单例配置
+- [x] 监听缺省页显示
+- [x] 自定义动画
+- [x] 多种状态缺省页
+- [x] 网络请求回调
+- [x] 传递任意对象作为标签
+- [x] 快速配置点击重试
+- [x] 异步线程
+- [x] 无网络立即显示错误缺省页
+- [x] 配合列表使用自动化显示列表缺省页
+- [x] 配合网络请求自动化显示缺省页
 
 <br>
 
@@ -57,4 +67,11 @@ state.showError() // 加载错误
 state.showEmpty() // 加载失败
 ```
 
-> StateLayout缺省页库非常推荐使用, BRV也暴露集成的缺省页库给开发者使用, [使用文档](https://liangjingkanji.github.io/StateLayout)
+## StateLayout
+
+StateLayout缺省页库非常推荐使用, BRV内部集成实现列表缺省页给开发者使用
+
+如果你想要自定义缺省页动画以及缺省页的生命周期监听建议你阅读以下文档
+
+- [GitHub](https://github.com/liangjingkanji/StateLayout/)
+- [使用文档](https://liangjingkanji.github.io/StateLayout)
