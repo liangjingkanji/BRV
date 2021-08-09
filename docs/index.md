@@ -111,17 +111,19 @@ android {
 ```
 选中行是databinding使用方法
 
-第三步, 应当在Application中注册一个全局的ID (别忘记在`AndroidManifest`注册该Application)
+第三步, 注册一个用于`自定绑定数据到XML布局的Id`(DataBinding基础知识), 推荐在Application中注册(别忘记在`AndroidManifest`使用该Application)
 <br>
 
-1. 注意要先创建`<layout>`布局中的变量`m`, `BR.m`才能被生成 <br>
-   <img src="https://i.imgur.com/mnTUXKY.png" width="450"/>
-2. 导包注意导入你所在module的BR <br>
-   <img src="https://i.imgur.com/qpdLiM0.png" width="450"/>
-2. 如果依然没有生成请`make project`(即图中绿色小锤子图标) <br>
-   <img src="https://i.imgur.com/r9yceVQ.png" width="150"/>
+1. 注意要先在某个布局或Item布局声明`<layout>`布局中的变量`m`, `BR.m`才能被生成 <br>
+   <img src="https://i.imgur.com/ADEBRQd.png" width="450"/>
+1. 导包注意导入你所在module的BR, 这样所有使用该Id来声明数据模型的布局都会被BRV自动绑定数据 <br>
+   <img src="https://i.imgur.com/5M3tYVo.png" width="350"/>
+   <img src="https://i.imgur.com/0R92bNI.png" width="350"/>
+1. 如果依然没有生成请`make project`(即图中绿色小锤子图标) <br>
+   <img src="https://i.imgur.com/mi5YYzj.png" width="150"/>
 
-> m 可以是任何其他的名称, model或者sb都可以, 这里只是作者习惯性的简写变量名
+> m 可以是任何其他的名称, model或者sb都可以, 这里只是作者习惯性的简写变量名(m是model的简称). <br>
+> 但是一旦声明以后你的item布局文件都得使用m来声明数据模型, 否则会无法自动绑定. 当然你也可以手动, 但是名称本身只是代号我建议都使用m
 
 ```kotlin
 class App : Application() {
