@@ -1,3 +1,6 @@
+## 1.3.31
+修复PageRefreshLayout缺省页崩溃问题
+
 ## 1.3.30
 1. 更新依赖SmartRefreshLayout至2.0.3
 1. 更新依赖StateLayout至1.2.0
