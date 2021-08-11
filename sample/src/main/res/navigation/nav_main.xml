@@ -90,5 +90,9 @@
         android:name="com.drake.brv.sample.ui.fragment.DragFragment"
         android:label="拖拽"
         tools:layout="@layout/fragment_drag" />
+    <fragment
+        android:id="@+id/coordinatorLayoutFragment"
+        android:name="com.drake.brv.sample.ui.fragment.CoordinatorLayoutFragment"
+        android:label="CoordinatorLayout" />
 
 </navigation>
