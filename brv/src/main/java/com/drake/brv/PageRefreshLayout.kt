@@ -479,7 +479,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             removeView(contentView)
             it.addView(contentView)
             it.setContentView(contentView!!)
-            setRefreshContent(this)
+            setRefreshContent(it)
 
             it.emptyLayout = emptyLayout
             it.errorLayout = errorLayout
