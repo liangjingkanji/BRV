@@ -58,9 +58,7 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
 
 ### 3) DataBinding
 
-通过DataBinding数据绑定形式自动填充数据, 推荐, 这是代码量最少最灵活的一种方式
-
-
+通过DataBinding数据绑定形式自动填充数据, 推荐, 这是代码量最少最灵活的一种方式.
 
 第一步, 启用DataBinding, 在module中的build.gradle文件中
 
@@ -109,12 +107,14 @@ android {
     </LinearLayout>
 </layout>
 ```
-选中行是databinding使用方法
+选中行是DataBinding使用方法
 
-第三步, 注册一个用于`自定绑定数据到XML布局的Id`(DataBinding基础知识), 推荐在Application中注册(别忘记在`AndroidManifest`使用该Application)
+第三步, 赋值一个用于`自定绑定数据到XML布局的Id`(DataBinding基础知识)
+
+> rv是一个列表. 里面的models是一个list集合, 每个元素对应一个item. dataBinding会根据你`赋值的Id`自动绑定models中元素到xml中赋值 <br>
 <br>
 
-1. 注意要先在某个布局或Item布局声明`<layout>`布局中的变量`m`, `BR.m`才能被生成 <br>
+1. 注意要先在某个布局或Item布局声明`<layout>`布局中的变量`name="m"`, `BR.m`才能被生成 <br>
    <img src="https://i.imgur.com/ADEBRQd.png" width="450"/>
 1. 导包注意导入你所在module的BR, 这样所有使用该Id来声明数据模型的布局都会被BRV自动绑定数据 <br>
    <img src="https://i.imgur.com/5M3tYVo.png" width="350"/>
@@ -122,8 +122,10 @@ android {
 1. 如果依然没有生成请`make project`(即图中绿色小锤子图标) <br>
    <img src="https://i.imgur.com/mi5YYzj.png" width="150"/>
 
-> m 可以是任何其他的名称, model或者sb都可以, 这里只是作者习惯性的简写变量名(m是model的简称). <br>
-> 但是一旦声明以后你的item布局文件都得使用m来声明数据模型, 否则会无法自动绑定. 当然你也可以手动, 但是名称本身只是代号我建议都使用m
+> m(m是model的简称)可以是任何其他的名称, model或者sb都可以, 比如你`name="data"`, 那么你就应该使用BR.data <br>
+> BR.data和Android中常见的`R.id.data`都属于Id常量, 本质上都是Int值. 你可以点击查看BR.m源码<br>
+> 但是一旦声明`BRV.model = BR.m`你的所有BRV使用的item布局都得使用`name="m"`来声明数据模型, 否则会无法自动绑定 <br>
+> 当然你也可以在`onBind`里面手动绑定, 但是肯定比自动麻烦, 而且名称本身只是代号我建议都使用m <br>
 
 ```kotlin
 class App : Application() {
@@ -131,7 +133,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // 初始化BindingAdapter的默认绑定ID, 如果不使用databinding并不需要初始化
+        // 初始化BindingAdapter的默认绑定ID, 如果不使用DataBinding并不需要初始化
         BRV.modelId = BR.m
     }
 }
