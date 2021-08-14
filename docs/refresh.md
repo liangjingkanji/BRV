@@ -1,6 +1,6 @@
 本章内容看似多实则代码很简练, 只是为避免介绍不够详细
 
-<img src="https://i.imgur.com/LZh90KX.gif" width="250"/>
+<img src="https://i.loli.net/2021/08/14/lV4ktFRAweYorsC.gif" width="250"/>
 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
 而BRV的下拉刷新和上拉加载正是扩展的SmartRefreshLayout , 支持其所有特性并且还增加了新的功能.
@@ -68,12 +68,12 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
         app:stateEnabled="true"
         android:layout_height="match_parent"
         tools:context="com.drake.brv.sample.fragment.RefreshFragment">
-
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+    
     </com.drake.brv.PageRefreshLayout>
     ```
 
@@ -179,9 +179,9 @@ StateConfig.apply {
         app:error_layout="@layout/layout_error"
         app:empty_layout="@layout/layout_empty"
         app:loading_layout="@layout/layout_loading">
-
+    
         <!--RecyclerView代码-->
-
+    
     </com.drake.brv.PageRefreshLayout>
     ```
 

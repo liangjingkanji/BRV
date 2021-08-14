@@ -14,7 +14,7 @@ dependencies {
 然后创建列表
 
 
-<img src="https://i.imgur.com/vyRLzrS.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/KYkHmyCrDogiLsS.png" width="250"/>
 
 ```kotlin
 rv.layoutManager = FlexboxLayoutManager(activity)
@@ -23,5 +23,4 @@ rv.setup {
     addType<FlexTagModel>(R.layout.item_flex_tag)
 }.models = getData()
 ```
-
 

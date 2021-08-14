@@ -115,12 +115,12 @@ android {
 <br>
 
 1. 注意要先在某个布局或Item布局声明`<layout>`布局中的变量`name="m"`, `BR.m`才能被生成 <br>
-   <img src="https://i.imgur.com/ADEBRQd.png" width="450"/>
+   <img src="https://i.loli.net/2021/08/14/rgX12ZSwkVMqQG3.png" width="450"/>
 1. 导包注意导入你所在module的BR, 这样所有使用该Id来声明数据模型的布局都会被BRV自动绑定数据 <br>
-   <img src="https://i.imgur.com/5M3tYVo.png" width="350"/>
-   <img src="https://i.imgur.com/0R92bNI.png" width="350"/>
+   <img src="https://i.loli.net/2021/08/14/VhYlAp1J7ZR9rIs.png" width="350"/>
+   <img src="https://i.loli.net/2021/08/14/Yh5Ge1qQIObJpDn.png" width="350"/>
 1. 如果依然没有生成请`make project`(即图中绿色小锤子图标) <br>
-   <img src="https://i.imgur.com/mi5YYzj.png" width="150"/>
+   <img src="https://i.loli.net/2021/08/14/IEh3H8VaFM6d1LR.png" width="150"/>
 
 > m(m是model的简称)可以是任何其他的名称, model或者sb都可以, 比如你`name="data"`, 那么你就应该使用BR.data <br>
 > BR.data和Android中常见的`R.id.data`都属于Id常量, 本质上都是Int值. 你可以点击查看BR.m源码<br>

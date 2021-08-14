@@ -1,5 +1,4 @@
-
-<p align="center"><img src="https://i.imgur.com/DQdEHQG.gif" width="250"/></p>
+<p align="center"><img src="https://i.loli.net/2021/08/14/Pl53LCpG8tdhuMW.gif" width="250"/></p>
 
 ## 特点
 
@@ -34,12 +33,12 @@ class GroupModel : ItemExpand {
     如果该数据模型是由Gson生成那么其字段默认值全部会被置为null, 这是由于Gson不支持Kotlin的默认值问题
 
     处理方案分为两种
-
+    
     1. 重写set/get函数
-
+    
         ```kotlin
         class GroupModel(var finalList: List<Model>) {
-
+    
             override var itemSublist: List<Any?>?
                 get() = finalList
                 set(value) {
@@ -47,9 +46,9 @@ class GroupModel : ItemExpand {
                 }
         }
         ```
-
+    
     2. 等Gson解析完成返回数据后手动赋值
-
+    
         ```kotlin
         val model = Post<GroupModel>()
         model.itemSublist = realList

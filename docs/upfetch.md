@@ -5,7 +5,7 @@
 
 <br>
 
-<img src="https://i.imgur.com/TUfL2Bk.gif" width="250"/>
+<img src="https://i.loli.net/2021/08/14/J9ZEOlKGHsQygwV.gif" width="250"/>
 
 ```kotlin hl_lines="8"
 override fun onActivityCreated(savedInstanceState: Bundle?) {

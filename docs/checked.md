@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/XOAv59E.gif" width="250"/>
+<img src="https://i.loli.net/2021/08/14/MIe74pdKf5c1hTX.gif" width="250"/>
 
 可编辑/多选列表在开发中很常见, BRV可以短短几行代码就可以实现一个选择模式: [Demo](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
 
@@ -40,7 +40,7 @@
             model.checked = isChecked
             model.notifyChange() // 通知UI跟随数据变化
        }
-
+    
        onClick(R.id.cb, R.id.item) {
             var checked = (getModel() as CheckModel).checked
             setChecked(adapterPosition, checked) // 在点击事件中触发选择事件, 即点击列表条目就选中

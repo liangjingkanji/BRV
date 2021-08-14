@@ -2,7 +2,7 @@
 
 ## 水平分割线
 
-<img src="https://i.imgur.com/tZUyUIZ.png" width="250" />
+<img src="https://i.loli.net/2021/08/14/IoBfnz6ERXVHlq3.png" width="250" />
 
 创建一个`drawable`文件来描述分隔线, 其具备复用的特点
 
@@ -25,7 +25,7 @@ rv_grid.linear().divider(R.drawable.divider_horizontal).setup {
 
 ## 垂直分割线
 
-<img src="https://i.imgur.com/6AvAiAJ.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/rAeDXkfV6HxJUym.png" width="250"/>
 
 创建Drawable作为分隔线
 ```xml
@@ -56,7 +56,7 @@ rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
 | [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | 是否显示尾部分割线 |
 | [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | 是否显示首尾分割线 |
 
-<img src="https://i.imgur.com/Z1vsVjW.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/iL5epWdOQKnwZAc.png" width="250"/>
 
 通过两个字段可以控制首尾是否显示分割线
 
@@ -72,7 +72,7 @@ rv.linear().divider {
 
 ## 四周全包裹
 
-<img src="https://i.imgur.com/vtPI13V.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/lGSOPdg5A8WInoL.png" width="250"/>
 
 这种分割线属于网格分割线, 要求使用`DividerOrientation.GRID`, 但LinearLayoutManager并不支持
 

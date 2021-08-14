@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/Mt0m2Sy.gif" width="250"/></p>
+<p align="center"><img src="https://i.loli.net/2021/08/14/4wUngbV2qZFAf5H.gif" width="250"/></p>
 
 通过实现接口`ItemHover`
 
@@ -61,7 +61,7 @@ fun isHover(position: Int): Boolean
 
 Demo截图
 
-<img src="https://i.imgur.com/OJUv7w7.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/4CfDnegM2kOi8WK.png" width="250"/>
 
 可以看到图片中悬停的item比普通的item要宽两倍, 这里需要确定悬停的Item的动态`SpanSize`, 所以不能直接使用`grid(3)`而是需要手动创建`HoverGridLayoutManager`
 
@@ -74,5 +74,4 @@ layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 }
 rv_hover.layoutManager = layoutManager
 ```
-
 

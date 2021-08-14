@@ -4,7 +4,7 @@
 
 ## 水平分割线
 
-<img src="https://i.imgur.com/jXdKlpQ.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/oyjdg42zDUbkFtu.png" width="250"/>
 
 ```kotlin
 rv.grid(3).divider(R.drawable.divider_horizontal).setup {
@@ -15,7 +15,8 @@ rv.grid(3).divider(R.drawable.divider_horizontal).setup {
 
 ## 垂直分割线
 
-<img src="https://i.imgur.com/RInJ0qL.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/ChG9ZnNiJyasWFr.png" width="250"/>
+
 ```kotlin
 rv.grid(3, RecyclerView.HORIZONTAL)
   .divider(R.drawable.divider_vertical, DividerOrientation.VERTICAL)
@@ -26,7 +27,7 @@ rv.grid(3, RecyclerView.HORIZONTAL)
 
 ## 网格分割线
 
-<img src="https://i.imgur.com/udblR3G.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/NLAPphzIU6yvVnt.png" width="250"/>
 
 ```kotlin
 rv.grid(3).divider {
@@ -49,7 +50,7 @@ rv.grid(3).divider {
 
 ### 1) 上下
 
-<img src="https://i.imgur.com/ujjSdw4.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/JBjETuMoaORFWHK.png" width="250"/>
 
 ```kotlin hl_lines="4"
 rv.grid(3).divider {
@@ -64,7 +65,7 @@ rv.grid(3).divider {
 
 ### 2) 左右
 
-<img src="https://i.imgur.com/aCczxuD.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/IcxHsWafFQXh4Eg.png" width="250"/>
 
 ```kotlin hl_lines="4"
 rv.grid(3).divider {
@@ -78,7 +79,7 @@ rv.grid(3).divider {
 
 ### 3) 四周
 
-<img src="https://i.imgur.com/d7H3Nz2.png" width="250"/>
+<img src="https://i.loli.net/2021/08/14/UmhH5BgFA3a1W2Q.png" width="250"/>
 
 ```kotlin hl_lines="4 5"
 rv.grid(3).divider {
@@ -95,7 +96,7 @@ rv.grid(3).divider {
 
 这里建议使用嵌套列表完成, 避免分割线出现问题. 这种需求比较常见所以演示实现思路
 
-<img src="https://i.imgur.com/FC8t7ZM.gif" width="250"/>
+<img src="https://i.loli.net/2021/08/14/kCS4Kr9qpIfsveQ.gif" width="250"/>
 
 ```kotlin
 binding.rv.linear().setup {
