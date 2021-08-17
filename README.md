@@ -31,11 +31,12 @@
 <p align="center"><strong>欢迎贡献代码/问题</strong></p>
 <br>
 
--   高内聚低耦合
--   刷新不闪屏
--   双向数据绑定(DataBinding)
--   无Adapter
--   自动化
+- 开发速度No.1
+- 高内聚低耦合
+- 刷新不闪屏
+- 双向数据绑定
+- 无Adapter
+- 自动化
 
 <br>
 
