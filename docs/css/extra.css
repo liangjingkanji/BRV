@@ -36,18 +36,22 @@
 }
 
 /*字体渲染*/
-@font-face {
-    font-family: 'Iosevka';
-    src: local('Iosevka Medium'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-medium.woff2') format('woff2');
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: local('JetBrains Mono'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/web/JetBrainsMono-Regular.eot') format('embedded-opentype'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
     font-display: swap;
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
-    font-family: 'Iosevka';
-    src: local('Iosevka Bold'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka/iosevka-bold.woff2') format('woff2');
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: local('JetBrains Mono'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/web/JetBrainsMono-Bold.eot') format('embedded-opentype'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Bold.woff2') format('woff2'),
+         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Bold.ttf') format('truetype');
     font-display: swap;
     font-weight: bold;
     font-style: normal;
@@ -73,7 +77,7 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     text-rendering: optimizeLegibility;
-    font-family: "Iosevka", "HYZhengYuan", monospace !important;
+    font-family: "JetBrains Mono", "HYZhengYuan", monospace !important;
 }
 
 /*布局*/
@@ -103,6 +107,7 @@ table tr:nth-child(2n), thead {
     box-shadow:none;
     font-size: var(--drake-font-size);
 }
+
 .md-typeset table:not([class]) th {
     border: 1px solid #dfe2e5;
     background-color: #f2f2f2;
