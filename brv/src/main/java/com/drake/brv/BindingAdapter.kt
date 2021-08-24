@@ -64,7 +64,7 @@ import kotlin.math.min
  *
  */
 @Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
-class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
+open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() {
 
     /** 当前Adapter被setAdapter才不为null */
     var rv: RecyclerView? = null
@@ -215,7 +215,7 @@ class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>() 
     private val longClickListeners = HashMap<Int, (BindingViewHolder.(Int) -> Unit)?>()
 
     /** 自定义ItemTouchHelper即可设置该属性 */
-    var itemTouchHelper: ItemTouchHelper? = ItemTouchHelper(DefaultItemTouchCallback(this))
+    var itemTouchHelper: ItemTouchHelper? = ItemTouchHelper(DefaultItemTouchCallback())
         set(value) {
             if (value == null) field?.attachToRecyclerView(null) else value.attachToRecyclerView(rv)
             field = value
