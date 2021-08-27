@@ -1,7 +1,6 @@
 @font-face{
     font-family: 'JetBrains Mono';
     src: local('JetBrains Mono'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/web/JetBrainsMono-Regular.eot') format('embedded-opentype'),
          url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
          url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf') format('truetype');
     font-display: swap;
@@ -11,7 +10,6 @@
 @font-face{
     font-family: 'JetBrains Mono';
     src: local('JetBrains Mono'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/web/JetBrainsMono-Bold.eot') format('embedded-opentype'),
          url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Bold.woff2') format('woff2'),
          url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Bold.ttf') format('truetype');
     font-display: swap;
@@ -29,7 +27,7 @@
 @font-face{
     font-family: 'HYZhengYuan';
     src: local('HYZhengYuan-75W'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan.ttf') format('truetype');
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan-75W.ttf') format('truetype');
     font-display: swap;
     font-weight: bold;
     font-style: normal;
