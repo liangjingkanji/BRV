@@ -304,7 +304,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param success Boolean 刷新/加载是否成功
      * @param hasMore 是否存在分页, 如果不存在分页当布局不满一页时会关闭Footer
      */
-    fun finish(success: Boolean = true, hasMore: Boolean = false) {
+    fun finish(success: Boolean = true, hasMore: Boolean = true) {
 
         if (trigger) {
             stateChanged = true
