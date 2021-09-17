@@ -26,12 +26,16 @@ import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
+import com.drake.tooltip.longToast
 import com.drake.tooltip.toast
+import java.lang.RuntimeException
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 class RefreshFragment : EngineFragment<FragmentRefreshBinding>(R.layout.fragment_refresh) {
 
-    private val total = 2
+    private val testError = AtomicBoolean(true)
+    private val total = 5
 
     override fun initView() {
         setHasOptionsMenu(true)
@@ -42,18 +46,22 @@ class RefreshFragment : EngineFragment<FragmentRefreshBinding>(R.layout.fragment
         }
 
         binding.page.onRefresh {
-
             val runnable = { // 模拟网络请求, 创建假的数据集
-                val data = getData()
-                addData(data) {
-                    index < total // 判断是否有更多页
-                }
+                if (index == 3 && testError.getAndSet(false)){
+                    longToast("现在为模拟请求失败, 自动化需求可使用`Net`")
+                    binding.page.showError(RuntimeException("test exception."))
+                }else{
+                    val data = getData()
+                    addData(data) {
+                        index < total // 判断是否有更多页
+                    }
 
-                // addData(data, binding.rv.bindingAdapter, isEmpty = {
-                //     true // 此处判断是否存在下一页
-                // }, hasMore = {
-                //     false // 此处判断是否显示空布局
-                // })
+                    // addData(data, binding.rv.bindingAdapter, isEmpty = {
+                    //     true // 此处判断是否存在下一页
+                    // }, hasMore = {
+                    //     false // 此处判断是否显示空布局
+                    // })
+                }
             }
             postDelayed(runnable, 2000)
 

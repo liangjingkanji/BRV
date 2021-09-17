@@ -36,7 +36,7 @@ implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加�
 刷新布局要求必须先初始化, 推荐在Application中
 
 ```
-SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(this) }
+SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> MaterialHeader(this) }
 SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
 ```
 

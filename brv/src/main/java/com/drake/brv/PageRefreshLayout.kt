@@ -86,9 +86,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var trigger = false
     private var realEnableLoadMore = false
     private var realEnableRefresh = false
+    private var lastHasMore = false
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
-
 
     var upFetchEnabled = false
         set(value) {
@@ -244,10 +244,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             adjustAdapter.addModels(data)
         }
 
-        val hasMoreResult = adjustAdapter.hasMore()
+        lastHasMore = adjustAdapter.hasMore()
         index += 1
 
-        if (isRefreshState) showContent(hasMoreResult) else finish(true, hasMoreResult)
+        if (isRefreshState) showContent(lastHasMore) else finish(true, lastHasMore)
     }
 
     // </editor-fold>
@@ -408,7 +408,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             loaded = false
             stateLayout?.showError(tag)
         }
-        finish(false)
+        finish(false, lastHasMore)
     }
 
     /**
