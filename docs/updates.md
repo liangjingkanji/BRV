@@ -1,3 +1,8 @@
+## 1.3.32
+- 允许BindingAdapter被重写
+- 修复加载更多时发生错误判断为没有更多页问题
+
+
 ## 1.3.31
 修复PageRefreshLayout缺省页崩溃问题
 
