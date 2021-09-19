@@ -157,14 +157,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     internal fun initialize() {
         setOnRefreshLoadMoreListener(this)
-
         realEnableLoadMore = mEnableLoadMore
         realEnableRefresh = mEnableRefresh
-
-        if (realEnableLoadMore) {
-            super.setEnableLoadMore(false)
-        }
-
         if (contentView == null) {
             for (i in 0 until childCount) {
                 val view = getChildAt(i)
@@ -457,6 +451,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         setNoMoreData(false)
+        if (realEnableLoadMore) super.setEnableLoadMore(false)
         index = startIndex
         onRefresh?.invoke(this)
     }
@@ -487,7 +482,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
             it.onRefresh {
                 if (realEnableRefresh) super.setEnableRefresh(false)
-                if (realEnableLoadMore) super.setEnableLoadMore(false)
                 notifyStateChanged(RefreshState.Refreshing)
                 onRefresh(this@PageRefreshLayout)
             }
