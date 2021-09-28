@@ -602,10 +602,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                 }
 
                 val itemSublist = item.itemSublist
-                val sublist: MutableList<Any?>? =
-                    if (itemSublist is ArrayList) itemSublist else itemSublist?.toMutableList()
-                if (!sublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
-                    val nestedList = flat(sublist, expand, nextDepth)
+                if (!itemSublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
+                    val nestedList = flat(ArrayList(itemSublist), expand, nextDepth)
                     list.addAll(nestedList)
                 }
             }
@@ -1054,9 +1052,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     previousExpandPosition = realPosition
                     0
                 } else {
-                    val sublist =
-                        if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
-                    val sublistFlat = flat(sublist, true, depth)
+                    val sublistFlat = flat(ArrayList(itemSublist), true, depth)
 
                     (this@BindingAdapter.models as MutableList).addAll(
                         realPosition + 1,
@@ -1097,9 +1093,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     notifyItemChanged(layoutPosition, itemExpand)
                     0
                 } else {
-                    val sublist =
-                        if (itemSublist is ArrayList) itemSublist else itemSublist.toMutableList()
-                    val sublistFlat = flat(sublist, false, depth)
+                    val sublistFlat = flat(ArrayList(itemSublist), false, depth)
                     (this@BindingAdapter.models as MutableList).removeAll(sublistFlat)
                     if (expandAnimationEnabled) {
                         notifyItemChanged(layoutPosition, itemExpand)
