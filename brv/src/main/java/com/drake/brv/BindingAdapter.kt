@@ -588,11 +588,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     ): MutableList<Any?> {
 
         if (list.isEmpty()) return list
-        val arrayList = ArrayList(list)
-        list.clear()
+        val arrayList = arrayListOf<Any?>()
 
-        arrayList.forEachIndexed { index, item ->
-            list.add(item)
+        list.forEachIndexed { index, item ->
+            arrayList.add(item)
             if (item is ItemExpand) {
                 item.itemGroupPosition = index
                 var nextDepth = depth
@@ -606,11 +605,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     if (itemSublist is ArrayList) itemSublist else itemSublist?.toMutableList()
                 if (!sublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
                     val nestedList = flat(sublist, expand, nextDepth)
-                    list.addAll(nestedList)
+                    arrayList.addAll(nestedList)
                 }
             }
         }
-        return list
+        return arrayList
     }
 
     /**
