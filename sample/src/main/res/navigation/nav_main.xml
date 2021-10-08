@@ -80,6 +80,11 @@
         android:name="com.drake.brv.sample.ui.fragment.SimpleFragment"
         android:label="简单列表"
         tools:layout="@layout/fragment_simple" />
+    <fragment
+        android:id="@+id/interfaceFragment"
+        android:name="com.drake.brv.sample.ui.fragment.InterfaceFragment"
+        android:label="接口类型绑定"
+        tools:layout="@layout/fragment_interface" />
 
     <include app:graph="@navigation/nav_divider" />
 
