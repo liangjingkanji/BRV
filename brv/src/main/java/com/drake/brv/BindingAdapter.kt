@@ -42,6 +42,7 @@ import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.listener.throttleClick
 import com.drake.brv.utils.BRV
+import java.lang.reflect.Modifier
 import kotlin.math.min
 
 /**
@@ -154,7 +155,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     override fun onBindViewHolder(
         holder: BindingViewHolder,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) {
         if (payloads.isNotEmpty()) {
             onPayload?.invoke(holder, payloads[0])
@@ -167,8 +168,14 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
-        return (typePool[modelClass]?.invoke(model, position)
-            ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
+        return (typePool[modelClass]?.invoke(model, position) ?: interfacePool?.run {
+            for (interfaceType in this) {
+                if (interfaceType.key.isAssignableFrom(modelClass)) {
+                    return@run interfaceType.value.invoke(model, position)
+                }
+            }
+            null
+        } ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -197,15 +204,31 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     /** 类型池 */
     val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
+    var interfacePool: MutableMap<Class<*>, Any.(Int) -> Int>? = null
+
+    /** 接口类型支持 */
+    fun Class<*>.addInterfaceType(block: Any.(Int) -> Int) {
+        (interfacePool ?: mutableMapOf<Class<*>, Any.(Int) -> Int>().also {
+            interfacePool = it
+        })[this] = block
+    }
 
     /** 添加多类型 */
     inline fun <reified M> addType(@LayoutRes layout: Int) {
-        typePool[M::class.java] = { layout }
+        if (Modifier.isInterface(M::class.java.modifiers)) {
+            M::class.java.addInterfaceType { layout }
+        } else {
+            typePool[M::class.java] = { layout }
+        }
     }
 
     /** 通过回调函数添加多类型, 一对多多类型 */
     inline fun <reified M> addType(noinline block: M.(Int) -> Int) {
-        typePool[M::class.java] = block as Any.(Int) -> Int
+        if (Modifier.isInterface(M::class.java.modifiers)) {
+            M::class.java.addInterfaceType(block as Any.(Int) -> Int)
+        } else {
+            typePool[M::class.java] = block as Any.(Int) -> Int
+        }
     }
     // </editor-fold>
 
@@ -584,7 +607,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     private fun flat(
         list: MutableList<Any?>,
         expand: Boolean? = null,
-        @IntRange(from = -1) depth: Int = 0
+        @IntRange(from = -1) depth: Int = 0,
     ): MutableList<Any?> {
 
         if (list.isEmpty()) return list
@@ -878,7 +901,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      */
     fun isSameGroup(
         @IntRange(from = 0) position: Int,
-        @IntRange(from = 0) otherPosition: Int
+        @IntRange(from = 0) otherPosition: Int,
     ): Boolean {
         val aModel = models?.getOrNull(otherPosition) ?: return false
         val bModel = models?.getOrNull(otherPosition) ?: return false
@@ -903,7 +926,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     fun expand(
         @IntRange(from = 0) position: Int,
         scrollTop: Boolean = false,
-        @IntRange(from = -1) depth: Int = 0
+        @IntRange(from = -1) depth: Int = 0,
     ): Int {
         val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
         return holder.expand(scrollTop, depth)
@@ -929,7 +952,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     fun expandOrCollapse(
         @IntRange(from = 0) position: Int,
         scrollTop: Boolean = false,
-        @IntRange(from = -1) depth: Int = 0
+        @IntRange(from = -1) depth: Int = 0,
     ): Int {
         val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
         return holder.expandOrCollapse(scrollTop, depth)
