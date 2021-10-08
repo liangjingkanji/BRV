@@ -72,6 +72,28 @@ rv_group.linear().setup {
 }.models = getData()
 ```
 
+## 分组层级
+
+假设想获取当前item位于分组嵌套列表中的第几层, 其实本质上数据本身就能确定自己位于第几层
+
+示例代码
+
+假设我们要创建一个`depth`字段来确定分组层级
+
+```kotlin
+rv.models = list.forEach {
+    it.depth = 0
+    it.itemSublist.forEach {
+        it.depth = 1
+        it.itemSublist.forEach {
+            it.depth = 2
+        }
+    }
+}
+```
+如果你的数据集合嵌套层过多可以改为函数递归调用来简化代码
+
+
 ## 分组相关函数
 
 | BindingAdapter的函数 | 描述 |
