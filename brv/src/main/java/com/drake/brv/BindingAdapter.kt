@@ -571,7 +571,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             }
         }
 
-    /** 可增删的数据模型集合 */
+    /** 可增删的数据模型集合, 本质上就是返回可变的models. 假设未赋值给models则将抛出异常为[ClassCastException] */
     var mutable
         get() = models as ArrayList
         set(value) {

@@ -48,10 +48,10 @@ var RecyclerView.models
     }
 
 /**
- * 可增删的[models]数据模型集合
+ * 可增删的数据模型集合, 本质上就是返回可变的models. 假设未赋值给models则将抛出异常为[ClassCastException]
  */
 var RecyclerView.mutable
-    get() = bindingAdapter.models as ArrayList
+    get() = bindingAdapter.models as? ArrayList ?: throw NullPointerException("[BindingAdapter.models] is null, no data")
     set(value) {
         bindingAdapter.models = value
     }
