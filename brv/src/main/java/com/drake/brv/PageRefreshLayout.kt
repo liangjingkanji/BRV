@@ -68,7 +68,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             rv: RecyclerView,
             adapter: BindingAdapter,
             holder: BindingAdapter.BindingViewHolder,
-            position: Int
+            position: Int,
         ) {
             if (mEnableLoadMore && !mFooterNoMoreData && preloadIndex != -1 && (adapter.itemCount - preloadIndex <= position)) {
                 post {
@@ -104,16 +104,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                         return super.canRefresh(content)
                     }
                 })
-                layout.scaleY = -1F
-                mRefreshContent.view.scaleY = -1F
-                refreshFooter?.view?.scaleY = -1F
             } else {
                 setEnableNestedScroll(false)
                 setScrollBoundaryDecider(SimpleBoundaryDecider())
-                layout.scaleY = 1F
-                contentView?.scaleY = 1F
-                refreshFooter?.view?.scaleY = 1F
             }
+            reversalContentViewPosition()
         }
 
     // <editor-fold desc="构造函数">
@@ -147,11 +142,14 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (upFetchEnabled) {
-            layout.scaleY = -1F
-            contentView?.scaleY = -1F
-            refreshFooter?.view?.scaleY = -1F
-        }
+        reversalContentViewPosition()
+    }
+
+    private fun reversalContentViewPosition() {
+        val scaleValue = if (upFetchEnabled) -1F else 1F
+        layout.scaleY = scaleValue
+        contentView?.scaleY = scaleValue
+        refreshFooter?.view?.scaleY = scaleValue
     }
 
     @Suppress("UNUSED_ANONYMOUS_PARAMETER")
@@ -217,7 +215,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         data: List<Any?>?,
         adapter: BindingAdapter? = null,
         isEmpty: () -> Boolean = { data.isNullOrEmpty() },
-        hasMore: BindingAdapter.() -> Boolean = { true }
+        hasMore: BindingAdapter.() -> Boolean = { true },
     ) {
 
         val adjustAdapter = when {
