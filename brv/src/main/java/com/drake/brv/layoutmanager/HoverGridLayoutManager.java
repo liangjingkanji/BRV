@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 为GridLayoutManager添加悬停/禁用滚动特性
+ * <p>
  * Created by jay on 2017/12/4 上午10:57
  *
  * @link https://github.com/Doist/RecyclerViewExtensions
