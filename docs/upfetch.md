@@ -7,6 +7,8 @@
 
 <img src="https://i.loli.net/2021/08/14/J9ZEOlKGHsQygwV.gif" width="250"/>
 
+> 向下拉取加载更多其实本质上是将rv反转, 再将内容布局反转(此时内容布局就是正常显示的).
+
 ```kotlin hl_lines="8"
 override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -27,3 +29,25 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
 }
 ```
 除了高亮的一个属性设置, 其他代码和正常一样
+
+布局代码
+
+```xml
+<com.drake.brv.PageRefreshLayout
+    android:id="@+id/page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true" />
+
+    <!--stackFromEnd=true 防止UpFetch时数据不满一屏幕的时候, 对齐底部而不是顶部-->
+    <!--reverseLayout=true rv数据排列顺序反转-->
+
+</com.drake.brv.PageRefreshLayout>
+```
