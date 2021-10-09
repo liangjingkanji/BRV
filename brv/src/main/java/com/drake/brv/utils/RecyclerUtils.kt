@@ -90,13 +90,13 @@ fun RecyclerView.setup(block: BindingAdapter.(RecyclerView) -> Unit): BindingAda
 fun RecyclerView.linear(
     @RecyclerView.Orientation orientation: Int = VERTICAL,
     reverseLayout: Boolean = false,
-    scrollEnabled: Boolean = true
+    scrollEnabled: Boolean = true,
+    stackFromEnd: Boolean = false
 ): RecyclerView {
-    layoutManager = HoverLinearLayoutManager(
-        context,
-        orientation,
-        reverseLayout
-    ).setScrollEnabled(scrollEnabled)
+    layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout).apply {
+        setScrollEnabled(scrollEnabled)
+        this.stackFromEnd = stackFromEnd
+    }
     return this
 }
 
@@ -111,12 +111,13 @@ fun RecyclerView.grid(
     spanCount: Int = 1,
     @RecyclerView.Orientation orientation: Int = VERTICAL,
     reverseLayout: Boolean = false,
-    scrollEnabled: Boolean = true
+    scrollEnabled: Boolean = true,
+    stackFromEnd: Boolean = false
 ): RecyclerView {
-    layoutManager =
-        HoverGridLayoutManager(context, spanCount, orientation, reverseLayout).setScrollEnabled(
-            scrollEnabled
-        )
+    layoutManager = HoverGridLayoutManager(context, spanCount, orientation, reverseLayout).apply {
+        setScrollEnabled(scrollEnabled)
+        this.stackFromEnd = stackFromEnd
+    }
     return this
 }
 
@@ -131,8 +132,7 @@ fun RecyclerView.staggered(
     @RecyclerView.Orientation orientation: Int = VERTICAL,
     scrollEnabled: Boolean = true
 ): RecyclerView {
-    layoutManager =
-        HoverStaggeredGridLayoutManager(spanCount, orientation).setScrollEnabled(scrollEnabled)
+    layoutManager = HoverStaggeredGridLayoutManager(spanCount, orientation).setScrollEnabled(scrollEnabled)
     return this
 }
 //</editor-fold>
