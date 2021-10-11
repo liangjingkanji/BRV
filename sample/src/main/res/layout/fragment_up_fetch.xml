@@ -44,10 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="true"
-                app:stackFromEnd="true" />
+                app:reverseLayout="true" />
 
-            <!--stackFromEnd=true 防止UpFetch时数据不满一屏幕的时候, 对齐底部而不是顶部-->
+            <!--stackFromEnd=true 防止UpFetch时数据不满一屏幕的时候, 对齐底部而不是顶部, 一般无需考虑-->
             <!--reverseLayout=true rv数据排列顺序反转-->
 
         </com.drake.brv.PageRefreshLayout>
