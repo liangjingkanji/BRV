@@ -206,14 +206,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
     var interfacePool: MutableMap<Class<*>, Any.(Int) -> Int>? = null
 
-    /** 接口类型支持 */
-    fun Class<*>.addInterfaceType(block: Any.(Int) -> Int) {
-        (interfacePool ?: mutableMapOf<Class<*>, Any.(Int) -> Int>().also {
-            interfacePool = it
-        })[this] = block
-    }
-
-    /** 添加多类型 */
+    /**
+     * 添加多类型
+     * 在BRV中一个Item类型就是对应一个唯一的布局文件Id, 而[M]即为对应该类型所需的数据类型. 只要使用该函数添加的元素类型才被允许赋值给[models].
+     * 然后假设你使用DataBinding的话, 则该类型对应在[models]中的对象会被DataBinding绑定都对应的布局上. 前提是你有在xml中声明数据类型
+     */
     inline fun <reified M> addType(@LayoutRes layout: Int) {
         if (Modifier.isInterface(M::class.java.modifiers)) {
             M::class.java.addInterfaceType { layout }
@@ -222,13 +219,27 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
     }
 
-    /** 通过回调函数添加多类型, 一对多多类型 */
-    inline fun <reified M> addType(noinline block: M.(Int) -> Int) {
+    /**
+     * 通过回调函数添加多类型, 一对多多类型(即一个数据类对应多个布局)
+     * [block]中的position为当前item位于列表中的索引, [M]则为rv的models中对应的数据类型
+     */
+    inline fun <reified M> addType(noinline block: M.(position: Int) -> Int) {
         if (Modifier.isInterface(M::class.java.modifiers)) {
             M::class.java.addInterfaceType(block as Any.(Int) -> Int)
         } else {
             typePool[M::class.java] = block as Any.(Int) -> Int
         }
+    }
+
+    /**
+     * 接口类型, 即类型必须为接口, 同时其子类都会被认为属于该接口而对应其布局
+     * @receiver 接口类
+     * @see addType
+     */
+    fun Class<*>.addInterfaceType(block: Any.(Int) -> Int) {
+        (interfacePool ?: mutableMapOf<Class<*>, Any.(Int) -> Int>().also {
+            interfacePool = it
+        })[this] = block
     }
     // </editor-fold>
 
