@@ -1,5 +1,7 @@
 ## 1.3.37
 - 修复UpFetch模式下缺省页颠倒问题
+- 修复reverseLayout下分割线问题
+- 新增ItemDepthUtils来简化获取分组层级深度
 
 ## 1.3.36
 - 修复UpFetch模式下分割线显示错误问题
