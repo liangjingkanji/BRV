@@ -112,27 +112,30 @@ fun RecyclerView.grid(
     @RecyclerView.Orientation orientation: Int = VERTICAL,
     reverseLayout: Boolean = false,
     scrollEnabled: Boolean = true,
-    stackFromEnd: Boolean = false
 ): RecyclerView {
     layoutManager = HoverGridLayoutManager(context, spanCount, orientation, reverseLayout).apply {
         setScrollEnabled(scrollEnabled)
-        this.stackFromEnd = stackFromEnd
     }
     return this
 }
 
 /**
  * 创建[HoverStaggeredGridLayoutManager] 交错列表
- * @param orientation 列表方向
  * @param spanCount 网格跨度数量
+ * @param orientation 列表方向
+ * @param reverseLayout 是否反转
  * @param scrollEnabled 是否允许滚动
  */
 fun RecyclerView.staggered(
     spanCount: Int,
     @RecyclerView.Orientation orientation: Int = VERTICAL,
+    reverseLayout: Boolean = false,
     scrollEnabled: Boolean = true
 ): RecyclerView {
-    layoutManager = HoverStaggeredGridLayoutManager(spanCount, orientation).setScrollEnabled(scrollEnabled)
+    layoutManager = HoverStaggeredGridLayoutManager(spanCount, orientation).apply {
+        setScrollEnabled(scrollEnabled)
+        this.reverseLayout = reverseLayout
+    }
     return this
 }
 //</editor-fold>
