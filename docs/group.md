@@ -74,25 +74,22 @@ rv_group.linear().setup {
 
 ## 分组层级
 
-假设想获取当前item位于分组嵌套列表中的第几层, 其实本质上数据本身就能确定自己位于第几层
+可以使用`ItemDepth`和`List.refreshItemDepth`辅助计算Item的层级
+其中`ItemDepth.itemDepth`为当前Model层级，层级计数从0依次递增
 
 示例代码
 
-假设我们要创建一个`depth`字段来确定分组层级
-
 ```kotlin
-rv.models = list.forEach {
-    it.depth = 0
-    it.itemSublist.forEach {
-        it.depth = 1
-        it.itemSublist.forEach {
-            it.depth = 2
-        }
-    }
+// Model实现ItemDepth
+class SampleItemDepth(override var itemDepth: Int) : ItemDepth
+
+// 在数据赋值给[BindingAdapter]前，刷新一次item层级即可
+fun getData(): List<ItemDepth> = List(10) { SampleItemDepth(it) }
+RecyclerView(TODO()).linear().setup {
+   // ...
+}.models = getData().refreshItemDepth()
 }
 ```
-如果你的数据集合嵌套层过多可以改为函数递归调用来简化代码
-
 
 ## 分组相关函数
 
