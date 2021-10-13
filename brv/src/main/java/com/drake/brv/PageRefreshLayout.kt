@@ -149,7 +149,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private fun reverseContentView() {
         val scaleValue = if (upFetchEnabled) -1F else 1F
         layout.scaleY = scaleValue
-        contentView?.scaleY = scaleValue
+        mRefreshContent.view.scaleY = scaleValue
         refreshFooter?.view?.scaleY = scaleValue
     }
 
