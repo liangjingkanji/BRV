@@ -93,7 +93,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     // <editor-fold desc="生命周期">
     private var onCreate: (BindingViewHolder.(viewType: Int) -> Unit)? = null
     private var onBind: (BindingViewHolder.() -> Unit)? = null
-    private var onPayload: (BindingViewHolder.(Any) -> Unit)? = null
+    private var onPayload: (BindingViewHolder.(model: Any) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onChecked: ((position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? = null
@@ -175,7 +175,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                 }
             }
             null
-        } ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
+        }
+        ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
@@ -315,7 +316,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 监听指定Id控件的点击事件, 包含防抖动
      */
-    fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
+    fun onClick(@IdRes vararg id: Int, block: BindingViewHolder.(viewId: Int) -> Unit) {
         for (i in id) {
             clickListeners[i] = Pair(block, false)
         }
@@ -325,7 +326,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 监听指定Id控件的点击事件
      */
-    fun onFastClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
+    fun onFastClick(@IdRes vararg id: Int, block: BindingViewHolder.(viewId: Int) -> Unit) {
         for (i in id) {
             clickListeners[i] = Pair(block, true)
         }
@@ -335,7 +336,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 长按点击事件回调
      */
-    fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(id: Int) -> Unit) {
+    fun onLongClick(@IdRes vararg id: Int, block: BindingViewHolder.(viewId: Int) -> Unit) {
         for (i in id) {
             longClickListeners[i] = block
         }
@@ -345,21 +346,21 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 添加点击事件, 点击启用防抖动
      */
-    fun @receiver:IdRes Int.onClick(listener: BindingViewHolder.(Int) -> Unit) {
+    fun @receiver:IdRes Int.onClick(listener: BindingViewHolder.(viewId: Int) -> Unit) {
         clickListeners[this] = Pair(listener, false)
     }
 
     /**
      * 添加点击事件
      */
-    fun @receiver:IdRes Int.onFastClick(listener: BindingViewHolder.(Int) -> Unit) {
+    fun @receiver:IdRes Int.onFastClick(listener: BindingViewHolder.(viewId: Int) -> Unit) {
         clickListeners[this] = Pair(listener, true)
     }
 
     /**
      * 添加长按事件
      */
-    fun @receiver:IdRes Int.onLongClick(listener: BindingViewHolder.(Int) -> Unit) {
+    fun @receiver:IdRes Int.onLongClick(listener: BindingViewHolder.(viewId: Int) -> Unit) {
         longClickListeners[this] = listener
     }
 
