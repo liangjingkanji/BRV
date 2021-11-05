@@ -85,7 +85,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          * 则应在Application中的onCreate函数内设置:
          * `BindingAdapter.modelId = BR.m`
          */
-        @Deprecated("函数优化", ReplaceWith("BR.modelId", "com.drake.brv.utils.BRV"))
+        @Deprecated("函数优化", ReplaceWith("BRV.modelId", "com.drake.brv.utils.BRV"))
         var modelId: Int = BRV.modelId
     }
 
