@@ -61,3 +61,46 @@ rv.linear().setup {
 }.models = data
 ```
 
+## 接口类型
+
+接口类型是可以addType一个类型, 然后由可以添加N个其子类作为models的数据. 接口具体实现由不同的子类不同实现
+
+示例
+
+```kotlin
+interface BaseInterfaceModel {
+    var text: String
+}
+
+data class InterfaceModel1(override var text: String) : BaseInterfaceModel
+
+data class InterfaceModel2(val otherData: Int, override var text: String) : BaseInterfaceModel
+
+data class InterfaceModel3(val otherText: String) : BaseInterfaceModel {
+    override var text: String = otherText
+}
+```
+
+构建示例数据
+
+```kotlin
+private fun getData(): List<Any> {
+    // 在Model中也可以绑定数据
+    return List(3) { InterfaceModel1("item $it") } +
+            List(3) { InterfaceModel2(it, "item ${3 + it}") } +
+            List(3) { InterfaceModel3("item ${6 + it}") }
+}
+```
+
+声明列表
+
+```kotlin
+ binding.rv.linear().setup {
+            addType<BaseInterfaceModel>(R.layout.item_interface_type)
+            R.id.item.onClick {
+                toast("点击文本")
+            }
+        }.models = getData()
+```
+
+这里只是演示简单的文本, 具体可以编写更加复杂的业务逻辑
