@@ -176,7 +176,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             }
             null
         }
-        ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.simpleName}>(R.layout.item)"))
+        ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.name}>(R.layout.item)"))
     }
 
     override fun getItemCount() = headerCount + modelCount + footerCount
