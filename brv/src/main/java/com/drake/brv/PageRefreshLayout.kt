@@ -174,12 +174,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         val rv = contentView
         if (rv is RecyclerView) {
-            rv.addOnLayoutChangeListener(OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-                val adapter = rv.adapter
-                if (adapter is BindingAdapter) {
-                    adapter.onBindViewHolders.add(onBindViewHolderListener)
-                }
-            })
+            rv.addOnLayoutChangeListener(
+                OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+                    val adapter = rv.adapter
+                    if (adapter is BindingAdapter) {
+                        adapter.onBindViewHolders.add(onBindViewHolderListener)
+                    }
+                })
         }
     }
 
@@ -203,6 +204,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         }
     }
 
+    /** 当加载完毕以后, 再次调用仅会静默加载 */
+    fun refreshing(tag: Any? = null) {
+        if (loaded) {
+            refresh()
+        } else {
+            showLoading(tag)
+        }
+    }
+
     /**
      * 自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
@@ -222,7 +232,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val adjustAdapter = when {
             adapter != null -> adapter
             contentView is RecyclerView -> (contentView as RecyclerView).bindingAdapter
-            else -> throw UnsupportedOperationException("Use parameter [adapter] on [addData] function or PageRefreshLayout direct wrap RecyclerView")
+            else -> throw UnsupportedOperationException(
+                "Use parameter [adapter] on [addData] function or PageRefreshLayout direct wrap RecyclerView"
+            )
         }
 
         val isRefreshState = state == RefreshState.Refreshing
