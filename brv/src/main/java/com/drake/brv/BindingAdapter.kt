@@ -714,25 +714,35 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 添加新的数据
      */
+    @SuppressLint("NotifyDataSetChanged")
     fun addModels(models: List<Any?>?, animation: Boolean = true) {
         if (models.isNullOrEmpty()) return
         val data: MutableList<Any?> = when (models) {
             is ArrayList -> models
             else -> models.toMutableList()
         }
-        if (this.models.isNullOrEmpty()) {
-            this.models = flat(data)
-            notifyDataSetChanged()
-        } else {
-            val realModels = this.models as MutableList
-            realModels.addAll(flat(data))
-            if (animation) {
-                notifyItemRangeInserted(headerCount + modelCount - data.size, data.size)
-                rv?.post {
-                    rv?.invalidateItemDecorations()
-                }
-            } else {
+        when {
+            this.models == null -> {
+                this.models = flat(data)
                 notifyDataSetChanged()
+            }
+            this.models?.isEmpty() == true -> {
+                (this.models as? MutableList)?.let {
+                    it.addAll(flat(data))
+                    notifyDataSetChanged()
+                }
+            }
+            else -> {
+                val realModels = this.models as MutableList
+                realModels.addAll(flat(data))
+                if (animation) {
+                    notifyItemRangeInserted(headerCount + modelCount - data.size, data.size)
+                    rv?.post {
+                        rv?.invalidateItemDecorations()
+                    }
+                } else {
+                    notifyDataSetChanged()
+                }
             }
         }
     }

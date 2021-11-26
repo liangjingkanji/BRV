@@ -240,7 +240,14 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val isRefreshState = state == RefreshState.Refreshing
 
         if (isRefreshState) {
-            adjustAdapter.models = data
+            if (adjustAdapter.models == null) {
+                adjustAdapter.models = data
+            } else {
+                (adjustAdapter.models as? MutableList)?.let {
+                    it.clear()
+                    adjustAdapter.addModels(data)
+                }
+            }
             if (isEmpty()) {
                 showEmpty()
                 return
