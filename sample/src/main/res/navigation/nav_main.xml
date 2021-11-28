@@ -99,5 +99,9 @@
         android:id="@+id/coordinatorLayoutFragment"
         android:name="com.drake.brv.sample.ui.fragment.CoordinatorLayoutFragment"
         android:label="CoordinatorLayout" />
+    <fragment
+        android:id="@+id/viewBindingFragment"
+        android:name="com.drake.brv.sample.ui.fragment.ViewBindingFragment"
+        android:label="ViewBindingFragment" />
 
 </navigation>

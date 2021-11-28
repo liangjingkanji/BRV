@@ -83,4 +83,8 @@
         android:id="@+id/coordinatorLayoutFragment"
         android:icon="@drawable/ic_up_fetch"
         android:title="CoordinatorLayout" />
+    <item
+        android:id="@+id/viewBindingFragment"
+        android:icon="@drawable/ic_view_binding"
+        android:title="ViewBinding" />
 </menu>

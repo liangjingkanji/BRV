@@ -48,6 +48,10 @@ android {
 
     buildFeatures.dataBinding = true
 
+    viewBinding {
+        enabled = true
+    }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
