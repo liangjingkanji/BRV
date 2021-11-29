@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentViewBindingBinding
-import com.drake.brv.sample.databinding.ItemDragBinding
+import com.drake.brv.sample.databinding.ItemSimpleBinding
 import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -22,7 +22,7 @@ class ViewBindingFragment : Fragment(R.layout.fragment_view_binding) {
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
             onBind {
-                val binding = ItemDragBinding.bind(itemView) // 使用ViewBinding
+                val binding = ItemSimpleBinding.bind(itemView) // 使用ViewBinding
             }
             R.id.tv_simple.onClick {
                 toast("点击文本")
