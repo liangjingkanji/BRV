@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_random_data"
+        android:title="随机排列"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_random_data_async"
+        android:title="异步对比数据"
+        app:showAsAction="never" />
+</menu>

@@ -102,6 +102,10 @@
     <fragment
         android:id="@+id/viewBindingFragment"
         android:name="com.drake.brv.sample.ui.fragment.ViewBindingFragment"
-        android:label="ViewBindingFragment" />
+        android:label="ViewBinding" />
+    <fragment
+        android:id="@+id/differDataChangeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.DifferDataChangeFragment"
+        android:label="对比数据变化" />
 
 </navigation>

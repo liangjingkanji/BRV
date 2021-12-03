@@ -19,7 +19,10 @@
 package com.drake.brv
 
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.NoSuchPropertyException
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +32,7 @@ import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.animation.*
@@ -37,12 +41,11 @@ import com.drake.brv.item.ItemBind
 import com.drake.brv.item.ItemExpand
 import com.drake.brv.item.ItemHover
 import com.drake.brv.item.ItemPosition
-import com.drake.brv.listener.DefaultItemTouchCallback
-import com.drake.brv.listener.OnBindViewHolderListener
-import com.drake.brv.listener.OnHoverAttachListener
-import com.drake.brv.listener.throttleClick
+import com.drake.brv.listener.*
 import com.drake.brv.utils.BRV
+import com.drake.brv.utils.setDifferModels
 import java.lang.reflect.Modifier
+import java.util.concurrent.*
 import kotlin.math.min
 
 /**
@@ -179,7 +182,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.name}>(R.layout.item)"))
     }
 
-    override fun getItemCount() = headerCount + modelCount + footerCount
+    override fun getItemCount(): Int {
+        return headerCount + modelCount + footerCount
+    }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         this.rv = recyclerView
@@ -588,10 +593,14 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             return if (models == null) 0 else models!!.size
         }
 
+    var _data: List<Any?>? = null
+
     /** 数据模型集合 */
-    var models: List<Any?>? = null
+    var models: List<Any?>?
+        get() = _data
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
-            field = when (value) {
+            _data = when (value) {
                 is ArrayList -> flat(value)
                 is List -> flat(value.toMutableList())
                 else -> null
@@ -605,6 +614,31 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                 lastPosition = itemCount - 1
             }
         }
+
+
+    /**
+     * 对比数据, 根据数据差异自动刷新列表
+     * 数据对比默认使用`equals`函数对比, 你可以为数据手动实现equals函数来修改对比逻辑. 推荐定义数据为 data class, 因其会根据构造参数自动生成equals
+     * 如果数据集合很大导致对比速度很慢, 建议在非主步线程中调用此函数, 效果等同于[androidx.recyclerview.widget.AsyncListDiffer]
+     * @param newModels 新的数据, 将覆盖旧的数据
+     * @param detectMoves 是否对比Item的移动
+     * @param commitCallback 因为子线程调用[setDifferModels]刷新列表会不同步(刷新列表需要切换到主线程), 而[commitCallback]保证在刷新列表完成以后调用(运行在主线程)
+     */
+    fun setDifferModels(newModels: List<Any?>?, detectMoves: Boolean = true, commitCallback: Runnable? = null) {
+        val oldModels = _data
+        _data = newModels
+        val diffResult = DiffUtil.calculateDiff(DefaultDifferCallback(newModels, oldModels), detectMoves)
+        val mainLooper = Looper.getMainLooper()
+        if (Looper.myLooper() != mainLooper) {
+            Handler(mainLooper).post {
+                diffResult.dispatchUpdatesTo(this)
+                commitCallback?.run()
+            }
+        } else {
+            diffResult.dispatchUpdatesTo(this)
+            commitCallback?.run()
+        }
+    }
 
     /** 可增删的数据模型集合, 本质上就是返回可变的models. 假设未赋值给models则将抛出异常为[ClassCastException] */
     var mutable

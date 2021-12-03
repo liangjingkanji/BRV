@@ -36,6 +36,10 @@
         android:icon="@drawable/ic_refresh"
         android:title="刷新列表" />
     <item
+        android:id="@+id/differDataChangeFragment"
+        android:icon="@drawable/ic_differ_data_change"
+        android:title="对比数据变化" />
+    <item
         android:id="@+id/multiTypeFragment"
         android:icon="@drawable/ic_multi_type"
         android:title="多类型" />
