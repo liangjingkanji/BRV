@@ -1,3 +1,7 @@
+## 1.3.38
+- 新增对比数据刷新函数`setDifferModels`, 本身BRV就支持官方对比刷新方案, 这次只是优化方案
+- 新增`PageRefreshLayout.refreshing`仅在第一次加载数据时时候加载缺省页后续使用静默加载
+
 ## 1.3.37
 - 修复UpFetch模式下缺省页颠倒问题
 - 修复reverseLayout下分割线问题
