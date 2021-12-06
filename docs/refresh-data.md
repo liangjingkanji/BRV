@@ -39,6 +39,22 @@ fun setDifferModels(newModels: List<Any?>?, detectMoves: Boolean = true, commitC
 ```
 > 数据对比默认使用`equals`函数对比, 你可以为数据手动实现equals函数来修改对比逻辑. 推荐定义数据为 data class, 因其会根据构造参数自动生成equals
 
+如果需要完全自定义对比数据的判断逻辑就实现`ItemDifferCallback`接口
+
+```kotlin hl_lines="3"
+rv.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+    itemDifferCallback = object : ItemDifferCallback {
+        override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return if (oldItem is SimpleModel && newItem is SimpleModel) {
+                oldItem.name == newItem.name
+            } else super.areContentsTheSame(oldItem, newItem)
+        }
+    }
+    // ...
+}.models = getRandomData(true)
+```
+
 ## 局部刷新
 
 局部刷新某个或者批量Item的内容, 我们可以使用到两种方式
