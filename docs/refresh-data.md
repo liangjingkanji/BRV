@@ -1,5 +1,3 @@
-这里介绍的其实都不属于BRV的内容, 但是由于很多开发者常问此需求, 故介绍下
-
 > BRV的数据集合无论是`models`或`addData()`都是添加的`List<Any?>(任意对象数据集合)`. 所以只要是一个集合即可映射出一个列表 <br>
 > 如果数据不满足一个集合条件(或任何数据上的问题), 请自己处理下数据
 
@@ -78,7 +76,7 @@ data class CheckModel(var checked: Boolean = false, var visibility: Boolean = fa
 
 ## 刷新函数
 
-BRV使用的是自定义的BindingAdapter, 其继承自`RecyclerView.Adapter`, 拥有其全部的数据刷新方法
+这里介绍的其实都不属于BRV的内容, 但是由于很多开发者常问此需求, 故介绍下. BRV是自定义的BindingAdapter, 其继承自`RecyclerView.Adapter`, 自然拥有其全部的数据刷新方法
 
 ```kotlin
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>()
