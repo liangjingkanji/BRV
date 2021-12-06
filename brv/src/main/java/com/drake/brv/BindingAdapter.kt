@@ -615,6 +615,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             }
         }
 
+    /** 对比新旧数据更改列表接口 */
+    var itemDifferCallback: ItemDifferCallback = ItemDifferCallback
 
     /**
      * 对比数据, 根据数据差异自动刷新列表
@@ -627,7 +629,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     fun setDifferModels(newModels: List<Any?>?, detectMoves: Boolean = true, commitCallback: Runnable? = null) {
         val oldModels = _data
         _data = newModels
-        val diffResult = DiffUtil.calculateDiff(DefaultDifferCallback(newModels, oldModels), detectMoves)
+        val diffResult = DiffUtil.calculateDiff(ProxyDiffCallback(newModels, oldModels, itemDifferCallback), detectMoves)
         val mainLooper = Looper.getMainLooper()
         if (Looper.myLooper() != mainLooper) {
             Handler(mainLooper).post {
