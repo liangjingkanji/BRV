@@ -160,7 +160,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         position: Int,
         payloads: MutableList<Any>,
     ) {
-        if (payloads.isNotEmpty()) {
+        if (payloads.isNotEmpty() && onPayload != null) {
             onPayload?.invoke(holder, payloads[0])
         } else {
             super.onBindViewHolder(holder, position, payloads)
