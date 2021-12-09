@@ -8,6 +8,7 @@
 - 展开后置顶
 - 列表始终仅展开一个分组
 - 查找上层分组
+- 分组和多类型可以共存
 
 ## 使用
 要求Model实现[ItemExpand](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/item/ItemExpand.kt)
