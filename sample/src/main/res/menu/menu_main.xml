@@ -20,7 +20,7 @@
         android:icon="@drawable/ic_list"
         android:title="简单列表" />
     <item
-        android:id="@+id/groupFragment"
+        android:id="@+id/nav_group.xml"
         android:icon="@drawable/ic_group"
         android:title="分组" />
     <item

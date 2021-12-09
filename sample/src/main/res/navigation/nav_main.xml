@@ -56,8 +56,8 @@
         android:label="头|脚布局"
         tools:layout="@layout/fragment_header_footer" />
     <fragment
-        android:id="@+id/groupFragment"
-        android:name="com.drake.brv.sample.ui.fragment.GroupFragment"
+        android:id="@+id/groupGridFragment"
+        android:name="com.drake.brv.sample.ui.fragment.group.GroupGridFragment"
         android:label="分组"
         tools:layout="@layout/fragment_group" />
     <fragment
@@ -107,5 +107,6 @@
         android:id="@+id/differDataChangeFragment"
         android:name="com.drake.brv.sample.ui.fragment.DifferDataChangeFragment"
         android:label="对比数据变化" />
+    <include app:graph="@navigation/nav_group" />
 
 </navigation>

@@ -14,28 +14,36 @@
  * limitations under the License.
  */
 
-package com.drake.brv.sample.ui.fragment
+package com.drake.brv.sample.ui.fragment.group
 
+import androidx.recyclerview.widget.GridLayoutManager
 import com.drake.brv.item.ItemExpand
+import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentGroupBinding
 import com.drake.brv.sample.model.GroupModel
 import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.NestedGroupModel
-import com.drake.brv.utils.linear
+import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.setup
-import com.drake.engine.base.EngineFragment
 import com.drake.tooltip.toast
 
 
-class GroupFragment : EngineFragment<FragmentGroupBinding>(R.layout.fragment_group) {
+class GroupGridFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_group) {
 
     override fun initView() {
-        binding.rv.linear().setup {
-
-            // 任何条目都需要添加类型到BindingAdapter中
+        val layoutManager = HoverGridLayoutManager(requireContext(), 2) // 2 则代表列表一行铺满要求跨度为2
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                // 根据类型设置列表item跨度
+                return when (binding.rv.bindingAdapter.getItemViewType(position)) {
+                    R.layout.item_multi_type_simple -> 1 // 设置指定类型的跨度为1, 假设spanCount为2则代表此类型占据宽度为二分之一
+                    else -> 2
+                }
+            }
+        }
+        binding.rv.layoutManager = layoutManager
+        binding.rv.setup {
             addType<GroupModel>(R.layout.item_group_title)
-            addType<NestedGroupModel>(R.layout.item_nested_group_title)
             addType<Model>(R.layout.item_multi_type_simple)
             R.id.item.onFastClick {
                 when (itemViewType) {
@@ -54,18 +62,7 @@ class GroupFragment : EngineFragment<FragmentGroupBinding>(R.layout.fragment_gro
 
     private fun getData(): MutableList<GroupModel> {
         return mutableListOf<GroupModel>().apply {
-            for (i in 0..4) {
-
-                // 第二个分组存在嵌套分组
-                if (i == 0) {
-                    val nestedGroupModel = GroupModel().apply {
-                        itemSublist =
-                            listOf(NestedGroupModel(), NestedGroupModel(), NestedGroupModel())
-                    }
-                    add(nestedGroupModel)
-                    continue
-                }
-
+            repeat(4) {
                 add(GroupModel())
             }
         }

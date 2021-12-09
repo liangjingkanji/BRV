@@ -92,6 +92,14 @@ RecyclerView(TODO()).linear().setup {
 }
 ```
 
+## 分组多类型
+
+<img src="https://s2.loli.net/2021/12/10/wo1CAqL5SDIZRKu.png" width="35%"/>
+
+这种添加`spanSizeLookup`即可实现. 请查看示例代码
+
+> 分组和多类型属于互不影响的功能, 分组下的多类型和普通列表的多类型添加方式等同
+
 ## 分组相关函数
 
 | BindingAdapter的函数 | 描述 |

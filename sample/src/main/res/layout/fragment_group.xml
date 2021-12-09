@@ -23,7 +23,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.GroupFragment">
+        tools:context=".ui.fragment.group.GroupFragment">
 
         <TextView
             android:layout_width="match_parent"
