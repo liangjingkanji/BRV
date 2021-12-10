@@ -31,6 +31,7 @@ import java.util.*
  */
 open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
 
+    /** 侧滑到底item消失时 */
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val adapter = viewHolder.bindingAdapter as? BindingAdapter
         val layoutPosition = viewHolder.layoutPosition
@@ -38,6 +39,10 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         (adapter?.models as ArrayList).removeAt(layoutPosition)
     }
 
+    /**
+     * 返回值表示拖拽/侧滑的方向
+     * @param viewHolder 拖拽触发的Item
+     */
     override fun getMovementFlags(
         recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder
     ): Int {
@@ -51,7 +56,7 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         return makeMovementFlags(drag, swipe)
     }
 
-
+    /** 绘制拖拽或者侧滑动画 */
     override fun onChildDraw(
         c: Canvas,
         recyclerView: RecyclerView,
@@ -73,12 +78,18 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         }
     }
 
+    /**
+     * 滑动距离速率来判断当前是否执行滑动删除事件(可以理解为移出itemView)
+     * @param viewHolder 拖拽触发的Item
+     */
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
         return 1f
     }
 
     /**
      * 当拖拽动作完成且松开手指时触发
+     * @param source 触发拖拽的Item
+     * @param target 拖拽目标的Item
      */
     open fun onDrag(
         source: BindingAdapter.BindingViewHolder, target: BindingAdapter.BindingViewHolder
@@ -90,6 +101,13 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
     private var sourceViewHolder: BindingAdapter.BindingViewHolder? = null
     private var targetViewHolder: BindingAdapter.BindingViewHolder? = null
 
+    /**
+     * 状态变化
+     * @param actionState
+     * @see ItemTouchHelper.ACTION_STATE_DRAG 拖拽
+     * @see ItemTouchHelper.ACTION_STATE_SWIPE 侧滑
+     * @see ItemTouchHelper.ACTION_STATE_IDLE 闲置
+     */
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         when (actionState) {
             ItemTouchHelper.ACTION_STATE_IDLE -> {
@@ -105,10 +123,10 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         }
     }
 
+    /** 拖拽移动超过其他item时, 其返回值表示是否已经拖拽替换(会触发函数onMoved) */
     override fun onMove(
         recyclerView: RecyclerView, source: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
     ): Boolean {
-
         val adapter = recyclerView.bindingAdapter as? BindingAdapter ?: return false
         val currentPosition = recyclerView.getChildLayoutPosition(source.itemView)
         val targetPosition = recyclerView.getChildLayoutPosition(target.itemView)
