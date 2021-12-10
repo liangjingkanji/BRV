@@ -21,8 +21,8 @@ import com.drake.brv.item.ItemExpand
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentGroupBinding
+import com.drake.brv.sample.model.GroupBasicModel
 import com.drake.brv.sample.model.GroupModel
-import com.drake.brv.sample.model.Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -44,10 +44,10 @@ class GroupGridFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragm
         binding.rv.layoutManager = layoutManager
         binding.rv.setup {
             addType<GroupModel>(R.layout.item_group_title)
-            addType<Model>(R.layout.item_multi_type_simple)
+            addType<GroupBasicModel>(R.layout.item_group_basic)
             R.id.item.onFastClick {
                 when (itemViewType) {
-                    R.layout.item_nested_group_title, R.layout.item_group_title -> {
+                    R.layout.item_group_title_second, R.layout.item_group_title -> {
 
                         val changeCount =
                             if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"

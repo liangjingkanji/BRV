@@ -18,12 +18,9 @@ package com.drake.brv.sample.model
 
 import androidx.databinding.BaseObservable
 import com.drake.brv.item.ItemExpand
-import com.drake.brv.item.ItemHover
-import com.drake.brv.item.ItemPosition
 import com.drake.brv.sample.R
 
-open class GroupModel : ItemExpand, ItemHover, ItemPosition,
-    BaseObservable() {
+class GroupSecondModel : ItemExpand, BaseObservable() {
 
     override var itemGroupPosition: Int = 0
     override var itemExpand: Boolean = false
@@ -31,21 +28,7 @@ open class GroupModel : ItemExpand, ItemHover, ItemPosition,
             field = value
             notifyChange()
         }
-
-    // 这种代理方式是为了避免Gson等框架解析Kotlin会覆盖默认值问题: https://liangjingkanji.github.io/BRV/group.html#_2
-    override var itemSublist: List<Any?>?
-        get() = finalList
-        set(value) {
-            finalList = value as List<GroupBasicModel>
-        }
-
-    var finalList: List<GroupBasicModel> = listOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
-
-    override var itemHover: Boolean = true
-    override var itemPosition: Int = 0
-
-    val title get() = "分组 [ $itemGroupPosition ]"
-
-    val expandIcon get() = if (itemExpand) R.drawable.ic_arrow_expand else R.drawable.ic_arrow_collapse
-
+    override var itemSublist: List<Any?>? = listOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
+    val title get() = "嵌套分组 [ $itemGroupPosition ]"
+    val expandIcon get() = if (itemExpand) R.drawable.ic_arrow_nested_expand else R.drawable.ic_arrow_nested_collapse
 }

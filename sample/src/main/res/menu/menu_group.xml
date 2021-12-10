@@ -6,4 +6,7 @@
     <item
         android:id="@+id/groupFragment"
         android:title="嵌套分组" />
+    <item
+        android:id="@+id/groupDragFragment"
+        android:title="拖拽分组" />
 </menu>

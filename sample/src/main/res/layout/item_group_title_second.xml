@@ -23,7 +23,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.NestedGroupModel" />
+            type="com.drake.brv.sample.model.GroupSecondModel" />
     </data>
 
     <LinearLayout

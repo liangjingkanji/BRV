@@ -19,17 +19,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_group.xml"
     app:startDestination="@id/groupGridFragment">
-
-    <fragment
-        android:id="@+id/groupFragment"
-        android:name="com.drake.brv.sample.ui.fragment.group.GroupFragment"
-        android:label="嵌套分组"
-        tools:layout="@layout/fragment_group" />
-
     <fragment
         android:id="@+id/groupGridFragment"
         android:name="com.drake.brv.sample.ui.fragment.group.GroupGridFragment"
         android:label="网格分组"
         tools:layout="@layout/fragment_group" />
-
+    <fragment
+        android:id="@+id/groupDragFragment"
+        android:name="com.drake.brv.sample.ui.fragment.group.GroupDragFragment"
+        android:label="拖拽分组"
+        tools:layout="@layout/fragment_group_drag" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.drake.brv.sample.ui.fragment.group.GroupFragment"
+        android:label="嵌套分组"
+        tools:layout="@layout/fragment_group" />
 </navigation>

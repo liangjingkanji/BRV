@@ -16,26 +16,42 @@
 
 package com.drake.brv.sample.ui.fragment.group
 
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.drake.brv.BindingAdapter
 import com.drake.brv.item.ItemExpand
+import com.drake.brv.listener.DefaultItemTouchCallback
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.FragmentGroupBinding
+import com.drake.brv.sample.databinding.FragmentGroupDragBinding
 import com.drake.brv.sample.model.GroupBasicModel
-import com.drake.brv.sample.model.GroupModel
-import com.drake.brv.sample.model.GroupSecondModel
+import com.drake.brv.sample.model.GroupDragModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
 
 
-class GroupFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_group) {
+class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.fragment_group_drag) {
 
     override fun initView() {
         binding.rv.linear().setup {
-
-            // 任何条目都需要添加类型到BindingAdapter中
-            addType<GroupModel>(R.layout.item_group_title)
-            addType<GroupSecondModel>(R.layout.item_group_title_second)
+            addType<GroupDragModel>(R.layout.item_group_title)
             addType<GroupBasicModel>(R.layout.item_group_basic)
+
+            // 自定义部分实现
+            itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback() {
+                override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                    if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) { // 如果开始拖拽则折叠分组
+                        (viewHolder as BindingAdapter.BindingViewHolder).collapse()
+                    }
+                    super.onSelectedChanged(viewHolder, actionState)
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    (viewHolder as BindingAdapter.BindingViewHolder).collapse() // 侧滑删除分组同时删除子列表
+                    super.onSwiped(viewHolder, direction)
+                }
+            })
+
             R.id.item.onFastClick {
                 when (itemViewType) {
                     R.layout.item_group_title_second, R.layout.item_group_title -> {
@@ -51,21 +67,10 @@ class GroupFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_
         }.models = getData()
     }
 
-    private fun getData(): MutableList<GroupModel> {
-        return mutableListOf<GroupModel>().apply {
-            for (i in 0..4) {
-
-                // 第二个分组存在嵌套分组
-                if (i == 0) {
-                    val nestedGroupModel = GroupModel().apply {
-                        itemSublist =
-                            listOf(GroupSecondModel(), GroupSecondModel(), GroupSecondModel())
-                    }
-                    add(nestedGroupModel)
-                    continue
-                }
-
-                add(GroupModel())
+    private fun getData(): MutableList<GroupDragModel> {
+        return mutableListOf<GroupDragModel>().apply {
+            repeat(4) {
+                add(GroupDragModel())
             }
         }
     }

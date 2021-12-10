@@ -100,6 +100,33 @@ RecyclerView(TODO()).linear().setup {
 
 > 分组和多类型属于互不影响的功能, 分组下的多类型和普通列表的多类型添加方式等同
 
+## 分组拖拽/侧滑
+[拖拽](drag.md)/[侧滑](swipe.md)功能和分组本身互不影响. 但是针对已展开的分组需要在动作发生之前折叠以保证列表数据不错乱, 所以我们需要自定义部分实现
+
+```kotlin
+binding.rv.linear().setup {
+
+    // 自定义部分实现
+    itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback() {
+        override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+            if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) { // 如果开始拖拽则折叠分组
+                (viewHolder as BindingAdapter.BindingViewHolder).collapse()
+            }
+            super.onSelectedChanged(viewHolder, actionState)
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            (viewHolder as BindingAdapter.BindingViewHolder).collapse() // 侧滑删除分组同时删除子列表
+            super.onSwiped(viewHolder, direction)
+        }
+    })
+
+    // ...
+}.models = getData()
+```
+
+具体可以看完整示例代码
+
 ## 分组相关函数
 
 | BindingAdapter的函数 | 描述 |

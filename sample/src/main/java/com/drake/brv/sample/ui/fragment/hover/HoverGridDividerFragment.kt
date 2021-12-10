@@ -23,9 +23,9 @@ import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentHoverBinding
+import com.drake.brv.sample.model.GroupBasicModel
+import com.drake.brv.sample.model.GroupSecondModel
 import com.drake.brv.sample.model.HoverHeaderModel
-import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.NestedGroupModel
 import com.drake.brv.utils.*
 import com.drake.tooltip.toast
 
@@ -44,17 +44,17 @@ class HoverGridDividerFragment : BaseHoverFragment<FragmentHoverBinding>(R.layou
                         includeVisible = true
                         orientation = DividerOrientation.GRID
                     }.grid(2).setup {
-                        addType<Model>(R.layout.item_multi_type_simple_none_margin)
+                        addType<GroupBasicModel>(R.layout.item_multi_type_simple_none_margin)
                     }
                 }
             }
             onBind {
                 if (itemViewType == R.layout.item_simple_list) { // 为嵌套的网格列表赋值数据
                     findView<RecyclerView>(R.id.rv).models =
-                        getModel<NestedGroupModel>().itemSublist
+                        getModel<GroupSecondModel>().itemSublist
                 }
             }
-            addType<NestedGroupModel>(R.layout.item_simple_list)
+            addType<GroupSecondModel>(R.layout.item_simple_list)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
 
             // 点击事件
@@ -81,13 +81,13 @@ class HoverGridDividerFragment : BaseHoverFragment<FragmentHoverBinding>(R.layou
     private fun getData(): List<Any> {
         return listOf(
             HoverHeaderModel(),
-            NestedGroupModel(),
+            GroupSecondModel(),
             HoverHeaderModel(),
-            NestedGroupModel(),
+            GroupSecondModel(),
             HoverHeaderModel(),
-            NestedGroupModel(),
+            GroupSecondModel(),
             HoverHeaderModel(),
-            NestedGroupModel(),
+            GroupSecondModel(),
         )
     }
 
