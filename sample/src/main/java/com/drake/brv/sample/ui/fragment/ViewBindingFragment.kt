@@ -23,6 +23,7 @@ class ViewBindingFragment : Fragment(R.layout.fragment_view_binding) {
             addType<SimpleModel>(R.layout.item_simple)
             onBind {
                 val binding = ItemSimpleBinding.bind(itemView) // 使用ViewBinding
+                binding.tvSimple.text = layoutPosition.toString()
             }
             R.id.tv_simple.onClick {
                 toast("点击文本")
