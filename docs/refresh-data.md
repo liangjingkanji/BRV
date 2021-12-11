@@ -53,6 +53,19 @@ rv.linear().setup {
 }.models = getRandomData(true)
 ```
 
+使用`setDifferModels`对比刷新时, 相同item刷新有白屏动画这是因为`getChangePayload`返回null, 随便返回一个对象即可关闭
+
+```kotlin
+rv.linear().setup {
+    // ...
+    itemDifferCallback = object : ItemDifferCallback {
+        override fun getChangePayload(oldItem: Any, newItem: Any): Any? {
+            return true
+        }
+    }
+}.models = getRandomData(true)
+```
+
 ## 局部刷新
 
 局部刷新某个或者批量Item的内容, 我们可以使用到两种方式
