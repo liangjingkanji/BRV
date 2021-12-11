@@ -16,4 +16,4 @@
 
 package com.drake.brv.sample.model
 
-class DoubleItemModel
+class TwoSpanModel

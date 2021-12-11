@@ -37,8 +37,9 @@ interface ItemDifferCallback {
     /**
      * 当 [areItemsTheSame] 返回true, [areContentsTheSame] 返回false时, 调用该方法
      * 该方法将返回一个用于更新的数据对象
-     * @see [RecyclerView.Adapter.onBindViewHolder] 中的 payloads
-     * 默认实现返回null
+     * @return 如果返回null则item会有闪屏动画, 返回非null则不会. 该返回值会被[com.drake.brv.BindingAdapter.onPayload]接受. 默认实现返回null
+     * @see [RecyclerView.Adapter.onBindViewHolder]
+     * @see [RecyclerView.Adapter.notifyItemChanged]
      */
     fun getChangePayload(oldItem: Any, newItem: Any): Any? {
         return null

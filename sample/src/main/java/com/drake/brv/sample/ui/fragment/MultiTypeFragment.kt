@@ -18,8 +18,8 @@ package com.drake.brv.sample.ui.fragment
 
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentMultiTypeBinding
-import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.TwoSpanModel
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -32,7 +32,7 @@ class MultiTypeFragment : EngineFragment<FragmentMultiTypeBinding>(R.layout.frag
     override fun initView() {
         binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
-            addType<DoubleItemModel>(R.layout.item_multi_type_two)
+            addType<TwoSpanModel>(R.layout.item_multi_type_two_span)
         }.models = getData()
 
         // 点击事件
@@ -47,15 +47,15 @@ class MultiTypeFragment : EngineFragment<FragmentMultiTypeBinding>(R.layout.frag
     private fun getData(): MutableList<Any> {
         return mutableListOf(
             Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
+            TwoSpanModel(),
+            TwoSpanModel(),
             Model(),
             Model(),
             Model(),
             Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
-            DoubleItemModel(),
+            TwoSpanModel(),
+            TwoSpanModel(),
+            TwoSpanModel(),
             Model(),
             Model(),
             Model()

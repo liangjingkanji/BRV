@@ -31,8 +31,8 @@ class OneMoreTypeFragment :
         binding.rv.linear().setup {
             addType<OneMoreTypeModel> {
                 when (type) {
-                    0 -> R.layout.item_multi_type_one
-                    else -> R.layout.item_multi_type_two
+                    0 -> R.layout.item_multi_type_one_more
+                    else -> R.layout.item_multi_type_two_span
                 }
             }
         }.models = getData()

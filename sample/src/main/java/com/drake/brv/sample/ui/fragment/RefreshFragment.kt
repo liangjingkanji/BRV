@@ -21,8 +21,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentRefreshBinding
-import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.TwoSpanModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
@@ -38,7 +38,7 @@ class RefreshFragment : EngineFragment<FragmentRefreshBinding>(R.layout.fragment
 
         binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
-            addType<DoubleItemModel>(R.layout.item_multi_type_two)
+            addType<TwoSpanModel>(R.layout.item_multi_type_two_span)
         }
 
         binding.page.onRefresh {
@@ -65,7 +65,7 @@ class RefreshFragment : EngineFragment<FragmentRefreshBinding>(R.layout.fragment
         return mutableListOf<Any>().apply {
             for (i in 0..9) {
                 when (i) {
-                    1, 2 -> add(DoubleItemModel())
+                    1, 2 -> add(TwoSpanModel())
                     else -> add(Model())
                 }
             }

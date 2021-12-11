@@ -21,8 +21,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentStateLayoutBinding
-import com.drake.brv.sample.model.DoubleItemModel
 import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.TwoSpanModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
@@ -35,7 +35,7 @@ class StateLayoutFragment :
         setHasOptionsMenu(true)
         binding.rv.linear().setup {
             addType<Model>(R.layout.item_multi_type_simple)
-            addType<DoubleItemModel>(R.layout.item_multi_type_two)
+            addType<TwoSpanModel>(R.layout.item_multi_type_two_span)
         }.models = getData()
 
     }
@@ -43,15 +43,15 @@ class StateLayoutFragment :
     private fun getData(): List<Any> {
         return listOf(
             Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
+            TwoSpanModel(),
+            TwoSpanModel(),
             Model(),
             Model(),
             Model(),
             Model(),
-            DoubleItemModel(),
-            DoubleItemModel(),
-            DoubleItemModel(),
+            TwoSpanModel(),
+            TwoSpanModel(),
+            TwoSpanModel(),
             Model(),
             Model(),
             Model()
