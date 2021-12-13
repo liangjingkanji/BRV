@@ -16,7 +16,7 @@
 > onBind或onCreate只有最后设置的有效. 存在覆盖关系
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
     onCreate {
         when(it){
@@ -37,19 +37,19 @@ rv_simple.linear().setup {
 在使用rv嵌套rv时应当在onCreate回调中为内嵌的rv设置视图(使用`rv.setup`), 这是为了避免同一类型反复创建rv导致内存消耗.  而嵌套的rv数据可以在onBind中绑定数据, 使用`rv.models`
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 
     onCreate {
-        val rv_nested = findView<RecyclerView>(R.id.rv_check_mode)
-        rv_nested.linear().setup {
+        val rv = findView<RecyclerView>(R.id.rv_check_mode)
+        rv.linear().setup {
             addType<NestedModel>(R.layout.item_simple_nested)
         }
     }
 
     onBind {
-        val rv_nested  = findView<RecyclerView>(R.id.rv_check_mode)
-        rv_nested.models = getModel<Model>().listNested
+        val rv  = findView<RecyclerView>(R.id.rv_check_mode)
+        rv.models = getModel<Model>().listNested
     }
 }
 ```

@@ -16,7 +16,7 @@
 创建列表
 
 ```kotlin
-rv_grid.linear().divider(R.drawable.divider_horizontal).setup {
+rv.linear().divider(R.drawable.divider_horizontal).setup {
     addType<DividerModel>(R.layout.item_divider)
 }.models = getData()
 ```

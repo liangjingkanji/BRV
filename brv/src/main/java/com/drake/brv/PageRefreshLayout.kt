@@ -204,7 +204,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         }
     }
 
-    /** 当加载完毕以后, 再次调用仅会静默加载 */
+    /** 初次调用等效于[showLoading]. 当加载完毕以后, 再次调用等效[refresh] */
     fun refreshing(tag: Any? = null) {
         if (loaded) {
             refresh()

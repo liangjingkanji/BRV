@@ -19,7 +19,7 @@ class HoverHeaderModel : ItemHover {
 override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
-    rv_hover.linear().setup {
+    rv.linear().setup {
         addType<Model>(R.layout.item_multi_type_simple)
         addType<HoverHeaderModel>(R.layout.item_hover_header)
         models = getData()
@@ -69,9 +69,9 @@ Demo截图
 val layoutManager = HoverGridLayoutManager(requireContext(), 2)
 layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
     override fun getSpanSize(position: Int): Int {
-        return if(rv_hover.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
+        return if(rv.bindingAdapter.isHover(position)) 2 else 1 // 具体的业务逻辑由你确定
     }
 }
-rv_hover.layoutManager = layoutManager
+rv.layoutManager = layoutManager
 ```
 

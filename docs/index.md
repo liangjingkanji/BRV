@@ -8,7 +8,7 @@
 ## 创建一个简单的列表
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 }.models = getData()
 ```
@@ -26,7 +26,7 @@ BRV支持三种方式, 灵活使用; 这里提及的Model就等同于数据类/J
 在`onBind`函数中填充数据
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
     onBind {
         findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
@@ -142,7 +142,7 @@ class App : Application() {
 这种方式创建列表无需处理数据
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 }.models = getData()
 ```

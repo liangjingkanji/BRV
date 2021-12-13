@@ -40,14 +40,14 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
             // 自定义部分实现
             itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback() {
                 override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-                    if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) { // 如果开始拖拽则折叠分组
+                    if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) { // 拖拽移动分组前先折叠子列表
                         (viewHolder as BindingAdapter.BindingViewHolder).collapse()
                     }
                     super.onSelectedChanged(viewHolder, actionState)
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    (viewHolder as BindingAdapter.BindingViewHolder).collapse() // 侧滑删除分组同时删除子列表
+                    (viewHolder as BindingAdapter.BindingViewHolder).collapse() // 侧滑删除分组前先折叠子列表
                     super.onSwiped(viewHolder, direction)
                 }
             })

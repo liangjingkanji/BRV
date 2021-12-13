@@ -6,7 +6,7 @@
 
 1. 创建列表
     ```kotlin
-    rv_check_mode.linear().setup {
+    rv.linear().setup {
         addType<CheckModel>(R.layout.item_check_mode)
     }.models = getData
     ```
@@ -21,7 +21,7 @@
 
 3. 监听选择事件
     ```kotlin hl_lines="3"
-    rv_check_mode.linear().setup {
+    rv.linear().setup {
        addType<CheckModel>(R.layout.item_check_mode)
        onChecked { position, isChecked, isAllChecked ->
             val model = getModel<CheckModel>(position)
@@ -33,7 +33,7 @@
 
 4. 触发选择事件
     ```kotlin hl_lines="11"
-    rv_check_mode.linear().setup {
+    rv.linear().setup {
        addType<CheckModel>(R.layout.item_check_mode)
        onChecked { position, isChecked, isAllChecked ->
             val model = getModel<CheckModel>(position)
@@ -61,7 +61,7 @@
 // 切换选择模式
 tv_manage.setOnClickListener {
     adapter.toggle()
-    rv_check_mode.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
+    rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
 }
 ```
 

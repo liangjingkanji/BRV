@@ -15,19 +15,19 @@
 
 === "LinearLayoutManager"
     ```kotlin hl_lines="1"
-    rv_simple.linear().setup {
+    rv.linear().setup {
         addType<SimpleModel>(R.layout.item_simple)
     }.models = getData()
     ```
 === "GridLayoutManager"
     ```kotlin hl_lines="1"
-    rv_simple.grid(3).setup {
+    rv.grid(3).setup {
         addType<SimpleModel>(R.layout.item_simple)
     }.models = getData()
     ```
 === "StaggeredLayoutManager"
     ```kotlin hl_lines="1"
-    rv_simple.staggered(3).setup {
+    rv.staggered(3).setup {
         addType<SimpleModel>(R.layout.item_simple)
     }.models = getData()
     ```

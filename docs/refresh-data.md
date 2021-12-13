@@ -4,11 +4,11 @@
 
 ## 添加数据
 
-使用BRV自带的两个函数添加数据会自动更新UI
+使用BRV自带的两个方法添加数据会自动刷新UI
 
 ```kotlin
 rv.models = dataList // 自动使用 notifyDataSetChanged
-rv.addModels(newDataList)
+rv.addModels(newDataList) // 自动使用 notifyItemRangeInserted, 当然也可以禁止动画
 ```
 
 代码示例
@@ -89,15 +89,14 @@ data class CheckModel(var checked: Boolean = false, var visibility: Boolean = fa
 
 ## 刷新函数
 
-这里介绍的其实都不属于BRV的内容, 但是由于很多开发者常问此需求, 故介绍下. BRV是自定义的BindingAdapter, 其继承自`RecyclerView.Adapter`, 自然拥有其全部的数据刷新方法
+这里介绍的属于RecyclerView官方函数, BRV的`BindingAdapter`继承`RecyclerView.Adapter`, 自然拥有父类的数据刷新方法.
+由于很多开发者常问此需求, 故统一介绍下
 
 ```kotlin
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>()
 ```
 
-RecyclerView.Adapter场景的数据刷新方法有
-
-| 函数 | 描述 |
+| 刷新函数 | 描述 |
 |-|-|
 | notifyDataSetChanged | 全部数据刷新(不带动画) |
 | notifyItemChanged | 局部数据变更 |
@@ -108,14 +107,15 @@ RecyclerView.Adapter场景的数据刷新方法有
 | notifyItemRangeInserted | 指定范围内Item插入 |
 | notifyItemRangeRemoved | 指定范围内删除 |
 
-以上函数BRV全部支持, 具体使用请搜索: `RecycleView局部刷新`
+具体区别可以搜索: `RecycleView局部刷新`<br>
+要注意的是这些方法都是刷新UI, 如果你列表数据并没有发生改变那么刷新是无效的
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 }.models = dataList
 
 dataList.add(SimpleModel())
 
-rv_simple.bindingAdapter.notifyItemInserted(dataList.size) // 最后的位置有插入一个新的Item
+rv.bindingAdapter.notifyItemInserted(dataList.size) // 最后的位置有插入一个新的Item
 ```

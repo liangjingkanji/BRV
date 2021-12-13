@@ -15,7 +15,7 @@ BRV提供一个切换事件的触发和监听, 相当于会提供一个回调函
 override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
-    rv_check_mode.linear().setup {
+    rv.linear().setup {
         addType<CheckModel>(R.layout.item_check_mode)
 
         // 监听切换事件
@@ -29,7 +29,7 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
 }
 
 fun onClick(v:View){
-    rv_check_mode.bindingAdapter.toggle() // 点击事件触发切换事件
+    rv.bindingAdapter.toggle() // 点击事件触发切换事件
 }
 
 ```

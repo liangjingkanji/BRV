@@ -130,6 +130,7 @@ PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
 | autoRefresh | 显示下拉刷新动画 |
 | showLoading | 显示加载中缺省页, 当然得先设置`loadingLayout`(或者读取`StateConfig`全局缺省页配置) |
 | refresh | 静默刷新(无动画) |
+| refreshing | 初次调用等效于`showLoading`. 当加载完毕以后, 再次调用等效`refresh` |
 
 > 这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
 

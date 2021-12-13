@@ -13,7 +13,7 @@
 override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
-    rv_up_fetch.setup {
+    rv.setup {
         addType<Model>(R.layout.item_multi_type_simple)
     }
 

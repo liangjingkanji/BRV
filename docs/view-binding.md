@@ -12,7 +12,7 @@
 如果你依然想用ViewBinding可以参考以下代码
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
 
     // 在onCreateViewHolder生命周期使用
     onCreate {

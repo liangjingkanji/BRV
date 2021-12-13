@@ -13,7 +13,7 @@
 这种使用适用于多个id处理同一个点击业务逻辑
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 
     onClick(R.id.item) {
@@ -25,7 +25,7 @@ rv_simple.linear().setup {
 onClick参数是可变长度. 可以指定多个Id, 并且存在覆盖行为.  onFastClick / onLongClick同理
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<NormalModel>(R.layout.item_multi_type_normal)
 
     onLongClick(R.id.item) {
@@ -46,7 +46,7 @@ rv_simple.linear().setup {
 既一个Id对应一个点击事件回调. 那么可以使用以下更加简洁的用法
 
 ```kotlin
-rv_simple.linear().setup {
+rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 
     R.id.tv_simple.onClick {
