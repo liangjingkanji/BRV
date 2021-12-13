@@ -317,20 +317,14 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param hasMore 是否存在分页, 如果不存在分页当布局不满一页时会关闭Footer
      */
     fun finish(success: Boolean = true, hasMore: Boolean = true) {
-
         if (trigger) {
             stateChanged = true
         }
-
         val currentState = state
-
-        if (success) {
-            loaded = true
-        }
-
+        if (success) loaded = true
+        if (realEnableRefresh) super.setEnableRefresh(true)
         if (currentState == RefreshState.Refreshing) {
             if (hasMore) finishRefresh(success) else finishRefreshWithNoMoreData()
-            if (realEnableRefresh) super.setEnableRefresh(true)
             if (!mEnableLoadMoreWhenContentNotFull) {
                 setEnableLoadMoreWhenContentNotFull(hasMore || !mFooterNoMoreData)
             }
