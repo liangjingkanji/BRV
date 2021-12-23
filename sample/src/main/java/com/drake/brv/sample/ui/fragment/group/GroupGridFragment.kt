@@ -34,9 +34,10 @@ class GroupGridFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragm
         val layoutManager = HoverGridLayoutManager(requireContext(), 2) // 2 则代表列表一行铺满要求跨度为2
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
+                if (position < 0) return 1 // 如果添加分割线可能导致position为负数
                 // 根据类型设置列表item跨度
                 return when (binding.rv.bindingAdapter.getItemViewType(position)) {
-                    R.layout.item_multi_type_simple -> 1 // 设置指定类型的跨度为1, 假设spanCount为2则代表此类型占据宽度为二分之一
+                    R.layout.item_group_basic -> 1 // 设置指定类型的跨度为1, 假设spanCount为2则代表此类型占据宽度为二分之一
                     else -> 2
                 }
             }
