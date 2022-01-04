@@ -13,7 +13,7 @@ rv.linear().setup {
 }.models = getData()
 ```
 
-这里出现的`BRV`关键词即本框架, `RV`即RecyclerView简称
+这里出现的`BRV`关键词即本框架, `RV`即RecyclerView简称. `setup`函数也只是简化创建BindingAdapter对象
 
 ## 列表填充数据的三种方式
 
