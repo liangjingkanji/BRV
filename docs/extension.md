@@ -5,8 +5,9 @@
 | 函数 | 描述 |
 |-|-|
 | bindingAdapter | 如果Adapter是[BindingAdapter]则返回对象, 否则抛出异常 |
-| models | 数据模型集合, 需要执行`notify*`函数手动刷新列表 |
-| mutable | 可增删的[models]数据模型集合, 需要执行`notify*`函数手动刷新列表 |
+| models | 数据模型集合, 无需执行`notify*`函数, 自动使用`notifyDataChanged`刷新 |
+| _data | 和models的唯一区别是不会自动使用`notifyDataChanged`刷新 |
+| mutable | 可增删的非空[models]只读数据模型集合, 需要执行`notify*`函数手动刷新列表,如果实际没有赋值数据该函数会抛出异常  |
 | addModels | 添加数据, 自动刷新列表 |
 
 ## 布局管理器
