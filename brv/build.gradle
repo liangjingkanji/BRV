@@ -58,8 +58,9 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
 
     compileOnly "androidx.recyclerview:recyclerview:$rv_version"
-    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'
     api "com.github.liangjingkanji:StateLayout:1.2.0"
-    api 'com.scwang.smart:refresh-footer-classics:2.0.3'
-    api 'com.scwang.smart:refresh-header-material:2.0.1'
+
+    api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
+    api 'io.github.scwang90:refresh-header-material:2.0.5'
+    api 'io.github.scwang90:refresh-footer-classics:2.0.5'
 }

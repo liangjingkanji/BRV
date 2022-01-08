@@ -10,11 +10,11 @@
   本框架中的`PageRefreshLayout`继承自`SmartRefreshLayout`, 故拥有其所有特性
 
 <br>
-本库已引入SmartRefreshLayout, 无需再次引入
+本库内置SmartRefreshLayout以下基础依赖, 无需再次引入
 ```groovy
-api 'com.scwang.smart:refresh-layout-kernel:2.0.0'
-api 'com.scwang.smart:refresh-footer-classics:2.0.0'
-api 'com.scwang.smart:refresh-header-material:2.0.0'
+api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
+api 'io.github.scwang90:refresh-header-material:2.0.5'
+api 'io.github.scwang90:refresh-footer-classics:2.0.5'
 ```
 
 
@@ -23,13 +23,14 @@ SmartRefreshLayout的指定的刷新头和刷新脚布局请分别依赖(其库�
 可选配置的刷新头布局和脚布局
 
 ```groovy
-implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
-implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
-implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
-implementation  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头 (内置)
-implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'   //二级刷新头
-implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲加载
-implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载 (内置)
+implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
+implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+implementation  'io.github.scwang90:refresh-header-radar:2.0.5'       //雷达刷新头
+implementation  'io.github.scwang90:refresh-header-falsify:2.0.5'     //虚拟刷新头
+implementation  'io.github.scwang90:refresh-header-material:2.0.5'    //谷歌刷新头
+implementation  'io.github.scwang90:refresh-header-two-level:2.0.5'   //二级刷新头
+implementation  'io.github.scwang90:refresh-footer-ball:2.0.5'        //球脉冲加载
+implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 ```
 
 ## 初始化
