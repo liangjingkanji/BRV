@@ -47,6 +47,7 @@ nav:
       - 线性列表: divider-linear.md
       - 网格列表: divider-grid.md
       - 瀑布流列表: divider-staggerd.md
+      - 自定义: divider-other.md
   - 缺省页: state.md
   - 下拉刷新/上拉加载: refresh.md
   - 拉取更多: upfetch.md
