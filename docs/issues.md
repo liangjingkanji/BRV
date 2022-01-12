@@ -8,3 +8,4 @@
 | 快速刷新列表点击失效 | [#67](https://github.com/liangjingkanji/BRV/issues/67) |
 | 支持DiffUtil更新列表 | [#64](https://github.com/liangjingkanji/BRV/issues/64) |
 | 编译SmartRefreshLayout依赖失败 | [#85](https://github.com/liangjingkanji/BRV/issues/85) |
+| onViewAttachedToWindow/onViewDetachedFromWindow等回调实现 | [#81](https://github.com/liangjingkanji/BRV/issues/81) |
