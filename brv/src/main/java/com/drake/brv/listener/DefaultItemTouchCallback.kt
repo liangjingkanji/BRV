@@ -24,7 +24,6 @@ import com.drake.brv.BindingAdapter
 import com.drake.brv.item.ItemDrag
 import com.drake.brv.item.ItemSwipe
 import com.drake.brv.utils.bindingAdapter
-import java.util.*
 
 /**
  * 默认实现拖拽替换和侧滑删除
@@ -134,8 +133,14 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         if (source is BindingAdapter.BindingViewHolder && target is BindingAdapter.BindingViewHolder) {
             val model = target.getModel<Any>()
             if (model is ItemDrag && model.itemOrientationDrag != 0) {
+                val fromPosition = currentPosition - adapter.headerCount
+                val toPosition = targetPosition - adapter.headerCount
+                val fromItem = adapter.mutable[fromPosition]
+                adapter.mutable.apply {
+                    removeAt(fromPosition)
+                    add(toPosition, fromItem)
+                }
                 adapter.notifyItemMoved(currentPosition, targetPosition)
-                Collections.swap(adapter.mutable, currentPosition - adapter.headerCount, targetPosition - adapter.headerCount)
                 sourceViewHolder = source
                 targetViewHolder = target
             }
