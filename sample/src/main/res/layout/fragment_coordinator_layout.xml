@@ -17,32 +17,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="#000000"
-                app:layout_scrollFlags="enterAlways|scroll" />
+                app:layout_scrollFlags="exitUntilCollapsed|scroll|enterAlwaysCollapsed" />
 
             <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                app:tabMode="scrollable">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="简介" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="评论" />
-
-            </com.google.android.material.tabs.TabLayout>
+                app:tabMode="scrollable" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 

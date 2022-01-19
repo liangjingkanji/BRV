@@ -44,7 +44,7 @@ class PreloadFragment : EngineFragment<FragmentPreloadBinding>(R.layout.fragment
                     index <= 3
                 }
             }, 1000)
-        }.showLoading() //  加载中(缺省页)
+        }.autoRefresh() //  加载中(缺省页)
     }
 
     /**
