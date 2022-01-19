@@ -1,3 +1,17 @@
+## 1.3.51
+fix: 修复拖拽功能导致列表显示与数据源不对应的问题
+
+## 1.3.50
+升级内置依赖SmartRefreshLayout至最新版本`2.0.5`
+```groovy
+api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
+api 'io.github.scwang90:refresh-header-material:2.0.5'
+api 'io.github.scwang90:refresh-footer-classics:2.0.5'
+```
+注意如果你有添加附属的SmartRefreshLayout刷新头, 需要一并更新至最新的`mavenCentral()`版本
+
+详情查看 [#85](https://github.com/liangjingkanji/BRV/issues/85)
+
 ## 1.3.40
 - 修复下拉刷新失效
 - 添加网格分组/拖拽分组示例
