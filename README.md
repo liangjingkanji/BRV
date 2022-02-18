@@ -103,7 +103,12 @@ dependencies {
 }
 ```
 
+项目根目录中 gradle.properties 添加
 
+```
+android.enableJetifier=true
+android.useAndroidX=true
+```
 
 ## License
 
