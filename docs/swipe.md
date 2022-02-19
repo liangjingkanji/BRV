@@ -42,13 +42,16 @@ class SwipeModel() : ItemDrag {
 
 ```kotlin
 rv.linear().setup {
-  addType<Model>(R.layout.item)
+  addType<SwipeModel>(R.layout.item)
 
   itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback(this) {
 	// 这里可以重写函数
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         super.onSwiped(viewHolder, direction)
         // 这是侧滑删除后回调, 这里可以同步服务器
+
+        Log.d("位置", "layoutPosition = ${viewHolder.layoutPosition}")
+        Log.d("数据", "SwipeModel = ${(viewHolder as BindingAdapter.BindingViewHolder).getModel<SwipeModel>()}")
     }
   })
 
