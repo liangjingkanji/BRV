@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.CommentModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2px"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            holder="@{@drawable/ic_default_avatar}"
+            imgCircle="@{m.avatar}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_default_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@{m.name}"
+            android:textColor="@{m.nameColor}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="历飞雨"
+            tools:textColor="#62666d" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            dateFormat="@{`MM-dd`}"
+            dateMilli="@{m.date}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11小时前"
+            android:textColor="#979ba1"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintLeft_toLeftOf="@id/tvUserName" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxLines="6"
+            android:text="@{m.content}"
+            android:textColor="#19191b"
+            app:layout_constraintLeft_toLeftOf="@id/tvUserName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            tools:text="这个世界并不是因为你的看法就有所改变，很多事情，如果不是失去后学会了后悔，是永远不会懂得珍惜的！" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llOpt"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/tvUserName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContent">
+
+            <TextView
+                android:id="@+id/tvUp"
+                activated="@{m.up}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="2dp"
+                android:gravity="center"
+                android:text="@{m.upCount}"
+                android:textColor="@drawable/selector_comment_up_text"
+                android:textSize="12dp"
+                app:drawableLeftCompat="@drawable/selector_comment_up"
+                tools:text="14"
+                tools:textColor="#979ba1" />
+
+            <ImageView
+                android:id="@+id/ivDown"
+                activated="@{m.down}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/selector_comment_down"
+                android:textColor="#979ba1" />
+
+            <ImageView
+                android:id="@+id/ivShare"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_comment_share"
+                android:textColor="#979ba1" />
+
+            <ImageView
+                android:id="@+id/ivInput"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_comment_input"
+                android:textColor="#979ba1" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp">
+
+                <ImageView
+                    android:id="@+id/ivMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/ic_comment_more"
+                    android:textColor="#979ba1" />
+
+            </FrameLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/tvSpec"
+            gone="@{m.sb}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_comment"
+            android:padding="6dp"
+            android:text="UP觉得很傻逼"
+            android:textColor="#757475"
+            android:textSize="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvUserName"
+            app:layout_constraintTop_toBottomOf="@id/llOpt" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNested"
+            gone="@{!m.comment.empty}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_comment"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="@id/tvUserName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSpec"
+            tools:layout_height="60dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
