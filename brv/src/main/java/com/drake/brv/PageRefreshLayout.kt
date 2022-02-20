@@ -407,10 +407,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     /**
      * 加载成功以后不会再显示错误页面, 除非指定强制显示
      *
-     * @param force 强制显示错误页面
+     * @param tag 传递参数将被[onError]接收
+     * @param force 强制显示错误页面, 因为如果页面已经显示过内容那么再次[showError]是无效的(避免覆盖已加载数据)
      */
     fun showError(tag: Any? = null, force: Boolean = false) {
-        if (stateEnabled && (force || !loaded)) {
+        if (stateEnabled && (force || !loaded || stateLayout?.status != Status.CONTENT)) {
             loaded = false
             stateLayout?.showError(tag)
         }
