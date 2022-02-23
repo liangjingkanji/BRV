@@ -9,3 +9,4 @@
 | 支持DiffUtil更新列表 | [#64](https://github.com/liangjingkanji/BRV/issues/64) |
 | 编译SmartRefreshLayout依赖失败 | [#85](https://github.com/liangjingkanji/BRV/issues/85) |
 | onViewAttachedToWindow/onViewDetachedFromWindow等回调实现 | [#81](https://github.com/liangjingkanji/BRV/issues/81) |
+| 如果使用Filter过滤数据 | [#105](https://github.com/liangjingkanji/BRV/issues/105) |
