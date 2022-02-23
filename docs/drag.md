@@ -58,3 +58,22 @@ rv.linear().setup {
 ```
 
 > `DefaultItemTouchCallback`是BRV内部的触摸事件处理, 你可以覆写他或者直接`ItemTouchHelper.Callback`
+
+## 点击拖拽
+
+直接点击Item开始拖拽会存在手势冲突问题, 因为滑动列表和拖拽排序都是移动手势. 所以建议你拖拽item的某个小图标开始拖拽(拖拽item则滑动列表)
+
+示例代码
+```kotlin
+rv.linear().setup {
+    addType<DragModel>(R.layout.item_drag)
+    onBind {
+        findView<View>(R.id.btnDrag).setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) { // 如果手指按下则开始拖拽
+                itemTouchHelper?.startDrag(this)
+            }
+            true
+        }
+    }
+}.models = getData()
+```
