@@ -21,14 +21,14 @@
     app:startDestination="@id/hoverLinearFragment">
 
     <fragment
-        android:id="@+id/hoverGridFragment"
-        android:name="com.drake.brv.sample.ui.fragment.hover.HoverGridFragment"
+        android:id="@+id/hoverLinearFragment"
+        android:name="com.drake.brv.sample.ui.fragment.hover.HoverLinearFragment"
         android:label="列表悬停"
         tools:layout="@layout/fragment_hover" />
 
     <fragment
-        android:id="@+id/hoverLinearFragment"
-        android:name="com.drake.brv.sample.ui.fragment.hover.HoverLinearFragment"
+        android:id="@+id/hoverGridFragment"
+        android:name="com.drake.brv.sample.ui.fragment.hover.HoverGridFragment"
         android:label="网格悬停"
         tools:layout="@layout/fragment_hover" />
 
