@@ -11,3 +11,4 @@
 | onViewAttachedToWindow/onViewDetachedFromWindow等回调实现 | [#81](https://github.com/liangjingkanji/BRV/issues/81) |
 | 如果使用Filter过滤数据 | [#105](https://github.com/liangjingkanji/BRV/issues/105) |
 | 如何循环滑动列表 | [#109](https://github.com/liangjingkanji/BRV/issues/109) |
+| 同时支持列表上下分页预加载 | [#114](https://github.com/liangjingkanji/BRV/issues/114) |
