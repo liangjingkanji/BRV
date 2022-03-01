@@ -1,3 +1,7 @@
+## 1.3.53
+- Fixed [#107](https://github.com/liangjingkanji/BRV/issues/107)
+- Fixed [#108](https://github.com/liangjingkanji/BRV/issues/108)
+
 ## 1.3.52
 避免多次显示加载页面导致缺省页showError无效
 
