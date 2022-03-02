@@ -92,3 +92,82 @@ rv.linear().setup {
 ```
 
 
+## 扩展函数
+
+完整复用构建列表代码可以直接封装为Kt扩展函数
+
+```kotlin
+/**
+ * 使用
+ */
+viewBinding.rv1.setupNews{ }.models = listOf<News1Module>()
+
+val adapter = viewBinding.rv2.setupNews{ }
+adapter.models = listOf<News1Module>()
+
+/**
+ * adapter ?
+ */
+fun <T : INews> RecyclerView.setupNews(onItemContainerClick: (T) -> Unit = {}): BindingAdapter =
+    linear()
+        .divider(R.drawable.item_news_rv_divider)
+        .setup {
+            addType<INews>(R.layout.item_standard_news)
+            onBind {
+
+            }
+            R.id.v_container.onClick { onItemContainerClick.invoke(getModel<T>()) }
+        }
+
+/**
+ * 定义接口
+ */
+interface INews {
+    val title: String
+    val image: String
+    val content: String
+    val url: String
+    val date: String
+    val time: String
+}
+
+/**
+ * 实体类 1
+ */
+data class News1Module(
+    val news1Field: String,
+    override val title: String,
+    override val image: String,
+    override val content: String,
+    override val url: String,
+    override val date: String,
+    override val time: String
+) : INews
+
+/**
+ * 实体类 2
+ */
+data class News2Module(
+    val news2Field: String,
+    val news2Field1: String,
+    val news2Field2: String,
+    val news2Field3: String,
+    val news2Field4: String,
+    val news2Field5: String,
+) : INews {
+    override val title: String
+        get() = news2Field
+    override val image: String
+        get() = news2Field1
+    override val content: String
+        get() = news2Field2
+    override val url: String
+        get() = news2Field3
+    override val date: String
+        get() = news2Field4
+    override val time: String
+        get() = news2Field5
+}
+```
+
+
