@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentDifferDataChangeBinding
-import com.drake.brv.sample.model.SimpleModel
+import com.drake.brv.sample.model.DiffModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setDifferModels
 import com.drake.brv.utils.setup
@@ -19,12 +19,31 @@ class DifferDataChangeFragment : EngineFragment<FragmentDifferDataChangeBinding>
 
     override fun initView() {
         setHasOptionsMenu(true)
+
         binding.rv.linear().setup {
-            addType<SimpleModel>(R.layout.item_simple)
+            addType<DiffModel>(R.layout.item_simple)
             onBind {
-                findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
+                findView<TextView>(R.id.tv_simple).text = getModel<DiffModel>().content
             }
+
+            // 如果要求刷新不白屏请参考以下代码逻辑
+            // itemDifferCallback = object : ItemDifferCallback {
+            //
+            //     override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+            //         return (oldItem as DiffModel).id == (newItem as DiffModel).id
+            //     }
+            //
+            //     override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+            //         return (oldItem as DiffModel).content == (newItem as DiffModel).content
+            //     }
+            //
+            //     override fun getChangePayload(oldItem: Any, newItem: Any): Any? {
+            //         return true
+            //     }
+            // }
+
         }.models = getRandomData(true)
+
     }
 
     override fun initData() {
@@ -56,7 +75,12 @@ class DifferDataChangeFragment : EngineFragment<FragmentDifferDataChangeBinding>
     private fun getRandomData(order: Boolean = false): MutableList<Any> {
         return mutableListOf<Any>().apply {
             for (i in 0..9) {
-                add(SimpleModel(i.toString()))
+                val id = i.toString()
+                if (i == 3) {
+                    add(DiffModel(id, System.currentTimeMillis().toString()))
+                } else {
+                    add(DiffModel(id, id))
+                }
             }
             if (!order) shuffle()
         }
