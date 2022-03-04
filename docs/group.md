@@ -126,8 +126,26 @@ binding.rv.linear().setup {
     // ...
 }.models = getData()
 ```
-
 具体可以看完整示例代码
+
+## 分组全部展开/折叠
+
+遍历集合数据将`itemExpand = true`即可展开全部(反之折叠). 如果要控制展开层级深度请自己遍历时控制
+
+展开全部
+```kotlin
+binding.rv.bindingAdapter.models = getData().map {
+                                it.itemExpand = true
+                                it
+                            }
+```
+折叠全部
+```kotlin
+binding.rv.bindingAdapter.models = getData().map {
+                                it.itemExpand = false
+                                it
+                            }
+```
 
 ## 分组相关函数
 
