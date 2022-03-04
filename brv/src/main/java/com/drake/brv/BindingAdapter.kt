@@ -626,7 +626,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * @param detectMoves 是否对比Item的移动
      * @param commitCallback 因为子线程调用[setDifferModels]刷新列表会不同步(刷新列表需要切换到主线程), 而[commitCallback]保证在刷新列表完成以后调用(运行在主线程)
      */
-    fun setDifferModels(newModels: List<Any?>?, detectMoves: Boolean = true, commitCallback: Runnable? = null) {
+    fun setDifferModels(
+        newModels: List<Any?>?,
+        detectMoves: Boolean = true,
+        commitCallback: Runnable? = null
+    ) {
         val oldModels = _data
         _data = newModels
         val diffResult = DiffUtil.calculateDiff(ProxyDiffCallback(newModels, oldModels, itemDifferCallback), detectMoves)
@@ -986,7 +990,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         scrollTop: Boolean = false,
         @IntRange(from = -1) depth: Int = 0,
     ): Int {
-        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
+        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: rv?.run {
+            val holder = createViewHolder(this, getItemViewType(position))
+            bindViewHolder(holder, position)
+            holder
+        } ?: return 0
         return holder.expand(scrollTop, depth)
     }
 
@@ -997,7 +1005,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * @return 折叠后消失的条目数量
      */
     fun collapse(@IntRange(from = 0) position: Int, @IntRange(from = -1) depth: Int = 0): Int {
-        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
+        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: rv?.run {
+            val holder = createViewHolder(this, getItemViewType(position))
+            bindViewHolder(holder, position)
+            holder
+        } ?: return 0
         return holder.collapse(depth)
     }
 
@@ -1012,7 +1024,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         scrollTop: Boolean = false,
         @IntRange(from = -1) depth: Int = 0,
     ): Int {
-        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: return 0
+        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: rv?.run {
+            val holder = createViewHolder(this, getItemViewType(position))
+            bindViewHolder(holder, position)
+            holder
+        } ?: return 0
         return holder.expandOrCollapse(scrollTop, depth)
     }
 
