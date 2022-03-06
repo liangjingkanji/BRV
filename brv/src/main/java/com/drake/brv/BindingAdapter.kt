@@ -1127,6 +1127,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          */
         fun expand(scrollTop: Boolean = true, @IntRange(from = -1) depth: Int = 0): Int {
             val itemExpand = getModelOrNull<ItemExpand>()
+            if (itemExpand?.itemExpand == true) return 0
 
             val realPosition =
                 if (singleExpandMode && findParentPosition() != previousExpandPosition) {
@@ -1136,7 +1137,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                         adapter.collapse(previousExpandPosition)
                         layoutPosition
                     }
-                } else layoutPosition
+                } else {
+                    layoutPosition
+                }
 
             onExpand?.invoke(this, true)
 
@@ -1179,6 +1182,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          */
         fun collapse(@IntRange(from = -1) depth: Int = 0): Int {
             val itemExpand = getModelOrNull<ItemExpand>()
+            if (itemExpand?.itemExpand == false) return 0
 
             onExpand?.invoke(this, false)
 
