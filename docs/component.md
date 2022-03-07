@@ -15,5 +15,4 @@ BRV框架并不影响原有rv功能和组件使用. 这里列举一些常用或�
 | [ZoomRecylerLayout](https://github.com/Spikeysanju/ZoomRecylerLayout) | 滑动时缩放效果列表 |
 | [Linkage-RecyclerView](https://github.com/KunMinX/Linkage-RecyclerView) | 二级联动列表 |
 | [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout) | 列表侧滑按钮 |
-| [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout) | 列表侧滑按钮 |
 | [flexbox-layout](https://github.com/google/flexbox-layout) | 谷歌出品的FlexBox流式布局(伸缩布局) |
