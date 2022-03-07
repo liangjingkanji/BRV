@@ -1,3 +1,8 @@
+## 1.3.54
+- Fixed [#119](https://github.com/liangjingkanji/BRV/issues/119)
+- 分组避免重复展开/折叠
+- 修复单一展开模式
+
 ## 1.3.53
 - Fixed [#107](https://github.com/liangjingkanji/BRV/issues/107)
 - Fixed [#108](https://github.com/liangjingkanji/BRV/issues/108)
