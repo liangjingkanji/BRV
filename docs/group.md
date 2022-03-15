@@ -134,16 +134,14 @@ binding.rv.linear().setup {
 
 展开全部
 ```kotlin
-binding.rv.bindingAdapter.models = getData().map {
+binding.rv.bindingAdapter.models = getData().forEach {
                                 it.itemExpand = true
-                                it
                             }
 ```
 折叠全部
 ```kotlin
-binding.rv.bindingAdapter.models = getData().map {
+binding.rv.bindingAdapter.models = getData().forEach {
                                 it.itemExpand = false
-                                it
                             }
 ```
 
