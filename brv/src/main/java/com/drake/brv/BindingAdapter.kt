@@ -118,8 +118,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     }
 
     /**
-     * 增量更新回调, 和[onBind]等效
-     * @param block 参数model等同于[BindingViewHolder.getModel]
+     * 增量更新回调
+     * 当你使用[notifyItemChanged(int, Object)]或者[notifyItemRangeChanged(int, Object)]等方法更新列表时才会触发, 并且形参payload要求不能为null
+     *
+     * @param block 形参model即为[notifyItemChanged]中的形参payload
      */
     fun onPayload(block: BindingViewHolder.(model: Any) -> Unit) {
         onPayload = block
