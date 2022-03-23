@@ -325,13 +325,25 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (realEnableRefresh) super.setEnableRefresh(true)
         if (currentState == RefreshState.Refreshing) {
             if (hasMore) finishRefresh(success) else finishRefreshWithNoMoreData()
-            if (!mEnableLoadMoreWhenContentNotFull) {
-                setEnableLoadMoreWhenContentNotFull(hasMore || !mFooterNoMoreData)
-            }
         } else {
             if (hasMore) finishLoadMore(success) else finishLoadMoreWithNoMoreData()
         }
+    }
 
+    /**
+     * 复写函数实现以下
+     * 1. 当不满一屏幕的时候默认不显示上拉加载更多
+     * 2. 当下拉刷新未成功完成不显示上拉加载
+     */
+    override fun finishRefresh(
+        delayed: Int,
+        success: Boolean,
+        noMoreData: Boolean
+    ): RefreshLayout {
+        super.finishRefresh(delayed, success, noMoreData)
+        if (!mEnableLoadMoreWhenContentNotFull) {
+            setEnableLoadMoreWhenContentNotFull(!noMoreData || !mFooterNoMoreData)
+        }
         if (realEnableLoadMore) {
             if (stateEnabled && stateLayout?.status != Status.CONTENT) {
                 super.setEnableLoadMore(false)
@@ -339,6 +351,27 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 super.setEnableLoadMore(true)
             }
         }
+        return this
+    }
+
+    /**
+     * 复写函数实现以下
+     * 当下拉刷新未成功完成不显示上拉加载
+     */
+    override fun finishLoadMore(
+        delayed: Int,
+        success: Boolean,
+        noMoreData: Boolean
+    ): RefreshLayout {
+        super.finishLoadMore(delayed, success, noMoreData)
+        if (realEnableLoadMore) {
+            if (stateEnabled && stateLayout?.status != Status.CONTENT) {
+                super.setEnableLoadMore(false)
+            } else {
+                super.setEnableLoadMore(true)
+            }
+        }
+        return this
     }
 
     /**
