@@ -1,3 +1,7 @@
+## 1.3.55
+解决不调用`PageRefreshLayout.finish`方法而是去调用`SmartRefreshLayout.finishRefresh`导致的上拉加载失效问题
+
+
 ## 1.3.54
 - Fixed [#119](https://github.com/liangjingkanji/BRV/issues/119)
 - 分组避免重复展开/折叠
