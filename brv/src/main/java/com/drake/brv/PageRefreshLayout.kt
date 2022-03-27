@@ -338,11 +338,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     override fun finishRefresh(
         delayed: Int,
         success: Boolean,
-        noMoreData: Boolean
+        noMoreData: Boolean?
     ): RefreshLayout {
         super.finishRefresh(delayed, success, noMoreData)
         if (!mEnableLoadMoreWhenContentNotFull) {
-            setEnableLoadMoreWhenContentNotFull(!noMoreData || !mFooterNoMoreData)
+            setEnableLoadMoreWhenContentNotFull(noMoreData == false || !mFooterNoMoreData)
         }
         if (realEnableLoadMore) {
             if (stateEnabled && stateLayout?.status != Status.CONTENT) {
