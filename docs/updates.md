@@ -1,3 +1,6 @@
+## 1.3.57
+`PageRefreshLayout.showContent`参数`hasMore`默认值改为true, 避免超出开发者预期关闭加载更多行为
+
 ## 1.3.56
 修复刷新崩溃
 
