@@ -460,7 +460,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh)
     }
 
-    fun showContent(hasMore: Boolean = false, tag: Any? = null) {
+    fun showContent(hasMore: Boolean = true, tag: Any? = null) {
         if (trigger && stateChanged) return
         if (stateEnabled) stateLayout?.showContent(tag)
         finish(hasMore = hasMore)
