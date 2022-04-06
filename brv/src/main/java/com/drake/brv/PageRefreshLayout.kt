@@ -228,8 +228,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         isEmpty: () -> Boolean = { data.isNullOrEmpty() },
         hasMore: BindingAdapter.() -> Boolean = { true },
     ) {
-
-        val adjustAdapter = when {
+        val adapterAdjust = when {
             adapter != null -> adapter
             contentView is RecyclerView -> (contentView as RecyclerView).bindingAdapter
             else -> throw UnsupportedOperationException(
@@ -240,12 +239,18 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val isRefreshState = state == RefreshState.Refreshing
 
         if (isRefreshState) {
-            if (adjustAdapter.models == null) {
-                adjustAdapter.models = data
+            val models = adapterAdjust.models
+            if (models == null) {
+                adapterAdjust.models = data
             } else {
-                (adjustAdapter.models as? MutableList)?.let {
-                    it.clear()
-                    adjustAdapter.addModels(data)
+                if (models is MutableList) {
+                    val size = models.size
+                    models.clear()
+                    if (data.isNullOrEmpty()) {
+                        adapterAdjust.notifyItemRangeRemoved(adapterAdjust.headerCount, size)
+                    } else {
+                        adapterAdjust.addModels(data)
+                    }
                 }
             }
             if (isEmpty()) {
@@ -253,10 +258,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 return
             }
         } else {
-            adjustAdapter.addModels(data)
+            adapterAdjust.addModels(data)
         }
 
-        val hasMoreResult = adjustAdapter.hasMore()
+        val hasMoreResult = adapterAdjust.hasMore()
         index += 1
 
         if (isRefreshState) showContent(hasMoreResult) else finish(true, hasMoreResult)
