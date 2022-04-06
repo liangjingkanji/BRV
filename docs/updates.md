@@ -1,3 +1,6 @@
+## 1.3.58
+fixed [#141](https://github.com/liangjingkanji/BRV/issues/141)
+
 ## 1.3.57
 `PageRefreshLayout.showContent`参数`hasMore`默认值改为true, 避免超出开发者预期关闭加载更多行为
 
