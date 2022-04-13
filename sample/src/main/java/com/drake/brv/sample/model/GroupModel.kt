@@ -32,15 +32,8 @@ open class GroupModel : ItemExpand, ItemHover, ItemPosition,
             notifyChange()
         }
 
-    // 这种代理方式是为了避免Gson等框架解析Kotlin会覆盖默认值问题: https://liangjingkanji.github.io/BRV/group.html#_2
-    override var itemSublist: List<Any?>?
-        get() = finalList
-        set(value) {
-            finalList = value as List<GroupBasicModel>
-        }
-
-    var finalList: List<GroupBasicModel> = listOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
-
+    // 请注意避免Gson等框架解析Kotlin会覆盖字段默认值问题
+    override var itemSublist: List<Any?>? = mutableListOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
     override var itemHover: Boolean = true
     override var itemPosition: Int = 0
 

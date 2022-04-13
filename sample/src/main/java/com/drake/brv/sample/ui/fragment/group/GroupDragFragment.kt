@@ -23,7 +23,7 @@ import com.drake.brv.item.ItemExpand
 import com.drake.brv.listener.DefaultItemTouchCallback
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentGroupDragBinding
-import com.drake.brv.sample.model.GroupBasicModel
+import com.drake.brv.sample.model.GroupDragBasicModel
 import com.drake.brv.sample.model.GroupDragModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -35,7 +35,7 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
     override fun initView() {
         binding.rv.linear().setup {
             addType<GroupDragModel>(R.layout.item_group_title)
-            addType<GroupBasicModel>(R.layout.item_group_basic)
+            addType<GroupDragBasicModel>(R.layout.item_group_basic)
 
             // 自定义部分实现
             itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback() {
@@ -47,8 +47,14 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    (viewHolder as BindingAdapter.BindingViewHolder).collapse() // 侧滑删除分组前先折叠子列表
+                    val vh = viewHolder as BindingAdapter.BindingViewHolder
+                    vh.collapse() // 侧滑删除分组前先折叠子列表
                     super.onSwiped(viewHolder, direction)
+
+                    // 如果侧滑删除的是分组里面的子列表, 要删除对应父分组的itemSublist数据, 否则会导致数据异常
+                    vh.getModelOrNull<GroupDragBasicModel>()?.let {
+                        (vh.findParentViewHolder()?.getModelOrNull<GroupDragModel>()?.itemSublist as? ArrayList)?.remove(it)
+                    }
                 }
             })
 

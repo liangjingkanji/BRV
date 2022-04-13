@@ -29,35 +29,8 @@ class GroupModel : ItemExpand {
 }
 ```
 
-> 当你要修改子项itemSublist时请使用类型强转将其转成可变集合后修改 <br>
-> 例(itemModel.itemSublist as ArrayList).add或者remove等修改分组集合
-
-
-??? summary "如果你使用Gson解析产生该Model请展开阅读"
-    如果该数据模型是由Gson生成那么其字段默认值全部会被置为null, 这是由于Gson不支持Kotlin的默认值问题
-
-    处理方案分为两种
-    
-    1. 重写set/get函数
-    
-        ```kotlin
-        class GroupModel(var finalList: List<Model>) {
-    
-            override var itemSublist: List<Any?>?
-                get() = finalList
-                set(value) {
-                    finalList = value as? List<Model>
-                }
-        }
-        ```
-    
-    2. 等Gson解析完成返回数据后手动赋值
-    
-        ```kotlin
-        val model = Post<GroupModel>()
-        model.itemSublist = realList
-        ```
-
+> 1. 当你要修改子项itemSublist时请使用类型强转将其转成可变集合后修改, 例(itemModel.itemSublist as ArrayList).add或者remove等修改分组集合
+> 1. 如果该数据模型是由Gson生成那么其字段默认值全部会被置为null, 这是由于Gson不支持Kotlin的默认值问题
 
 
 创建列表

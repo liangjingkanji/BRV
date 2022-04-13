@@ -16,10 +16,10 @@
 
 package com.drake.brv.sample.model
 
-import com.drake.brv.item.ItemExpand
+import com.drake.brv.annotaion.ItemOrientation
+import com.drake.brv.item.ItemSwipe
 
-open class GroupBasicModel(
-    override var itemGroupPosition: Int = 0,
-    override var itemExpand: Boolean = false,
-    override var itemSublist: List<Any?>? = null,
-) : ItemExpand
+/** 为[GroupBasicModel]添加侧滑功能 */
+class GroupDragBasicModel(
+    override var itemOrientationSwipe: Int = ItemOrientation.HORIZONTAL, // 侧滑方向
+) : GroupBasicModel(), ItemSwipe
