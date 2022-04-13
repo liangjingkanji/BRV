@@ -96,6 +96,10 @@ binding.rv.linear().setup {
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             (viewHolder as BindingAdapter.BindingViewHolder).collapse() // 侧滑删除分组前先折叠子列表
             super.onSwiped(viewHolder, direction)
+
+            // 如果侧滑删除的是分组里面的子列表, 要删除对应父分组的itemSublist数据, 否则会导致数据异常
+            // itemSublist必须为可变集合, 否则无法被删除
+            (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.itemSublist as? ArrayList)?.remove(vh.getModelOrNull())
         }
     })
 

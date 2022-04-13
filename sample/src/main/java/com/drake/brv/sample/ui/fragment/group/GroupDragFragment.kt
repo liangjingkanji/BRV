@@ -52,9 +52,8 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
                     super.onSwiped(viewHolder, direction)
 
                     // 如果侧滑删除的是分组里面的子列表, 要删除对应父分组的itemSublist数据, 否则会导致数据异常
-                    vh.getModelOrNull<GroupDragBasicModel>()?.let {
-                        (vh.findParentViewHolder()?.getModelOrNull<GroupDragModel>()?.itemSublist as? ArrayList)?.remove(it)
-                    }
+                    // itemSublist必须为可变集合, 否则无法被删除
+                    (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.itemSublist as? ArrayList)?.remove(vh.getModelOrNull())
                 }
             })
 
