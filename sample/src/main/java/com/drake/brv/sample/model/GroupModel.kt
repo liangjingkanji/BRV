@@ -32,8 +32,16 @@ open class GroupModel : ItemExpand, ItemHover, ItemPosition,
             notifyChange()
         }
 
-    // 请注意避免Gson等框架解析Kotlin会覆盖字段默认值问题
-    override var itemSublist: List<Any?>? = mutableListOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
+    /** 由于类型是List<Any>所以本字段不能用于json解析, 所以使用真实字段jsonSublist代理 */
+    override var itemSublist: List<Any?>?
+        get() = jsonSublist
+        set(value) {
+            jsonSublist = value as List<GroupBasicModel> // 注意类型转换异常
+        }
+
+    /** 接口数据里面的子列表使用此字段接收(请注意避免gson等框架解析kotlin会覆盖字段默认值问题) */
+    var jsonSublist: List<GroupBasicModel> = mutableListOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
+
     override var itemHover: Boolean = true
     override var itemPosition: Int = 0
 
