@@ -50,6 +50,8 @@ BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/l
     val state = state() // 在Activity/Fragment直接函数创建缺省页, `rv.state()`也可以, 推荐使用第一种方式
     ```
 
+CoordinatorLayout+ViewPager`要求缺省页的XML根布局为`NestedScrollView`, 否则显示缺省页后无法正常滑动
+
 第二步, 创建列表
 
 ```kotlin
