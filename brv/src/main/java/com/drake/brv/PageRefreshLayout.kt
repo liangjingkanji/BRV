@@ -54,15 +54,45 @@ import com.scwang.smart.refresh.layout.simple.SimpleBoundaryDecider
 open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     companion object {
-        var startIndex = 1 // 全局分页初始索引
-        var preloadIndex = 3 // 全局预加载索引
+        /** 全局分页初始索引 */
+        var startIndex = 1
+
+        /** 全局预加载索引 */
+        var preloadIndex = 3
     }
 
-    var index = startIndex // 分页索引
-    var contentView: View? = null
-    var stateLayout: StateLayout? = null // 可以指定缺省页
+    /** 分页索引 */
+    var index = startIndex
 
-    // 监听onBindViewHolder事件
+    /** 内容视图 */
+    var contentView: View? = null
+
+    /** 缺省页视图 */
+    var stateLayout: StateLayout? = null
+
+    /** 变更为 下拉加载更多, 上拉刷新 */
+    var upFetchEnabled = false
+        set(value) {
+            if (value == field) return
+            field = value
+            if (field) {
+                setEnableRefresh(false)
+                setEnableNestedScroll(false)
+                setEnableAutoLoadMore(true)
+                setEnableScrollContentWhenLoaded(true)
+                setScrollBoundaryDecider(object : SimpleBoundaryDecider() {
+                    override fun canLoadMore(content: View?): Boolean {
+                        return super.canRefresh(content)
+                    }
+                })
+            } else {
+                setEnableNestedScroll(false)
+                setScrollBoundaryDecider(SimpleBoundaryDecider())
+            }
+            reverseContentView()
+        }
+
+    /** 监听onBindViewHolder事件 */
     var onBindViewHolderListener = object : OnBindViewHolderListener {
         override fun onBindViewHolder(
             rv: RecyclerView,
@@ -88,28 +118,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     private var realEnableRefresh = false
     private var onRefresh: (PageRefreshLayout.() -> Unit)? = null
     private var onLoadMore: (PageRefreshLayout.() -> Unit)? = null
-
-
-    var upFetchEnabled = false
-        set(value) {
-            if (value == field) return
-            field = value
-            if (field) {
-                setEnableRefresh(false)
-                setEnableNestedScroll(false)
-                setEnableAutoLoadMore(true)
-                setEnableScrollContentWhenLoaded(true)
-                setScrollBoundaryDecider(object : SimpleBoundaryDecider() {
-                    override fun canLoadMore(content: View?): Boolean {
-                        return super.canRefresh(content)
-                    }
-                })
-            } else {
-                setEnableNestedScroll(false)
-                setScrollBoundaryDecider(SimpleBoundaryDecider())
-            }
-            reverseContentView()
-        }
 
     // <editor-fold desc="构造函数">
 
@@ -169,7 +177,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } else return
 
         if (stateEnabled) {
-            initStateLayout()
+            initializeState()
         }
 
         val rv = contentView
@@ -272,31 +280,64 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     // <editor-fold desc="生命周期">
 
+    /**
+     * 当错误缺省页显示时回调
+     * @see showError
+     * @see StateConfig.onError
+     */
     fun onError(block: View.(Any?) -> Unit): PageRefreshLayout {
         stateLayout?.onError(block)
         return this
     }
 
+    /**
+     * 当空缺省页显示时回调
+     * @see showEmpty
+     * @see StateConfig.onEmpty
+     */
     fun onEmpty(block: View.(Any?) -> Unit): PageRefreshLayout {
         stateLayout?.onEmpty(block)
         return this
     }
 
+    /**
+     * 当加载中缺省页显示时回调
+     * @see showLoading
+     * @see StateConfig.onLoading
+     */
     fun onLoading(block: View.(Any?) -> Unit): PageRefreshLayout {
         stateLayout?.onLoading(block)
         return this
     }
 
+    /**
+     * 当[showContent]时会回调该函数参数, 一般将网络请求等异步操作放入其中
+     * @see showContent
+     * @see StateConfig.onContent
+     */
     fun onContent(block: View.(Any?) -> Unit): PageRefreshLayout {
         stateLayout?.onContent(block)
         return this
     }
 
+    /**
+     * 下拉刷新回调
+     * 如果不设置[onLoadMore], 上拉加载也会执行此方法
+     *
+     * 触发方式有以下三种:
+     * @see showLoading 加载中缺省页
+     * @see autoRefresh 下拉刷新
+     * @see refresh 静默刷新
+     */
     fun onRefresh(block: PageRefreshLayout.() -> Unit): PageRefreshLayout {
         onRefresh = block
         return this
     }
 
+    /**
+     * 上拉加载回调
+     * 如果不执行该方法, 上拉加载会自动触发[onRefresh]
+     */
     fun onLoadMore(block: PageRefreshLayout.() -> Unit): PageRefreshLayout {
         onLoadMore = block
         return this
@@ -404,7 +445,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             field = value
             if (finishInflate) {
                 if (field && stateLayout == null) {
-                    initStateLayout()
+                    initializeState()
                 } else if (!field) {
                     stateLayout?.showContent()
                 }
@@ -436,6 +477,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         return this
     }
 
+    /**
+     * 显示空缺省页
+     * @param tag 传递参数将被[onEmpty]接受
+     */
     fun showEmpty(tag: Any? = null) {
         if (stateEnabled) stateLayout?.showEmpty(tag)
         finish()
@@ -465,6 +510,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh)
     }
 
+    /**
+     * 显示内容页
+     * @param hasMore 否能上拉加载更多
+     * @param tag 传递参数将被[onContent]接收
+     */
     fun showContent(hasMore: Boolean = true, tag: Any? = null) {
         if (trigger && stateChanged) return
         if (stateEnabled) stateLayout?.showContent(tag)
@@ -509,9 +559,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     //</editor-fold>
 
     /**
-     * 替换成缺省页
+     * 初始化缺省页
      */
-    private fun initStateLayout() {
+    private fun initializeState() {
 
         if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID &&
             StateConfig.emptyLayout == View.NO_ID && emptyLayout == View.NO_ID &&
