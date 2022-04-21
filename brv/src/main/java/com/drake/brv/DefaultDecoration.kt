@@ -280,6 +280,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
         }
 
         val position = parent.getChildAdapterPosition(view)
+        if (position == RecyclerView.NO_POSITION) return
 
         val divider = divider
         val height = when {
@@ -621,6 +622,10 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
             }
 
             val position = parent.getChildAdapterPosition(child)
+            if (position == RecyclerView.NO_POSITION) {
+                parent.invalidateItemDecorations()
+                continue@loop
+            }
             val layoutManager = parent.layoutManager ?: return
             val edge = computeEdge(position, layoutManager, reverseLayout)
 
