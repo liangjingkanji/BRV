@@ -91,11 +91,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     /**
      * 列表是否被反转
      */
-    private val RecyclerView.LayoutManager.isReverseLayout: Boolean get() = when (this) {
-        is LinearLayoutManager -> reverseLayout
-        is StaggeredGridLayoutManager -> reverseLayout
-        else -> false
-    }
+    private val RecyclerView.LayoutManager.isReverseLayout: Boolean
+        get() = when (this) {
+            is LinearLayoutManager -> reverseLayout
+            is StaggeredGridLayoutManager -> reverseLayout
+            else -> false
+        }
 
     private var size = 1
     private var marginStart = 0
@@ -280,17 +281,18 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
         val position = parent.getChildAdapterPosition(view)
 
+        val divider = divider
         val height = when {
             divider == null -> size
-            divider?.intrinsicHeight != -1 -> divider!!.intrinsicHeight
-            divider?.intrinsicWidth != -1 -> divider!!.intrinsicWidth
+            divider.intrinsicHeight != -1 -> divider.intrinsicHeight
+            divider.intrinsicWidth != -1 -> divider.intrinsicWidth
             else -> size
         }
 
         val width = when {
             divider == null -> size
-            divider?.intrinsicWidth != -1 -> divider!!.intrinsicWidth
-            divider?.intrinsicHeight != -1 -> divider!!.intrinsicHeight
+            divider.intrinsicWidth != -1 -> divider.intrinsicWidth
+            divider.intrinsicHeight != -1 -> divider.intrinsicHeight
             else -> size
         }
 
@@ -300,12 +302,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
         when (orientation) {
             DividerOrientation.HORIZONTAL -> {
-                val top = if (reverseLayout){
+                val top = if (reverseLayout) {
                     if ((endVisible && edge.top) || !edge.top) height else 0
                 } else {
                     if (startVisible && edge.top) height else 0
                 }
-                val bottom = if (reverseLayout){
+                val bottom = if (reverseLayout) {
                     if (startVisible && edge.bottom) height else 0
                 } else {
                     if ((endVisible && edge.bottom) || !edge.bottom) height else 0
@@ -332,7 +334,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val spanIndex = when (layoutManager) {
                     is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanIndex(position, spanCount)
-                    is StaggeredGridLayoutManager -> (layoutManager.findViewByPosition(position)!!.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
+                    is StaggeredGridLayoutManager -> (layoutManager.findViewByPosition(position)?.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
                     else -> 0
                 }
 
@@ -373,14 +375,14 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                             if (edge.left) if (endVisible) width else 0 else 0
                         }
                     }
-                    startVisible && orientation == RecyclerView.VERTICAL -> if (reverseLayout){
+                    startVisible && orientation == RecyclerView.VERTICAL -> if (reverseLayout) {
                         (spanGroupIndex + 1) * height / spanGroupCount
                     } else {
                         height - spanGroupIndex * height / spanGroupCount
                     }
-                    else -> if (reverseLayout){
+                    else -> if (reverseLayout) {
                         height - (spanGroupIndex + 1) * height / spanGroupCount
-                    }else{
+                    } else {
                         spanGroupIndex * height / spanGroupCount
                     }
                 }
@@ -393,14 +395,14 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                             if (edge.right) if (endVisible) width else 0 else height
                         }
                     }
-                   startVisible && orientation == RecyclerView.VERTICAL ->  if (reverseLayout){
-                       height - spanGroupIndex * height / spanGroupCount
-                   } else {
-                       (spanGroupIndex + 1) * height / spanGroupCount
-                   }
-                    else -> if (reverseLayout){
+                    startVisible && orientation == RecyclerView.VERTICAL -> if (reverseLayout) {
+                        height - spanGroupIndex * height / spanGroupCount
+                    } else {
+                        (spanGroupIndex + 1) * height / spanGroupCount
+                    }
+                    else -> if (reverseLayout) {
                         spanGroupIndex * height / spanGroupCount
-                    }else{
+                    } else {
                         height - (spanGroupIndex + 1) * height / spanGroupCount
                     }
                 }
@@ -480,7 +482,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val firstTop: Int
                 val firstBottom: Int
-                if (reverseLayout){
+                if (reverseLayout) {
                     firstBottom = decoratedBounds.bottom
                     firstTop = if (intrinsicHeight == -1) firstBottom - size else firstBottom - intrinsicHeight
                 } else {
@@ -490,7 +492,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val top: Int
                 val bottom: Int
-                if (reverseLayout){
+                if (reverseLayout) {
                     top = decoratedBounds.top
                     bottom = if (intrinsicHeight == -1) top + size else top + intrinsicHeight
                 } else {
@@ -622,17 +624,18 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
             val layoutManager = parent.layoutManager ?: return
             val edge = computeEdge(position, layoutManager, reverseLayout)
 
+            val divider = divider
             val height = when {
                 divider == null -> size
-                divider?.intrinsicHeight != -1 -> divider!!.intrinsicHeight
-                divider?.intrinsicWidth != -1 -> divider!!.intrinsicWidth
+                divider.intrinsicHeight != -1 -> divider.intrinsicHeight
+                divider.intrinsicWidth != -1 -> divider.intrinsicWidth
                 else -> size
             }
 
             val width = when {
                 divider == null -> size
-                divider?.intrinsicWidth != -1 -> divider!!.intrinsicWidth
-                divider?.intrinsicHeight != -1 -> divider!!.intrinsicHeight
+                divider.intrinsicWidth != -1 -> divider.intrinsicWidth
+                divider.intrinsicHeight != -1 -> divider.intrinsicHeight
                 else -> size
             }
 
@@ -720,7 +723,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
              * @param position 指定计算的Item索引
              * @param layoutManager 当前列表的LayoutManager
              */
-            fun computeEdge(position: Int, layoutManager: RecyclerView.LayoutManager, reverseLayout: Boolean): Edge {
+            fun computeEdge(
+                position: Int,
+                layoutManager: RecyclerView.LayoutManager,
+                reverseLayout: Boolean
+            ): Edge {
 
                 val index = position + 1
                 val itemCount = layoutManager.itemCount
@@ -729,8 +736,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     when (layoutManager) {
                         is StaggeredGridLayoutManager -> {
                             val spanCount = layoutManager.spanCount
-                            val spanIndex = (layoutManager.findViewByPosition(position)!!.layoutParams
-                                        as StaggeredGridLayoutManager.LayoutParams).spanIndex + 1
+                            val spanIndex = (layoutManager.findViewByPosition(position)?.layoutParams
+                                    as StaggeredGridLayoutManager.LayoutParams).spanIndex + 1
 
                             if (layoutManager.orientation == RecyclerView.VERTICAL) {
                                 left = spanIndex == 1
