@@ -1,6 +1,5 @@
 如果直接绘制item的xml可以实现分割线, 比如你在xml中使用简单的`layout_margin`(设置间距)也能完成你想要的分割线效果, 那么我更建议使用layout_margin
 
-> 由于网格分割线是动态计算的, 所以在RecyclerView中假设你添加新的数据使用局部刷新函数(notifyItem*等函数)以后可能需要使用`rv.invalidateItemDecorations()`刷新分隔物, 否则可能会分割线宽高错乱
 
 ## 水平分割线
 

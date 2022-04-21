@@ -1,6 +1,5 @@
 瀑布流分割线
 
-> 由于网格分割线是动态计算的, 所以在RecyclerView中假设你添加新的数据使用局部刷新函数(notifyItem*等函数)以后可能需要使用`rv.invalidateItemDecorations()`刷新分隔物, 否则可能会分割线宽高错乱
 
 <img src="https://i.loli.net/2021/08/14/gx8mLuCNOFzWfIj.png" width="250"/>
 
