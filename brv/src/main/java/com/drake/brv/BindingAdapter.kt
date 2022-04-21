@@ -134,19 +134,34 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     private var context: Context? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            viewType,
-            parent,
+    /** 是否启用DataBinding */
+    private val dataBindingEnable: Boolean by lazy {
+        try {
+            Class.forName("androidx.databinding.DataBindingUtil")
+            true
+        } catch (e: Throwable) {
             false
-        )
-        val viewHolder =
-            if (viewDataBinding == null) BindingViewHolder(parent.getView(viewType)) else BindingViewHolder(
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+        val vh = if (dataBindingEnable) {
+            val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
+                LayoutInflater.from(parent.context),
+                viewType,
+                parent,
+                false
+            )
+            if (viewDataBinding == null) {
+                BindingViewHolder(parent.getView(viewType))
+            } else BindingViewHolder(
                 viewDataBinding
             )
-        onCreate?.invoke(viewHolder, viewType)
-        return viewHolder
+        } else {
+            BindingViewHolder(parent.getView(viewType))
+        }
+        onCreate?.invoke(vh, viewType)
+        return vh
     }
 
     fun ViewGroup.getView(@LayoutRes layout: Int): View {
