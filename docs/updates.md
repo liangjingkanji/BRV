@@ -1,3 +1,7 @@
+## 1.3.60
+现在可选依赖DataBinding
+
+
 ## 1.3.58
 fixed [#141](https://github.com/liangjingkanji/BRV/issues/141)
 

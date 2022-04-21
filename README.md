@@ -90,16 +90,9 @@ dependencyResolutionManagement {
 然后在 module 的 build.gradle 添加依赖框架
 
 ```groovy
-apply plugin: "kotlin-kapt"
-
-android {
-    //... 即使你不使用DataBinding也要打开其开关
-    buildFeatures.dataBinding = true
-}
-
 dependencies {
     //...
-    implementation 'com.github.liangjingkanji:BRV:1.3.58'
+    implementation 'com.github.liangjingkanji:BRV:1.3.60'
 }
 ```
 
