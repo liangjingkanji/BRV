@@ -90,6 +90,16 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          */
         @Deprecated("函数优化", ReplaceWith("BRV.modelId", "com.drake.brv.utils.BRV"))
         var modelId: Int = BRV.modelId
+
+        /** 是否启用DataBinding */
+        private val dataBindingEnable: Boolean by lazy {
+            try {
+                Class.forName("androidx.databinding.DataBindingUtil")
+                true
+            } catch (e: Throwable) {
+                false
+            }
+        }
     }
 
 
@@ -133,16 +143,6 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     // <editor-fold desc="覆写函数">
 
     private var context: Context? = null
-
-    /** 是否启用DataBinding */
-    private val dataBindingEnable: Boolean by lazy {
-        try {
-            Class.forName("androidx.databinding.DataBindingUtil")
-            true
-        } catch (e: Throwable) {
-            false
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
         val vh = if (dataBindingEnable) {
