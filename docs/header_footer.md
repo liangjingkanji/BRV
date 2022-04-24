@@ -1,4 +1,4 @@
-<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g73msnitazg308m0iong7.gif" width="250"/>
+<img src="https://s2.loli.net/2022/04/24/JgSrqjWAP26b8x5.gif" width="250"/>
 
 1.  头布局和脚布局在rv中算作一个item, 所以计算`position`的时候应当考虑其中
 2.  头布局和脚布局也需要使用`addType`函数添加类型
