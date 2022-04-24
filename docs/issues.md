@@ -1,15 +1,14 @@
+## 常见问题
 
-| 问题 | 引用 |
-|-|-|
-| 由`data class`导致的分组折叠崩溃 | [#79](https://github.com/liangjingkanji/BRV/issues/79) |
-| 适配ViewBinding | [#71](https://github.com/liangjingkanji/BRV/issues/71) |
-| 适配Paging3 | [#73](https://github.com/liangjingkanji/BRV/issues/73) |
-| 删除Item失败 | [#68](https://github.com/liangjingkanji/BRV/issues/68) |
-| 快速刷新列表点击失效 | [#67](https://github.com/liangjingkanji/BRV/issues/67) |
-| 支持DiffUtil更新列表 | [#64](https://github.com/liangjingkanji/BRV/issues/64) |
-| 编译SmartRefreshLayout依赖失败 | [#85](https://github.com/liangjingkanji/BRV/issues/85) |
-| onViewAttachedToWindow/onViewDetachedFromWindow等回调实现 | [#81](https://github.com/liangjingkanji/BRV/issues/81) |
-| 如果使用Filter过滤数据 | [#105](https://github.com/liangjingkanji/BRV/issues/105) |
-| 如何循环滑动列表 | [#109](https://github.com/liangjingkanji/BRV/issues/109) |
-| 同时支持列表上下分页预加载 | [#114](https://github.com/liangjingkanji/BRV/issues/114) |
-| CoordinatorLayout显示缺省页后无法正常滑动 | [#152](https://github.com/liangjingkanji/BRV/issues/152) |
+- [由dataclass导致的分组折叠崩溃](https://github.com/liangjingkanji/BRV/issues/79)
+- [适配ViewBinding](https://github.com/liangjingkanji/BRV/issues/71)
+- [适配Paging3](https://github.com/liangjingkanji/BRV/issues/73)
+- [删除Item失败](https://github.com/liangjingkanji/BRV/issues/68)
+- [快速刷新列表点击失效](https://github.com/liangjingkanji/BRV/issues/67)
+- [支持DiffUtil更新列表](https://github.com/liangjingkanji/BRV/issues/64)
+- [编译SmartRefreshLayout依赖失败](https://github.com/liangjingkanji/BRV/issues/85)
+- [onViewAttachedToWindow/onViewDetachedFromWindow等回调实现](https://github.com/liangjingkanji/BRV/issues/81)
+- [如果使用Filter过滤数据](https://github.com/liangjingkanji/BRV/issues/105)
+- [如何循环滑动列表](https://github.com/liangjingkanji/BRV/issues/109)
+- [同时支持列表上下分页预加载](https://github.com/liangjingkanji/BRV/issues/114)
+- [CoordinatorLayout显示缺省页后无法正常滑动](https://github.com/liangjingkanji/BRV/issues/152)

@@ -62,7 +62,7 @@ nav:
   - 扩展函数: extension.md
   - 网络请求: net.md
   - ViewBinding: view-binding.md
-  - 常见问题: issues.md
+  - 常见问题: https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md
   - 第三方组件: component.md
   - 更新日志: updates.md
   - 1.x文档: api/index.html
