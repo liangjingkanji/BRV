@@ -18,7 +18,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.4.10'
+        kotlin_version = '1.6.10'
         rv_version = '1.2.0'
     }
     repositories {
@@ -28,7 +28,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.3'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.32'
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
