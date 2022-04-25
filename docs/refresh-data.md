@@ -1,3 +1,13 @@
+
+BRV没有自定义RecyclerView, 所以RV如何操作数据BRV就如何操作数据. 对于RV基础不了解的可以阅读本章后网上搜索
+
+你要知道的是RV操作数据需要两个步骤
+
+1. 更新集合(删除或者添加元素)
+2. 调用对应的notify**()方法更新列表
+
+但是BRV的`models/addData`赋值会自动notifyDataChanged(), 无需调用更新列表. 如果不想自动更新列表可以使用BindingAdapter的`_data`字段
+
 > BRV的数据集合无论是`models`或`addData()`都是添加的`List<Any?>(任意对象数据集合)`. 所以只要是一个集合即可映射出一个列表 <br>
 > 如果数据不满足一个集合条件(或任何数据上的问题), 请自己处理下数据
 
@@ -22,7 +32,20 @@ binding.rv.linear().setup {
 ```
 
 
-> 切记Java/Kotlin的引用类型是传址, 如果这两个函数操作的数据集都是同一个会导致问题 - 自己添加自己.  这种属于基本的语法问题
+> 切记Java/Kotlin的引用类型是传址, 如果这两个方法操作的数据集都是同一个会导致问题 - 自己添加自己.  这种属于基本的语法问题
+
+## 删除数据
+
+BRV操作数据和RV没有任何区别(毕竟只是自定义Adapter), 删除全部数据可以为models赋值null
+
+如果删除指定数据, 比如删除第二条
+
+```kotlin
+rv.mutable.removeAt(2) // 先删除数据
+rv.bindingAdapter.notifyItemRemoved(2) // 然后刷新列表
+```
+
+如果你删除N条或者添加/插入N条, 请调用对应的`notifyItem**()`方法, 具体方法你可以查看本章末尾或者网上搜索
 
 ## 对比数据刷新
 BRV可以根据新的数据集合和旧的数据集合对比判断来自动使用刷新动画
@@ -31,11 +54,11 @@ BRV可以根据新的数据集合和旧的数据集合对比判断来自动使�
 rv.setDifferModels(getRandomData())
 ```
 
-该函数内部使用Android自带工具`DiffUtil`进行数据对比刷新, 但是支持异步/同步线程对比
+该方法内部使用Android自带工具`DiffUtil`进行数据对比刷新, 但是支持异步/同步线程对比
 ```kotlin
 fun setDifferModels(newModels: List<Any?>?, detectMoves: Boolean = true, commitCallback: Runnable? = null)
 ```
-> 数据对比默认使用`equals`函数对比, 你可以为数据手动实现equals函数来修改对比逻辑. 推荐定义数据为 data class, 因其会根据构造参数自动生成equals
+> 数据对比默认使用`equals`方法对比, 你可以为数据手动实现equals方法来修改对比逻辑. 推荐定义数据为 data class, 因其会根据构造参数自动生成equals
 
 如果需要完全自定义对比数据的判断逻辑就实现`ItemDifferCallback`接口
 
@@ -70,7 +93,7 @@ rv.linear().setup {
 
 局部刷新某个或者批量Item的内容, 我们可以使用到两种方式
 
-1. `notifyItemChanged`等函数, 这个上面提过
+1. `notifyItemChanged`等方法, 这个上面提过
 2. DataBinding本身就支持这个特性 (推荐此方法), 性能最高/方便. Demo中的[选择模式](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)就是如此实现
 
 <br>
@@ -87,16 +110,16 @@ data class CheckModel(var checked: Boolean = false, var visibility: Boolean = fa
 
 > 以上属于DataBinding使用基础, 具体请阅读: [DataBinding最全使用说明 ](https://juejin.cn/post/6844903549223059463)
 
-## 刷新函数
+## 刷新方法
 
-这里介绍的属于RecyclerView官方函数, BRV的`BindingAdapter`继承`RecyclerView.Adapter`, 自然拥有父类的数据刷新方法.
+这里介绍的属于RecyclerView官方方法, BRV的`BindingAdapter`继承`RecyclerView.Adapter`, 自然拥有父类的数据刷新方法.
 由于很多开发者常问此需求, 故统一介绍下
 
 ```kotlin
 class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolder>()
 ```
 
-| 刷新函数 | 描述 |
+| 刷新方法 | 描述 |
 |-|-|
 | notifyDataSetChanged | 全部数据刷新(不带动画) |
 | notifyItemChanged | 局部数据变更 |
