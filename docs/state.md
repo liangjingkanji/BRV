@@ -30,7 +30,17 @@ BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/l
 
 ## 使用
 
-第一步, 创建缺省页
+第一步, 在Application中初始化缺省页
+
+```kotlin
+StateConfig.apply {
+    emptyLayout = R.layout.layout_empty
+    errorLayout = R.layout.layout_error
+    loadingLayout = R.layout.layout_loading
+}
+```
+
+第二步, 创建缺省页
 
 === "布局创建"
     ```xml
@@ -52,7 +62,7 @@ BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/l
 
 CoordinatorLayout+ViewPager`要求缺省页的XML根布局为`NestedScrollView`, 否则显示缺省页后无法正常滑动
 
-第二步, 创建列表
+第三步, 创建列表
 
 ```kotlin
 rv.linear().setup {
@@ -61,7 +71,7 @@ rv.linear().setup {
 }.models = getData()
 ```
 
-第三步, 显示缺省页
+第四步, 显示缺省页
 ```kotlin
 state.showLoading()  // 加载中
 state.showContent() // 加载成功
