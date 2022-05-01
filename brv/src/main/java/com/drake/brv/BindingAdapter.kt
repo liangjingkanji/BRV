@@ -34,6 +34,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
@@ -1142,7 +1143,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          * @param depth 递归展开子项的深度, 如等于-1则代表展开所有子项, 0表示仅展开当前
          * @return 展开后新增的条目数量
          */
-        fun expand(scrollTop: Boolean = true, @IntRange(from = -1) depth: Int = 0): Int {
+        fun expand(scrollTop: Boolean = false, @IntRange(from = -1) depth: Int = 0): Int {
             val itemExpand = getModelOrNull<ItemExpand>()
             if (itemExpand?.itemExpand == true) return 0
 
@@ -1175,7 +1176,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                         notifyDataSetChanged()
                     }
                     if (scrollTop) {
-                        rv?.postDelayed({ rv?.smoothScrollToPosition(position) }, 200)
+                        rv?.let {
+                            it.scrollToPosition(position)
+                            (it.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(position, 0)
+                        }
                     }
                     sublistFlat.size
                 }
