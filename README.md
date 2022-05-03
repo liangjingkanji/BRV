@@ -29,6 +29,9 @@
 
 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目也将一直保持维护状态
 
+欢迎将本项目文档/注释进行国际化翻译, 感谢您的支持! <br>
+Welcome to international translation of this project's documents/notes, thank you for your support!
+
 <br>
 <p align="center"><strong>欢迎贡献代码/问题</strong></p>
 <br>
