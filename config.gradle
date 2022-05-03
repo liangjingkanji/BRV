@@ -1,0 +1,5 @@
+
+ext {
+    kotlin_version = '1.4.10'
+    rv_version = '1.2.0'
+}
