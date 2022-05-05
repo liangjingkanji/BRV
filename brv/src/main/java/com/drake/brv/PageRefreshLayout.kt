@@ -224,6 +224,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     /**
      * 自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
+     * 请勿每次给[data]赋值同一个集合对象, 因为为了保证rv持有数据集合为一个对象, 覆盖数据会先[clear]再[addAll]新的数据集合
+     * 本方法只是简化分页列表数据赋值, 如果出现任何问题请尝试自己更新rv数据集合, 比如使用[BindingAdapter.models]
+     *
      * 此函数每次调用会导致[index]递增或者下拉刷新会导致[index]等于[startIndex]
      * @param data 数据集
      * @param adapter 假设PageRefreshLayout不能直接包裹RecyclerView, 然后也想使用自动分页, 请指定此参数, 因为自动分页需要[BindingAdapter]实例
