@@ -1122,6 +1122,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         fun <B : ViewDataBinding> getBinding(): B = viewDataBinding as B
 
         /**
+         * 返回匹配泛型的数据绑定对象ViewDataBinding, 如果不匹配则返回null
+         */
+        fun <B : ViewDataBinding> getBindingOrNull(): B? = viewDataBinding as? B
+
+        /**
          * 查找ItemView上的视图
          */
         fun <V : View> findView(@IdRes id: Int): V = itemView.findViewById(id)
