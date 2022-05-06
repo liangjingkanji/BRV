@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e2e4e6"
-        tools:context=".ui.fragment.ComposeFragment">
+        tools:context=".ui.fragment.CommentFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"

@@ -3,7 +3,7 @@ package com.drake.brv.sample.ui.fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.BindingAdapter
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.FragmentComposeBinding
+import com.drake.brv.sample.databinding.FragmentCommentBinding
 import com.drake.brv.sample.model.CommentModel
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
@@ -12,7 +12,7 @@ import com.drake.tooltip.toast
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 
-class ComposeFragment : EngineFragment<FragmentComposeBinding>(R.layout.fragment_compose) {
+class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment_comment) {
 
     /** 最好的Json序列化框架 https://github.com/Kotlin/kotlinx.serialization */
     private val json = Json {

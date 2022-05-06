@@ -81,9 +81,9 @@
         android:label="简单列表"
         tools:layout="@layout/fragment_simple" />
     <fragment
-        android:id="@+id/composeFragment"
-        android:name="com.drake.brv.sample.ui.fragment.ComposeFragment"
-        android:label="复杂列表" />
+        android:id="@+id/commentFragment"
+        android:name="com.drake.brv.sample.ui.fragment.CommentFragment"
+        android:label="评论列表" />
     <fragment
         android:id="@+id/interfaceFragment"
         android:name="com.drake.brv.sample.ui.fragment.InterfaceFragment"

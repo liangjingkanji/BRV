@@ -20,9 +20,9 @@
         android:icon="@drawable/ic_list"
         android:title="简单列表" />
     <item
-        android:id="@+id/composeFragment"
+        android:id="@+id/commentFragment"
         android:icon="@drawable/ic_view_binding"
-        android:title="复杂列表" />
+        android:title="评论列表" />
     <item
         android:id="@+id/nav_group.xml"
         android:icon="@drawable/ic_group"
