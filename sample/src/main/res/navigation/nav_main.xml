@@ -112,5 +112,9 @@
         android:name="com.drake.brv.sample.ui.fragment.DifferDataChangeFragment"
         android:label="对比数据变化" />
     <include app:graph="@navigation/nav_group" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.drake.brv.sample.ui.fragment.ChatFragment"
+        android:label="聊天列表" />
 
 </navigation>

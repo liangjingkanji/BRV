@@ -21,8 +21,12 @@
         android:title="简单列表" />
     <item
         android:id="@+id/commentFragment"
-        android:icon="@drawable/ic_view_binding"
+        android:icon="@drawable/ic_comment"
         android:title="评论列表" />
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/ic_chat"
+        android:title="聊天列表" />
     <item
         android:id="@+id/nav_group.xml"
         android:icon="@drawable/ic_group"

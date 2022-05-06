@@ -25,7 +25,7 @@
 </p>
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/21078112/159120990-dc056729-fe5b-44ed-bddc-c0a656400709.jpg" align="center" width="30%;" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/21078112/167219741-46ba8bf9-ebda-4e86-9eff-049d62355685.png" align="center" width="30%;" /></p>
 
 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目也将一直保持维护状态
 
@@ -37,11 +37,10 @@ Welcome to international translation of this project's documents/notes, thank yo
 <br>
 
 - 开发速度No.1
-- 高内聚低耦合
-- 刷新不闪屏
-- 双向数据绑定
 - 无Adapter
-- 自动化
+- 详细的文档
+- 简单的示例
+- 低学习成本
 
 <br>
 

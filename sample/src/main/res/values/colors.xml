@@ -16,9 +16,9 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#2FA8E6</color>
-    <color name="colorPrimaryDark">#2FA8E6</color>
-    <color name="colorAccent">#F44336</color>
+    <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorPrimaryDark">#FF3700B3</color>
+    <color name="colorAccent">#FF6200EE</color>
 
     <!--辅助颜色-->
     <color name="divider">#339e9e9e</color>
@@ -32,6 +32,5 @@
 
     <!--基本颜色-->
     <color name="white">#FFFFFF</color>
-    <color name="orange">#F44336</color>
     <color name="black">#000000</color>
 </resources>
