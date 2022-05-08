@@ -13,24 +13,45 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/item"
         android:paddingVertical="16dp">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            holder="@{@drawable/ic_default_avatar}"
+            imgCircle="@{m.avatar}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_default_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:autoLink="web"
             android:background="@drawable/bg_msg_bubble_left"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:paddingHorizontal="16dp"
-            android:text="@{m.content}"
+            android:paddingVertical="8dp"
+            android:text="@{m.richMessage}"
             android:textColor="@color/black"
             android:textIsSelectable="true"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="12dp"
+            app:layout_constrainedHeight="true"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
             tools:text="How are you ?" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

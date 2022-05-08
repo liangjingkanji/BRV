@@ -48,7 +48,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
     override fun onClick(v: View) {
         when (v) {
             binding.btnSend -> {
-                binding.rv.addModels(model.getMessage()) // 添加一条消息
+                binding.rv.addModels(model.getMessages()) // 添加一条消息
                 binding.rv.smoothScrollToPosition(binding.rv.adapter!!.itemCount - 1) // 保证最新一条消息显示
             }
             binding.rv -> {
