@@ -92,7 +92,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.11.0" // 图片加载
     kapt "com.github.bumptech.glide:compiler:4.11.0"
     implementation 'com.github.liangjingkanji:spannable:1.1.0' // 富文本
-    implementation 'com.github.liangjingkanji:soft-input-event:1.0.3' // 软键盘事件监听/平滑键盘弹出动画
+    implementation 'com.github.liangjingkanji:soft-input-event:1.0.4' // 软键盘事件监听/平滑键盘弹出动画
 
     implementation project(":brv")
 }
