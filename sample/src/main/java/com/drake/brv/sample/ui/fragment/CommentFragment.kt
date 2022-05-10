@@ -1,7 +1,6 @@
 package com.drake.brv.sample.ui.fragment
 
 import androidx.recyclerview.widget.RecyclerView
-import com.drake.brv.BindingAdapter
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentCommentBinding
 import com.drake.brv.sample.model.CommentModel
@@ -52,7 +51,7 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
             }
             // 点赞
             R.id.tvUp.onClick {
-                upWorks()
+                getModel<CommentModel>().like()
             }
             // 踩
             R.id.ivDown.onClick {
@@ -75,31 +74,18 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
         }
     }
 
+    override fun initData() {
+        val models = mutableListOf<Any>()
+        models.add("title") // 标题
+        models.addAll(comments) // 评论列表
+        binding.rv.models = models
+    }
+
     /** 随机打乱排序 */
     private fun sortWorks() {
         binding.rv.models = mutableListOf<Any>().apply {
             add("title")
             addAll(comments.shuffled())
         }
-    }
-
-    /** 点赞 */
-    private fun BindingAdapter.BindingViewHolder.upWorks() {
-        getModel<CommentModel>().apply {
-            // 更新点赞数量
-            if (up) {
-                upCount--
-            } else {
-                upCount++
-            }
-            up = !up
-        }.notifyChange()
-    }
-
-    override fun initData() {
-        val models = mutableListOf<Any>()
-        models.add("title") // 标题
-        models.addAll(comments) // 评论列表
-        binding.rv.models = models
     }
 }

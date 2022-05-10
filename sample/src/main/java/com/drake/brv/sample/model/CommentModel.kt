@@ -57,6 +57,18 @@ data class CommentModel(
         return data
     }
 
+    /** 点赞 */
+    fun like() {
+        // 一般情况下这里应当请求网络, 然后更新点赞数量
+        if (up) {
+            upCount--
+        } else {
+            upCount++
+        }
+        up = !up
+        notifyChange()
+    }
+
     @Serializable
     data class Comment(
         var name: String = "",
