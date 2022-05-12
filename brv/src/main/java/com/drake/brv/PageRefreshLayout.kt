@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnMultiStateListener
 import com.drake.brv.utils.bindingAdapter
+import com.drake.statelayout.StateChangedHandler
 import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateConfig.errorLayout
 import com.drake.statelayout.StateLayout
@@ -455,20 +456,32 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             }
         }
 
+    /** 空页面布局 */
     var emptyLayout = View.NO_ID
         set(value) {
             field = value
             stateLayout?.emptyLayout = value
         }
+
+    /** 错误页面布局 */
     var errorLayout = View.NO_ID
         set(value) {
             field = value
             stateLayout?.errorLayout = value
         }
+
+    /** 加载中页面布局 */
     var loadingLayout = View.NO_ID
         set(value) {
             field = value
             stateLayout?.loadingLayout = value
+        }
+
+    /** 处理缺省页状态变更 */
+    var stateChangedHandler: StateChangedHandler? = null
+        set(value) {
+            field = value
+            stateLayout?.stateChangedHandler = value
         }
 
     /**
@@ -577,7 +590,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         stateLayout = StateLayout(context).let {
             removeView(contentView)
             it.addView(contentView)
-            it.setContentView(contentView!!)
+            it.setContent(contentView!!)
             setRefreshContent(it)
 
             it.emptyLayout = emptyLayout
