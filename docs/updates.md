@@ -1,11 +1,12 @@
 ## 1.3.66
 - 更新StateLayout至1.3.3
+- 有网络情况下`showLoading`才显示LOADING, 不影响`onRefresh`
 
 ## 1.3.64
 - 更新StateLayout至1.3.1
-- 新增StateChangedHandler自定义缺省页切换处理
-- 新增FadeStateChangedHandler渐变透明切换缺省页
-- 新增getBindingOrNull方法
+- 新增`StateChangedHandler`自定义缺省页切换处理
+- 新增`FadeStateChangedHandler`渐变透明切换缺省页
+- 新增`getBindingOrNull`方法
 
 ## 1.3.63
 Fixed [#164](https://github.com/liangjingkanji/BRV/issues/164)
