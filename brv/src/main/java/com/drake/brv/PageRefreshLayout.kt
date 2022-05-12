@@ -522,8 +522,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param tag 传递参数将被[onLoading]接收
      * @param refresh 是否回调[onRefresh]
      */
-    fun showLoading(tag: Any? = null, refresh: Boolean = true) {
-        if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh)
+    fun showLoading(tag: Any? = null, refresh: Boolean = true, requireNetworking: Boolean = true) {
+        if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh, requireNetworking = requireNetworking)
     }
 
     /**

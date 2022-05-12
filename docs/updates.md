@@ -1,3 +1,6 @@
+## 1.3.66
+- 更新StateLayout至1.3.3
+
 ## 1.3.64
 - 更新StateLayout至1.3.1
 - 新增StateChangedHandler自定义缺省页切换处理
