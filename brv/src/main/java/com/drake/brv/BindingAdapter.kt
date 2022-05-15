@@ -38,10 +38,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
-import com.drake.brv.item.ItemBind
-import com.drake.brv.item.ItemExpand
-import com.drake.brv.item.ItemHover
-import com.drake.brv.item.ItemPosition
+import com.drake.brv.item.*
 import com.drake.brv.listener.*
 import com.drake.brv.utils.BRV
 import com.drake.brv.utils.setDifferModels
@@ -213,12 +210,16 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     }
 
     override fun onViewAttachedToWindow(holder: BindingViewHolder) {
-        super.onViewAttachedToWindow(holder)
         val layoutPosition = holder.layoutPosition
         if (animationEnabled && lastPosition < layoutPosition) {
             itemAnimation.onItemEnterAnimation(holder.itemView)
             lastPosition = layoutPosition
         }
+        holder.getModelOrNull<ItemAttached>()?.onViewAttachedToWindow(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: BindingViewHolder) {
+        holder.getModelOrNull<ItemAttached>()?.onViewDetachedFromWindow(holder)
     }
 
     // </editor-fold>
