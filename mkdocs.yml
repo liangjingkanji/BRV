@@ -40,6 +40,7 @@ nav:
   - 更新数据: refresh-data.md
   - 点击事件: click.md
   - 生命周期: lifecycle.md
+  - 滑动卡顿: performance.md
   - 头脚布局: header_footer.md
   - 分组: group.md
   - 悬停: hover.md
