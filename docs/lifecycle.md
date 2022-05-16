@@ -13,8 +13,22 @@
 | onBind | 对应Adapter的`onBindViewHolder`函数回调, 每次显示Item都会触发回调, 用于处理数据绑定 |
 | onBindViewHolders | 一个`onBindViewHolder`监听器的集合, 一般用于其他框架来监听扩展, 使用者一般不需要使用 |
 
-> BindingAdapter是`open class` 可以被继承重写, 任何没有提供的函数回调可以通过继承或者匿名类实现 <br>
-> onBind或onCreate只有最后设置的有效. 存在覆盖关系
+
+BindingAdapter是`open class` 可以被继承重写, 任何没有提供的函数回调可以通过继承或者匿名类实现 <br>
+
+```kotlin
+binding.rv.linear().adapter = object : BindingAdapter() {
+    override fun onViewRecycled(holder: BindingViewHolder) {
+        super.onViewRecycled(holder)
+        // ....
+    }
+}.apply {
+    addType<SimpleModel>(R.layout.item_simple)
+    models = getData()
+}
+```
+
+> onBind或onCreate只有最后设置的有效, 存在覆盖关系
 
 ```kotlin
 rv.linear().setup {
@@ -30,7 +44,8 @@ rv.linear().setup {
 ```
 
 > 在onCreate中获取想要itemViewType, 需要在作用域中使用`it`, 而不是其`itemViewType`字段. <br>
-> 这是因为在onCreateViewHolder期间的ViewHolder的itemViewType实际上是没有值的. 而onCreate就是对应的`onCreateViewHolder`
+
+这是因为在onCreateViewHolder期间的ViewHolder的itemViewType实际上是没有值的. 而onCreate就是对应的`onCreateViewHolder`
 
 
 ## 嵌套RecyclerView
