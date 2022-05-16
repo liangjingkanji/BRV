@@ -74,6 +74,12 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /** onBindViewHolder触发监听器集合 */
     var onBindViewHolders = mutableListOf<OnBindViewHolderListener>()
 
+    /**
+     * 单独配置modelId, 会忽略[BRV.modelId]
+     * @see BRV.modelId
+     */
+    var modelId: Int = BRV.modelId
+
     companion object {
         /**
          * 即item的layout布局中的<variable>标签内定义变量名称
@@ -86,7 +92,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          * 则应在Application中的onCreate函数内设置:
          * `BindingAdapter.modelId = BR.m`
          */
-        @Deprecated("函数优化", ReplaceWith("BRV.modelId", "com.drake.brv.utils.BRV"))
+        @Deprecated("函数优化", ReplaceWith("BRV.modelId", "com.drake.brv.utils.BRV"), DeprecationLevel.ERROR)
         var modelId: Int = BRV.modelId
 
         /** 是否启用DataBinding */
@@ -284,7 +290,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     var clickThrottle: Long = BRV.clickThrottle
 
     /** 防抖动点击事件的间隔时间, 单位毫秒. 本函数已废弃 */
-    @Deprecated("Rename to clickThrottle", ReplaceWith("clickThrottle"))
+    @Deprecated("Rename to clickThrottle", ReplaceWith("clickThrottle"), DeprecationLevel.ERROR)
     var clickPeriod: Long
         get() = clickThrottle
         set(value) {
@@ -299,7 +305,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     @Deprecated(
         "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖",
         ReplaceWith("onClick(*id){  }"),
-        DeprecationLevel.WARNING
+        DeprecationLevel.ERROR
     )
     fun addClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -314,7 +320,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     @Deprecated(
         "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖",
         ReplaceWith("onFastClick(*id){  }"),
-        DeprecationLevel.WARNING
+        DeprecationLevel.ERROR
     )
     fun addFastClickable(@IdRes vararg id: Int) {
         for (i in id) {
@@ -329,7 +335,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     @Deprecated(
         "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖",
         ReplaceWith("onLongClick(*id){  }"),
-        DeprecationLevel.WARNING
+        DeprecationLevel.ERROR
     )
     fun addLongClickable(@IdRes vararg id: Int) {
         for (i in id) {
