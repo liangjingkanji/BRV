@@ -12,3 +12,4 @@
 - [如何循环滑动列表](https://github.com/liangjingkanji/BRV/issues/109)
 - [同时支持列表上下分页预加载](https://github.com/liangjingkanji/BRV/issues/114)
 - [CoordinatorLayout显示缺省页后无法正常滑动](https://github.com/liangjingkanji/BRV/issues/152)
+- [下拉刷新保持选中状态](https://github.com/liangjingkanji/BRV/issues/173)

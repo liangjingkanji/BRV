@@ -1,3 +1,6 @@
+## 1.3.67
+新增ItemAttached
+
 ## 1.3.66
 - 更新StateLayout至1.3.3
 - 有网络情况下`showLoading`才显示LOADING, 不影响`onRefresh`
