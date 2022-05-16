@@ -40,9 +40,7 @@ rv.linear().setup {
     // 任何条目都需要添加类型到BindingAdapter中
     addType<GroupModel>(R.layout.item_group_title)
 
-    addFastClickable(R.id.item) // 展开和折叠点击事件不需要防抖动, 所以使用该函数
-    
-    onClick {
+    R.id.item.onClick {
         expandOrCollapse() // 展开或者折叠
     }
 
