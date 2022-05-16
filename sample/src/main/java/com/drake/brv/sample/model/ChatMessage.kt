@@ -14,11 +14,20 @@ data class ChatMessage(
     val avatar: String = "https://avatars.githubusercontent.com/u/21078112?v=4"
 ) {
 
+    /** 字符串自动替换为图标规则 */
+    private val emojiRules = mapOf(
+        "[星星]" to R.drawable.ic_msg_star,
+    )
+
     /** 渲染过后的消息 */
     fun getRichMessage(): CharSequence {
-        return content.replaceSpan("[星星]") {
-            CenterImageSpan(app, R.drawable.ic_msg_star).setDrawableSize(18.dp)
+        var result: CharSequence = content
+        emojiRules.forEach { rule -> // 应用所有规则
+            result = result.replaceSpan(rule.key) {
+                CenterImageSpan(app, rule.value).setDrawableSize(18.dp)
+            }
         }
+        return result
     }
 
     fun isMine(): Boolean {
