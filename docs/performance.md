@@ -33,7 +33,9 @@ rv.linear().setup {
 }
 ```
 
-被嵌套的rv是无法复用item, 所以建议使用recycledViewPool来复用, 具体请搜索关键词
+由于被嵌套的rv是无法复用item, 所以建议使用recycledViewPool来复用, 具体请搜索关键词
+
+如果被嵌套的列表非常简单其实也无需考虑其复用优化, 甚至你直接使用addView动态添加可能会比嵌套列表更简单
 
 ## 视图添加/删除
 
@@ -42,3 +44,31 @@ rv.linear().setup {
 1. 建议使用visibility控制视图显示或隐藏
 1. 判断数据避免反复addView, 视图已经addView情况下赋值而不是remove
 1. 如果只是添加图标建议使用[Spannable](https://github.com/liangjingkanji/spannable)构建图文混排直接赋值给TextView
+
+## 高速滑动节流
+
+实现原理很像自动搜索节流, 延迟到一定时间后item依然显示在屏幕之上才加载数据, 因为高速滑动列表可能大部分item只会停留在屏幕很短时间并不需要加载数据
+
+```kotlin
+data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
+
+    private var itemVisible: Boolean = false
+
+    override fun onViewAttachedToWindow(holder: BindingAdapter.BindingViewHolder) {
+        itemVisible = true
+    }
+
+    override fun onViewDetachedFromWindow(holder: BindingAdapter.BindingViewHolder) {
+        itemVisible = false
+    }
+
+    override fun onBind(holder: BindingAdapter.BindingViewHolder) {
+        holder.itemView.postDelayed({
+            if (itemVisible) {
+                  // 500ms 以后依然可见才会触发加载
+            }
+        }, 500)
+    }
+
+}
+```
