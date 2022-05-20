@@ -1180,7 +1180,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                 } else {
                     val sublistFlat = flat(ArrayList(itemSublist), true, depth)
 
-                    (this@BindingAdapter.models as MutableList).addAll(position + 1, sublistFlat)
+                    (this@BindingAdapter.models as MutableList).addAll(position + 1 - headerCount, sublistFlat)
                     if (expandAnimationEnabled) {
                         notifyItemChanged(position)
                         notifyItemRangeInserted(position + 1, sublistFlat.size)
@@ -1222,7 +1222,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     0
                 } else {
                     val sublistFlat = flat(ArrayList(itemSublist), false, depth)
-                    (this@BindingAdapter.models as MutableList).subList(position + 1, position + 1 + sublistFlat.size).clear()
+                    (this@BindingAdapter.models as MutableList).subList(position + 1 - headerCount, position + 1 - headerCount + sublistFlat.size).clear()
                     if (expandAnimationEnabled) {
                         notifyItemChanged(position, itemExpand)
                         notifyItemRangeRemoved(position + 1, sublistFlat.size)
