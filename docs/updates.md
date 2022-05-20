@@ -1,3 +1,8 @@
+## 1.3.68
+- Fixed #182
+- 新增单例BindingAdapter.modelId
+- 提升Api废弃等级
+
 ## 1.3.67
 新增ItemAttached
 
