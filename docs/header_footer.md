@@ -21,10 +21,11 @@ binding.rv.bindingAdapter.addHeader(Header(), animation = true)
 binding.rv.bindingAdapter.addFooter(Footer(), animation = true)
 ```
 
-> `PageRefreshLayout`的缺省页功能会导致整个列表可能都会被缺省页遮挡 <br>
-如果你希望头布局不会被数据问题影响, 并且和RV联动划动 <br>
-请使用`CoordinatorLayout`嵌套RV <br>
-而不是`ScrollView/NestedScrollView`嵌套RV或者使用BRV的头布局(Header)
+不使用上面介绍的方法实现联动列表的Header还有以下解决方案
+
+1. 如果你不想缺省页覆盖Header请使用CoordinatorLayout来实现Header效果, 因为`PageRefreshLayout`的缺省页功能会导致整个列表可能都会被缺省页遮挡
+1. 如果只是不想Header或者Footer干扰BRV可以使用[ConcatAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter)实现
+1. 使用`ScrollView/NestedScrollView`嵌套rv也可以实现Header但会导致其失去复用item效果, 列表存在大量数据可能会造成卡顿(如果数据量小可以忽略)
 
 <br>
 
