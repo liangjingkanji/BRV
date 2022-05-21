@@ -932,7 +932,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
         val itemViewType = getItemViewType(position)
 
-        if (checkableItemTypeList != null && checkableItemTypeList!!.contains(itemViewType)) return
+        if (checkableItemTypeList?.contains(itemViewType) == false) return
 
         if (onChecked == null) return
 
