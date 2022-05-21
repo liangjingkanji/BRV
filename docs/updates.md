@@ -1,3 +1,6 @@
+## 1.3.69
+Fixed #184 修复setCheckableType
+
 ## 1.3.68
 - Fixed #182
 - 新增单例BindingAdapter.modelId
