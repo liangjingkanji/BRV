@@ -49,8 +49,9 @@ rv.linear().setup {
 
 ## 分组层级
 
-可以使用`ItemDepth`和`List.refreshItemDepth`辅助计算Item的层级
-其中`ItemDepth.itemDepth`为当前Model层级，层级计数从0依次递增
+分组层级其实数据集合本身就能计算出来
+
+为方便BRV提供`ItemDepth`和`ItemDepth.refreshItemDepth`辅助计算Item的层级, 其中`ItemDepth.itemDepth`为当前Model层级，层级计数从0依次递增
 
 示例代码
 
@@ -58,12 +59,13 @@ rv.linear().setup {
 // Model实现ItemDepth
 class SampleItemDepth(override var itemDepth: Int) : ItemDepth
 
-// 在数据赋值给[BindingAdapter]前，刷新一次item层级即可
+//
 fun getData(): List<ItemDepth> = List(10) { SampleItemDepth(it) }
-RecyclerView(TODO()).linear().setup {
+
+
+rv.linear().setup {
    // ...
-}.models = getData().refreshItemDepth()
-}
+}.models = ItemDepth.refreshItemDepth(getData())
 ```
 
 ## 分组多类型
