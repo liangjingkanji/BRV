@@ -72,3 +72,30 @@ data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
 
 }
 ```
+
+## 固定布局优化
+
+如果列表所有item的宽高不会因为适配器(Adapter)动态改变, 那么可以使用`setHasFixedSize(true)`来减少测绘次数提高性能
+
+
+## 列表唯一标识
+
+通过为item配置唯一ID提高列表使用`notifyDataSetChanged()`时的排序性能
+
+```kotlin
+binding.rv.linear().setup {
+    setHasStableIds(true) // 启用唯一ID
+    addType<UserModel>(R.layout.item_user)
+}.models = getData()
+```
+
+数据模型实现`ItemStableId`
+
+```kotlin
+data class UserModel(var userId: Long) : ItemStableId {
+
+    override fun getItemId(): Long {
+        return userId // 返回列表中唯一ID
+    }
+}
+```
