@@ -19,6 +19,7 @@ package com.drake.brv.utils
 import android.app.Dialog
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.annotation.DrawableRes
+import androidx.annotation.IntRange
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -59,12 +60,17 @@ var RecyclerView.mutable
 //</editor-fold>
 
 /**
- * 添加数据
+ * 添加新的数据
  * @param models 被添加的数据
- * @param animation 添加数据是否显示动画
+ * @param animation 是否使用动画
+ * @param index 插入到[models]指定位置, 如果index超过[models]长度则会添加到最后
  */
-fun RecyclerView.addModels(models: List<Any?>?, animation: Boolean = true) {
-    bindingAdapter.addModels(models, animation)
+fun RecyclerView.addModels(
+    models: List<Any?>?,
+    animation: Boolean = true,
+    @IntRange(from = -1) index: Int = -1
+) {
+    bindingAdapter.addModels(models, animation, index)
 }
 
 /**
@@ -75,7 +81,11 @@ fun RecyclerView.addModels(models: List<Any?>?, animation: Boolean = true) {
  * @param detectMoves 是否对比Item的移动
  * @param commitCallback 因为子线程调用[setDifferModels]刷新列表会不同步(刷新列表需要切换到主线程), 而[commitCallback]保证在刷新列表完成以后调用(运行在主线程)
  */
-fun RecyclerView.setDifferModels(newModels: List<Any?>?, detectMoves: Boolean = true, commitCallback: Runnable? = null) {
+fun RecyclerView.setDifferModels(
+    newModels: List<Any?>?,
+    detectMoves: Boolean = true,
+    commitCallback: Runnable? = null
+) {
     bindingAdapter.setDifferModels(newModels, detectMoves, commitCallback)
 }
 

@@ -747,9 +747,16 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     /**
      * 添加新的数据
+     * @param models 被添加的数据
+     * @param animation 是否使用动画
+     * @param index 插入到[models]指定位置, 如果index超过[models]长度则会添加到最后
      */
     @SuppressLint("NotifyDataSetChanged")
-    fun addModels(models: List<Any?>?, animation: Boolean = true) {
+    fun addModels(
+        models: List<Any?>?,
+        animation: Boolean = true,
+        @IntRange(from = -1) index: Int = -1
+    ) {
         if (models.isNullOrEmpty()) return
         val data: MutableList<Any?> = when (models) {
             is ArrayList -> models
@@ -768,7 +775,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             }
             else -> {
                 val realModels = this.models as MutableList
-                realModels.addAll(flat(data))
+                if (index == -1 || realModels.size < index) {
+                    realModels.addAll(flat(data))
+                } else {
+                    realModels.addAll(index, flat(data))
+                }
                 if (animation) {
                     notifyItemRangeInserted(headerCount + modelCount - data.size, data.size)
                     rv?.post {
