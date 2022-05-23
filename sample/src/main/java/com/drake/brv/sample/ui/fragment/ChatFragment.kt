@@ -23,7 +23,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
         binding.m = model
 
         // 键盘弹出平滑动画
-        setWindowSoftInput(float = binding.llInput)
+        setWindowSoftInput(float = binding.llInput, setPadding = true)
 
         binding.rv.setup {
             addType<ChatMessage> {
@@ -49,7 +49,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
         when (v) {
             binding.btnSend -> {
                 binding.rv.addModels(model.getMessages()) // 添加一条消息
-                binding.rv.smoothScrollToPosition(binding.rv.adapter!!.itemCount - 1) // 保证最新一条消息显示
+                binding.rv.scrollToPosition(binding.rv.adapter!!.itemCount - 1) // 保证最新一条消息显示
             }
             binding.rv -> {
                 hideSoftInput() // 隐藏键盘
