@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_ID
 import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.item.*
@@ -118,17 +119,17 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
 
     /**
-     * [onBindViewHolder]执行时回调
-     */
-    fun onBind(block: BindingViewHolder.() -> Unit) {
-        onBind = block
-    }
-
-    /**
      * [onCreateViewHolder]执行时回调
      */
     fun onCreate(block: BindingViewHolder.(viewType: Int) -> Unit) {
         onCreate = block
+    }
+
+    /**
+     * [onBindViewHolder]执行时回调
+     */
+    fun onBind(block: BindingViewHolder.() -> Unit) {
+        onBind = block
     }
 
     /**
@@ -139,6 +140,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      */
     fun onPayload(block: BindingViewHolder.(model: Any) -> Unit) {
         onPayload = block
+    }
+
+    override fun getItemId(position: Int): Long {
+        return getModelOrNull<ItemStableId>(position)?.getItemId() ?: NO_ID
     }
 
     // </editor-fold>
