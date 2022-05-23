@@ -6,7 +6,7 @@
     <br>
     <a href="http://liangjingkanji.github.io/BRV/">使用文档</a>
     | <a href="https://coding-pages-bucket-3558162-8706000-16641-587681-1252757332.cos-website.ap-shanghai.myqcloud.com/">备用访问</a>
-    | <a href="https://github.com/liangjingkanji/BRV/releases/download/1.3.69/brv-sample.apk">下载体验</a>
+    | <a href="https://github.com/liangjingkanji/BRV/releases/download/1.3.70/brv-sample.apk">下载体验</a>
     <br>
     <img src="https://i.imgur.com/G7WYYXb.jpg" width="350"/>
 </p>
@@ -46,23 +46,23 @@ Welcome to international translation of this project's documents/notes, thank yo
 
 ## 功能
 
-- 快速创建多类型列表
-- 一对多/多对多创建多类型布局
-- 添加头布局和脚布局
-- 点击(防抖动)/长按事件
-- 分组(展开折叠/递归层次/展开置顶/拖拽/侧滑/多类型/单一展开模式)
-- 悬停
-- 快速创建分割线/间隔(支持官方全部的`LayoutManager`)
-- 切换模式(例如切换编辑模式)
-- 选择模式(多选/单选/全选/取消全选/反选)
-- 拖拽位置
-- 侧滑删除
-- 下拉刷新(Refresh) | 上拉加载(LoadMore) | 下拉加载(UpFetch), 由[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)实现
-- 预加载(Preload)
-- 列表缺省页, 由[StateLayout](https://github.com/liangjingkanji/StateLayout)实现
-- 自动分页加载列表数据
-- 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现Flexbox伸缩布局
-- 可添加[Net](https://github.com/liangjingkanji/Net)(基于协程实现自动化的并发网络请求)实现自动化网络请求
+- [x] 快速创建多类型列表
+- [x] 一对多/多对多创建多类型布局
+- [x] 添加头布局和脚布局
+- [x] 点击(防抖动)/长按事件
+- [x] 分组(展开折叠/递归层次/展开置顶/拖拽/侧滑/多类型/单一展开模式)
+- [x] 悬停
+- [x] 快速创建分割线/间隔(支持官方全部的`LayoutManager`)
+- [x] 切换模式(例如切换编辑模式)
+- [x] 选择模式(多选/单选/全选/取消全选/反选)
+- [x] 拖拽位置
+- [x] 侧滑删除
+- [x] 下拉刷新(Refresh) | 上拉加载(LoadMore) | 下拉加载(UpFetch), 由[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)实现
+- [x] 预加载(Preload)
+- [x] 列表缺省页, 由[StateLayout](https://github.com/liangjingkanji/StateLayout)实现
+- [x] 自动分页加载列表数据
+- [x] 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现Flexbox伸缩布局
+- [x] 可添加[Net](https://github.com/liangjingkanji/Net)(基于协程实现自动化的并发网络请求)实现自动化网络请求
 
 
 ## 安装
@@ -96,7 +96,7 @@ dependencyResolutionManagement {
 ```groovy
 dependencies {
     //...
-    implementation 'com.github.liangjingkanji:BRV:1.3.69'
+    implementation 'com.github.liangjingkanji:BRV:1.3.70'
 }
 ```
 

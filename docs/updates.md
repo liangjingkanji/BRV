@@ -1,3 +1,8 @@
+## 1.3.70
+- 新增`ItemStableId`来固定列表ID
+- feature #186 addModels索引插入
+- 修改ItemDepth位置
+
 ## 1.3.69
 Fixed #184 修复setCheckableType
 
