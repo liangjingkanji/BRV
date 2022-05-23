@@ -684,20 +684,23 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
 
     /**
-     * 扁平化数据. 将折叠分组铺平展开创建列表
+     * 扁平化数据, 将折叠分组铺平展开创建列表
+     * @param models 数据集合
+     * @param expand 是否展开或折叠其子分组, null则什么都不做
+     * @param depth 扁平化深度层级 -1 表示全部
      */
     private fun flat(
-        list: MutableList<Any?>,
+        models: MutableList<Any?>,
         expand: Boolean? = null,
         @IntRange(from = -1) depth: Int = 0,
     ): MutableList<Any?> {
 
-        if (list.isEmpty()) return list
-        val arrayList = ArrayList(list)
-        list.clear()
+        if (models.isEmpty()) return models
+        val arrayList = ArrayList(models)
+        models.clear()
 
         arrayList.forEachIndexed { index, item ->
-            list.add(item)
+            models.add(item)
             if (item is ItemExpand) {
                 item.itemGroupPosition = index
                 var nextDepth = depth
@@ -709,11 +712,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                 val itemSublist = item.itemSublist
                 if (!itemSublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
                     val nestedList = flat(ArrayList(itemSublist), expand, nextDepth)
-                    list.addAll(nestedList)
+                    models.addAll(nestedList)
                 }
             }
         }
-        return list
+        return models
     }
 
     /**
