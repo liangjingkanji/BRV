@@ -778,13 +778,16 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             }
             else -> {
                 val realModels = this.models as MutableList
+                var insertIndex: Int = headerCount
                 if (index == -1 || realModels.size < index) {
+                    insertIndex += realModels.size
                     realModels.addAll(flat(data))
                 } else {
+                    insertIndex += index
                     realModels.addAll(index, flat(data))
                 }
                 if (animation) {
-                    notifyItemRangeInserted(headerCount + modelCount - data.size, data.size)
+                    notifyItemRangeInserted(insertIndex, data.size)
                     rv?.post {
                         rv?.invalidateItemDecorations()
                     }
