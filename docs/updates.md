@@ -1,3 +1,6 @@
+## 1.3.71
+修复addModels使用index局部更新错误
+
 ## 1.3.70
 - 新增`ItemStableId`来固定列表ID
 - feature #186 addModels索引插入
