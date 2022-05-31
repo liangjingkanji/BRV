@@ -79,7 +79,7 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
     ```
 
 === "代码包裹"
-
+    只推荐使用布局创建, 可保持项目代码可读性并且避免不必要的问题发生
     ```xml
     val page = rv.page()
     ```

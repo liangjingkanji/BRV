@@ -23,8 +23,8 @@ import com.drake.brv.PageRefreshLayout
 
 /**
  * PageRefreshLayout 包裹当前 view
+ * 但是更建议在XML布局中创建, 可保持代码可读性且避免不必要的问题发生, 性能也更优
  *
- * @receiver View
  * @param loadMoreEnabled Boolean 启用上拉加载
  * @param stateEnabled Boolean 启用缺省页
  */
