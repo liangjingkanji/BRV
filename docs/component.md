@@ -16,3 +16,4 @@ BRV框架并不影响原有rv功能和组件使用. 这里列举一些常用或�
 | [Linkage-RecyclerView](https://github.com/KunMinX/Linkage-RecyclerView) | 二级联动列表 |
 | [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout) | 列表侧滑按钮 |
 | [flexbox-layout](https://github.com/google/flexbox-layout) | 谷歌出品的FlexBox流式布局(伸缩布局) |
+| [SpannedGridLayoutManager](https://github.com/jmartinesp/SpannedGridLayoutManager) | 根据SpanSize重新排列列表来填满 |
