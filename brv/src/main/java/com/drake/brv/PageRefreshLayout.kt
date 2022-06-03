@@ -214,11 +214,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     /** 初次调用等效于[showLoading]. 当加载完毕以后, 再次调用等效[refresh] */
-    fun refreshing(tag: Any? = null) {
+    fun refreshing(tag: Any? = null, requireNetworking: Boolean = true) {
         if (loaded) {
             refresh()
         } else {
-            showLoading(tag)
+            showLoading(tag, requireNetworking = requireNetworking)
         }
     }
 
