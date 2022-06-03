@@ -1,3 +1,6 @@
+## 1.3.73
+- fix: StateLayout 1.3.5
+
 ## 1.3.72
 - refactor: StateLayout 1.3.4
 - feat: refreshing新增requireNetworking参数
