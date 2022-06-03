@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/refreshFragment"
         android:name="com.drake.brv.sample.ui.fragment.RefreshFragment"
-        android:label="刷新列表"
+        android:label="下拉/上拉加载"
         tools:layout="@layout/fragment_refresh" />
     <fragment
         android:id="@+id/preloadFragment"

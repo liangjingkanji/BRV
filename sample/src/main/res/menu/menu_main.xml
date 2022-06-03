@@ -42,7 +42,7 @@
     <item
         android:id="@+id/refreshFragment"
         android:icon="@drawable/ic_refresh"
-        android:title="刷新列表" />
+        android:title="下拉/上拉加载" />
     <item
         android:id="@+id/differDataChangeFragment"
         android:icon="@drawable/ic_differ_data_change"
