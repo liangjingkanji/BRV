@@ -87,12 +87,13 @@ dependencies {
     implementation "com.github.liangjingkanji:StatusBar:2.0.2" // 透明状态栏
     implementation "com.github.liangjingkanji:debugkit:1.2.11" // 调试窗口
     implementation 'com.github.liangjingkanji:Tooltip:1.2.1' // 吐司
-    implementation 'com.github.liangjingkanji:Engine:0.0.62' // 快速开发基础库
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2" // 序列化Json
+    implementation 'com.github.liangjingkanji:Engine:0.0.63' // 快速开发基础库
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3" // 序列化Json
     implementation "com.github.bumptech.glide:glide:4.11.0" // 图片加载
     kapt "com.github.bumptech.glide:compiler:4.11.0"
-    implementation 'com.github.liangjingkanji:spannable:1.1.2' // 富文本
+    implementation 'com.github.liangjingkanji:spannable:1.1.4' // 富文本
     implementation 'com.github.liangjingkanji:soft-input-event:1.0.6' // 软键盘事件监听/平滑键盘弹出动画
+    implementation 'com.airbnb.android:lottie:5.1.1'
 
     implementation project(":brv")
 }

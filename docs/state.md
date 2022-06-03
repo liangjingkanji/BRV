@@ -88,3 +88,11 @@ StateLayout缺省页库非常推荐使用, BRV内部集成实现列表缺省页�
 
 - [GitHub](https://github.com/liangjingkanji/StateLayout/)
 - [使用文档](https://liangjingkanji.github.io/StateLayout)
+
+## 骨骼动画
+
+骨骼动画实际上就是对应布局的动画或者图片
+
+brv的骨骼动画同样由StateLayout实现: [骨骼动画](https://liangjingkanji.github.io/StateLayout/skeleton/)
+
+具体实现代码示例可以阅读[sample](https://github.com/liangjingkanji/BRV/blob/857e33e2bbc80bbdb9b5dec364012ff353b74d5a/sample/src/main/java/com/drake/brv/sample/ui/fragment/SkeletonFragment.kt)

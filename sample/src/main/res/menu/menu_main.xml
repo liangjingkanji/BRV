@@ -80,6 +80,10 @@
         android:icon="@drawable/ic_state"
         android:title="缺省状态" />
     <item
+        android:id="@+id/skeletonFragment"
+        android:icon="@drawable/ic_state"
+        android:title="骨骼动画" />
+    <item
         android:id="@+id/preloadFragment"
         android:icon="@drawable/ic_preload"
         android:title="预加载" />
