@@ -1,3 +1,7 @@
+## 1.3.72
+- refactor: StateLayout 1.3.4
+- feat: refreshing新增requireNetworking参数
+
 ## 1.3.71
 修复addModels使用index局部更新错误
 
