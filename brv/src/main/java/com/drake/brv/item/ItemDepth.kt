@@ -40,7 +40,7 @@ interface ItemDepth {
             }
             if (item is ItemExpand) {
                 item.itemSublist?.run {
-                    refreshItemDepth(models, initDepth + 1)
+                    refreshItemDepth(this, initDepth + 1)
                 }
             }
         }
