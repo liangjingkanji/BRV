@@ -6,7 +6,7 @@
     <br>
     <a href="http://liangjingkanji.github.io/BRV/">使用文档</a>
     | <a href="https://coding-pages-bucket-3558162-8706000-16641-587681-1252757332.cos-website.ap-shanghai.myqcloud.com/">备用访问</a>
-    | <a href="https://github.com/liangjingkanji/BRV/releases/download/1.3.73/brv-sample.apk">下载体验</a>
+    | <a href="https://github.com/liangjingkanji/BRV/releases/download/1.3.74/brv-sample.apk">下载体验</a>
     <br>
     <img src="https://i.imgur.com/G7WYYXb.jpg" width="350"/>
 </p>
@@ -96,7 +96,7 @@ dependencyResolutionManagement {
 ```groovy
 dependencies {
     //...
-    implementation 'com.github.liangjingkanji:BRV:1.3.73'
+    implementation 'com.github.liangjingkanji:BRV:1.3.74'
 }
 ```
 
