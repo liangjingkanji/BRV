@@ -504,7 +504,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun showEmpty(tag: Any? = null) {
         if (stateEnabled) stateLayout?.showEmpty(tag)
-        finish()
+        finish(hasMore = false)
     }
 
 
