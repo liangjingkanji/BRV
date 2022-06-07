@@ -1,3 +1,7 @@
+## 1.3.75
+- fix: showEmpty改为没有更多加载
+- fix: PageRefreshLayout使用addData新增索引判断, 避免状态判断无效
+
 ## 1.3.74
 - fix: 修复分组深度计算错误
 
