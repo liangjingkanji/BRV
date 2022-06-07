@@ -225,10 +225,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     /**
      * 自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
-     * 请勿每次给[data]赋值同一个集合对象, 因为为了保证rv持有数据集合为一个对象, 覆盖数据会先[clear]再[addAll]新的数据集合
-     * 本方法只是简化分页列表数据赋值, 如果出现任何问题请尝试自己更新rv数据集合, 比如使用[BindingAdapter.models]
+     * ## 实现
+     * 当[getState]等于[RefreshState.Refreshing]或者[index]等于[startIndex]会判断为下拉沙墟
+     * [index]初始值为[startIndex], 每次调用本方法会将[index]递增, 下拉刷新会将[index]重置为[startIndex]
      *
-     * 此函数每次调用会导致[index]递增或者下拉刷新会导致[index]等于[startIndex]
+     * ## 注意事项
+     * 请勿每次给[data]赋值同一个集合对象, 因为为了保证rv持有数据集合为一个对象, 覆盖数据会先[clear]再[addAll]新的数据集合
+     *
+     * 本方法只是简化分页列表数据赋值, 如果出现特别的需求请尝试自己更新rv数据集(即不使用本方法), 比如使用[BindingAdapter.models]
+     *
      * @param data 数据集
      * @param adapter 假设PageRefreshLayout不能直接包裹RecyclerView, 然后也想使用自动分页, 请指定此参数, 因为自动分页需要[BindingAdapter]实例
      * @param hasMore 在函数参数中返回布尔类型来判断是否还存在下一页数据, 默认值true表示始终存在
@@ -248,7 +253,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             )
         }
 
-        val isRefreshState = state == RefreshState.Refreshing
+        val isRefreshState = state == RefreshState.Refreshing || index == startIndex
 
         if (isRefreshState) {
             val models = adapterAdjust.models
