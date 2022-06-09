@@ -1,3 +1,6 @@
+## 1.3.76
+- fix: 网格和间距方向一致情况下导致item(铺满)大小不一致
+
 ## 1.3.75
 - fix: showEmpty改为没有更多加载
 - fix: PageRefreshLayout使用addData新增索引判断, 避免状态判断无效
