@@ -24,6 +24,10 @@
         android:icon="@drawable/ic_comment"
         android:title="评论列表" />
     <item
+        android:id="@+id/douyinCommentFragment"
+        android:icon="@drawable/ic_comment"
+        android:title="抖音评论列表" />
+    <item
         android:id="@+id/chatFragment"
         android:icon="@drawable/ic_chat"
         android:title="聊天列表" />

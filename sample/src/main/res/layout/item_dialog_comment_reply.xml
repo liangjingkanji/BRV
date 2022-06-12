@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2018 Drake, https://github.com/liangjingkanji
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.CommentReplyModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="4dp"
+        android:paddingLeft="72dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            holder="@{@drawable/ic_default_avatar}"
+            imgCircle="@{m.avatar}"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_default_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@{m.nickname}"
+            android:textColor="#727579"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar"
+            tools:text="刘建龙" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="16dp"
+            android:maxLines="3"
+            android:text="@{m.content}"
+            app:layout_constraintLeft_toLeftOf="@id/tvNickname"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNickname"
+            tools:text="这样的我关注了一万个了" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{m.lastTime}"
+            android:textColor="#727579"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvContent"
+            app:layout_constraintTop_toBottomOf="@id/tvContent"
+            tools:text="1小时前" />
+
+        <TextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:text="回复"
+            android:textColor="#727579"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvDate"
+            app:layout_constraintLeft_toRightOf="@id/tvDate" />
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/selector_comment_favorite"
+            app:layout_constraintBottom_toBottomOf="@id/tvDate"
+            app:layout_constraintRight_toLeftOf="@id/tvFavoriteCount"
+            app:layout_constraintTop_toTopOf="@id/tvDate"
+            app:layout_goneMarginRight="20dp" />
+
+        <TextView
+            android:id="@+id/tvFavoriteCount"
+            gone="@{m.favoriteCount != 0}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@{m.favoriteCount}"
+            android:textColor="@color/selector_comment_favorite"
+            android:textSize="12dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvDate"
+            app:layout_constraintRight_toLeftOf="@id/ivAnnoying"
+            tools:text="0"
+            tools:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivAnnoying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/selector_comment_annoying"
+            app:layout_constraintBottom_toBottomOf="@id/tvDate"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvDate" />
+
+        <LinearLayout
+            android:id="@+id/llExpandComment"
+            gone="@{m.showExpand()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="@id/ivAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            tools:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more_replay_line" />
+
+            <TextView
+                gone="@{!m.loading}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@{m.expandDesc}"
+                android:textColor="#727579"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                tools:text="展开3条回复" />
+
+            <ImageView
+                activated="@{m.hasMore}"
+                gone="@{!m.loading}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_comment_expand" />
+
+            <ProgressBar
+                gone="@{m.loading}"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

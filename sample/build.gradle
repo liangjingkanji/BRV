@@ -95,5 +95,11 @@ dependencies {
     implementation 'com.github.liangjingkanji:soft-input-event:1.0.6' // 软键盘事件监听/平滑键盘弹出动画
     implementation 'com.airbnb.android:lottie:5.1.1'
 
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    implementation "com.squareup.okhttp3:okhttp:4.9.3"
+    implementation 'com.github.liangjingkanji:Net:3.4.10'
+
     implementation project(":brv")
 }

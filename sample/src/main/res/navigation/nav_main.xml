@@ -125,5 +125,9 @@
         android:id="@+id/skeletonFragment"
         android:name="com.drake.brv.sample.ui.fragment.SkeletonFragment"
         android:label="SkeletonFragment" />
+    <fragment
+        android:id="@+id/douyinCommentFragment"
+        android:name="com.drake.brv.sample.ui.fragment.DouyinCommentFragment"
+        android:label="抖音评论列表" />
 
 </navigation>
