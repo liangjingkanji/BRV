@@ -47,7 +47,7 @@ Welcome to international translation of this project's documents/notes, thank yo
 ## 功能
 
 - [x] 快速创建多类型列表
-- [x] 一对多/多对多创建多类型布局
+- [x] 一对一/一对多创建多类型
 - [x] 添加头布局和脚布局
 - [x] 点击(防抖动)/长按事件
 - [x] 分组(展开折叠/递归层次/展开置顶/拖拽/侧滑/多类型/单一展开模式)
@@ -59,8 +59,11 @@ Welcome to international translation of this project's documents/notes, thank yo
 - [x] 侧滑删除
 - [x] 下拉刷新(Refresh) | 上拉加载(LoadMore) | 下拉加载(UpFetch), 由[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)实现
 - [x] 预加载(Preload)
+- [x] 对比数据更新(Diffs)
+- [x] 自动分页加载数据
+- [x] 列表动画/骨骼图动画
 - [x] 列表缺省页, 由[StateLayout](https://github.com/liangjingkanji/StateLayout)实现
-- [x] 自动分页加载列表数据
+- [x] 支持DataBinding/ViewBinding
 - [x] 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现Flexbox伸缩布局
 - [x] 可添加[Net](https://github.com/liangjingkanji/Net)(基于协程实现自动化的并发网络请求)实现自动化网络请求
 
