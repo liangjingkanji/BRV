@@ -14,31 +14,31 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CommentModel(
-    var name: String = "", // 发布者名称
+    var nickname: String = "", // 发布者名称
     var avatar: String = "", // 发布者头像
     var content: String = "", // 评论内容
-    var date: String = "", // 评论时间
-    var vip: Int = 0, // 会员等级
-    var upCount: Int = 0, // 点赞数量
-    var up: Boolean = false, // 点赞
-    var down: Boolean = false, // 踩
+    var createDate: Long = 0L, // 评论时间
+    var vipLevel: Int = 0, // 会员等级
+    var favoriteCount: Int = 0, // 点赞数量
+    var favorite: Boolean = false, // 点赞
+    var annoying: Boolean = false, // 踩
     var sb: Boolean = false, // UP觉得很傻逼
-    var commentUp: Boolean = false, // UP评论
+    var isAuthor: Boolean = false, // UP评论
     var commentCount: Long = 0, // 子评论数量
-    var comment: List<Comment> = listOf() // 子评论
+    var comments: List<Comment> = listOf() // 子评论
 ) : BaseObservable() {
 
     /**
      * 当Vip达到6级需要显示红色用户名
      */
     fun getNameColor(): Int {
-        return if (vip == 6) Color.parseColor("#ed6f98") else Color.parseColor("#62666d")
+        return if (vipLevel == 6) Color.parseColor("#ed6f98") else Color.parseColor("#62666d")
     }
 
     /** 显示更多子评论 */
-    fun comment(): List<CharSequence> {
+    fun comments(): List<CharSequence> {
         val data = mutableListOf<CharSequence>()
-        data.addAll(comment.map { it.getSpannable() })
+        data.addAll(comments.map { it.getSpannable() })
 
         // 如果小于等于三条评论
         if (commentCount <= 3) return data
@@ -46,7 +46,7 @@ data class CommentModel(
         val span = SpannableStringBuilder()
 
         // 如果UP参与评论
-        if (commentUp) {
+        if (isAuthor) {
             span.addSpan("UP主等人 ", ForegroundColorSpan(Color.parseColor("#979ba1")))
         }
 
@@ -58,14 +58,14 @@ data class CommentModel(
     }
 
     /** 点赞 */
-    fun like() {
+    fun favoriteAction() {
         // 一般情况下这里应当请求网络, 然后更新点赞数量
-        if (up) {
-            upCount--
+        if (favorite) {
+            favoriteCount--
         } else {
-            upCount++
+            favoriteCount++
         }
-        up = !up
+        favorite = !favorite
         notifyChange()
     }
 

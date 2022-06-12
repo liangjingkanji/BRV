@@ -20,7 +20,7 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
 
     /** 模拟加载网络数据 */
     private val comments by lazy {
-        json.decodeFromStream<List<CommentModel>>(resources.openRawResource(R.raw.compose))
+        json.decodeFromStream<List<CommentModel>>(resources.openRawResource(R.raw.comment))
     }
 
     override fun initView() {
@@ -37,13 +37,13 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
                         R.id.item.onClick {
                             toast("查看子评论")
                         }
-                    }.models = model.comment()
+                    }.models = model.comments()
                 }
             }
 
             // 按热度
             R.id.tvFilter.onClick {
-                sortWorks()
+                randomSortComments()
             }
             // 点击头像
             R.id.ivAvatar.onClick {
@@ -51,12 +51,12 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
             }
             // 点赞
             R.id.tvUp.onClick {
-                getModel<CommentModel>().like()
+                getModel<CommentModel>().favoriteAction()
             }
             // 踩
             R.id.ivDown.onClick {
                 getModel<CommentModel>().apply {
-                    down = !down
+                    annoying = !annoying
                 }.notifyChange()
             }
             // 分享
@@ -82,7 +82,7 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
     }
 
     /** 随机打乱排序 */
-    private fun sortWorks() {
+    private fun randomSortComments() {
         binding.rv.models = mutableListOf<Any>().apply {
             add("title")
             addAll(comments.shuffled())

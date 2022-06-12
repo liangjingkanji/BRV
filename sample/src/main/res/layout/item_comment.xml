@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@{m.name}"
+            android:text="@{m.nickname}"
             android:textColor="@{m.nameColor}"
             app:layout_constrainedWidth="true"
             app:layout_constraintHorizontal_bias="0"
@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/tvDate"
             dateFormat="@{`MM-dd`}"
-            dateMilli="@{m.date}"
+            dateMilli="@{m.createDate}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11小时前"
@@ -81,25 +81,25 @@
 
             <TextView
                 android:id="@+id/tvUp"
-                activated="@{m.up}"
+                activated="@{m.favorite}"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:drawablePadding="2dp"
                 android:gravity="center"
-                android:text="@{m.upCount}"
-                android:textColor="@drawable/selector_comment_up_text"
+                android:text="@{m.favoriteCount}"
+                android:textColor="@color/selector_comment_favorite"
                 android:textSize="12dp"
-                app:drawableLeftCompat="@drawable/selector_comment_up"
+                app:drawableLeftCompat="@drawable/selector_comment_favorite"
                 tools:text="14"
                 tools:textColor="#979ba1" />
 
             <ImageView
                 android:id="@+id/ivDown"
-                activated="@{m.down}"
+                activated="@{m.annoying}"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/selector_comment_down"
+                android:src="@drawable/selector_comment_annoying"
                 android:textColor="#979ba1" />
 
             <ImageView
@@ -153,7 +153,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNested"
-            gone="@{!m.comment.empty}"
+            gone="@{!m.comments.empty}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
