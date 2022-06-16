@@ -66,6 +66,11 @@
         android:label="下拉/上拉加载"
         tools:layout="@layout/fragment_refresh" />
     <fragment
+        android:id="@+id/pagePartStateFragment"
+        android:name="com.drake.brv.sample.ui.fragment.PagePartStateFragment"
+        android:label="列表局部缺省页"
+        tools:layout="@layout/fragment_refresh" />
+    <fragment
         android:id="@+id/preloadFragment"
         android:name="com.drake.brv.sample.ui.fragment.PreloadFragment"
         android:label="预加载"

@@ -29,6 +29,25 @@ binding.rv.bindingAdapter.addFooter(Footer(), animation = true)
 
 <br>
 
+
+## 列表局部缺省页
+
+如果你使用`CoordinatorLayout`方案来解决缺省页覆盖头部问题, 但是希望页面顶部开始下拉刷新
+
+请参考demo中的`PageNestedHeaderFragment`实现代码. 手动指定缺省页避免覆盖头部
+
+```kotlin
+<com.drake.brv.PageRefreshLayout
+    android:id="@+id/page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:page_rv="@id/rv"
+    app:page_state="@id/state">
+```
+
+1. `app:page_rv` 指定嵌套的rv
+1. `app:page_state` 指定嵌套的缺省页
+
 ## 函数
 
 | 函数 | 描述 |

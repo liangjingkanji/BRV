@@ -80,6 +80,10 @@
         android:icon="@drawable/ic_state"
         android:title="缺省状态" />
     <item
+        android:id="@+id/pagePartStateFragment"
+        android:icon="@drawable/ic_refresh"
+        android:title="列表局部缺省页" />
+    <item
         android:id="@+id/skeletonFragment"
         android:icon="@drawable/ic_state"
         android:title="骨骼动画" />
