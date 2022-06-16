@@ -623,9 +623,13 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             return if (models == null) 0 else models!!.size
         }
 
+    /** 原始的数据集合对象, 不会经过任何处理 */
     var _data: List<Any?>? = null
 
-    /** 数据模型集合 */
+    /**
+     * 数据模型集合
+     * 如果赋值的是[List]不可变集合将会自动被替换成[MutableList], 将无法保持为同一个集合对象引用
+     */
     var models: List<Any?>?
         get() = _data
         @SuppressLint("NotifyDataSetChanged")

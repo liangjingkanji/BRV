@@ -41,6 +41,7 @@ val RecyclerView.bindingAdapter
 
 /**
  * 数据模型集合
+ * 如果赋值的是[List]不可变集合将会自动被替换成[MutableList], 将无法保持为同一个集合对象引用
  */
 var RecyclerView.models
     get() = bindingAdapter.models
