@@ -71,6 +71,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     /** 缺省页视图 */
     var stateLayout: StateLayout? = null
 
+    /**
+     * 缺省页ID, 默认不配置会自动创建StateLayout并且包裹PageRefreshLayout的RefreshContent
+     */
+    var stateLayoutId: Int = View.NO_ID
+
     /** 变更为 下拉加载更多, 上拉刷新 */
     var upFetchEnabled = false
         set(value) {
@@ -131,6 +136,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         try {
             stateEnabled =
                 attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
+            stateLayoutId =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_page_state, stateLayoutId)
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
@@ -592,20 +599,26 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             return
         }
 
-        stateLayout = StateLayout(context).let {
-            removeView(contentView)
-            it.addView(contentView)
-            it.setContent(contentView!!)
-            setRefreshContent(it)
+        if (stateLayout == null) {
+            stateLayout = if (stateLayoutId == View.NO_ID) {
+                StateLayout(context).let {
+                    removeView(contentView)
+                    it.addView(contentView)
+                    it.setContent(contentView!!)
+                    setRefreshContent(it)
 
-            it.emptyLayout = emptyLayout
-            it.errorLayout = errorLayout
-            it.loadingLayout = loadingLayout
+                    it.emptyLayout = emptyLayout
+                    it.errorLayout = errorLayout
+                    it.loadingLayout = loadingLayout
 
-            it.onRefresh {
-                if (realEnableRefresh) super.setEnableRefresh(false)
-                notifyStateChanged(RefreshState.Refreshing)
-                onRefresh(this@PageRefreshLayout)
+                    it.onRefresh {
+                        if (realEnableRefresh) super.setEnableRefresh(false)
+                        notifyStateChanged(RefreshState.Refreshing)
+                        onRefresh(this@PageRefreshLayout)
+                    }
+                }
+            } else {
+                findViewById(stateLayoutId)
             }
         }
     }

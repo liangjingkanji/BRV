@@ -23,6 +23,7 @@
         <attr name="loading_layout" format="reference" />
         <!--        启用缺省页-->
         <attr name="stateEnabled" format="boolean" />
+        <attr name="page_state" format="reference" />
     </declare-styleable>
 
 </resources>
