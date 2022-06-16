@@ -23,7 +23,10 @@
         <attr name="loading_layout" format="reference" />
         <!--        启用缺省页-->
         <attr name="stateEnabled" format="boolean" />
+        <!--指定嵌套布局中的缺省页-->
         <attr name="page_state" format="reference" />
+        <!--指定嵌套布局中的RecyclerView-->
+        <attr name="page_rv" format="reference" />
     </declare-styleable>
 
 </resources>

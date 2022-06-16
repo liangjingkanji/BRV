@@ -65,9 +65,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     /** 分页索引 */
     var index = startIndex
 
-    /** 内容视图 */
-    var contentView: View? = null
-
     /** 缺省页视图 */
     var stateLayout: StateLayout? = null
 
@@ -75,6 +72,14 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 缺省页ID, 默认不配置会自动创建StateLayout并且包裹PageRefreshLayout的RefreshContent
      */
     var stateLayoutId: Int = View.NO_ID
+
+    /** 手动指定列表, 用于获取[BindingAdapter]来让[addData]方法处理自动分页, 如果[PageRefreshLayout]直接嵌套[RecyclerView]本方法没必要调用 */
+    var rv: RecyclerView? = null
+
+    /**
+     * 列表ID, 会根据ID自动赋值[rv]
+     */
+    var recyclerViewId: Int = View.NO_ID
 
     /** 变更为 下拉加载更多, 上拉刷新 */
     var upFetchEnabled = false
@@ -117,6 +122,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         }
     }
 
+    /** 内容视图 */
+    private var refreshContent: View? = null
     private var stateChanged = false
     private var finishInflate = false
     private var trigger = false
@@ -138,6 +145,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
             stateLayoutId =
                 attributes.getResourceId(R.styleable.PageRefreshLayout_page_state, stateLayoutId)
+            recyclerViewId =
+                attributes.getResourceId(R.styleable.PageRefreshLayout_page_rv, recyclerViewId)
+
 
             mEnableLoadMoreWhenContentNotFull = false
             mEnableLoadMoreWhenContentNotFull = attributes.getBoolean(
@@ -146,11 +156,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             )
 
             emptyLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_empty_layout, emptyLayout)
             errorLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_error_layout, errorLayout)
             loadingLayout =
-                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, View.NO_ID)
+                attributes.getResourceId(R.styleable.PageRefreshLayout_loading_layout, loadingLayout)
         } finally {
             attributes.recycle()
         }
@@ -171,14 +181,15 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     internal fun initialize() {
+        rv = findViewById(recyclerViewId)
         setOnRefreshLoadMoreListener(this)
         realEnableLoadMore = mEnableLoadMore
         realEnableRefresh = mEnableRefresh
-        if (contentView == null) {
+        if (refreshContent == null) {
             for (i in 0 until childCount) {
                 val view = getChildAt(i)
                 if (view !is RefreshComponent) {
-                    contentView = view
+                    refreshContent = view
                     break
                 }
             }
@@ -188,7 +199,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             initializeState()
         }
 
-        val rv = contentView
+        val rv = if (this.rv == null) refreshContent else this.rv
         if (rv is RecyclerView) {
             rv.addOnLayoutChangeListener(
                 OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
@@ -242,7 +253,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 本方法只是简化分页列表数据赋值, 如果出现特别的需求请尝试自己更新rv数据集(即不使用本方法), 比如使用[BindingAdapter.models]
      *
      * @param data 数据集
-     * @param adapter 假设PageRefreshLayout不能直接包裹RecyclerView, 然后也想使用自动分页, 请指定此参数, 因为自动分页需要[BindingAdapter]实例
+     * @param adapter 假设PageRefreshLayout不能直接包裹RecyclerView, 请指定此参数. 但更推荐在布局中使用app:page_rv来指定列表
      * @param hasMore 在函数参数中返回布尔类型来判断是否还存在下一页数据, 默认值true表示始终存在
      * @param isEmpty 返回true表示数据为空, 将显示缺省页 -> 空布局, 默认以[data.isNullOrEmpty()]则为空
      */
@@ -252,28 +263,29 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         isEmpty: () -> Boolean = { data.isNullOrEmpty() },
         hasMore: BindingAdapter.() -> Boolean = { true },
     ) {
-        val adapterAdjust = when {
+        val refreshContent = this.refreshContent
+        val rv = this.rv
+        val adapterTemp = when {
             adapter != null -> adapter
-            contentView is RecyclerView -> (contentView as RecyclerView).bindingAdapter
-            else -> throw UnsupportedOperationException(
-                "Use parameter [adapter] on [addData] function or PageRefreshLayout direct wrap RecyclerView"
-            )
+            rv != null -> rv.bindingAdapter
+            refreshContent is RecyclerView -> refreshContent.bindingAdapter
+            else -> throw UnsupportedOperationException("Use parameter [adapter] on [addData] function or PageRefreshLayout direct wrap RecyclerView")
         }
 
         val isRefreshState = state == RefreshState.Refreshing || index == startIndex
 
         if (isRefreshState) {
-            val models = adapterAdjust.models
+            val models = adapterTemp.models
             if (models == null) {
-                adapterAdjust.models = data
+                adapterTemp.models = data
             } else {
                 if (models is MutableList) {
                     val size = models.size
                     models.clear()
                     if (data.isNullOrEmpty()) {
-                        adapterAdjust.notifyItemRangeRemoved(adapterAdjust.headerCount, size)
+                        adapterTemp.notifyItemRangeRemoved(adapterTemp.headerCount, size)
                     } else {
-                        adapterAdjust.addModels(data)
+                        adapterTemp.addModels(data)
                     }
                 }
             }
@@ -282,10 +294,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 return
             }
         } else {
-            adapterAdjust.addModels(data)
+            adapterTemp.addModels(data)
         }
 
-        val hasMoreResult = adapterAdjust.hasMore()
+        val hasMoreResult = adapterTemp.hasMore()
         index += 1
 
         if (isRefreshState) showContent(hasMoreResult) else finish(true, hasMoreResult)
@@ -601,24 +613,24 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         if (stateLayout == null) {
             stateLayout = if (stateLayoutId == View.NO_ID) {
-                StateLayout(context).let {
-                    removeView(contentView)
-                    it.addView(contentView)
-                    it.setContent(contentView!!)
-                    setRefreshContent(it)
-
-                    it.emptyLayout = emptyLayout
-                    it.errorLayout = errorLayout
-                    it.loadingLayout = loadingLayout
-
-                    it.onRefresh {
-                        if (realEnableRefresh) super.setEnableRefresh(false)
-                        notifyStateChanged(RefreshState.Refreshing)
-                        onRefresh(this@PageRefreshLayout)
-                    }
+                StateLayout(context).also { state ->
+                    removeView(refreshContent)
+                    state.addView(refreshContent)
+                    state.setContent(refreshContent!!)
+                    setRefreshContent(state)
                 }
             } else {
                 findViewById(stateLayoutId)
+            }
+        }
+        stateLayout?.let { state ->
+            state.emptyLayout = emptyLayout
+            state.errorLayout = errorLayout
+            state.loadingLayout = loadingLayout
+            state.onRefresh {
+                if (realEnableRefresh) super.setEnableRefresh(false)
+                notifyStateChanged(RefreshState.Refreshing)
+                onRefresh(this@PageRefreshLayout)
             }
         }
     }

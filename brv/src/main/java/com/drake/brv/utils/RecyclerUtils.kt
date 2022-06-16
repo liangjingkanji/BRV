@@ -37,7 +37,7 @@ import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
  */
 val RecyclerView.bindingAdapter
     get() = adapter as? BindingAdapter
-        ?: throw NullPointerException("RecyclerView has no BindingAdapter")
+        ?: throw NullPointerException("RecyclerView without BindingAdapter")
 
 /**
  * 数据模型集合
