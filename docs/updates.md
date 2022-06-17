@@ -1,3 +1,7 @@
+## 1.3.78
+- feat: PageRefreshLayout新增page_rv属性来指定列表
+- feat: PageRefreshLayout新增page_state布局属性指定缺省页
+
 ## 1.3.77
 - feat: StateLayout 1.3.6
 - feat: `ACCESS_NETWORK_STATE`(避免无网络显示加载中缺省页)权限可以被安全删除, 可以零权限运行本库
