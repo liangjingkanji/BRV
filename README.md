@@ -25,7 +25,7 @@
 </p>
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/21078112/167219741-46ba8bf9-ebda-4e86-9eff-049d62355685.png" align="center" width="30%;" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/21078112/174295743-78f040bb-b276-4b9f-adfd-c5d4de39fb03.png" align="center" width="30%;" /></p>
 
 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目也将一直保持维护状态
 
