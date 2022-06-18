@@ -1162,7 +1162,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         /**
          * 查找ItemView上的视图
          */
-        fun <V : View> findView(@IdRes id: Int): V = itemView.findViewById(id)
+        fun <V : View?> findView(@IdRes id: Int): V = itemView.findViewById(id)
 
         /**
          * 返回数据模型
