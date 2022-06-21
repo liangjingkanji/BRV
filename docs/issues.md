@@ -1,5 +1,6 @@
 ## 常见问题
 
+- [java 上可以用吗?](https://github.com/liangjingkanji/BRV/issues/180)
 - [由dataclass导致的分组折叠崩溃](https://github.com/liangjingkanji/BRV/issues/79)
 - [适配ViewBinding](https://github.com/liangjingkanji/BRV/issues/71)
 - [适配Paging3](https://github.com/liangjingkanji/BRV/issues/73)
@@ -13,3 +14,7 @@
 - [同时支持列表上下分页预加载](https://github.com/liangjingkanji/BRV/issues/114)
 - [CoordinatorLayout显示缺省页后无法正常滑动](https://github.com/liangjingkanji/BRV/issues/152)
 - [下拉刷新保持选中状态](https://github.com/liangjingkanji/BRV/issues/173)
+- [上拉加载多语言的问题](https://github.com/liangjingkanji/BRV/issues/212)
+- [第一页加载项没有占满整个页面时，自动加载第二页](https://github.com/liangjingkanji/BRV/issues/206)
+- [上拉加载时会把顶部布局顶出去](https://github.com/liangjingkanji/BRV/issues/192)
+- [请教侧滑背景实现思路](https://github.com/liangjingkanji/BRV/issues/158)
