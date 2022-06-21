@@ -55,7 +55,7 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
 
 ### 声明
 
-支持两种方式创建, 推荐布局包裹, 
+支持两种方式创建, 推荐布局包裹,
 
 === "布局包裹"
 
@@ -69,19 +69,19 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
         app:stateEnabled="true"
         android:layout_height="match_parent"
         tools:context="com.drake.brv.sample.fragment.RefreshFragment">
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    
+
     </com.drake.brv.PageRefreshLayout>
     ```
 
 === "代码包裹"
     只推荐使用布局创建, 可保持项目代码可读性并且避免不必要的问题发生
     ```xml
-    val page = rv.page()
+    val page = rv.pageCreate()
     ```
 
 ### 创建列表
@@ -181,9 +181,9 @@ StateConfig.apply {
         app:error_layout="@layout/layout_error"
         app:empty_layout="@layout/layout_empty"
         app:loading_layout="@layout/layout_loading">
-    
+
         <!--RecyclerView代码-->
-    
+
     </com.drake.brv.PageRefreshLayout>
     ```
 

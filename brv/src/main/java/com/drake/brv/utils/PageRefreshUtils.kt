@@ -22,17 +22,16 @@ import com.drake.brv.PageRefreshLayout
 
 
 /**
- * PageRefreshLayout 包裹当前 view
- * 但是更建议在XML布局中创建, 可保持代码可读性且避免不必要的问题发生, 性能也更优
+ * 创建一个[PageRefreshLayout]来包裹视图
+ * 但是更建议在XML布局中创建[PageRefreshLayout], 可保持代码可读性且避免不必要的问题发生, 性能也更优
  *
- * @param loadMoreEnabled Boolean 启用上拉加载
- * @param stateEnabled Boolean 启用缺省页
+ * @param loadMoreEnabled 启用上拉加载
+ * @param stateEnabled 启用缺省页
  */
-fun View.page(
+fun View.pageCreate(
     loadMoreEnabled: Boolean = true,
     stateEnabled: Boolean = true
 ): PageRefreshLayout {
-
     val pageRefreshLayout = PageRefreshLayout(context)
 
     val parent = parent as ViewGroup
@@ -41,17 +40,19 @@ fun View.page(
     val layoutParams = layoutParams
 
     parent.removeView(this)
-    pageRefreshLayout.setRefreshContent(this@page)
+    pageRefreshLayout.setRefreshContent(this@pageCreate)
     parent.addView(pageRefreshLayout, index, layoutParams)
-
-
-    pageRefreshLayout.apply {
-        setEnableLoadMore(loadMoreEnabled)
-        this.stateEnabled = stateEnabled
-        initialize()
-    }
+    pageRefreshLayout.setEnableLoadMore(loadMoreEnabled)
+    pageRefreshLayout.stateEnabled = stateEnabled
+    pageRefreshLayout.initialize()
 
     return pageRefreshLayout
 }
+
+@Deprecated("命名规范, 本方法将在未来废弃建议立即替换", ReplaceWith("pageCreate(loadMoreEnabled, stateEnabled)"))
+fun View.page(
+    loadMoreEnabled: Boolean = true,
+    stateEnabled: Boolean = true
+): PageRefreshLayout = pageCreate(loadMoreEnabled, stateEnabled)
 
 
