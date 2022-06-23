@@ -192,6 +192,21 @@ fun RecyclerView.divider(
         this.orientation = orientation
     }
 }
+
+/**
+ * 设置空白间距分割
+ * @param space item的空白间距
+ * @param orientation 分割线方向, 仅[androidx.recyclerview.widget.GridLayoutManager]需要使用此参数, 其他LayoutManager都是根据其方向自动推断
+ */
+fun RecyclerView.dividerSpace(
+    space: Int,
+    orientation: DividerOrientation = DividerOrientation.HORIZONTAL,
+): RecyclerView {
+    return divider {
+        setDivider(space)
+        this.orientation = orientation
+    }
+}
 //</editor-fold>
 
 

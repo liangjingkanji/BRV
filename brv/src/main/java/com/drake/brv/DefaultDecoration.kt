@@ -247,9 +247,9 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      *
      * @param start 分割线为水平则是左间距, 垂直则为上间距
      * @param end 分割线为水平则是右间距, 垂直则为下间距
-     * @param dp 是否单位为dp, 默认为true即使用dp单位
+     * @param dp 是否单位为dp, 默认为false即使用像素单位
      */
-    fun setMargin(start: Int = 0, end: Int = 0, dp: Boolean = true) {
+    fun setMargin(start: Int = 0, end: Int = 0, dp: Boolean = false) {
         if (!dp) {
             this.marginStart = start
             this.marginEnd = end
