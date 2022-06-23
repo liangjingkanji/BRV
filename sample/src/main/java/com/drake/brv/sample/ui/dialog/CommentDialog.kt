@@ -45,10 +45,10 @@ class CommentDialog : EngineBottomSheetDialogFragment<DialogCommentBinding>() {
             }
             R.id.llExpandComment.onClick {
                 getModelOrNull<CommentDialogModel>()?.let {
-                    expandComments()
+                    expandReply()
                 }
                 getModelOrNull<CommentReplyModel>()?.let {
-                    expandMoreComments(this, this@setup, it)
+                    expandMoreReply(this, this@setup, it)
                 }
             }
         }
@@ -59,9 +59,9 @@ class CommentDialog : EngineBottomSheetDialogFragment<DialogCommentBinding>() {
     }
 
     /**
-     * 展开评论
+     * 展开评论回复
      */
-    private fun BindingAdapter.BindingViewHolder.expandComments() {
+    private fun BindingAdapter.BindingViewHolder.expandReply() {
         val model = getModel<CommentDialogModel>()
         if (!model.itemExpand) {
             if (model.comments.size >= model.commentCount) {
@@ -84,23 +84,24 @@ class CommentDialog : EngineBottomSheetDialogFragment<DialogCommentBinding>() {
     }
 
     /**
-     * 展开更多评论
-     * 收起评论
+     * 展开更多评论回复
+     * 收起评论回复
      */
-    private fun expandMoreComments(
+    private fun expandMoreReply(
         vh: BindingAdapter.BindingViewHolder,
         adapter: BindingAdapter,
-        model: CommentReplyModel
+        replyModel: CommentReplyModel
     ) {
         val parentPosition = vh.findParentPosition()
-        val parentModel = adapter.getModel<CommentDialogModel>(parentPosition)
-        if (model.isHasMore()) {
+        val commentModel = adapter.getModel<CommentDialogModel>(parentPosition)
+        if (replyModel.isHasMore()) {
             val data = getComments<List<CommentReplyModel>>()
-            parentModel.addComment(data)
+            commentModel.addComment(data)
             adapter.addModels(data, index = vh.layoutPosition + 1)
         } else {
-            parentModel.itemExpand = false
-            val replyComments = parentModel.comments
+            commentModel.itemExpand = false
+            commentModel.notifyChange()
+            val replyComments = commentModel.comments
             adapter.mutable.removeAll(replyComments)
             adapter.notifyItemRangeRemoved(parentPosition + 1, replyComments.size)
         }
