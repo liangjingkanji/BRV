@@ -57,7 +57,7 @@ class DifferDataChangeFragment : EngineFragment<FragmentDifferDataChangeBinding>
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             // 主线程刷新
-            R.id.menu_random_data -> binding.rv.setDifferModels(getRandomData())
+            R.id.menu_random_data -> binding.rv.setDifferModels(getRandomData(), false)
             R.id.menu_random_data_async -> thread { // 异步线程对比刷新(避免大量数据对比阻塞主线程)
                 binding.rv.setDifferModels(getRandomData()) {
                     // 刷新完成
