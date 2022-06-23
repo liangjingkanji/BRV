@@ -70,6 +70,10 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      */
     var endVisible = false
 
+    /**
+     * 列表前后都显示分割线
+     * 等效[startVisible]和[endVisible]都为true
+     */
     var includeVisible
         get() = startVisible && endVisible
         set(value) {
@@ -766,7 +770,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                             val spanSizeLookup = layoutManager.spanSizeLookup
                             val spanCount = layoutManager.spanCount
                             val spanGroupIndex = spanSizeLookup.getSpanGroupIndex(position, spanCount)
-                            val maxSpanGroupIndex = ceil(itemCount / spanCount.toFloat()).toInt()
+                            val maxSpanGroupIndex = spanSizeLookup.getSpanGroupIndex(itemCount - 1, spanCount)
                             val spanIndex = spanSizeLookup.getSpanIndex(position, spanCount) + 1
                             val spanSize = spanSizeLookup.getSpanSize(position)
 
@@ -774,7 +778,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                                 left = spanIndex == 1
                                 right = spanIndex + spanSize - 1 == spanCount
                                 top = if (reverseLayout) {
-                                    spanGroupIndex == maxSpanGroupIndex - 1
+                                    spanGroupIndex == maxSpanGroupIndex
                                 } else {
                                     index <= spanCount && spanGroupIndex == spanSizeLookup.getSpanGroupIndex(
                                         position - 1,
@@ -787,12 +791,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                                         spanCount
                                     )
                                 } else {
-                                    spanGroupIndex == maxSpanGroupIndex - 1
+                                    spanGroupIndex == maxSpanGroupIndex
                                 }
-
                             } else {
                                 left = spanGroupIndex == 0
-                                right = spanGroupIndex == maxSpanGroupIndex - 1
+                                right = spanGroupIndex == maxSpanGroupIndex
                                 top = if (reverseLayout) spanIndex + spanSize - 1 == spanCount else spanIndex == 1
                                 bottom = if (reverseLayout) spanIndex == 1 else spanIndex + spanSize - 1 == spanCount
                             }
