@@ -23,6 +23,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.util.NoSuchPropertyException
 import android.view.LayoutInflater
 import android.view.View
@@ -1138,14 +1139,19 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             }
 
             onBind?.invoke(this@BindingViewHolder)
-            try {
-                viewDataBinding?.setVariable(modelId, model)
-            } catch (e: Exception) {
-                val message =
-                    "${e.message} at file(${context.resources.getResourceEntryName(itemViewType)}.xml:0)"
-                Exception(message).printStackTrace()
+
+            val dataBindingEnable = dataBindingEnable
+            val viewDataBinding = viewDataBinding
+            if (dataBindingEnable && viewDataBinding != null) {
+                try {
+                    viewDataBinding.setVariable(modelId, model)
+                    viewDataBinding.executePendingBindings()
+                } catch (e: Exception) {
+                    val message =
+                        "DataBinding type mismatch ...(${context.resources.getResourceEntryName(itemViewType)}.xml:1)"
+                    Log.e(javaClass.simpleName, message, e)
+                }
             }
-            viewDataBinding?.executePendingBindings()
         }
 
 
