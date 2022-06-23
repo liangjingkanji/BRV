@@ -1,3 +1,10 @@
+## 1.3.79
+- fix: 网格分割线动态spanSize间距丢失
+- feat: findView支持可空类型
+- feat: 新增dividerSpace函数
+- pref: DataBinding绑定数据失败日志输出
+- refactor: page函数废弃, 新增createPage
+
 ## 1.3.78
 - feat: PageRefreshLayout新增page_rv属性来指定列表
 - feat: PageRefreshLayout新增page_state布局属性指定缺省页
