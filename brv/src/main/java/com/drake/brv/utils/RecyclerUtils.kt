@@ -24,11 +24,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.drake.brv.BindingAdapter
+import com.drake.brv.BindingAdapter.Companion.equals
 import com.drake.brv.DefaultDecoration
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
+import com.drake.brv.listener.ItemDifferCallback
 
 //<editor-fold desc="数据集">
 /**
@@ -78,8 +80,11 @@ fun RecyclerView.addModels(
  * 对比数据, 根据数据差异自动刷新列表
  * 数据对比默认使用`equals`函数对比, 你可以为数据手动实现equals函数来修改对比逻辑. 推荐定义数据为 data class, 因其会根据构造参数自动生成equals
  * 如果数据集合很大导致对比速度很慢, 建议在非主步线程中调用此函数, 效果等同于[androidx.recyclerview.widget.AsyncListDiffer]
+ *
+ * 对于数据是否匹配可能需要你自定义[BindingAdapter.itemDifferCallback], 因为默认使用数据模型的[equals]方法匹配, 具体请阅读[ItemDifferCallback.DEFAULT]
+ *
  * @param newModels 新的数据, 将覆盖旧的数据
- * @param detectMoves 是否对比Item的移动
+ * @param detectMoves 是否对比Item的移动, true会导致列表当前位置发生移动
  * @param commitCallback 因为子线程调用[setDifferModels]刷新列表会不同步(刷新列表需要切换到主线程), 而[commitCallback]保证在刷新列表完成以后调用(运行在主线程)
  */
 fun RecyclerView.setDifferModels(
