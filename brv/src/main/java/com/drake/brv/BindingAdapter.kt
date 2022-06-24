@@ -610,7 +610,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
 
     /** 原始的数据集合对象, 不会经过任何处理 */
-    var _data: List<Any?>? = null
+    var _data: MutableList<Any?>? = null
 
     /**
      * 数据模型集合
@@ -652,7 +652,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         newModels: List<Any?>?, detectMoves: Boolean = true, commitCallback: Runnable? = null
     ) {
         val oldModels = _data
-        _data = newModels
+        _data = when (newModels) {
+            is ArrayList -> flat(newModels)
+            is List -> flat(newModels.toMutableList())
+            else -> null
+        }
         val diffResult = DiffUtil.calculateDiff(ProxyDiffCallback(newModels, oldModels, itemDifferCallback), detectMoves)
         val mainLooper = Looper.getMainLooper()
         if (Looper.myLooper() != mainLooper) {
@@ -663,6 +667,13 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         } else {
             diffResult.dispatchUpdatesTo(this)
             commitCallback?.run()
+        }
+        checkedPosition.clear()
+        if (isFirst) {
+            lastPosition = -1
+            isFirst = false
+        } else {
+            lastPosition = itemCount - 1
         }
     }
 
