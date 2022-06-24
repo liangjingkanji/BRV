@@ -670,8 +670,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         commitCallback: Runnable? = null
     ) {
         val oldModels = _data
-        models = newModels
-        val diffResult = DiffUtil.calculateDiff(ProxyDiffCallback(_data, oldModels, itemDifferCallback), detectMoves)
+        _data = newModels
+        val diffResult = DiffUtil.calculateDiff(ProxyDiffCallback(newModels, oldModels, itemDifferCallback), detectMoves)
         val mainLooper = Looper.getMainLooper()
         if (Looper.myLooper() != mainLooper) {
             Handler(mainLooper).post {
