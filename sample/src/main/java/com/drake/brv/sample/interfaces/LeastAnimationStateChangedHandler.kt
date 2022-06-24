@@ -34,6 +34,8 @@ open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
 
     /** 加载状态开始时间 */
     private var loadingStartTime = 0L
+    private var next: View? = null
+    private var animationPlaying = false
 
     override fun onRemove(container: StateLayout, state: View, status: Status, tag: Any?) {
         if (status == Status.LOADING) {
@@ -41,19 +43,26 @@ open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
             animation?.addAnimatorUpdateListener {
                 val duration = System.currentTimeMillis() - loadingStartTime
                 if (duration >= leastDuration ?: it.duration) {
+                    animationPlaying = false
                     animation.cancelAnimation()
                     animation.removeAllUpdateListeners()
-                    StateChangedHandler.onRemove(container, state, status, tag)
+                    container.removeAllViews()
+                    next?.let { state -> if (state.parent == null) container.addView(state) }
                 }
             }
+        } else {
+            StateChangedHandler.onRemove(container, state, status, tag)
         }
     }
 
     override fun onAdd(container: StateLayout, state: View, status: Status, tag: Any?) {
+        next = state
+        if (animationPlaying) return
         super.onAdd(container, state, status, tag)
         if (status == Status.LOADING) {
             loadingStartTime = System.currentTimeMillis()
             state.findViewById<LottieAnimationView>(R.id.lottie)?.let {
+                animationPlaying = true
                 it.repeatCount = LottieDrawable.INFINITE
                 it.playAnimation()
             }
