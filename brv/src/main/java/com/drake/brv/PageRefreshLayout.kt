@@ -28,6 +28,7 @@ import com.drake.brv.utils.bindingAdapter
 import com.drake.statelayout.StateChangedHandler
 import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateConfig.errorLayout
+import com.drake.statelayout.StateConfig.setRetryIds
 import com.drake.statelayout.StateLayout
 import com.drake.statelayout.Status
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -67,6 +68,13 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     /** 缺省页视图 */
     var stateLayout: StateLayout? = null
+
+    /**
+     * 设置[setRetryIds]点击重试要求网络可用才会显示加载缺省,
+     * 会回调[onRefresh]但不会回调[onLoading]
+     * 为避免无网络情况下点击重试导致闪屏
+     */
+    var isNetworkingRetry = StateConfig.isNetworkingRetry
 
     /**
      * 缺省页ID, 默认不配置会自动创建StateLayout并且包裹PageRefreshLayout的RefreshContent
@@ -232,11 +240,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     /** 初次调用等效于[showLoading]. 当加载完毕以后, 再次调用等效[refresh] */
-    fun refreshing(tag: Any? = null, requireNetworking: Boolean = true) {
+    fun refreshing(tag: Any? = null) {
         if (loaded) {
             refresh()
         } else {
-            showLoading(tag, requireNetworking = requireNetworking)
+            showLoading(tag)
         }
     }
 
@@ -535,7 +543,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun showError(tag: Any? = null, force: Boolean = false) {
         if (stateEnabled && (force || !loaded || stateLayout?.status != Status.CONTENT)) {
-            loaded = false
             stateLayout?.showError(tag)
         }
         finish(false)
@@ -546,8 +553,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * @param tag 传递参数将被[onLoading]接收
      * @param refresh 是否回调[onRefresh]
      */
-    fun showLoading(tag: Any? = null, refresh: Boolean = true, requireNetworking: Boolean = true) {
-        if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh, requireNetworking = requireNetworking)
+    fun showLoading(tag: Any? = null, refresh: Boolean = true) {
+        if (stateEnabled) stateLayout?.showLoading(tag, refresh = refresh)
     }
 
     /**
