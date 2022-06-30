@@ -36,7 +36,7 @@
             android:foreground="?selectableItemBackgroundBorderless">
 
             <TextView
-                android:text="@{String.valueOf(m.itemGroupPosition)}"
+                android:text="@{String.valueOf(m.id)}"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

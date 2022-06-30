@@ -29,6 +29,13 @@
         android:name="com.drake.brv.sample.ui.fragment.group.GroupDragFragment"
         android:label="拖拽分组"
         tools:layout="@layout/fragment_group_drag" />
+
+    <fragment
+        android:id="@+id/groupSpanDragFragment"
+        android:name="com.drake.brv.sample.ui.fragment.group.GroupSpanDragFragment"
+        android:label="跨组拖拽分组"
+        tools:layout="@layout/fragment_group_span_drag" />
+
     <fragment
         android:id="@+id/groupFragment"
         android:name="com.drake.brv.sample.ui.fragment.group.GroupFragment"

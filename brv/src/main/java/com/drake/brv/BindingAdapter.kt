@@ -38,6 +38,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_ID
+import com.drake.brv.BindingAdapter.Companion.equals
 import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.item.*
@@ -701,6 +702,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         models: MutableList<Any?>,
         expand: Boolean? = null,
         @IntRange(from = -1) depth: Int = 0,
+        itemParent:ItemExpand?=null
     ): MutableList<Any?> {
 
         if (models.isEmpty()) return models
@@ -709,8 +711,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
         arrayList.forEachIndexed { index, item ->
             models.add(item)
-            if (item is ItemExpand) {
+            if (item is ItemGroup){
+                item.itemParent = itemParent
                 item.itemGroupPosition = index
+            }
+            if (item is ItemExpand) {
                 var nextDepth = depth
                 if (expand != null && depth != 0) {
                     item.itemExpand = expand
@@ -719,7 +724,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
                 val itemSublist = item.itemSublist
                 if (!itemSublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
-                    val nestedList = flat(ArrayList(itemSublist), expand, nextDepth)
+                    val nestedList = flat(ArrayList(itemSublist), expand, nextDepth,item)
                     models.addAll(nestedList)
                 }
             }
@@ -1213,7 +1218,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     notifyItemChanged(position)
                     0
                 } else {
-                    val sublistFlat = flat(ArrayList(itemSublist), true, depth)
+                    val sublistFlat = flat(ArrayList(itemSublist), true, depth,itemExpand)
 
                     (this@BindingAdapter.models as MutableList).addAll(position + 1 - headerCount, sublistFlat)
                     if (expandAnimationEnabled) {
@@ -1256,7 +1261,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     notifyItemChanged(position, itemExpand)
                     0
                 } else {
-                    val sublistFlat = flat(ArrayList(itemSublist), false, depth)
+                    val sublistFlat = flat(ArrayList(itemSublist), false, depth,itemExpand)
                     (this@BindingAdapter.models as MutableList).subList(position + 1 - headerCount, position + 1 - headerCount + sublistFlat.size).clear()
                     if (expandAnimationEnabled) {
                         notifyItemChanged(position, itemExpand)

@@ -49,4 +49,6 @@ open class GroupModel : ItemExpand, ItemHover, ItemPosition,
 
     val expandIcon get() = if (itemExpand) R.drawable.ic_arrow_expand else R.drawable.ic_arrow_collapse
 
+    override var itemParent: ItemExpand? =null
+
 }
