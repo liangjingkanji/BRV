@@ -144,4 +144,4 @@ binding.rv.bindingAdapter.models = getData().forEach {
 | collapse | 折叠指定条目 |
 | expandOrCollapse | 展开或者折叠指定条目(根据当前条目状态决定是折叠/展开) |
 | findParentPosition | 查找父项条目的索引(即当前条目属于哪个分组下), 如果没有返回-1 |
-| findParentViewHolder | 查找父项条目ViewHolder, 如果没有返回null |
+| findParentViewHolder | 查找父项条目ViewHolder, null表示不存在父项或没有显示在屏幕中 |

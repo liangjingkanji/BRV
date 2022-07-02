@@ -214,9 +214,6 @@ StateConfig.apply {
 前面提到 PageRefreshLayout 支持自动分页加载, 自动分页不需要你调用`rv.models`函数去设置数据, 使用`addData`即可
 
 ```kotlin hl_lines="8"
-//
-//
-
 // 下拉刷新和上拉加载都会执行onRefresh, 除非另外设置onLoadMore
 pageLayout.onRefresh {
     scope {

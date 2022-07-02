@@ -1300,7 +1300,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
         /**
          * 查找分组中的父项ViewHolder
-         * @return null表示不存在父项
+         * @return null表示不存在父项或没有显示在屏幕中
          */
         fun findParentViewHolder(): BindingViewHolder? {
             return rv?.findViewHolderForLayoutPosition(findParentPosition()) as? BindingViewHolder
