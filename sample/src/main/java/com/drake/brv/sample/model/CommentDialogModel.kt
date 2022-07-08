@@ -73,4 +73,7 @@ data class CommentDialogModel(
             m.notifyChange()
         }
     }
+
+    override var itemParent: ItemExpand? =null
+
 }

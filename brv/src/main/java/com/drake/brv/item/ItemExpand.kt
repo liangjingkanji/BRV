@@ -16,17 +16,16 @@
 
 package com.drake.brv.item
 
+
 /**
  * 可展开/折叠的条目
  */
-interface ItemExpand {
-
-    /** 同级别的分组的索引位置 */
-    var itemGroupPosition: Int
+interface ItemExpand : ItemGroup {
 
     /** 是否已展开 */
     var itemExpand: Boolean
 
-    /** 子列表 */
+    /** 子列表 ，若是末尾item，设置为null*/
     var itemSublist: List<Any?>?
 }
+

@@ -16,10 +16,13 @@
 
 package com.drake.brv.sample.model
 
+import android.view.View
 import com.drake.brv.item.ItemExpand
 
 open class GroupBasicModel(
+    val id:Int= View.generateViewId(),
     override var itemGroupPosition: Int = 0,
     override var itemExpand: Boolean = false,
     override var itemSublist: List<Any?>? = null,
+    override var itemParent: ItemExpand? =null
 ) : ItemExpand
