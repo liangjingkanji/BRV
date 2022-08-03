@@ -16,7 +16,7 @@
     data class CheckModel(
         var checked: Boolean = false,
         var visibility: Boolean = false
-    ) : BaseObservable() // BaseObservable 这是DataBinding的数据绑定写法，使用 DataBInding 时，将 checked 属性关联到对应 view
+    ) : BaseObservable() // BaseObservable 这是DataBinding的数据绑定写法，使用 DataBinding 时，需要手动将 checked 属性关联到对应 xml 中的 view 上
     ```
 
 3. 监听选择事件
