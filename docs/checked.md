@@ -16,7 +16,7 @@
     data class CheckModel(
         var checked: Boolean = false,
         var visibility: Boolean = false
-    ) : BaseObservable() // BaseObservable 这是DataBinding的数据绑定写法
+    ) : BaseObservable() // BaseObservable 这是DataBinding的数据绑定写法，使用 DataBInding 时，将 checked 属性关联到对应 view
     ```
 
 3. 监听选择事件
@@ -43,7 +43,11 @@
     
        onClick(R.id.cb, R.id.item) {
             var checked = (getModel() as CheckModel).checked
-            setChecked(adapterPosition, checked) // 在点击事件中触发选择事件, 即点击列表条目就选中
+           // 此处添加 UI 逻辑如
+           if(!checked){
+           checked = true // 点击选中
+           setChecked(adapterPosition, checked) // 在点击事件中触发选择事件, 即点击列表条目就选中
+          }      
        }
     }.models = getData
     ```
