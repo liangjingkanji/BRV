@@ -11,7 +11,7 @@
 - 分组和多类型可以共存
 
 <br>
-> 所谓展开/折叠就是添加item到列表中, 所以每次展开列表就会新增item(折叠就会减少item). 请注意列表position的变化避免索引越界
+> 所谓展开/折叠就是添加item到列表(models)中, 所以每次展开列表就会新增item(折叠就会减少item). 请注意列表position的变化以及models的size避免索引越界
 
 ## 使用
 要求Model实现[ItemExpand](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/item/ItemExpand.kt)
