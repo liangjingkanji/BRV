@@ -19,6 +19,7 @@ BRV没有自定义RecyclerView, 所以RV如何操作数据BRV就如何操作数�
 ```kotlin
 rv.models = dataList // 自动使用 notifyDataSetChanged
 rv.addModels(newDataList) // 自动使用 notifyItemRangeInserted, 当然也可以禁止动画
+binding.rv.addModels(newDataList, index = 3) // 在索引3后面添加数据
 ```
 
 代码示例
@@ -29,6 +30,9 @@ binding.rv.linear().setup {
         findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
     }
 }.models = getData()
+
+binding.rv.addModels(data, index = 3) // 添加数据
+binding.rv.models = newDataList // 覆盖原来的列表
 ```
 
 
