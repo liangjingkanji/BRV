@@ -112,7 +112,12 @@ data class CheckModel(var checked: Boolean = false, var visibility: Boolean = fa
 - LiveData
 - ObservableField
 
-> 以上属于DataBinding使用基础, 具体请阅读: [DataBinding最全使用说明 ](https://juejin.cn/post/6844903549223059463)
+自动更新LiveData字段要求先为DataBinding配置生命周期, 因为liveData观察者需要lifecycleOwner
+```kotlin
+binding.lifecycleOwner = this
+```
+
+> 以上属于DataBinding使用基础, 更多DataBinding使用方法请阅读: [DataBinding最全使用说明 ](https://juejin.cn/post/6844903549223059463)
 
 ## 刷新方法
 
