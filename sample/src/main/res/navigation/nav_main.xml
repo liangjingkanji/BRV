@@ -129,5 +129,9 @@
         android:id="@+id/douyinCommentFragment"
         android:name="com.drake.brv.sample.ui.fragment.DouyinCommentFragment"
         android:label="抖音评论列表" />
+    <fragment
+        android:id="@+id/letterIndexFragment"
+        android:name="com.drake.brv.sample.ui.fragment.LetterIndexFragment"
+        android:label="LetterIndexFragment" />
 
 </navigation>

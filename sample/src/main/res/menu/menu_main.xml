@@ -32,6 +32,10 @@
         android:icon="@drawable/ic_chat"
         android:title="聊天列表" />
     <item
+        android:id="@+id/letterIndexFragment"
+        android:icon="@drawable/ic_letter_index"
+        android:title="字母索引" />
+    <item
         android:id="@+id/nav_group.xml"
         android:icon="@drawable/ic_group"
         android:title="分组" />

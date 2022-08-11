@@ -26,7 +26,7 @@
 </p>
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/21078112/174295743-78f040bb-b276-4b9f-adfd-c5d4de39fb03.png" align="center" width="30%;" /></p>
+<p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/image/preview.png?raw=true" align="center" width="30%;" /></p>
 
 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目承诺会永远保持社区维护
 
