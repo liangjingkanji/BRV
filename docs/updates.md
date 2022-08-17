@@ -1,3 +1,6 @@
+## 1.3.80
+pref: setRetryIds设置点击重试会使用最近showLoading的tag
+
 ## 1.3.79
 - fix: 网格分割线动态spanSize间距丢失
 - feat: findView支持可空类型
