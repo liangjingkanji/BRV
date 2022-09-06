@@ -116,7 +116,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onChecked: ((position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? = null
-    private var onToggle: ((position: Int, toggleModel: Boolean, end: Boolean) -> Unit)? = null
+    private var onToggle: ((position: Int, toggleMode: Boolean, end: Boolean) -> Unit)? = null
 
 
     /**
@@ -852,7 +852,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * @param toggleMode 切换模式
      * @param end 全部条目已经切换完成
      */
-    fun onToggle(block: (position: Int, toggleModel: Boolean, end: Boolean) -> Unit) {
+    fun onToggle(block: (position: Int, toggleMode: Boolean, end: Boolean) -> Unit) {
         onToggle = block
     }
     //</editor-fold>
