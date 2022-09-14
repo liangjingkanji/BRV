@@ -1,3 +1,6 @@
+## 1.3.81
+修复侧滑删除遇到有 header 的时候移除 models 中 item 下标越界的问题
+
 ## 1.3.80
 pref: setRetryIds设置点击重试会使用最近showLoading的tag
 
