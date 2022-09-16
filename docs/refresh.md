@@ -120,9 +120,7 @@ page.onLoadMore {
 1.  如果不调用`onLoadMore`则上拉加载同样也会执行`onRefresh`函数, 因为下拉刷新和上拉加载在项目中一般是同一个接口只是分页字段值不同而已
 
 
-### 缺省页
-
-PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
+### 触发刷新
 
 拥有三个函数可以触发刷新状态(都会回调函数onRefresh)
 
@@ -134,6 +132,10 @@ PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
 | refreshing | 初次调用等效于`showLoading`. 当加载完毕以后, 再次调用等效`refresh` |
 
 > 这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
+
+### 缺省页
+
+PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
 
 缺省页状态控制(一般情况下都是框架内部自动控制)
 
