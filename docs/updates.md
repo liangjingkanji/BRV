@@ -1,3 +1,6 @@
+## 1.3.82
+fix: [#263](https://github.com/liangjingkanji/BRV/issues/263) 自定义侧滑移动的视图android:tag="swipe"复用问题
+
 ## 1.3.81
 修复侧滑删除遇到有 header 的时候移除 models 中 item 下标越界的问题
 
