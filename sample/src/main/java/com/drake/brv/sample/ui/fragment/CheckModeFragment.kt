@@ -17,6 +17,7 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.view.View
+import com.drake.brv.BindingAdapter
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentCheckModeBinding
 import com.drake.brv.sample.model.CheckModel
@@ -66,28 +67,11 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
             }
 
             // 监听切换模式
-            onToggle { position, toggleMode, end ->
-
+            onToggle { position, toggleMode, _ ->
                 // 刷新列表显示选择按钮
                 val model = getModel<CheckModel>(position)
                 model.visibility = toggleMode
                 model.notifyChange()
-
-
-                if (end) {
-                    // 管理按钮
-                    binding.tvManage.text = if (toggleMode) "取消" else "管理"
-
-                    // 显示和隐藏编辑菜单
-                    binding.llMenu.visibility = if (toggleMode) View.VISIBLE else View.GONE
-
-                    // 显示/隐藏计数器
-                    binding.tvCheckedCount.visibility = if (toggleMode) View.VISIBLE else View.GONE
-                    binding.tvCheckedCount.text = "已选择 ${checkedCount}/${modelCount}"
-
-                    // 如果取消管理模式则取消全部已选择
-                    if (!toggleMode) checkedAll(false)
-                }
             }
 
         }.models = getData()
@@ -127,8 +111,27 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
         // 切换选择模式
         binding.tvManage.setOnClickListener {
             adapter.toggle()
+            changeListEditable(adapter)
             // binding.rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
         }
+    }
+
+    /** 改变编辑状态 */
+    private fun changeListEditable(adapter: BindingAdapter) {
+        val toggleMode = adapter.toggleMode
+        val checkedCount = adapter.checkedCount
+        // 管理按钮
+        binding.tvManage.text = if (toggleMode) "取消" else "管理"
+
+        // 显示和隐藏编辑菜单
+        binding.llMenu.visibility = if (toggleMode) View.VISIBLE else View.GONE
+
+        // 显示/隐藏计数器
+        binding.tvCheckedCount.visibility = if (toggleMode) View.VISIBLE else View.GONE
+        binding.tvCheckedCount.text = "已选择 ${checkedCount}/${adapter.modelCount}"
+
+        // 如果取消管理模式则取消全部已选择
+        if (!toggleMode) adapter.checkedAll(false)
     }
 
     private fun getData(): List<CheckModel> {
