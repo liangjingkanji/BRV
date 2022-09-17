@@ -91,6 +91,14 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         return 1f
     }
 
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+        super.clearView(recyclerView, viewHolder)
+        val view = viewHolder.itemView.findViewWithTag<View>("swipe")
+        if (view != null) {
+            view.translationX = 0F
+        }
+    }
+
     /**
      * 当拖拽动作完成且松开手指时触发
      * @param source 触发拖拽的Item
