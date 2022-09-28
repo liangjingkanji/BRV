@@ -43,7 +43,7 @@ import com.scwang.smart.refresh.layout.simple.SimpleBoundaryDecider
  * 扩展SmartRefreshLayout的功能
  *
  * 功能:
- * - 下拉刷新u
+ * - 下拉刷新
  * - 上拉加载
  * - 拉取
  * - 预加载
@@ -89,7 +89,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     var recyclerViewId: Int = View.NO_ID
 
-    /** 变更为 下拉加载更多, 上拉刷新 */
+    /** 变更为下拉加载更多, 上拉刷新 */
     var upFetchEnabled = false
         set(value) {
             if (value == field) return
@@ -252,7 +252,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多
      *
      * ## 实现
-     * 当[getState]等于[RefreshState.Refreshing]或者[index]等于[startIndex]会判断为下拉沙墟
+     * 当[getState]等于[RefreshState.Refreshing]或者[index]等于[startIndex]会判断为下拉刷新
      * [index]初始值为[startIndex], 每次调用本方法会将[index]递增, 下拉刷新会将[index]重置为[startIndex]
      *
      * ## 注意事项
