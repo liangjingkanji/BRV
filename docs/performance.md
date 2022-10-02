@@ -73,6 +73,8 @@ data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
 }
 ```
 
+如果你使用的Glide你还可以阅读[RecyclerView预加载图片](https://muyangmin.github.io/glide-docs-cn/int/recyclerview.html), 可以显著减少用户滑动图片列表时看到的加载中数量
+
 ## 固定布局优化
 
 如果列表所有item的宽高不会因为适配器(Adapter)动态改变, 那么可以使用`setHasFixedSize(true)`来减少测绘次数提高性能
