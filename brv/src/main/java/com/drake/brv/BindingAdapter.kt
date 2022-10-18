@@ -442,7 +442,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /** 头布局的数据模型 */
     var headers: List<Any?> = mutableListOf()
         set(value) {
-            field = value.toMutableList()
+            field = if (value is ArrayList) value else value.toMutableList()
             notifyDataSetChanged()
         }
 
@@ -515,10 +515,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      */
     var footers: List<Any?> = mutableListOf()
         set(value) {
-
-            field = value.toMutableList()
+            field = if (value is ArrayList) value else value.toMutableList()
             notifyDataSetChanged()
-
             if (isFirst) {
                 lastPosition = -1
                 isFirst = false
@@ -791,6 +789,13 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     insertIndex += realModels.size
                     realModels.addAll(flat(data))
                 } else {
+                    if (checkedPosition.isNotEmpty()) {
+                        val insertSize = models.size
+                        val iterator = checkedPosition.listIterator()
+                        while (iterator.hasNext()) {
+                            iterator.set(iterator.next() + insertSize)
+                        }
+                    }
                     insertIndex += index
                     realModels.addAll(index, flat(data))
                 }

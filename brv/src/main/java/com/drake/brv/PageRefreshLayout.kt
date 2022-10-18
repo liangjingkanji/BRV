@@ -290,6 +290,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 if (models is MutableList) {
                     val size = models.size
                     models.clear()
+                    adapterTemp.checkedPosition.clear()
                     if (data.isNullOrEmpty()) {
                         adapterTemp.notifyItemRangeRemoved(adapterTemp.headerCount, size)
                     } else {
