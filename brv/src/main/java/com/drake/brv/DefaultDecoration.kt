@@ -51,22 +51,22 @@ import kotlin.math.roundToInt
  * 7. 支持全部的LayoutManager, 竖向/横向/网格分割线
  * 8. 优于其他框架, 完美支持均布网格分隔物
  * 9. 支持分组条目的分割线
- *
- * @property startVisible 在[GridLayoutManager]/[StaggeredGridLayoutManager]中控制上下是否显示分割线, 在[LinearLayoutManager]中控制顶部是否显示分割线
- * @property endVisible 在[GridLayoutManager]/[StaggeredGridLayoutManager]中控制左右是否显示分割线, 在[LinearLayoutManager]中控制底部是否显示分割线
- * @property expandVisible 控制[ItemExpand.itemExpand]为true的情况下是否显示分割线, 但当你配置[onEnabled]后则无效, 因为此字段为其默认实现所用
- * @property orientation 分割线的方向, 仅支持[GridLayoutManager], 其他LayoutManager都是根据其方向自动适应
- * @property typePool 集合内包含的类型才显示分割线
  */
 class DefaultDecoration constructor(private val context: Context) : RecyclerView.ItemDecoration() {
 
     /**
-     * 第一个条目之前是否显示分割线, 当处于[DividerOrientation.GRID] 时水平方向顶端和末端是否显示分割线
+     * 根据[orientation]值不同
+     * [DividerOrientation.VERTICAL] 为是否显示顶部分割线
+     * [DividerOrientation.HORIZONTAL] 为是否显示左侧分割线
+     * [DividerOrientation.GRID] 为最左/右侧是否显示分割线
      */
     var startVisible = false
 
     /**
-     * 最后一个条目是否显示分割线, 当处于[DividerOrientation.GRID] 时垂直方向顶端和末端是否显示分割线
+     * 根据[orientation]值不同
+     * [DividerOrientation.VERTICAL] 为是否显示底部分割线
+     * [DividerOrientation.HORIZONTAL] 为是否显示右侧分割线
+     * [DividerOrientation.GRID] 为最上/下侧是否显示分割线
      */
     var endVisible = false
 
@@ -83,11 +83,12 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     /**
      * 展开分组条目后该条目是否显示分割线
+     * 控制[ItemExpand.itemExpand]为true的情况下是否显示分割线, 但当你配置[onEnabled]后则无效, 因为此字段为其默认实现所用
      */
     var expandVisible = false
 
     /**
-     * 大部分情况下该值只适用于[GridLayoutManager] 或其它自定义[RecyclerView.LayoutManager]
+     * 分割线的方向, 仅支持[GridLayoutManager], 其他LayoutManager都是根据其方向自动适应
      * 布局管理器为[LinearLayoutManager] 和 [StaggeredGridLayoutManager] 时，该值会通过[adjustOrientation]自动调整
      */
     var orientation = DividerOrientation.HORIZONTAL
@@ -109,6 +110,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     //<editor-fold desc="类型">
 
+    /** 集合内包含的类型才显示分割线 */
     var typePool: MutableList<Int>? = null
 
     private var onEnabled: (BindingAdapter.BindingViewHolder.() -> Boolean)? = null

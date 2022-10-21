@@ -19,7 +19,7 @@ package com.drake.brv.listener
 import android.view.View
 
 /**
- * 由RecyclerView.Adapter实现该接口
+ * 监听Item附着/分离屏幕顶部回调
  */
 interface OnHoverAttachListener {
     /**

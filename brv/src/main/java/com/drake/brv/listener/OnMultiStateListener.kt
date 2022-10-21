@@ -16,6 +16,7 @@
 
 package com.drake.brv.listener
 
+import android.annotation.SuppressLint
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -43,10 +44,11 @@ open class OnMultiStateListener : OnMultiListener {
     override fun onFooterReleased(footer: RefreshFooter?, footerHeight: Int, maxDragHeight: Int) {
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onStateChanged(
-            refreshLayout: RefreshLayout,
-            oldState: RefreshState,
-            newState: RefreshState
+        refreshLayout: RefreshLayout,
+        oldState: RefreshState,
+        newState: RefreshState
     ) {
     }
 

@@ -19,7 +19,7 @@ package com.drake.brv.listener
 import android.content.Context
 import androidx.recyclerview.widget.LinearSmoothScroller
 
-class SnapLinearSmoothScroller(context: Context) : LinearSmoothScroller(context) {
+internal class SnapLinearSmoothScroller(context: Context) : LinearSmoothScroller(context) {
     override fun getVerticalSnapPreference(): Int {
         return SNAP_TO_START
     }

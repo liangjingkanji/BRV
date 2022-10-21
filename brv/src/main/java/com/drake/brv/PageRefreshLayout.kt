@@ -40,17 +40,17 @@ import com.scwang.smart.refresh.layout.simple.SimpleBoundaryDecider
 
 
 /**
- * 扩展SmartRefreshLayout的功能
+ * 扩展[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)的功能
  *
- * 功能:
- * - 下拉刷新
- * - 上拉加载
- * - 拉取
- * - 预加载
- * - 预拉取
- * - 自动分页
- * - 添加数据
- * - 缺省状态页
+ * ## 功能
+ * 1. 下拉刷新
+ * 2. 上拉加载
+ * 3. 拉取
+ * 4. 预加载
+ * 5. 预拉取
+ * 6. 自动分页
+ * 7. 添加数据
+ * 8. 缺省状态页
  */
 @Suppress("UNUSED_PARAMETER")
 open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
@@ -383,8 +383,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     /**
      * 监听多种状态, 不会拦截已有的刷新(onRefresh)和加载生命周期(onLoadMore)
-     * @param onMultiStateListener OnMultiStateListener
-     * @return PageRefreshLayout
      */
     fun setOnMultiStateListener(onMultiStateListener: OnMultiStateListener): PageRefreshLayout {
         setOnMultiListener(onMultiStateListener)
