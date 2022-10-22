@@ -1,3 +1,8 @@
+## 1.3.83
+- fix: 刷新数据导致单选失效
+- upgrade: StateLayout 1.3.11 FadeStateChangedHandler 内存泄漏
+
+
 ## 1.3.82
 fix: [#263](https://github.com/liangjingkanji/BRV/issues/263) 自定义侧滑移动的视图android:tag="swipe"复用问题
 
