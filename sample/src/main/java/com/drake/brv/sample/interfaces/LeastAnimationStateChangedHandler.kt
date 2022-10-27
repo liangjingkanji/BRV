@@ -29,7 +29,7 @@ import com.drake.statelayout.Status
  *
  * @param leastDuration 至少显示动画多长时间, 如果为null则至少显示动画完整播放一次的时间
  */
-open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
+open class LeastAnimationStateChangedHandler(private val leastDuration: Long? = null) :
     StateChangedHandler {
 
     /** 加载状态开始时间 */
@@ -42,7 +42,7 @@ open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
             val animation = state.findViewById<LottieAnimationView>(R.id.lottie)
             animation?.addAnimatorUpdateListener {
                 val duration = System.currentTimeMillis() - loadingStartTime
-                if (duration >= leastDuration ?: it.duration) {
+                if (duration >= (leastDuration ?: it.duration)) {
                     animationPlaying = false
                     animation.cancelAnimation()
                     animation.removeAllUpdateListeners()
