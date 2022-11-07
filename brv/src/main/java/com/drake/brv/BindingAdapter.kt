@@ -109,7 +109,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     // <editor-fold desc="生命周期">
     private var onCreate: (BindingViewHolder.(viewType: Int) -> Unit)? = null
     private var onBind: (BindingViewHolder.() -> Unit)? = null
-    private var onPayload: (BindingViewHolder.(model: Any) -> Unit)? = null
+    private var onPayload: (BindingViewHolder.(payloads: MutableList<Any>) -> Unit)? = null
     private var onClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onLongClick: (BindingViewHolder.(viewId: Int) -> Unit)? = null
     private var onChecked: ((position: Int, checked: Boolean, allChecked: Boolean) -> Unit)? = null
@@ -134,9 +134,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * 增量更新回调
      * 当你使用[notifyItemChanged(int, Object)]或者[notifyItemRangeChanged(int, Object)]等方法更新列表时才会触发, 并且形参payload要求不能为null
      *
-     * @param block 形参model即为[notifyItemChanged]中的形参payload
+     * @param block 多次调用[notifyItemChanged]会将payload合并到一个集合中payloads
      */
-    fun onPayload(block: BindingViewHolder.(model: Any) -> Unit) {
+    fun onPayload(block: BindingViewHolder.(payloads: MutableList<Any>) -> Unit) {
         onPayload = block
     }
 
@@ -181,8 +181,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         position: Int,
         payloads: MutableList<Any>,
     ) {
-        if (payloads.isNotEmpty() && onPayload != null) {
-            onPayload?.invoke(holder, payloads[0])
+        if (onPayload != null && payloads.isNotEmpty()) {
+            onPayload?.invoke(holder, payloads)
         } else {
             super.onBindViewHolder(holder, position, payloads)
         }
