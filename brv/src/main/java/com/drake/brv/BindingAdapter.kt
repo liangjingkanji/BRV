@@ -38,12 +38,14 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_ID
+import androidx.viewbinding.ViewBinding
 import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.item.*
 import com.drake.brv.listener.*
 import com.drake.brv.utils.BRV
 import com.drake.brv.utils.setDifferModels
+import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Modifier
 import java.util.concurrent.*
 import kotlin.math.min
@@ -153,14 +155,14 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
         val vh = if (dataBindingEnable) {
-            val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
+            val viewBinding = DataBindingUtil.inflate<ViewDataBinding>(
                 LayoutInflater.from(parent.context), viewType, parent, false
             )
-            if (viewDataBinding == null) {
+            if (viewBinding == null) {
                 BindingViewHolder(parent.getView(viewType))
-            } else BindingViewHolder(
-                viewDataBinding
-            )
+            } else {
+                BindingViewHolder(viewBinding)
+            }
         } else {
             BindingViewHolder(parent.getView(viewType))
         }
@@ -1088,12 +1090,13 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         val adapter: BindingAdapter = this@BindingAdapter
         val modelPosition get() = layoutPosition - headerCount
 
-        private var viewDataBinding: ViewDataBinding? = null
+        @PublishedApi
+        internal var viewBinding: ViewBinding? = null
 
         constructor(itemView: View) : super(itemView)
 
-        constructor(viewDataBinding: ViewDataBinding) : super(viewDataBinding.root) {
-            this.viewDataBinding = viewDataBinding
+        constructor(viewBinding: ViewDataBinding) : super(viewBinding.root) {
+            this.viewBinding = viewBinding
         }
 
         init {
@@ -1135,12 +1138,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
             onBind?.invoke(this@BindingViewHolder)
 
-            val dataBindingEnable = dataBindingEnable
-            val viewDataBinding = viewDataBinding
-            if (dataBindingEnable && viewDataBinding != null) {
+            val viewBinding = viewBinding
+            if (dataBindingEnable && viewBinding is ViewDataBinding) {
                 try {
-                    viewDataBinding.setVariable(modelId, model)
-                    viewDataBinding.executePendingBindings()
+                    viewBinding.setVariable(modelId, model)
+                    viewBinding.executePendingBindings()
                 } catch (e: Exception) {
                     val message = "DataBinding type mismatch ...(${context.resources.getResourceEntryName(itemViewType)}.xml:1)"
                     Log.e(javaClass.simpleName, message, e)
@@ -1150,14 +1152,36 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
 
         /**
-         * 返回匹配泛型的数据绑定对象ViewDataBinding
+         * 返回匹配泛型的数据绑定对象[ViewBinding]
          */
-        fun <B : ViewDataBinding> getBinding(): B = viewDataBinding as B
+        inline fun <reified B : ViewBinding> getBinding(): B {
+            return if (viewBinding == null) {
+                val method = B::class.java.getMethod("bind", View::class.java)
+                val viewBinding = method.invoke(null, itemView) as B
+                this.viewBinding = viewBinding
+                viewBinding
+            } else {
+                viewBinding as B
+            }
+        }
 
         /**
-         * 返回匹配泛型的数据绑定对象ViewDataBinding, 如果不匹配则返回null
+         * 返回匹配泛型的数据绑定对象[ViewBinding], 如果不匹配则返回null
          */
-        fun <B : ViewDataBinding> getBindingOrNull(): B? = viewDataBinding as? B
+        inline fun <reified B : ViewBinding> getBindingOrNull(): B? {
+            return if (viewBinding == null) {
+                try {
+                    val method = B::class.java.getMethod("bind", View::class.java)
+                    val viewBinding = method.invoke(null, itemView) as? B
+                    this.viewBinding = viewBinding
+                    viewBinding
+                } catch (e: InvocationTargetException) {
+                    null
+                }
+            } else {
+                viewBinding as? B
+            }
+        }
 
         /**
          * 查找ItemView上的视图

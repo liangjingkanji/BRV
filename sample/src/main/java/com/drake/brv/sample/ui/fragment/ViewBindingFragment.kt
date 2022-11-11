@@ -22,7 +22,7 @@ class ViewBindingFragment : Fragment(R.layout.fragment_view_binding) {
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
             onBind {
-                val binding = ItemSimpleBinding.bind(itemView) // 使用ViewBinding
+                val binding = getBinding<ItemSimpleBinding>() // 使用ViewBinding
                 binding.tvSimple.text = layoutPosition.toString()
             }
             R.id.tv_simple.onClick {
