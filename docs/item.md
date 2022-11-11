@@ -20,8 +20,7 @@ data class SimpleModel(var name: String = "BRV") : ItemBind {
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
         // 使用不同的方法来获取视图控件
         // holder.findView<TextView>(R.id.tv_simple).text = appName // 使用findById
-        // val viewBinding = ItemSimpleBinding.bind(holder.itemView) // 使用ViewBinding
-        // val dataBinding = holder.getBinding<ItemMultiTypeOneBinding>() // 使用DataBinding
+        // val binding = holder.getBinding<ItemMultiTypeOneBinding>() // 使用DataBinding或ViewBinding
     }
 }
 ```
