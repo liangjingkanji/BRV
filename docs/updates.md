@@ -1,3 +1,6 @@
+## 1.3.85
+- feat: #286 使用getBinding()获取ViewBinding实例
+
 ## 1.3.84
 - fix: setDifferModel不支持继承自ItemExpand分组集合数据的问题
 - fix: #281 onPayload没有传递负载数据集合
