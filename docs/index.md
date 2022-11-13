@@ -15,13 +15,13 @@ rv.linear().setup {
 
 这里出现的`BRV`关键词即本框架, `RV`即RecyclerView简称. `setup`函数也只是简化创建BindingAdapter对象
 
-## 列表填充数据的三种方式
+## 列表填充数据的4种方式
 
-BRV支持三种方式, 灵活使用; 这里提及的Model就等同于数据类/JavaBean/POJO
+BRV支持4种方式, 灵活使用, 这里提及的Model就等同于数据类/JavaBean/POJO
 
 
 
-### 函数回调方式
+### 1. 函数回调
 
 在`onBind`函数中填充数据
 
@@ -38,7 +38,7 @@ rv.linear().setup {
 
 
 
-### 实现接口方式
+### 2. 实现接口
 
 通过为Model实现接口`ItemBind`, 实现函数`onBind`, 在该函数中填充数据; 这种方式在很多框架中被应用, 例如BRVAH, 但是我不推荐这种视图在Model中绑定的方式, 因为Model应当只存储数据和计算逻辑, 不应包含任何UI
 
@@ -52,15 +52,29 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
 }
 ```
 
+### 3. ViewBinding
+
+```kotlin
+rv.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+
+    onCreate {
+        getBinding<ItemSimpleBinding>().tvName.text = "文本内容"
+    }
+
+    onBind {
+        val binding = getBinding<ItemSimpleBinding>() // 使用ViewBinding/DataBinding都可以使用本方法
+    }
+}.models = getData()
+```
 
 
 
-
-### DataBinding方式
+### 4. DataBinding
 
 通过DataBinding数据绑定形式自动填充数据, 推荐, 这是代码量最少最灵活的一种方式.
 
-#### 1) 启用DataBinding
+#### a. 启用DataBinding
 
 第一步在module中的`build.gradle`文件中开启DataBinding框架
 
@@ -73,7 +87,7 @@ android {
 }
 ```
 
-#### 2) 布局声明变量
+#### b. 布局声明变量
 
 第二步, 在Item的布局文件中声明变量, 然后绑定变量到视图控件上
 
@@ -114,7 +128,7 @@ android {
 选中行是DataBinding使用方法
 
 
-#### 3) 初始化全局ID
+#### c. 初始化全局ID
 
 
 ```kotlin
@@ -142,7 +156,7 @@ class App : Application() {
 1. m(m是model的简称)可以是任何其他的名称, model或者sb都可以, 比如你`name="data"`, 那么你就应该使用BR.data <br>
 BR.data和Android中常见的`R.id.data`都属于Id常量, 本质上都是Int值. 你可以点击查看BR.m源码<br>
 
-#### 4) 构建列表
+#### d. 构建列表
 
 这种方式创建列表无需处理数据
 
@@ -152,7 +166,7 @@ rv.linear().setup {
 }.models = getData()
 ```
 
-别看文档中第三种方式复杂, 实际第三种方式代码量最少, 同时最解耦
+别看文档中DataBinding方式复杂, 实际代码量最少, 同时最解耦
 
 > 使用DataBinding可以复制或者引用我的常用自定义属性:  [DataBindingComponent.kt](https://github.com/liangjingkanji/Engine/blob/master/engine/src/main/java/com/drake/engine/databinding/DataBindingComponent.kt)<br>
 > 如果你想更加了解DataBinding请阅读[DataBinding最全使用说明](https://juejin.cn/post/6844903549223059463/)
