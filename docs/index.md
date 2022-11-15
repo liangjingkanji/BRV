@@ -2,7 +2,7 @@
 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本框架也将一直保持维护状态
 
 <br>
-<p align="center"><strong>非常欢迎共同贡献代码/修订文档, 点击文档右上角小铅笔可直接修订文档 ↗</strong></p>
+<p align="center"><strong>STAR/分享可以让更多人参与到本开源项目, 点击文档右上角小铅笔可直接修订文档 ↗</strong></p>
 <br>
 
 ## 创建一个简单的列表
