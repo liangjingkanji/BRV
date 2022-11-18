@@ -74,7 +74,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 会回调[onRefresh]但不会回调[onLoading]
      * 为避免无网络情况下点击重试导致闪屏
      */
-    var isNetworkingRetry = StateConfig.isNetworkingRetry
+    var isNetworkingRetry
+        get() = stateLayout?.isNetworkingRetry ?: false
+        set(value) {
+            stateLayout?.isNetworkingRetry = value
+        }
 
     /**
      * 缺省页ID, 默认不配置会自动创建StateLayout并且包裹PageRefreshLayout的RefreshContent
