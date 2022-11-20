@@ -52,10 +52,10 @@ Welcome to international translation of this project's documents/notes, thank yo
 - [x] 点击(防抖动)/长按事件
 - [x] 分组(展开折叠/递归层次/展开置顶/拖拽/侧滑/多类型/单一展开模式)
 - [x] 悬停/粘性头部
-- [x] 快速创建分割线/间隔(支持官方全部的`LayoutManager`)
+- [x] 快速创建分割线/间隔
 - [x] 切换模式(例如切换编辑模式)
 - [x] 选择模式(多选/单选/全选/取消全选/反选)
-- [x] 拖拽位置
+- [x] 拖拽排序
 - [x] 侧滑删除
 - [x] 下拉刷新(Refresh) | 上拉加载(LoadMore) | 下拉加载(UpFetch), 由[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)实现
 - [x] 预加载(Preload)
@@ -65,8 +65,8 @@ Welcome to international translation of this project's documents/notes, thank yo
 - [x] 列表缺省页, 由[StateLayout](https://github.com/liangjingkanji/StateLayout)实现
 - [x] 支持DataBinding
 - [x] 支持ViewBinding
-- [x] 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现Flexbox伸缩布局
-- [x] 可添加[Net](https://github.com/liangjingkanji/Net)(基于协程实现自动化的并发网络请求)实现自动化网络请求
+- [x] 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现伸缩列表自动换行
+- [x] 可添加[Net](https://github.com/liangjingkanji/Net)(强大的协程网络请求)实现自动化网络请求
 
 
 ## 安装
