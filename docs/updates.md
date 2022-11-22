@@ -1,3 +1,9 @@
+## 1.3.86
+- fix: PageRefreshLayout.isNetworkingRetry noop
+- feat: #292 新增refreshEnableWhenEmpty/refreshEnableWhenError控制缺省页下拉刷新启用
+- pref: #298 onCreate现在支持itemViewType值
+
+
 ## 1.3.85
 - feat: #286 使用getBinding()获取ViewBinding实例
 
