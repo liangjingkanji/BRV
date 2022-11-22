@@ -100,7 +100,7 @@ rv.grid(3).divider {
 ```kotlin
 binding.rv.linear().setup {
     onCreate {
-        if (it == R.layout.item_simple_list) { // 构建嵌套网格列表
+        if (itemViewType == R.layout.item_simple_list) { // 构建嵌套网格列表
             findView<RecyclerView>(R.id.rv).divider { // 构建间距
                 setDivider(20)
                 includeVisible = true

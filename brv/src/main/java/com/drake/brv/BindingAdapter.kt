@@ -33,10 +33,7 @@ import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import androidx.recyclerview.widget.RecyclerView.NO_ID
 import androidx.viewbinding.ViewBinding
 import com.drake.brv.animation.*
@@ -166,6 +163,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         } else {
             BindingViewHolder(parent.getView(viewType))
         }
+        RecyclerViewUtils.setItemViewType(vh, viewType)
         onCreate?.invoke(vh, viewType)
         return vh
     }
