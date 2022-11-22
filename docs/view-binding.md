@@ -56,6 +56,8 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
 class SimpleModel(var name: String = "BRV") : ItemBind {
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
+
+        // 方式1 判断itemViewType
         when(holder.itemViewType) {
             R.layout.item_simple -> {
                 getBinding<ItemSimpleBinding>().tvName.text = "文本内容"
@@ -65,8 +67,15 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
             }
         }
 
-        getBindingOrNull<ItemSimpleBinding>()?.let {
-            // 该方法仅ItemSimpleBinding正确获取到才会执行, 故不需要判断item类型
+
+        // 方式2 判断ViewBinding
+        when (val viewBinding = getBinding<ViewBinding>()) {
+            is ItemSimpleBinding -> {
+                viewBinding.tvName.text = "文本内容"
+            }
+            is ItemComplexBinding -> {
+                viewBinding.tvName.text = "类型2-文本内容"
+            }
         }
     }
 }

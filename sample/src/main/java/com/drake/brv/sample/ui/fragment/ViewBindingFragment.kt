@@ -3,8 +3,10 @@ package com.drake.brv.sample.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentViewBindingBinding
+import com.drake.brv.sample.databinding.ItemCommentBinding
 import com.drake.brv.sample.databinding.ItemSimpleBinding
 import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
@@ -22,8 +24,20 @@ class ViewBindingFragment : Fragment(R.layout.fragment_view_binding) {
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
             onBind {
+
+                // 单一类型不用判断
                 val binding = getBinding<ItemSimpleBinding>() // 使用ViewBinding/DataBinding都可以使用本方法
                 binding.tvSimple.text = layoutPosition.toString()
+
+                // 如果是多类型可以通过判断ViewBinding类型分开处理
+                when (val viewBinding = getBinding<ViewBinding>()) {
+                    is ItemSimpleBinding -> {
+                        viewBinding.tvSimple.text = layoutPosition.toString()
+                    }
+                    is ItemCommentBinding -> {
+                        viewBinding.tvContent.text = layoutPosition.toString()
+                    }
+                }
             }
             R.id.tv_simple.onClick {
                 toast("点击文本")
