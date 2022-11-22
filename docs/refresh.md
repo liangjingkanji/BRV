@@ -239,6 +239,19 @@ class App : Application() {
     }
 ```
 
-这里的网络请求使用的是我开源的另一个项目Net, 支持扩展BRV. GitHub: [Net](https://github.com/liangjingkanji/Net).
+这里的网络请求使用的是我开源的另一个项目[Net]((https://github.com/liangjingkanji/Net)), 和BRV可以联动配置
 <br>
 > 假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/-b-r-v/com.drake.brv/-page-refresh-layout/index.html#-704450894%2FFunctions%2F-900954490)函数指定参数adapter来使用自动分页, 否则将抛出异常
+
+## 缺省页禁止下拉刷新
+
+控制PageRefreshLayout当显示缺省页状态时禁止下拉刷新交互手势
+
+| 函数 | 描述 |
+|-|-|
+| refreshEnableWhenEmpty | 是否显示空缺省页时启用下拉刷新 |
+| refreshEnableWhenError | 是否显示错误缺省页时启用下拉刷新 |
+
+> 同名的伴生对象属性为全局配置, PageRefreshLayout对象属性属于单例配置
+
+如果需要更复杂的逻辑建议自己在缺省页回调中通过`PageRefreshLayout.setEnableRefresh()`自由控制

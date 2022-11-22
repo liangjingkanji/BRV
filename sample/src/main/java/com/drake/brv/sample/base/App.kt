@@ -17,6 +17,7 @@
 package com.drake.brv.sample.base
 
 import android.app.Application
+import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.BR
 import com.drake.brv.sample.R
 import com.drake.brv.utils.BRV
@@ -34,6 +35,9 @@ class App : Application() {
         // 初始化BindingAdapter的默认绑定ID
         BRV.modelId = BR.m
 
+        // 禁止错误缺省页启用下拉刷新
+        PageRefreshLayout.refreshEnableWhenError = false
+
         /**
          *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
          *  具体查看 https://github.com/liangjingkanji/StateLayout
@@ -43,7 +47,7 @@ class App : Application() {
             errorLayout = R.layout.layout_error
             loadingLayout = R.layout.layout_loading
 
-            setRetryIds(R.id.msg)
+            setRetryIds(R.id.msg, R.id.iv)
 
             onLoading {
                 // 此生命周期可以拿到LoadingLayout创建的视图对象, 可以进行动画设置或点击事件.

@@ -61,6 +61,16 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
         /** 全局预加载索引 */
         var preloadIndex = 3
+
+        /**
+         * 是否显示空缺省页时启用下拉刷新
+         */
+        var refreshEnableWhenEmpty = true
+
+        /**
+         * 是否显示错误缺省页时启用下拉刷新
+         */
+        var refreshEnableWhenError = true
     }
 
     /** 分页索引 */
@@ -407,7 +417,17 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         }
         val currentState = state
         if (success) loaded = true
-        if (realEnableRefresh) super.setEnableRefresh(true)
+        val stateLayout = stateLayout
+        if (realEnableRefresh) {
+            when {
+                stateLayout == null -> super.setEnableRefresh(true)
+                (stateLayout.status == Status.EMPTY && !refreshEnableWhenEmpty) ||
+                        (stateLayout.status == Status.ERROR && !refreshEnableWhenError) -> {
+                    super.setEnableRefresh(false)
+                }
+                else -> super.setEnableRefresh(true)
+            }
+        }
         if (currentState == RefreshState.Refreshing) {
             if (hasMore) finishRefresh(success) else finishRefreshWithNoMoreData()
         } else {
@@ -518,6 +538,16 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             field = value
             stateLayout?.stateChangedHandler = value
         }
+
+    /**
+     * 是否显示空缺省页时启用下拉刷新
+     */
+    var refreshEnableWhenEmpty = Companion.refreshEnableWhenEmpty
+
+    /**
+     * 是否显示错误缺省页时启用下拉刷新
+     */
+    var refreshEnableWhenError = Companion.refreshEnableWhenError
 
     /**
      * 设置[errorLayout]中的视图点击后会执行[StateLayout.showLoading]
