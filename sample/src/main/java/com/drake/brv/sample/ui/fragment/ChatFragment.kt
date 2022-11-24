@@ -7,9 +7,9 @@ import com.drake.brv.sample.databinding.FragmentChatBinding
 import com.drake.brv.sample.model.ChatMessage
 import com.drake.brv.sample.model.ChatModel
 import com.drake.brv.utils.addModels
-import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
+import com.drake.net.utils.scope
 import com.drake.softinput.hideSoftInput
 import com.drake.softinput.setWindowSoftInput
 
@@ -42,14 +42,21 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
     }
 
     override fun initData() {
-        binding.rv.models = model.fetchHistory() // 模拟拉取历史记录
+        binding.page.onRefresh {
+            scope {
+                val data = model.fetchHistory(index) // 模拟拉取历史记录
+                addData(data) {
+                    itemCount < 1
+                }
+            }
+        }.refresh()
     }
 
     override fun onClick(v: View) {
         when (v) {
             binding.btnSend -> {
-                binding.rv.addModels(model.getMessages()) // 添加一条消息
-                binding.rv.scrollToPosition(binding.rv.adapter!!.itemCount - 1) // 保证最新一条消息显示
+                binding.rv.addModels(model.getMessages(), index = 0) // 添加一条消息
+                binding.rv.scrollToPosition(0) // 保证最新一条消息显示
             }
             binding.rv -> {
                 hideSoftInput() // 隐藏键盘

@@ -25,6 +25,7 @@
             android:autoLink="web"
             android:background="@drawable/bg_msg_bubble_right"
             android:gravity="center_vertical"
+            android:layerType="software"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
             android:text="@{m.richMessage}"
