@@ -21,8 +21,10 @@
         <attr name="empty_layout" format="reference" />
         <attr name="error_layout" format="reference" />
         <attr name="loading_layout" format="reference" />
-        <!--        启用缺省页-->
+        <!--启用缺省页-->
         <attr name="stateEnabled" format="boolean" />
+        <!--启用拉取更多-->
+        <attr name="page_upFetchEnabled" format="boolean" />
         <!--指定嵌套布局中的缺省页-->
         <attr name="page_state" format="reference" />
         <!--指定嵌套布局中的RecyclerView-->

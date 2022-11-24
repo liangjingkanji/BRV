@@ -122,7 +122,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
                 setEnableNestedScroll(false)
                 setScrollBoundaryDecider(SimpleBoundaryDecider())
             }
-            reverseContentView()
+            if (finishInflate) {
+                reverseContentView()
+            }
         }
 
     /** 监听onBindViewHolder事件 */
@@ -163,6 +165,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.PageRefreshLayout)
 
         try {
+            upFetchEnabled =
+                attributes.getBoolean(R.styleable.PageRefreshLayout_page_upFetchEnabled, upFetchEnabled)
             stateEnabled =
                 attributes.getBoolean(R.styleable.PageRefreshLayout_stateEnabled, stateEnabled)
             stateLayoutId =

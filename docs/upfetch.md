@@ -51,3 +51,5 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
 
 </com.drake.brv.PageRefreshLayout>
 ```
+
+使用`app:page_upFetchEnabled`属性也可以配置
