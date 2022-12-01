@@ -37,7 +37,7 @@ binding.rv.linear().adapter = object : BindingAdapter() {
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
     onCreate {
-        when(it){
+        when(itemViewType){
             R.layout.item_simple -> {
                 // 特殊处理
             }
