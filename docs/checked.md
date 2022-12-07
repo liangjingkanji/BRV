@@ -65,6 +65,10 @@ tv_manage.setOnClickListener {
 }
 ```
 
+## 数据变化
+
+如果数据位置发生变化, 例如增删, 请使用`BindingAdapter.checkedPosition.clear()`清除选中位置集合(也不一定就是清除), 否则可能发生数据错误导致的无法单选
+
 ## 函数
 
 支持选择模式的常用函数
