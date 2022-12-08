@@ -151,17 +151,16 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
+        val itemView = parent.getView(viewType)
         val vh = if (dataBindingEnable) {
-            val viewBinding = DataBindingUtil.inflate<ViewDataBinding>(
-                LayoutInflater.from(parent.context), viewType, parent, false
-            )
+            val viewBinding = DataBindingUtil.bind<ViewDataBinding>(itemView)
             if (viewBinding == null) {
-                BindingViewHolder(parent.getView(viewType))
+                BindingViewHolder(itemView)
             } else {
                 BindingViewHolder(viewBinding)
             }
         } else {
-            BindingViewHolder(parent.getView(viewType))
+            BindingViewHolder(itemView)
         }
         RecyclerViewUtils.setItemViewType(vh, viewType)
         onCreate?.invoke(vh, viewType)
@@ -189,17 +188,13 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     }
 
     override fun getItemViewType(position: Int): Int {
-
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
-        return (typePool[modelClass]?.invoke(model, position) ?: interfacePool?.run {
-            for (interfaceType in this) {
-                if (interfaceType.key.isAssignableFrom(modelClass)) {
-                    return@run interfaceType.value.invoke(model, position)
-                }
-            }
-            null
-        } ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.name}>(R.layout.item)"))
+        return typePool[modelClass]?.invoke(model, position)
+            ?: interfacePool?.firstNotNullOfOrNull {
+                if (it.key.isAssignableFrom(modelClass)) it.value else null
+            }?.invoke(model, position)
+            ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.name}>(R.layout.item)")
     }
 
     override fun getItemCount(): Int {
