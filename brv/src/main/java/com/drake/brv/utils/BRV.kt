@@ -24,10 +24,10 @@ object BRV {
      * ```
      * <variable
      *      name="m"
-     *      type="com.drake.brv.sample.mod.CheckModel" />
+     *      type="com.drake.brv.sample.model.CheckModel" />
      * ```
      * 则应在Application中的onCreate函数内设置:
-     * `BindingAdapter.modelId = BR.m`
+     * `BRV.modelId = BR.m`
      */
     var modelId: Int = -1
 

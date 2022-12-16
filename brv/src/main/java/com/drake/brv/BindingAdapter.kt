@@ -85,10 +85,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          * ```
          * <variable
          *      name="m"
-         *      type="com.drake.brv.sample.mod.CheckModel" />
+         *      type="com.drake.brv.sample.model.CheckModel" />
          * ```
          * 则应在Application中的onCreate函数内设置:
-         * `BindingAdapter.modelId = BR.m`
+         * `BRV.modelId = BR.m`
          */
         @Deprecated("函数优化", ReplaceWith("BRV.modelId", "com.drake.brv.utils.BRV"), DeprecationLevel.ERROR)
         var modelId: Int = BRV.modelId
