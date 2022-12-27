@@ -1,3 +1,9 @@
+## 1.3.87
+- fix: #311 notifyItemChanged触发onRefresh
+- pref: 优化dataBinding开启时使用非layout布局存在inflate两次布局问题
+- feat: 新增page_upFetchEnabled属性
+- upgrade: StateLayout 1.3.12
+
 ## 1.3.86
 - fix: PageRefreshLayout.isNetworkingRetry noop
 - feat: #292 新增refreshEnableWhenEmpty/refreshEnableWhenError控制缺省页下拉刷新启用
