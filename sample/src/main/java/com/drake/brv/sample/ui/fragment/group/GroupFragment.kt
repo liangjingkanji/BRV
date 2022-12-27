@@ -38,12 +38,23 @@ class GroupFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_
             addType<GroupBasicModel>(R.layout.item_group_basic)
             R.id.item.onFastClick {
                 when (itemViewType) {
+                    // 点击展开或折叠
                     R.layout.item_group_title_second, R.layout.item_group_title -> {
 
                         val changeCount =
                             if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"
 
                         toast(changeCount)
+                    }
+                    // 点击删除嵌套分组
+                    R.layout.item_group_basic -> {
+                        val itemGroupPosition = getModel<GroupBasicModel>().itemGroupPosition
+                        val parentPosition = findParentPosition()
+                        if (parentPosition != -1) {
+                            (getModel<ItemExpand>(parentPosition).itemSublist as MutableList).removeAt(itemGroupPosition)
+                            mutable.removeAt(layoutPosition)
+                            notifyItemRemoved(layoutPosition)
+                        }
                     }
                 }
             }

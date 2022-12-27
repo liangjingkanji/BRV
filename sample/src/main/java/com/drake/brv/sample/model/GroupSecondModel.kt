@@ -28,7 +28,7 @@ class GroupSecondModel : ItemExpand, BaseObservable() {
             field = value
             notifyChange()
         }
-    override var itemSublist: List<Any?>? = listOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
+    override var itemSublist: List<Any?>? = mutableListOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
     val title get() = "嵌套分组 [ $itemGroupPosition ]"
     val expandIcon get() = if (itemExpand) R.drawable.ic_arrow_nested_expand else R.drawable.ic_arrow_nested_collapse
 }
