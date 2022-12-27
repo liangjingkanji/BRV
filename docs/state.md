@@ -58,7 +58,7 @@ StateConfig.apply {
 === "代码创建"
     建议在XML布局中创建, 可保持代码可读性且避免不必要的问题发生, 性能也更优
     ```kotlin
-    val state = state() // 在Activity/Fragment直接函数创建缺省页, `rv.state()`也可以, 但是还是推荐在布局中创建
+    val state = stateCreate() // 在Activity/Fragment直接函数创建缺省页, `rv.stateCreate()`也可以, 但是非常不推荐使用
     ```
 
 > CoordinatorLayout+ViewPager`要求使用的状态缺省页的XML根布局为`NestedScrollView`, 否则显示缺省页后无法正常滑动
