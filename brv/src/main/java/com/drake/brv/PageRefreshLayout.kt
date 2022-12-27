@@ -22,6 +22,7 @@ import android.view.View
 import android.view.View.OnLayoutChangeListener
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.drake.brv.listener.OnBindViewHolderListener
 import com.drake.brv.listener.OnMultiStateListener
 import com.drake.brv.utils.bindingAdapter
@@ -135,7 +136,11 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             holder: BindingAdapter.BindingViewHolder,
             position: Int,
         ) {
-            if (mEnableLoadMore && !mFooterNoMoreData && preloadIndex != -1 && (adapter.itemCount - preloadIndex <= position)) {
+            if (mEnableLoadMore && !mFooterNoMoreData &&
+                rv.scrollState != SCROLL_STATE_IDLE &&
+                preloadIndex != -1 &&
+                (adapter.itemCount - preloadIndex <= position)
+            ) {
                 post {
                     if (state == RefreshState.None) {
                         notifyStateChanged(RefreshState.Loading)
