@@ -125,6 +125,28 @@ binding.rv.bindingAdapter.models = getData().forEach {
                             }
 ```
 
+
+## 嵌套分组删除
+
+在示例代码中有演示如何删除嵌套分组中的某个item, 和删除普通item只是多了一个步骤, 即删除父item中的`itemSublist`, 避免下次展开时数据错误
+
+```kotlin
+// 点击删除嵌套分组
+val model = getModel<GroupBasicModel>()
+val parentPosition = findParentPosition()
+if (parentPosition != -1) {
+    // 删除父item的嵌套分组数据
+    (getModel<ItemExpand>(parentPosition).itemSublist as MutableList).remove(model)
+
+    // 正常删除item
+    mutable.removeAt(layoutPosition)
+    notifyItemRemoved(layoutPosition)
+}
+```
+
+示例代码: [GroupFragment.kt](https://github.com/liangjingkanji/BRV/blob/67a5caff28bd0872e41e9afffcdef1e4380db6d9/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupFragment.kt#L50)
+
+
 ## 分组相关函数
 
 | BindingAdapter的函数 | 描述 |
