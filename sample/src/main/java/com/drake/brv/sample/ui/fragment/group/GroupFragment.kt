@@ -48,10 +48,10 @@ class GroupFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_
                     }
                     // 点击删除嵌套分组
                     R.layout.item_group_basic -> {
-                        val itemGroupPosition = getModel<GroupBasicModel>().itemGroupPosition
+                        val model = getModel<GroupBasicModel>()
                         val parentPosition = findParentPosition()
                         if (parentPosition != -1) {
-                            (getModel<ItemExpand>(parentPosition).itemSublist as MutableList).removeAt(itemGroupPosition)
+                            (getModel<ItemExpand>(parentPosition).itemSublist as MutableList).remove(model)
                             mutable.removeAt(layoutPosition)
                             notifyItemRemoved(layoutPosition)
                         }
