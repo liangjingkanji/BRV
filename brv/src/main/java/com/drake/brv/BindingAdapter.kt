@@ -682,7 +682,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 扁平化数据, 将折叠分组铺平展开创建列表
      * @param models 数据集合
-     * @param expand 是否展开或折叠其子分组, null则什么都不做
+     * @param expand true展开或false折叠其子分组, null则什么都不做
      * @param depth 扁平化深度层级 -1 表示全部
      */
     private fun flat(
@@ -1199,8 +1199,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          * @return 展开后新增的条目数量
          */
         fun expand(scrollTop: Boolean = false, @IntRange(from = -1) depth: Int = 0): Int {
-            val itemExpand = getModelOrNull<ItemExpand>()
-            if (itemExpand?.itemExpand == true) return 0
+            val itemExpand = getModelOrNull<ItemExpand>() ?: return 0
+            if (itemExpand.itemExpand) return 0
 
             var position = if (bindingAdapterPosition == -1) layoutPosition else bindingAdapterPosition
 
@@ -1213,33 +1213,30 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
             onExpand?.invoke(this, true)
 
-            return if (itemExpand != null && !itemExpand.itemExpand) {
-                val itemSublist = itemExpand.itemSublist
-                itemExpand.itemExpand = true
-                previousExpandPosition = position
-                if (itemSublist.isNullOrEmpty()) {
-                    notifyItemChanged(position)
-                    0
-                } else {
-                    val sublistFlat = flat(ArrayList(itemSublist), true, depth)
+            val itemSublist = itemExpand.itemSublist
+            itemExpand.itemExpand = true
+            previousExpandPosition = position
 
-                    (this@BindingAdapter.models as MutableList).addAll(position + 1 - headerCount, sublistFlat)
-                    if (expandAnimationEnabled) {
-                        notifyItemChanged(position)
-                        notifyItemRangeInserted(position + 1, sublistFlat.size)
-                    } else {
-                        notifyDataSetChanged()
-                    }
-                    if (scrollTop) {
-                        rv?.let {
-                            it.scrollToPosition(position)
-                            (it.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(position, 0)
-                        }
-                    }
-                    sublistFlat.size
-                }
-            } else {
+            return if (itemSublist.isNullOrEmpty()) {
+                notifyItemChanged(position)
                 0
+            } else {
+                val sublistFlat = flat(ArrayList(itemSublist), true, depth)
+
+                (this@BindingAdapter.models as MutableList).addAll(position + 1 - headerCount, sublistFlat)
+                if (expandAnimationEnabled) {
+                    notifyItemChanged(position)
+                    notifyItemRangeInserted(position + 1, sublistFlat.size)
+                } else {
+                    notifyDataSetChanged()
+                }
+                if (scrollTop) {
+                    rv?.let {
+                        it.scrollToPosition(position)
+                        (it.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(position, 0)
+                    }
+                }
+                sublistFlat.size
             }
         }
 
@@ -1249,33 +1246,29 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
          * @return 折叠后减少的条目数量
          */
         fun collapse(@IntRange(from = -1) depth: Int = 0): Int {
-            val itemExpand = getModelOrNull<ItemExpand>()
+            val itemExpand = getModelOrNull<ItemExpand>() ?: return 0
+            if (!itemExpand.itemExpand) return 0
 
-            if (itemExpand?.itemExpand == false) return 0
             val position = if (bindingAdapterPosition == -1) layoutPosition else bindingAdapterPosition
 
             onExpand?.invoke(this, false)
 
-            return if (itemExpand != null && itemExpand.itemExpand) {
-                val itemSublist = itemExpand.itemSublist
-                itemExpand.itemExpand = false
+            val itemSublist = itemExpand.itemSublist
+            itemExpand.itemExpand = false
 
-                if (itemSublist.isNullOrEmpty()) {
-                    notifyItemChanged(position, itemExpand)
-                    0
-                } else {
-                    val sublistFlat = flat(ArrayList(itemSublist), false, depth)
-                    (this@BindingAdapter.models as MutableList).subList(position + 1 - headerCount, position + 1 - headerCount + sublistFlat.size).clear()
-                    if (expandAnimationEnabled) {
-                        notifyItemChanged(position, itemExpand)
-                        notifyItemRangeRemoved(position + 1, sublistFlat.size)
-                    } else {
-                        notifyDataSetChanged()
-                    }
-                    sublistFlat.size
-                }
-            } else {
+            return if (itemSublist.isNullOrEmpty()) {
+                notifyItemChanged(position, itemExpand)
                 0
+            } else {
+                val sublistFlat = flat(ArrayList(itemSublist), false, depth)
+                (this@BindingAdapter.models as MutableList).subList(position + 1 - headerCount, position + 1 - headerCount + sublistFlat.size).clear()
+                if (expandAnimationEnabled) {
+                    notifyItemChanged(position, itemExpand)
+                    notifyItemRangeRemoved(position + 1, sublistFlat.size)
+                } else {
+                    notifyDataSetChanged()
+                }
+                sublistFlat.size
             }
         }
 
