@@ -39,8 +39,11 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         if (layoutPosition < headerCount) {
             adapter.removeHeader(layoutPosition, true)
         } else {
-            adapter.mutable.removeAt(layoutPosition - headerCount)
-            adapter.notifyItemRemoved(layoutPosition)
+            val models = adapter.models as? MutableList
+            if (models != null) {
+                models.removeAt(layoutPosition - headerCount)
+                adapter.notifyItemRemoved(layoutPosition)
+            }
         }
     }
 
@@ -145,20 +148,16 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         val currentPosition = recyclerView.getChildLayoutPosition(source.itemView)
         val targetPosition = recyclerView.getChildLayoutPosition(target.itemView)
 
-        if (source is BindingViewHolder && target is BindingViewHolder) {
-            val model = target.getModel<Any>()
-            if (model is ItemDrag && model.itemOrientationDrag != 0) {
-                val fromPosition = currentPosition - adapter.headerCount
-                val toPosition = targetPosition - adapter.headerCount
-                val fromItem = adapter.mutable[fromPosition]
-                adapter.mutable.apply {
-                    removeAt(fromPosition)
-                    add(toPosition, fromItem)
-                }
-                adapter.notifyItemMoved(currentPosition, targetPosition)
-                sourceViewHolder = source
-                targetViewHolder = target
-            }
+        val models = adapter.models as? MutableList
+        if (models != null && source is BindingViewHolder && target is BindingViewHolder) {
+            val fromPosition = currentPosition - adapter.headerCount
+            val toPosition = targetPosition - adapter.headerCount
+            val fromItem = models[fromPosition]
+            models.removeAt(fromPosition)
+            models.add(toPosition, fromItem)
+            adapter.notifyItemMoved(currentPosition, targetPosition)
+            sourceViewHolder = source
+            targetViewHolder = target
         }
         return false
     }
