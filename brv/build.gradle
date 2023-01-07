@@ -18,8 +18,6 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: "com.github.dcendents.android-maven"
-group = "com.github.liangjingkanji"
 
 
 android {

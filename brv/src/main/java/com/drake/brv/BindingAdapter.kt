@@ -680,7 +680,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
 
     /**
-     * 扁平化数据, 将折叠分组铺平展开创建列表
+     * 扁平化数据, 如果元素存在子列表[ItemExpand.itemSublist], 会自动展开(将子列表添加到数据集合中)/折叠(将子列表从数据集合中删除)
      * @param models 数据集合
      * @param expand true展开或false折叠其子分组, null则什么都不做
      * @param depth 扁平化深度层级 -1 表示全部
@@ -695,22 +695,32 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         val arrayList = ArrayList(models)
         models.clear()
 
-        arrayList.forEachIndexed { index, item ->
+        var itemSublist: List<*>? = null
+        var itemGroupPosition = 0
+
+        arrayList.forEach { item ->
+            if (itemSublist != null && models.any { item === it }) {
+                return@forEach
+            }
+            itemSublist = null
             models.add(item)
             if (item is ItemExpand) {
-                item.itemGroupPosition = index
+                item.itemGroupPosition = itemGroupPosition
                 var nextDepth = depth
                 if (expand != null && depth != 0) {
                     item.itemExpand = expand
                     if (depth > 0) nextDepth -= 1
                 }
 
-                val itemSublist = item.itemSublist
-                if (!itemSublist.isNullOrEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
-                    val nestedList = flat(ArrayList(itemSublist), expand, nextDepth)
-                    models.addAll(nestedList)
+                itemSublist = item.itemSublist
+                itemSublist?.let {
+                    if (it.isNotEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
+                        val nestedList = flat(it.toMutableList(), expand, nextDepth)
+                        models.addAll(nestedList)
+                    }
                 }
             }
+            itemGroupPosition += 1
         }
         return models
     }

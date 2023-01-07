@@ -1,4 +1,4 @@
-首先希望你已经阅读过rv基础的[生命周期](lifecycle.md)
+首先希望你已经阅读过rv基础的[生命周期](lifecycle.md), 正常情况下列表并不使用本章的优化方法也不会卡顿
 
 > BRV并没有对RecyclerView存在卡顿影响, 这里介绍的都是RecyclerView的优化点, 未提及的请自行搜索或补充
 
