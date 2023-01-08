@@ -1,3 +1,10 @@
+## 1.3.88
+- fix: #317 无法拖拽到item(禁用拖拽状态)的相邻位置
+- fix: #305 列表重新赋值数据可以恢复列表展开状态
+- pref: expand/collapse 判断逻辑
+- sample: #313 嵌套分组删除崩溃
+- sample: fix something
+
 ## 1.3.87
 - fix: #311 notifyItemChanged触发onRefresh
 - pref: 优化dataBinding开启时使用非layout布局存在inflate两次布局问题
