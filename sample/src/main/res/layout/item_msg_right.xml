@@ -18,11 +18,11 @@
         android:paddingVertical="16dp">
 
         <TextView
+            android:id="@+id/tvMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginRight="16dp"
-            android:autoLink="web"
             android:background="@drawable/bg_msg_bubble_right"
             android:gravity="center_vertical"
             android:layerType="software"

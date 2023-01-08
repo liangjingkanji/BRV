@@ -2,6 +2,7 @@ package com.drake.brv.sample.ui.fragment
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.widget.TextView
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentChatBinding
 import com.drake.brv.sample.model.ChatMessage
@@ -12,6 +13,7 @@ import com.drake.engine.base.EngineFragment
 import com.drake.net.utils.scope
 import com.drake.softinput.hideSoftInput
 import com.drake.softinput.setWindowSoftInput
+import com.drake.spannable.movement.ClickableMovementMethod
 
 class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat) {
 
@@ -33,6 +35,9 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
                     R.layout.item_msg_left // 对方发的消息
                 }
             }
+            onCreate {
+                findView<TextView>(R.id.tvMessage).movementMethod = ClickableMovementMethod()
+            }
         }
         binding.rv.setOnTouchListener { v, _ ->
             v.clearFocus() // 清除文字选中状态
@@ -46,7 +51,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
             scope {
                 val data = model.fetchHistory(index) // 模拟拉取历史记录
                 addData(data) {
-                    itemCount < 1
+                    itemCount < 3
                 }
             }
         }.refresh()

@@ -88,7 +88,7 @@
     <fragment
         android:id="@+id/commentFragment"
         android:name="com.drake.brv.sample.ui.fragment.CommentFragment"
-        android:label="评论列表" />
+        android:label="哔哩哔哩评论" />
     <fragment
         android:id="@+id/interfaceFragment"
         android:name="com.drake.brv.sample.ui.fragment.InterfaceFragment"
@@ -124,14 +124,14 @@
     <fragment
         android:id="@+id/skeletonFragment"
         android:name="com.drake.brv.sample.ui.fragment.SkeletonFragment"
-        android:label="SkeletonFragment" />
+        android:label="骨骼动画" />
     <fragment
         android:id="@+id/douyinCommentFragment"
         android:name="com.drake.brv.sample.ui.fragment.DouyinCommentFragment"
-        android:label="抖音评论列表" />
+        android:label="抖音评论" />
     <fragment
         android:id="@+id/letterIndexFragment"
         android:name="com.drake.brv.sample.ui.fragment.LetterIndexFragment"
-        android:label="LetterIndexFragment" />
+        android:label="字母索引" />
 
 </navigation>

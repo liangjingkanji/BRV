@@ -71,7 +71,7 @@ data class CommentModel(
 
     @Serializable
     data class Comment(
-        var name: String = "",
+        var nickname: String = "",
         var content: String = ""
     ) {
 
@@ -80,7 +80,7 @@ data class CommentModel(
          * 使用依赖库快速渲染评论内容 https://github.com/liangjingkanji/spannable
          */
         fun getSpannable(): CharSequence {
-            return name.setSpan(ForegroundColorSpan(Color.parseColor("#3b87bf"))).addSpan(": $content").replaceSpan("@[^@]+?(?=\\s|\$)".toRegex()) {
+            return nickname.setSpan(ForegroundColorSpan(Color.parseColor("#3b87bf"))).addSpan(" : $content").replaceSpan("@[^@]+?(?=\\s|\$)".toRegex()) {
                 ForegroundColorSpan(Color.parseColor("#3b87bf"))
             }
         }

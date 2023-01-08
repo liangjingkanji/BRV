@@ -22,11 +22,11 @@
     <item
         android:id="@+id/commentFragment"
         android:icon="@drawable/ic_comment"
-        android:title="评论列表" />
+        android:title="哔哩哔哩评论" />
     <item
         android:id="@+id/douyinCommentFragment"
         android:icon="@drawable/ic_comment"
-        android:title="抖音评论列表" />
+        android:title="抖音评论" />
     <item
         android:id="@+id/chatFragment"
         android:icon="@drawable/ic_chat"
