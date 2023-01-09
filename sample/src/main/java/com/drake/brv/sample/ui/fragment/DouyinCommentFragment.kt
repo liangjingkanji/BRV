@@ -7,6 +7,9 @@ import com.drake.brv.sample.ui.dialog.CommentDialog
 import com.drake.engine.base.EngineFragment
 
 class DouyinCommentFragment : EngineFragment<FragmentDouyinCommentBinding>(R.layout.fragment_douyin_comment) {
+
+    private val commentDialog = CommentDialog()
+
     override fun initView() {
         binding.v = this
     }
@@ -16,12 +19,18 @@ class DouyinCommentFragment : EngineFragment<FragmentDouyinCommentBinding>(R.lay
 
     override fun onResume() {
         super.onResume()
-        CommentDialog().show(childFragmentManager, null)
+        showDialog()
     }
 
     override fun onClick(v: View) {
         when (v) {
-            binding.btnShowDialog -> CommentDialog().show(childFragmentManager, null)
+            binding.btnShowDialog -> showDialog()
+        }
+    }
+
+    private fun showDialog() {
+        if (commentDialog.dialog?.isShowing != true) {
+            commentDialog.show(childFragmentManager, null)
         }
     }
 }
