@@ -29,7 +29,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
 
         binding.rv.setup {
             addType<ChatMessage> {
-                if (isMine()) {
+                if (isSelf()) {
                     R.layout.item_msg_right // 我发的消息
                 } else {
                     R.layout.item_msg_left // 对方发的消息
@@ -49,7 +49,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
     override fun initData() {
         binding.page.onRefresh {
             scope {
-                val data = model.fetchHistory(index) // 模拟拉取历史记录
+                val data = model.getHistory(index) // 模拟拉取历史记录
                 addData(data) {
                     itemCount < 3
                 }
@@ -63,7 +63,7 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
                 binding.rv.addModels(model.getMessages(), index = 0) // 添加一条消息
                 binding.rv.scrollToPosition(0) // 保证最新一条消息显示
             }
-            binding.rv -> {
+            binding.page -> {
                 hideSoftInput() // 隐藏键盘
             }
         }

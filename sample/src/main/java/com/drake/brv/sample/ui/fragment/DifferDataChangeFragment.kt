@@ -21,7 +21,7 @@ class DifferDataChangeFragment : EngineFragment<FragmentDifferDataChangeBinding>
         setHasOptionsMenu(true)
 
         binding.rv.linear().setup {
-            addType<DiffModel>(R.layout.item_simple)
+            addType<DiffModel>(R.layout.item_simple_text)
             onBind {
                 findView<TextView>(R.id.tv_simple).text = getModel<DiffModel>().content
             }

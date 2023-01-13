@@ -1,0 +1,90 @@
+{
+  "banner": [
+    {
+      "id": 1,
+      "image": "https://gmedia.playstation.com/is/image/SIEPDC/animals-and-companions-keyart-03-en-24aug22?$1600px--t$"
+    },
+    {
+      "id": 2,
+      "image": "https://gmedia.playstation.com/is/image/SIEPDC/playstation-goes-to-the-movies-keyart-01-22mar22?$1600px--t$"
+    },
+    {
+      "id": 3,
+      "image": "https://gmedia.playstation.com/is/image/SIEPDC/ultimate-gaming-setup-keyart-01-en-24oct22?$1600px$"
+    },
+    {
+      "id": 4,
+      "image": "https://gmedia.playstation.com/is/image/SIEPDC/tmop-editorials-new-and-returning-players-image-block-02a-en-22jun21?$1600px--t$"
+    }
+  ],
+  "explore": [
+    {
+      "id": 1,
+      "image": "https://image.api.playstation.com/pr/bam-art/129/926/57378d6b-29b7-4d35-81e9-9be992d8441f.jpg?w=780&thumb=false"
+    },
+    {
+      "id": 2,
+      "image": "https://image.api.playstation.com/pr/bam-art/125/741/1f9cfb15-5bb2-46c4-b4cd-d2bd6d353124.jpg?w=780&thumb=false"
+    },
+    {
+      "id": 3,
+      "image": "https://image.api.playstation.com/pr/bam-art/135/445/5609fab7-2d32-4bfa-a119-a7ed3deb0b73.png?w=780&thumb=false"
+    },
+    {
+      "id": 4,
+      "image": "https://image.api.playstation.com/pr/bam-art/128/134/ff1a2ff0-a9f1-45b3-ac9a-0854a64b3e17.jpg?w=780&thumb=false"
+    },
+    {
+      "id": 5,
+      "image": "https://image.api.playstation.com/pr/bam-art/149/249/e531392a-93f9-46fe-98f7-adc0e58294c1.jpg?w=780&thumb=false"
+    },
+    {
+      "id": 6,
+      "image": "https://image.api.playstation.com/pr/bam-art/148/085/7f495770-61e8-45b0-8186-f57f12c73479.jpg?w=780&thumb=false"
+    },
+    {
+      "id": 7,
+      "image": "https://image.api.playstation.com/pr/bam-art/145/080/8f844ac7-9981-4ad8-b45f-1010aefd5b98.jpg?w=780&thumb=false"
+    },
+    {
+      "id": 8,
+      "image": "https://image.api.playstation.com/pr/bam-art/135/561/41fa3636-be3d-4bb6-b459-375a759c0969.jpg?w=780&thumb=false"
+    }
+  ],
+  "event": {
+    "id": 1,
+    "image": "https://image.api.playstation.com/pr/bam-art/150/878/81734b32-edc5-4f40-a3c0-09c99a37bc18.png?w=780&thumb=false"
+  },
+  "tabs": [
+    {
+      "id": 1,
+      "title": "Switch",
+      "count": 3562
+    },
+    {
+      "id": 2,
+      "title": "Steam",
+      "count": 1481
+    },
+    {
+      "id": 3,
+      "title": "PS4",
+      "count": 522
+    },
+    {
+      "id": 4,
+      "title": "PS5",
+      "count": 190
+    },
+    {
+      "id": 5,
+      "title": "Xbox",
+      "count": 222
+    },
+    {
+      "id": 6,
+      "title": "手游",
+      "count": 264
+    }
+  ]
+}

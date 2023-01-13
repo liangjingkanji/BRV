@@ -18,7 +18,7 @@ package com.drake.brv.sample.ui.fragment
 
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentUpFetchBinding
-import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
 
@@ -30,7 +30,7 @@ class UpFetchFragment : EngineFragment<FragmentUpFetchBinding>(R.layout.fragment
 
     override fun initView() {
         binding.rv.setup {
-            addType<Model>(R.layout.item_multi_type_simple)
+            addType<SimpleModel>(R.layout.item_simple)
         }
 
         binding.page.upFetchEnabled = true
@@ -50,7 +50,7 @@ class UpFetchFragment : EngineFragment<FragmentUpFetchBinding>(R.layout.fragment
     private fun getData(): MutableList<Any> {
         return mutableListOf<Any>().apply {
             for (i in 0..9) {
-                add(Model())
+                add(SimpleModel())
             }
         }
     }

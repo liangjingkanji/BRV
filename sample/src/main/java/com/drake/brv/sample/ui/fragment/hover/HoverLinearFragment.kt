@@ -22,7 +22,7 @@ import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentHoverBinding
 import com.drake.brv.sample.model.HoverHeaderModel
-import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -32,7 +32,7 @@ class HoverLinearFragment : BaseHoverFragment<FragmentHoverBinding>(R.layout.fra
 
     override fun initView() {
         binding.rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_simple)
+            addType<SimpleModel>(R.layout.item_simple)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
             models = getData()
 
@@ -61,25 +61,25 @@ class HoverLinearFragment : BaseHoverFragment<FragmentHoverBinding>(R.layout.fra
     private fun getData(): List<Any> {
         return listOf(
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model()
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel()
         )
     }
 

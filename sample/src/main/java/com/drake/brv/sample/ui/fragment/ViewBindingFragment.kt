@@ -7,8 +7,8 @@ import androidx.viewbinding.ViewBinding
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentViewBindingBinding
 import com.drake.brv.sample.databinding.ItemCommentBinding
-import com.drake.brv.sample.databinding.ItemSimpleBinding
-import com.drake.brv.sample.model.SimpleModel
+import com.drake.brv.sample.databinding.ItemSimpleTextBinding
+import com.drake.brv.sample.model.SimpleBindingModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -22,16 +22,16 @@ class ViewBindingFragment : Fragment(R.layout.fragment_view_binding) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.rv.linear().setup {
-            addType<SimpleModel>(R.layout.item_simple)
+            addType<SimpleBindingModel>(R.layout.item_simple_text)
             onBind {
 
                 // 单一类型不用判断
-                val binding = getBinding<ItemSimpleBinding>() // 使用ViewBinding/DataBinding都可以使用本方法
+                val binding = getBinding<ItemSimpleTextBinding>() // 使用ViewBinding/DataBinding都可以使用本方法
                 binding.tvSimple.text = layoutPosition.toString()
 
                 // 如果是多类型可以通过判断ViewBinding类型分开处理
                 when (val viewBinding = getBinding<ViewBinding>()) {
-                    is ItemSimpleBinding -> {
+                    is ItemSimpleTextBinding -> {
                         viewBinding.tvSimple.text = layoutPosition.toString()
                     }
                     is ItemCommentBinding -> {
@@ -49,7 +49,7 @@ class ViewBindingFragment : Fragment(R.layout.fragment_view_binding) {
     private fun getData(): MutableList<Any> {
         // 在Model中也可以绑定数据
         return mutableListOf<Any>().apply {
-            for (i in 0..9) add(SimpleModel())
+            for (i in 0..9) add(SimpleBindingModel())
         }
     }
 }

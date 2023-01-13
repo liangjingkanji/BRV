@@ -27,6 +27,7 @@
 
         <com.drake.brv.PageRefreshLayout
             android:id="@+id/page"
+            click="@{v}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -36,7 +37,7 @@
                 android:id="@+id/rv"
                 click="@{v}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:reverseLayout="true"
                 tools:itemCount="3"

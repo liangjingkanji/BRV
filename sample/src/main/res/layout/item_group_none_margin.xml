@@ -20,7 +20,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.Model" />
+            type="com.drake.brv.sample.model.Group3Model" />
     </data>
 
     <LinearLayout
@@ -31,15 +31,14 @@
             android:id="@+id/item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_margin="16dp"
             android:background="@drawable/bg_card"
             android:foreground="?selectableItemBackgroundBorderless">
 
             <TextView
-                android:text="@{String.valueOf(m.itemPosition)}"
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{String.valueOf(m.itemGroupPosition)}" />
 
         </FrameLayout>
 

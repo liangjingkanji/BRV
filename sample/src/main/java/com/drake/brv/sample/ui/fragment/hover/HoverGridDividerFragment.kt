@@ -23,8 +23,8 @@ import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentHoverBinding
-import com.drake.brv.sample.model.GroupBasicModel
-import com.drake.brv.sample.model.GroupSecondModel
+import com.drake.brv.sample.model.Group2Model
+import com.drake.brv.sample.model.Group3Model
 import com.drake.brv.sample.model.HoverHeaderModel
 import com.drake.brv.utils.*
 import com.drake.tooltip.toast
@@ -38,23 +38,23 @@ class HoverGridDividerFragment : BaseHoverFragment<FragmentHoverBinding>(R.layou
         binding.rv.linear().setup {
 
             onCreate {
-                if (itemViewType == R.layout.item_simple_list) { // 构建嵌套网格列表
+                if (itemViewType == R.layout.item_rv) { // 构建嵌套网格列表
                     findView<RecyclerView>(R.id.rv).divider { // 构建间距
                         setDivider(20)
                         includeVisible = true
                         orientation = DividerOrientation.GRID
                     }.grid(2).setup {
-                        addType<GroupBasicModel>(R.layout.item_multi_type_simple_none_margin)
+                        addType<Group3Model>(R.layout.item_group_none_margin)
                     }
                 }
             }
             onBind {
-                if (itemViewType == R.layout.item_simple_list) { // 为嵌套的网格列表赋值数据
+                if (itemViewType == R.layout.item_rv) { // 为嵌套的网格列表赋值数据
                     findView<RecyclerView>(R.id.rv).models =
-                        getModel<GroupSecondModel>().itemSublist
+                        getModel<Group2Model>().itemSublist
                 }
             }
-            addType<GroupSecondModel>(R.layout.item_simple_list)
+            addType<Group2Model>(R.layout.item_rv)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
 
             // 点击事件
@@ -81,13 +81,13 @@ class HoverGridDividerFragment : BaseHoverFragment<FragmentHoverBinding>(R.layou
     private fun getData(): List<Any> {
         return listOf(
             HoverHeaderModel(),
-            GroupSecondModel(),
+            Group2Model(),
             HoverHeaderModel(),
-            GroupSecondModel(),
+            Group2Model(),
             HoverHeaderModel(),
-            GroupSecondModel(),
+            Group2Model(),
             HoverHeaderModel(),
-            GroupSecondModel(),
+            Group2Model(),
         )
     }
 

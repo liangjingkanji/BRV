@@ -20,7 +20,12 @@ import android.app.Application
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.BR
 import com.drake.brv.sample.R
+import com.drake.brv.sample.component.net.SerializationConverter
+import com.drake.brv.sample.constants.Api
+import com.drake.brv.sample.mock.MockDispatcher
 import com.drake.brv.utils.BRV
+import com.drake.net.NetConfig
+import com.drake.net.okhttp.setConverter
 import com.drake.statelayout.StateConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -60,5 +65,12 @@ class App : Application() {
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
             ClassicsFooter(context)
         }
+
+        NetConfig.initialize(Api.HOST, this) {
+            // 数据转换器
+            setConverter(SerializationConverter())
+        }
+
+        MockDispatcher.initialize()
     }
 }

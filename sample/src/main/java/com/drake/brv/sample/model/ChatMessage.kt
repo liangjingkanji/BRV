@@ -34,7 +34,7 @@ data class ChatMessage(
                 URLSpan(it.value)
             }
             // 避免URL颜色被覆盖
-            if (isMine()) {
+            if (isSelf()) {
                 result = result.replaceSpan(urlRule.toRegex()) {
                     ColorSpan(Color.WHITE)
                 }
@@ -43,7 +43,7 @@ data class ChatMessage(
         return result
     }
 
-    fun isMine(): Boolean {
+    fun isSelf(): Boolean {
         return currentUserId == userId
     }
 }

@@ -18,7 +18,7 @@ package com.drake.brv.sample.ui.fragment
 
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentOneMoreTypeBinding
-import com.drake.brv.sample.model.OneMoreTypeModel
+import com.drake.brv.sample.model.OneMoreModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
@@ -29,35 +29,35 @@ class OneMoreTypeFragment :
 
     override fun initView() {
         binding.rv.linear().setup {
-            addType<OneMoreTypeModel> {
+            addType<OneMoreModel> {
                 when (type) {
-                    0 -> R.layout.item_multi_type_one_more
+                    0 -> R.layout.item_one_more
                     else -> R.layout.item_multi_type_two_span
                 }
             }
         }.models = getData()
     }
 
-    private fun getData(): List<OneMoreTypeModel> {
+    private fun getData(): List<OneMoreModel> {
         return listOf(
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(1),
-            OneMoreTypeModel(0),
-            OneMoreTypeModel(0)
+            OneMoreModel(0),
+            OneMoreModel(0),
+            OneMoreModel(1),
+            OneMoreModel(1),
+            OneMoreModel(0),
+            OneMoreModel(0),
+            OneMoreModel(1),
+            OneMoreModel(1),
+            OneMoreModel(0),
+            OneMoreModel(0),
+            OneMoreModel(0),
+            OneMoreModel(1),
+            OneMoreModel(0),
+            OneMoreModel(0),
+            OneMoreModel(0),
+            OneMoreModel(1),
+            OneMoreModel(0),
+            OneMoreModel(0)
         )
     }
 

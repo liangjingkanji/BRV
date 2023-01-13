@@ -22,8 +22,8 @@ import android.view.MenuItem
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentSkeletonBinding
 import com.drake.brv.sample.interfaces.LeastAnimationStateChangedHandler
-import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.TwoSpanModel
+import com.drake.brv.sample.model.FullSpanModel
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
@@ -37,8 +37,8 @@ class SkeletonFragment : EngineFragment<FragmentSkeletonBinding>(R.layout.fragme
         setHasOptionsMenu(true)
 
         binding.rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_simple)
-            addType<TwoSpanModel>(R.layout.item_multi_type_two_span)
+            addType<SimpleModel>(R.layout.item_simple)
+            addType<FullSpanModel>(R.layout.item_multi_type_two_span)
         }
 
         // 该处理者可以保证骨骼动图显示最短时间(避免网络请求过快导致骨骼动画快速消失屏幕闪烁), 如果不需要可以不配置
@@ -63,8 +63,8 @@ class SkeletonFragment : EngineFragment<FragmentSkeletonBinding>(R.layout.fragme
         return mutableListOf<Any>().apply {
             for (i in 0..9) {
                 when (i) {
-                    1, 2 -> add(TwoSpanModel())
-                    else -> add(Model())
+                    1, 2 -> add(FullSpanModel())
+                    else -> add(SimpleModel())
                 }
             }
         }

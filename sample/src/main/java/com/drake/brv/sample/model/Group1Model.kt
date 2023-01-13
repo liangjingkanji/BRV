@@ -22,7 +22,7 @@ import com.drake.brv.item.ItemHover
 import com.drake.brv.item.ItemPosition
 import com.drake.brv.sample.R
 
-open class GroupModel : ItemExpand, ItemHover, ItemPosition,
+open class Group1Model : ItemExpand, ItemHover, ItemPosition,
     BaseObservable() {
 
     override var itemGroupPosition: Int = 0
@@ -36,11 +36,11 @@ open class GroupModel : ItemExpand, ItemHover, ItemPosition,
     override var itemSublist: List<Any?>?
         get() = jsonSublist
         set(value) {
-            jsonSublist = value as List<GroupBasicModel> // 注意类型转换异常
+            jsonSublist = value as List<Group3Model> // 注意类型转换异常
         }
 
     /** 接口数据里面的子列表使用此字段接收(请注意避免gson等框架解析kotlin会覆盖字段默认值问题) */
-    var jsonSublist: List<GroupBasicModel> = mutableListOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
+    var jsonSublist: List<Group3Model> = mutableListOf(Group3Model(), Group3Model(), Group3Model(), Group3Model())
 
     override var itemHover: Boolean = true
     override var itemPosition: Int = 0

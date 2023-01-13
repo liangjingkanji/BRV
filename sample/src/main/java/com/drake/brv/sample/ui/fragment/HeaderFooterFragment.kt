@@ -21,7 +21,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentHeaderFooterBinding
-import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -36,20 +36,20 @@ class HeaderFooterFragment :
         setHasOptionsMenu(true)
 
         binding.rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_simple)
+            addType<SimpleModel>(R.layout.item_simple)
 
             /**
              * BRV的数据集 = Header + Footer + Models
              * 所以本质上他们都是一组多类型而已, 分出来只是为了方便替换Models而不影响Header和Footer
              */
 
-            addType<Header>(R.layout.item_multi_type_header)
-            addType<Footer>(R.layout.item_multi_type_footer)
+            addType<Header>(R.layout.item_header)
+            addType<Footer>(R.layout.item_footer)
         }.models = getData()
     }
 
-    private fun getData(): List<Model> {
-        return listOf(Model(), Model())
+    private fun getData(): List<SimpleModel> {
+        return listOf(SimpleModel(), SimpleModel())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -81,12 +81,12 @@ class HeaderFooterFragment :
         return super.onOptionsItemSelected(item)
     }
 
-    private fun randomModelList(): List<Model> {
+    private fun randomModelList(): List<SimpleModel> {
         val random = Random()
         val num = random.nextInt(3)
-        val result = arrayListOf<Model>()
+        val result = arrayListOf<SimpleModel>()
         for (i in 0..num) {
-            result.add(Model())
+            result.add(SimpleModel())
         }
         return result
     }

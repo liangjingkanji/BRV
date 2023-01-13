@@ -21,8 +21,8 @@ import com.drake.brv.item.ItemExpand
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentGroupBinding
-import com.drake.brv.sample.model.GroupBasicModel
-import com.drake.brv.sample.model.GroupModel
+import com.drake.brv.sample.model.Group1Model
+import com.drake.brv.sample.model.Group3Model
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -37,18 +37,18 @@ class GroupGridFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragm
                 if (position < 0) return 1 // 如果添加分割线可能导致position为负数
                 // 根据类型设置列表item跨度
                 return when (binding.rv.bindingAdapter.getItemViewType(position)) {
-                    R.layout.item_group_basic -> 1 // 设置指定类型的跨度为1, 假设spanCount为2则代表此类型占据宽度为二分之一
+                    R.layout.item_group_3 -> 1 // 设置指定类型的跨度为1, 假设spanCount为2则代表此类型占据宽度为二分之一
                     else -> 2
                 }
             }
         }
         binding.rv.layoutManager = layoutManager
         binding.rv.setup {
-            addType<GroupModel>(R.layout.item_group_title)
-            addType<GroupBasicModel>(R.layout.item_group_basic)
+            addType<Group1Model>(R.layout.item_group_1)
+            addType<Group3Model>(R.layout.item_group_3)
             R.id.item.onFastClick {
                 when (itemViewType) {
-                    R.layout.item_group_title_second, R.layout.item_group_title -> {
+                    R.layout.item_group_2, R.layout.item_group_1 -> {
 
                         val changeCount =
                             if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"
@@ -61,10 +61,10 @@ class GroupGridFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragm
         }.models = getData()
     }
 
-    private fun getData(): MutableList<GroupModel> {
-        return mutableListOf<GroupModel>().apply {
+    private fun getData(): MutableList<Group1Model> {
+        return mutableListOf<Group1Model>().apply {
             repeat(4) {
-                add(GroupModel())
+                add(Group1Model())
             }
         }
     }

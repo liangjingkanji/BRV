@@ -7,7 +7,7 @@
 
         <variable
             name="v"
-            type="com.drake.brv.sample.ui.dialog.CommentDialog" />
+            type="com.drake.brv.sample.ui.dialog.DouyinCommentDialog" />
 
     </data>
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="700dp"
             android:orientation="vertical"
-            tools:context=".ui.dialog.CommentDialog">
+            tools:context=".ui.dialog.DouyinCommentDialog">
 
             <ImageView
                 android:id="@+id/ivClose"
@@ -40,11 +40,20 @@
                 android:textSize="12dp"
                 android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
+            <com.drake.brv.PageRefreshLayout
+                android:id="@+id/page"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:srlEnableNestedScrolling="false"
+                app:srlEnableRefresh="false">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </com.drake.brv.PageRefreshLayout>
 
         </LinearLayout>
 

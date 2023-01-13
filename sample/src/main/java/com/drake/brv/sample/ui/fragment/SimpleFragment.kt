@@ -29,7 +29,7 @@ class SimpleFragment : EngineFragment<FragmentSimpleBinding>(R.layout.fragment_s
 
     override fun initView() {
         binding.rv.linear().setup {
-            addType<SimpleModel>(R.layout.item_simple)
+            addType<SimpleModel>(R.layout.item_simple_text)
             onBind {
                 findView<TextView>(R.id.tv_simple).text = getModel<SimpleModel>().name
             }

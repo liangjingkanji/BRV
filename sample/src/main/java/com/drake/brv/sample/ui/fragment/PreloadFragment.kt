@@ -19,7 +19,7 @@ package com.drake.brv.sample.ui.fragment
 import com.drake.brv.PageRefreshLayout
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentPreloadBinding
-import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
 
@@ -31,7 +31,7 @@ class PreloadFragment : EngineFragment<FragmentPreloadBinding>(R.layout.fragment
 
     override fun initView() {
         binding.rv.setup {
-            addType<Model>(R.layout.item_multi_type_simple)
+            addType<SimpleModel>(R.layout.item_simple)
         }
 
         // page.preloadIndex = 4 // 自定义列表倒数第4个开始预加载, 默认为3
@@ -53,7 +53,7 @@ class PreloadFragment : EngineFragment<FragmentPreloadBinding>(R.layout.fragment
     private fun getData(): MutableList<Any> {
         return mutableListOf<Any>().apply {
             for (i in 0..9) {
-                add(Model())
+                add(SimpleModel())
             }
         }
     }

@@ -14,26 +14,34 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
-        android:id="@+id/item"
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.SimpleModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/bg_card"
-        android:foreground="?selectableItemBackgroundBorderless">
+        android:layout_height="wrap_content">
 
-        <TextView
-            tools:text="2"
-            android:id="@+id/tv_simple"
-            android:gravity="center"
+        <FrameLayout
+            android:id="@+id/item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_card"
+            android:foreground="?selectableItemBackgroundBorderless">
 
-    </FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{String.valueOf(m.itemPosition)}" />
 
-</LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

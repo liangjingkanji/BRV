@@ -17,30 +17,21 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="m"
-            type="com.drake.brv.sample.model.FlexTagModel" />
-
-    </data>
-
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_card"
+        android:foreground="?selectableItemBackgroundBorderless">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/btn_tag"
-            android:paddingLeft="10dp"
-            android:paddingTop="4dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="4dp"
-            android:text="@{m.name}"
-            tools:text="标签" />
+            android:id="@+id/tv_simple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="italic"
+            tools:text="Simple Text" />
 
     </FrameLayout>
-
 </layout>

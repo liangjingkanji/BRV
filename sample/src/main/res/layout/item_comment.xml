@@ -7,7 +7,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.CommentModel" />
+            type="com.drake.brv.sample.model.CommentModel.Data" />
 
     </data>
 

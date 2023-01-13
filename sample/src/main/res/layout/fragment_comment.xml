@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <FrameLayout
+    <com.drake.brv.PageRefreshLayout
+        android:id="@+id/page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e2e4e6"
+        android:background="@color/white"
         tools:context=".ui.fragment.CommentFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -18,5 +19,5 @@
             android:paddingBottom="64dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </FrameLayout>
+    </com.drake.brv.PageRefreshLayout>
 </layout>

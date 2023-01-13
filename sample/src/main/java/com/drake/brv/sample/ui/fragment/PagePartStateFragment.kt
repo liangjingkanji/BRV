@@ -21,8 +21,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentPagePartStateHeaderBinding
-import com.drake.brv.sample.model.Model
-import com.drake.brv.sample.model.TwoSpanModel
+import com.drake.brv.sample.model.FullSpanModel
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
@@ -36,8 +36,8 @@ class PagePartStateFragment : EngineFragment<FragmentPagePartStateHeaderBinding>
         setHasOptionsMenu(true)
 
         binding.rv.linear().setup {
-            addType<Model>(R.layout.item_multi_type_simple)
-            addType<TwoSpanModel>(R.layout.item_multi_type_two_span)
+            addType<SimpleModel>(R.layout.item_simple)
+            addType<FullSpanModel>(R.layout.item_multi_type_two_span)
         }
 
         binding.page.onRefresh {
@@ -55,8 +55,8 @@ class PagePartStateFragment : EngineFragment<FragmentPagePartStateHeaderBinding>
         return mutableListOf<Any>().apply {
             for (i in 0..9) {
                 when (i) {
-                    1, 2 -> add(TwoSpanModel())
-                    else -> add(Model())
+                    1, 2 -> add(FullSpanModel())
+                    else -> add(SimpleModel())
                 }
             }
         }

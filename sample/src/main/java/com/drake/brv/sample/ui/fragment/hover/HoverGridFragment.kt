@@ -24,7 +24,7 @@ import com.drake.brv.listener.OnHoverAttachListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentHoverBinding
 import com.drake.brv.sample.model.HoverHeaderModel
-import com.drake.brv.sample.model.Model
+import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -44,7 +44,7 @@ class HoverGridFragment : BaseHoverFragment<FragmentHoverBinding>(R.layout.fragm
         binding.rv.layoutManager = layoutManager
 
         binding.rv.setup {
-            addType<Model>(R.layout.item_multi_type_simple)
+            addType<SimpleModel>(R.layout.item_simple)
             addType<HoverHeaderModel>(R.layout.item_hover_header)
 
             // 点击事件
@@ -71,25 +71,25 @@ class HoverGridFragment : BaseHoverFragment<FragmentHoverBinding>(R.layout.fragm
     private fun getData(): List<Any> {
         return listOf(
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
             HoverHeaderModel(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model(),
-            Model()
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel(),
+            SimpleModel()
         )
     }
 

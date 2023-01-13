@@ -16,19 +16,10 @@
 
 package com.drake.brv.sample.model
 
-import androidx.databinding.BaseObservable
 import com.drake.brv.item.ItemExpand
-import com.drake.brv.sample.R
 
-class GroupSecondModel : ItemExpand, BaseObservable() {
-
-    override var itemGroupPosition: Int = 0
-    override var itemExpand: Boolean = false
-        set(value) {
-            field = value
-            notifyChange()
-        }
-    override var itemSublist: List<Any?>? = mutableListOf(GroupBasicModel(), GroupBasicModel(), GroupBasicModel(), GroupBasicModel())
-    val title get() = "嵌套分组 [ $itemGroupPosition ]"
-    val expandIcon get() = if (itemExpand) R.drawable.ic_arrow_nested_expand else R.drawable.ic_arrow_nested_collapse
-}
+open class Group3Model(
+    override var itemGroupPosition: Int = 0,
+    override var itemExpand: Boolean = false,
+    override var itemSublist: List<Any?>? = null,
+) : ItemExpand

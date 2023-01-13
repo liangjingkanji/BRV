@@ -22,7 +22,7 @@
 
         <variable
             name="m"
-            type="com.drake.brv.sample.model.CommentReplyModel" />
+            type="com.drake.brv.sample.model.DouyinCommentReplyModel.Data" />
 
     </data>
 

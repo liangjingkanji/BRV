@@ -18,7 +18,7 @@ package com.drake.brv.sample.ui.fragment
 
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentFlexBoxBinding
-import com.drake.brv.sample.model.FlexTagModel
+import com.drake.brv.sample.model.LableModel
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -34,20 +34,20 @@ class FlexBoxFragment : EngineFragment<FragmentFlexBoxBinding>(R.layout.fragment
         binding.rv.layoutManager = FlexboxLayoutManager(activity)
 
         binding.rv.setup {
-            addType<FlexTagModel>(R.layout.item_flex_tag)
+            addType<LableModel>(R.layout.item_label)
         }.models = getData()
     }
 
-    private fun getData(): List<FlexTagModel> {
+    private fun getData(): List<LableModel> {
         return listOf(
-            FlexTagModel("淘宝"),
-            FlexTagModel("微信"),
-            FlexTagModel("QQ"),
-            FlexTagModel("UC浏览器"),
-            FlexTagModel("京东"),
-            FlexTagModel("滴滴"),
-            FlexTagModel("抖音"),
-            FlexTagModel("今日头条")
+            LableModel("淘宝"),
+            LableModel("微信"),
+            LableModel("QQ"),
+            LableModel("UC浏览器"),
+            LableModel("京东"),
+            LableModel("滴滴"),
+            LableModel("抖音"),
+            LableModel("今日头条")
         )
     }
 

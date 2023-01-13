@@ -23,8 +23,8 @@ import com.drake.brv.item.ItemExpand
 import com.drake.brv.listener.DefaultItemTouchCallback
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentGroupDragBinding
-import com.drake.brv.sample.model.GroupDragBasicModel
-import com.drake.brv.sample.model.GroupDragModel
+import com.drake.brv.sample.model.GroupDrag1Model
+import com.drake.brv.sample.model.GroupDrag2Model
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
@@ -34,12 +34,15 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
 
     override fun initView() {
         binding.rv.linear().setup {
-            addType<GroupDragModel>(R.layout.item_group_title)
-            addType<GroupDragBasicModel>(R.layout.item_group_basic)
+            addType<GroupDrag1Model>(R.layout.item_group_1)
+            addType<GroupDrag2Model>(R.layout.item_group_3)
 
             // 自定义部分实现
             itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback() {
-                override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                override fun onSelectedChanged(
+                    viewHolder: RecyclerView.ViewHolder?,
+                    actionState: Int
+                ) {
                     if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) { // 拖拽移动分组前先折叠子列表
                         (viewHolder as BindingAdapter.BindingViewHolder).collapse()
                     }
@@ -59,7 +62,7 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
 
             R.id.item.onFastClick {
                 when (itemViewType) {
-                    R.layout.item_group_title_second, R.layout.item_group_title -> {
+                    R.layout.item_group_2, R.layout.item_group_1 -> {
 
                         val changeCount =
                             if (getModel<ItemExpand>().itemExpand) "折叠 ${expandOrCollapse()} 条" else "展开 ${expandOrCollapse()} 条"
@@ -72,10 +75,10 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
         }.models = getData()
     }
 
-    private fun getData(): MutableList<GroupDragModel> {
-        return mutableListOf<GroupDragModel>().apply {
+    private fun getData(): MutableList<GroupDrag1Model> {
+        return mutableListOf<GroupDrag1Model>().apply {
             repeat(4) {
-                add(GroupDragModel())
+                add(GroupDrag1Model())
             }
         }
     }

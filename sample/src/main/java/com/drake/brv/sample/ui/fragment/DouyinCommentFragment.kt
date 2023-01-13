@@ -3,12 +3,12 @@ package com.drake.brv.sample.ui.fragment
 import android.view.View
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentDouyinCommentBinding
-import com.drake.brv.sample.ui.dialog.CommentDialog
+import com.drake.brv.sample.ui.dialog.DouyinCommentDialog
 import com.drake.engine.base.EngineFragment
 
 class DouyinCommentFragment : EngineFragment<FragmentDouyinCommentBinding>(R.layout.fragment_douyin_comment) {
 
-    private val commentDialog = CommentDialog()
+    private val commentDialog = DouyinCommentDialog()
 
     override fun initView() {
         binding.v = this
