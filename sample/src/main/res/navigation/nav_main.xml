@@ -31,6 +31,11 @@
         android:label="首页布局"
         tools:layout="@layout/fragment_home" />
     <fragment
+        android:id="@+id/nestedListFragment"
+        android:name="com.drake.brv.sample.ui.fragment.NestedListFragment"
+        android:label="嵌套列表"
+        tools:layout="@layout/fragment_nested_list" />
+    <fragment
         android:id="@+id/checkModeFragment"
         android:name="com.drake.brv.sample.ui.fragment.CheckModeFragment"
         android:label="选择模式"

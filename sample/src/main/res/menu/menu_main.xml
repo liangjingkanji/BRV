@@ -44,6 +44,10 @@
         android:icon="@drawable/ic_group"
         android:title="分组" />
     <item
+        android:id="@+id/nestedListFragment"
+        android:icon="@drawable/ic_nested_list"
+        android:title="嵌套列表" />
+    <item
         android:id="@+id/nav_hover_header.xml"
         android:icon="@drawable/ic_hover_header"
         android:title="悬停" />
