@@ -1,3 +1,10 @@
+## 1.3.89
+- upgrade: stateLayout 1.3.13
+- sample: use mock data
+- sample: 示例-嵌套列表
+- sample: 示例-首页布局
+- sample: 避免重复显示对话框
+
 ## 1.3.88
 - fix: #317 无法拖拽到item(禁用拖拽状态)的相邻位置
 - fix: #305 列表重新赋值数据可以恢复列表展开状态
