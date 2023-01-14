@@ -9,6 +9,10 @@
             name="m"
             type="com.drake.brv.sample.model.HomeModel" />
 
+        <variable
+            name="v"
+            type="com.drake.brv.sample.ui.fragment.home.HomeFragment" />
+
     </data>
 
     <com.drake.brv.PageRefreshLayout
@@ -75,6 +79,8 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tvMoreExplore"
+                                click="@{v}"
                                 android:layout_width="70dp"
                                 android:layout_height="50dp"
                                 android:gravity="center_vertical"
@@ -104,6 +110,8 @@
                         android:paddingVertical="16dp">
 
                         <ImageView
+                            android:id="@+id/ivEvent"
+                            click="@{v}"
                             corner="@{8}"
                             img="@{m.event.image}"
                             android:layout_width="match_parent"

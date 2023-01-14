@@ -14,18 +14,29 @@ import com.drake.engine.adapter.FragmentPagerAdapter
 import com.drake.engine.base.EngineFragment
 import com.drake.net.Get
 import com.drake.net.utils.scope
+import com.drake.tooltip.toast
 import com.youth.banner.indicator.RoundLinesIndicator
 
+
+/**
+ * 演示如何使用BRV+NET(https://github.com/liangjingkanji/Net)快速构建应用首页(MVVM架构)
+ */
 class HomeFragment : EngineFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun initView() {
         // 轮播图
         binding.banner.setAdapter(HomeBannerAdapter())
-            .setIntercept(false)
             .setIndicator(RoundLinesIndicator(requireContext()))
+            .setOnBannerListener { data, position ->
+                toast("点击: 轮播图(${position})")
+            }
+            .setIntercept(false)
 
         // 探索
         binding.rvExplore.setup {
             addType<HomeModel.Explore>(R.layout.item_home_explore)
+            R.id.item.onClick {
+                toast("点击: 探索(${layoutPosition})")
+            }
         }
         // 标签
         binding.rvTab.setup {
@@ -55,6 +66,7 @@ class HomeFragment : EngineFragment<FragmentHomeBinding>(R.layout.fragment_home)
             scope {
                 val res = Get<HomeModel>(Api.HOME).await()
                 binding.m = res
+                binding.v = this@HomeFragment // 数据请求完成绑定点击事件
                 if (res.explore.isEmpty()) {
                     binding.llExplore.visibility = View.GONE
                 } else {
@@ -64,7 +76,15 @@ class HomeFragment : EngineFragment<FragmentHomeBinding>(R.layout.fragment_home)
                 binding.rvTab.bindingAdapter.setChecked(0, true)
                 binding.banner.setDatas(res.banner)
                 binding.vp.adapter = FragmentPagerAdapter(res.tabs.map { GameFragment() })
+                binding.vp.offscreenPageLimit = res.tabs.size
             }
         }.showLoading()
+    }
+
+    override fun onClick(v: View) {
+        when (v) {
+            binding.tvMoreExplore -> toast("点击: 更多")
+            binding.ivEvent -> toast("点击: 活动页面")
+        }
     }
 }

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.drake.brv.sample.model.HomeModel
 import com.youth.banner.adapter.BannerAdapter
 
-class HomeBannerAdapter(datas: MutableList<HomeModel.Banner>? = null) : BannerAdapter<HomeModel.Banner, HomeBannerAdapter.BannerViewHolder>(datas) {
+class HomeBannerAdapter(data: MutableList<HomeModel.Banner>? = null) : BannerAdapter<HomeModel.Banner, HomeBannerAdapter.BannerViewHolder>(data) {
 
     override fun onCreateHolder(
         parent: ViewGroup,

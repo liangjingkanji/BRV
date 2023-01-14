@@ -12,8 +12,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="120dp"
+        android:foreground="?selectableItemBackgroundBorderless">
 
 
         <ImageView
@@ -22,7 +24,7 @@
             img="@{m.img}"
             android:layout_width="120dp"
             android:layout_height="match_parent"
-            android:background="@{@color/windowBackgroundSecond}"
+            android:src="@color/windowBackgroundSecond"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:singleLine="true"
             android:text="@{m.name}"
             android:textSize="16dp"
@@ -39,9 +41,45 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toRightOf="@id/ivImg"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/barrier"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="神秘海域" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="ivCommend, tvGrade" />
+
+        <ImageView
+            android:id="@+id/ivCommend"
+            gone="@{m.commend != 0}"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_game_commend"
+            app:barrierAllowsGoneWidgets="true"
+            app:layout_constraintRight_toLeftOf="@id/tvGrade"
+            app:layout_constraintTop_toTopOf="@id/tvGrade"
+            app:layout_goneMarginTop="9dp" />
+
+        <TextView
+            android:id="@+id/tvGrade"
+            gone="@{m.grade != 0}"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_game_grade"
+            android:gravity="center"
+            android:text="@{m.grade}"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="78" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,8 +118,9 @@
             android:id="@+id/tvDiscount"
             android:layout_width="80dp"
             android:layout_height="30dp"
-            android:background="@drawable/bg_game_sale"
+            android:background="@drawable/bg_game_discount"
             android:gravity="center"
+            android:layerType="software"
             android:text="@{m.discountDesc}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

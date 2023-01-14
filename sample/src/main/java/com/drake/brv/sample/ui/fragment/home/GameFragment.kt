@@ -9,6 +9,7 @@ import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
 import com.drake.engine.utils.dp
 import com.drake.net.Get
+import com.drake.net.utils.TipUtils.toast
 import com.drake.net.utils.scope
 
 class GameFragment : EngineFragment<FragmentGameBinding>(R.layout.fragment_game) {
@@ -16,6 +17,9 @@ class GameFragment : EngineFragment<FragmentGameBinding>(R.layout.fragment_game)
     override fun initView() {
         binding.rv.dividerSpace(10.dp).setup {
             addType<GameModel.Data>(R.layout.item_game)
+            R.id.item.onClick {
+                toast("点击: 游戏详情(${getModel<GameModel.Data>().name})")
+            }
         }
     }
 
@@ -24,7 +28,7 @@ class GameFragment : EngineFragment<FragmentGameBinding>(R.layout.fragment_game)
             scope {
                 val res = Get<GameModel>(Api.GAME) {
                 }.await()
-                addData(res.list.shuffled()) { // shuffled() 为随机打乱顺序
+                addData(res.list.shuffled()) { // shuffled() 为随机打乱列表顺序
                     itemCount < res.total
                 }
             }
