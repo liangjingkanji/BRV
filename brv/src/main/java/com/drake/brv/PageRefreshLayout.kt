@@ -542,10 +542,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         }
 
     /** 处理缺省页状态变更 */
-    var stateChangedHandler: StateChangedHandler? = null
+    var stateChangedHandler: StateChangedHandler
+        get() = stateLayout!!.stateChangedHandler
         set(value) {
-            field = value
-            stateLayout?.stateChangedHandler = value
+            stateLayout!!.stateChangedHandler = value
         }
 
     /**
@@ -625,8 +625,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
     }
 
     override fun onFinishInflate() {
-        super.onFinishInflate()
         initialize()
+        super.onFinishInflate()
         finishInflate = true
     }
 
@@ -651,7 +651,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      * 初始化缺省页
      */
     private fun initializeState() {
-
         if (StateConfig.errorLayout == View.NO_ID && errorLayout == View.NO_ID &&
             StateConfig.emptyLayout == View.NO_ID && emptyLayout == View.NO_ID &&
             StateConfig.loadingLayout == View.NO_ID && loadingLayout == View.NO_ID
