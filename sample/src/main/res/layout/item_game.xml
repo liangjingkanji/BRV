@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.GameModel.Data" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+
+        <ImageView
+            android:id="@+id/ivImg"
+            holder="@{@color/windowBackgroundSecond}"
+            img="@{m.img}"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@{@color/windowBackgroundSecond}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:singleLine="true"
+            android:text="@{m.name}"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/ivImg"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="神秘海域" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:maxLines="2"
+            android:text="@{m.labelDesc}"
+            android:textSize="12dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/ivImg"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="全区中文" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:singleLine="true"
+            android:text="@{m.priceDesc}"
+            android:textColor="#eb4d50"
+            android:textStyle="bold"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toRightOf="@id/ivImg"
+            app:layout_constraintRight_toLeftOf="@id/tvDiscount"
+            tools:text="¥120.00" />
+
+        <TextView
+            android:id="@+id/tvDiscount"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_game_sale"
+            android:gravity="center"
+            android:text="@{m.discountDesc}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="90%折扣" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{m.remainDate}"
+            android:textColor="#999999"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@id/tvDiscount"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="剩余25天" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

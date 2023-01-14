@@ -26,6 +26,11 @@
         android:label="多类型"
         tools:layout="@layout/fragment_multi_type" />
     <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.home.HomeFragment"
+        android:label="首页布局"
+        tools:layout="@layout/fragment_home" />
+    <fragment
         android:id="@+id/checkModeFragment"
         android:name="com.drake.brv.sample.ui.fragment.CheckModeFragment"
         android:label="选择模式"

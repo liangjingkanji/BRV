@@ -1,0 +1,33 @@
+package com.drake.brv.sample.ui.fragment.home
+
+import com.drake.brv.sample.R
+import com.drake.brv.sample.constants.Api
+import com.drake.brv.sample.databinding.FragmentGameBinding
+import com.drake.brv.sample.model.GameModel
+import com.drake.brv.utils.dividerSpace
+import com.drake.brv.utils.setup
+import com.drake.engine.base.EngineFragment
+import com.drake.engine.utils.dp
+import com.drake.net.Get
+import com.drake.net.utils.scope
+
+class GameFragment : EngineFragment<FragmentGameBinding>(R.layout.fragment_game) {
+
+    override fun initView() {
+        binding.rv.dividerSpace(10.dp).setup {
+            addType<GameModel.Data>(R.layout.item_game)
+        }
+    }
+
+    override fun initData() {
+        binding.page.onRefresh {
+            scope {
+                val res = Get<GameModel>(Api.GAME) {
+                }.await()
+                addData(res.list.shuffled()) { // shuffled() 为随机打乱顺序
+                    itemCount < res.total
+                }
+            }
+        }.showLoading()
+    }
+}

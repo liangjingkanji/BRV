@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.HomeModel.Tab" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="4dp">
+
+        <TextView
+            selected="@{m.checked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{m.title}"
+            android:textColor="@color/selector_home_tab"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            tools:text="PS5" />
+
+        <TextView
+            selected="@{m.checked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_home_tab_desc"
+            android:paddingHorizontal="6dp"
+            android:text="@{m.count}"
+            android:textColor="@color/selector_home_tab"
+            android:textSize="12dp"
+            tools:text="522款" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
