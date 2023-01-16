@@ -19,7 +19,6 @@ package com.drake.brv
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -192,43 +191,6 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
         val colorRes = ContextCompat.getColor(context, color)
         divider = ColorDrawable(colorRes)
     }
-
-    private var background = Color.TRANSPARENT
-
-    /**
-     * 分割线背景色
-     * 分割线有时候会存在间距(例如配置[setMargin])或属于虚线, 这个时候暴露出来的是RecyclerView的背景色, 所以我们可以设置一个背景色来调整
-     * 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
-     */
-    fun setBackground(@ColorInt color: Int) {
-        background = color
-    }
-
-    /**
-     * 分割线背景色
-     * 分割线有时候会存在间距(例如配置[setMargin])或属于虚线, 这个时候暴露出来的是RecyclerView的背景色, 所以我们可以设置一个背景色来调整
-     * 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
-     *
-     * @param colorString 颜色的16进制字符串
-     */
-    fun setBackground(colorString: String) {
-        try {
-            background = Color.parseColor(colorString)
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Unknown color: $colorString")
-        }
-    }
-
-    /**
-     * 分割线背景色
-     * 分割线有时候会存在间距(例如配置[setMargin])或属于虚线, 这个时候暴露出来的是RecyclerView的背景色, 所以我们可以设置一个背景色来调整
-     * 可以设置背景色解决不统一的问题, 默认为透明[Color.TRANSPARENT]
-     *
-     */
-    fun setBackgroundRes(@ColorRes color: Int) {
-        background = ContextCompat.getColor(context, color)
-    }
-
     //</editor-fold>
 
     //<editor-fold desc="间距">
@@ -513,20 +475,6 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     top = if (intrinsicHeight == -1) bottom - size else bottom - intrinsicHeight
                 }
 
-                if (background != Color.TRANSPARENT) {
-                    val paint = Paint()
-                    paint.color = background
-                    paint.style = Paint.Style.FILL
-
-                    if (startVisible && if (reverseLayout) edge.bottom else edge.top) {
-                        val firstRect = Rect(parent.paddingLeft, firstTop, parent.width - parent.paddingRight, firstBottom)
-                        canvas.drawRect(firstRect, paint)
-                    }
-
-                    val rect = Rect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
-                    canvas.drawRect(rect, paint)
-                }
-
                 if (startVisible && if (reverseLayout) edge.bottom else edge.top) {
                     setBounds(left, firstTop, right, firstBottom)
                     draw(canvas)
@@ -586,20 +534,6 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val right = (decoratedBounds.right + child.translationX).roundToInt()
                 val left = if (intrinsicWidth == -1) right - size else right - intrinsicWidth
-
-                if (background != Color.TRANSPARENT) {
-                    val paint = Paint()
-                    paint.color = background
-                    paint.style = Paint.Style.FILL
-
-                    if (startVisible && edge.left) {
-                        val firstRect = Rect(firstLeft, parent.paddingTop, firstRight, parent.height - parent.paddingBottom)
-                        canvas.drawRect(firstRect, paint)
-                    }
-
-                    val rect = Rect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
-                    canvas.drawRect(rect, paint)
-                }
 
                 if (startVisible && edge.left) {
                     setBounds(firstLeft, top, firstRight, bottom)
