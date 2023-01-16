@@ -106,7 +106,7 @@ binding.rv.linear().setup {
                 includeVisible = true
                 orientation = DividerOrientation.GRID
             }.grid(2).setup {
-                addType<Model>(R.layout.item_multi_type_simple_none_margin)
+                addType<Model>(R.layout.item_group_none_margin)
             }
         }
     }

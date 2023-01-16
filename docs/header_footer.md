@@ -6,15 +6,15 @@
 
 ```kotlin
 binding.rv.linear().setup {
-    addType<Model>(R.layout.item_multi_type_simple)
+    addType<Model>(R.layout.item_simple)
 
     /**
      * BRV的数据集 = Header + Footer + Models
      * 所以本质上他们都是一组多类型而已, 分出来只是为了方便替换Models而不影响Header和Footer
      */
 
-    addType<Header>(R.layout.item_multi_type_header)
-    addType<Footer>(R.layout.item_multi_type_footer)
+    addType<Header>(R.layout.item_header)
+    addType<Footer>(R.layout.item_footer)
 }.models = getData()
 
 binding.rv.bindingAdapter.addHeader(Header(), animation = true)

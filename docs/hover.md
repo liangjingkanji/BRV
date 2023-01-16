@@ -20,7 +20,7 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
     rv.linear().setup {
-        addType<Model>(R.layout.item_multi_type_simple)
+        addType<Model>(R.layout.item_simple)
         addType<HoverHeaderModel>(R.layout.item_hover_header)
         models = getData()
 

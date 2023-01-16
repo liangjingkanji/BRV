@@ -14,7 +14,7 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
 
     rv.setup {
-        addType<Model>(R.layout.item_multi_type_simple)
+        addType<Model>(R.layout.item_simple)
     }
 
     page.upFetchEnabled = true

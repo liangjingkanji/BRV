@@ -38,7 +38,7 @@ class SkeletonFragment : EngineFragment<FragmentSkeletonBinding>(R.layout.fragme
 
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
-            addType<FullSpanModel>(R.layout.item_multi_type_two_span)
+            addType<FullSpanModel>(R.layout.item_full_span)
         }
 
         // 该处理者可以保证骨骼动图显示最短时间(避免网络请求过快导致骨骼动画快速消失屏幕闪烁), 如果不需要可以不配置

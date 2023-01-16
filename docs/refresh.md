@@ -87,8 +87,8 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
 ### 创建列表
 ```kotlin
 rv.linear().setup {
-    addType<Model>(R.layout.item_multi_type_simple)
-    addType<DoubleItemModel>(R.layout.item_multi_type_two)
+    addType<Model>(R.layout.item_simple)
+    addType<DoubleItemModel>(R.layout.item_full_span)
 }
 
 page.onRefresh {

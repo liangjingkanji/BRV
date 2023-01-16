@@ -32,7 +32,7 @@ class MultiTypeFragment : EngineFragment<FragmentMultiTypeBinding>(R.layout.frag
     override fun initView() {
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
-            addType<FullSpanModel>(R.layout.item_multi_type_two_span)
+            addType<FullSpanModel>(R.layout.item_full_span)
         }.models = getData()
 
         // 点击事件

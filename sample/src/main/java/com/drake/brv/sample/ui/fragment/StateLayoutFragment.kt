@@ -35,7 +35,7 @@ class StateLayoutFragment :
         setHasOptionsMenu(true)
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
-            addType<FullSpanModel>(R.layout.item_multi_type_two_span)
+            addType<FullSpanModel>(R.layout.item_full_span)
         }.models = getData()
 
     }

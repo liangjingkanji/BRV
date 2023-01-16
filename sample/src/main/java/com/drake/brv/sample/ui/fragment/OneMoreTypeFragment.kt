@@ -32,7 +32,7 @@ class OneMoreTypeFragment :
             addType<OneMoreModel> {
                 when (type) {
                     0 -> R.layout.item_one_more
-                    else -> R.layout.item_multi_type_two_span
+                    else -> R.layout.item_full_span
                 }
             }
         }.models = getData()

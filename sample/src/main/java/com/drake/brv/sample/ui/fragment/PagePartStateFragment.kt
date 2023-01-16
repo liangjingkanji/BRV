@@ -37,7 +37,7 @@ class PagePartStateFragment : EngineFragment<FragmentPagePartStateHeaderBinding>
 
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
-            addType<FullSpanModel>(R.layout.item_multi_type_two_span)
+            addType<FullSpanModel>(R.layout.item_full_span)
         }
 
         binding.page.onRefresh {
