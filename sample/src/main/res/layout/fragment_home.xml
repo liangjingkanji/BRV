@@ -66,6 +66,7 @@
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            gone="@{m.explore.size() != 0}"
                             android:orientation="horizontal">
 
                             <TextView

@@ -68,11 +68,7 @@ class HomeFragment : EngineFragment<FragmentHomeBinding>(R.layout.fragment_home)
                 val res = Get<HomeModel>(Api.HOME).await()
                 binding.m = res
                 binding.v = this@HomeFragment // 数据请求完成绑定点击事件
-                if (res.explore.isEmpty()) {
-                    binding.llExplore.visibility = View.GONE
-                } else {
-                    binding.rvExplore.models = res.explore
-                }
+                binding.rvExplore.models = res.explore
                 binding.rvTab.models = res.tabs
                 binding.rvTab.bindingAdapter.setChecked(0, true)
                 binding.banner.setDatas(res.banner)
