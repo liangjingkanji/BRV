@@ -14,6 +14,7 @@ import com.drake.engine.adapter.FragmentPagerAdapter
 import com.drake.engine.base.EngineFragment
 import com.drake.net.Get
 import com.drake.net.utils.scope
+import com.drake.serialize.intent.withArguments
 import com.drake.tooltip.toast
 import com.youth.banner.indicator.RoundLinesIndicator
 
@@ -75,7 +76,9 @@ class HomeFragment : EngineFragment<FragmentHomeBinding>(R.layout.fragment_home)
                 binding.rvTab.models = res.tabs
                 binding.rvTab.bindingAdapter.setChecked(0, true)
                 binding.banner.setDatas(res.banner)
-                binding.vp.adapter = FragmentPagerAdapter(res.tabs.map { GameFragment() })
+                binding.vp.adapter = FragmentPagerAdapter(res.tabs.map {
+                    GameFragment().withArguments("categoryId" to it.id)
+                })
                 binding.vp.offscreenPageLimit = res.tabs.size
             }
         }.showLoading()

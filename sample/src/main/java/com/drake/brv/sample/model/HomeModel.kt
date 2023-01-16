@@ -11,25 +11,25 @@ data class HomeModel(
 ) {
     @kotlinx.serialization.Serializable
     data class Banner(
-        var id: Int = 0,
+        var id: Long = 0,
         var image: String = "",
     )
 
     @kotlinx.serialization.Serializable
     data class Explore(
-        var id: Int = 0,
+        var id: Long = 0,
         var image: String = "",
     )
 
     @kotlinx.serialization.Serializable
     data class Event(
-        var id: Int = 0,
+        var id: Long = 0,
         var image: String = "",
     )
 
     @kotlinx.serialization.Serializable
     data class Tab(
-        var id: Int = 0,
+        var id: Long = 0,
         var title: String = "",
         var count: Int = 0
     ) : BaseObservable() {
