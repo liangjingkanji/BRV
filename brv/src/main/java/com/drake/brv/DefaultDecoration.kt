@@ -57,7 +57,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      * 根据[orientation]值不同
      * [DividerOrientation.VERTICAL] 为是否显示顶部分割线
      * [DividerOrientation.HORIZONTAL] 为是否显示左侧分割线
-     * [DividerOrientation.GRID] 为最左/右侧是否显示分割线
+     * [DividerOrientation.GRID] 为最上/下侧是否显示分割线
      */
     var startVisible = false
 
@@ -65,13 +65,13 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      * 根据[orientation]值不同
      * [DividerOrientation.VERTICAL] 为是否显示底部分割线
      * [DividerOrientation.HORIZONTAL] 为是否显示右侧分割线
-     * [DividerOrientation.GRID] 为最上/下侧是否显示分割线
+     * [DividerOrientation.GRID] 为最左/右侧是否显示分割线
      */
     var endVisible = false
 
     /**
-     * 列表前后都显示分割线
-     * 等效[startVisible]和[endVisible]都为true
+     * 列表四周显示分割线
+     * 等于[startVisible]和[endVisible]全为true
      */
     var includeVisible
         get() = startVisible && endVisible
@@ -213,8 +213,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     /**
      * 设置分隔左右或上下间距, 依据分割线为垂直或者水平决定具体方向间距
      *
-     * @param start 分割线为水平则是左间距, 垂直则为上间距
-     * @param end 分割线为水平则是右间距, 垂直则为下间距
+     * @param start 分割线为水平则是左间距, 垂直则为上间距, 如果网格布局则为上下间距
+     * @param end 分割线为水平则是右间距, 垂直则为下间距, 如果网格布局则为左右间距
      * @param dp 是否单位为dp, 默认为false即使用像素单位
      */
     fun setMargin(start: Int = 0, end: Int = 0, dp: Boolean = false) {
@@ -329,7 +329,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                             if (edge.left) if (endVisible) width else 0 else 0
                         }
                     }
-                    startVisible && rvOrientation == RecyclerView.VERTICAL -> if (reverseLayout) {
+                    (startVisible && rvOrientation == RecyclerView.VERTICAL) ||
+                            (endVisible && rvOrientation == RecyclerView.HORIZONTAL) -> if (reverseLayout) {
                         (spanGroupIndex + 1) * height / spanGroupCount
                     } else {
                         height - spanGroupIndex * height / spanGroupCount
@@ -349,7 +350,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                             if (edge.right) if (endVisible) width else 0 else height
                         }
                     }
-                    startVisible && rvOrientation == RecyclerView.VERTICAL -> if (reverseLayout) {
+                    (startVisible && rvOrientation == RecyclerView.VERTICAL) ||
+                            (endVisible && rvOrientation == RecyclerView.HORIZONTAL) -> if (reverseLayout) {
                         height - spanGroupIndex * height / spanGroupCount
                     } else {
                         (spanGroupIndex + 1) * height / spanGroupCount
@@ -600,50 +602,62 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                 )
 
                 // top
-                if (!endVisible && edge.right) {
+                if (startVisible && edge.top) {
+                    setBounds(bounds.left - width, bounds.top - height, bounds.right + width, bounds.top)
+                    draw(canvas)
+                } else if (!edge.top && edge.right) {
                     setBounds(bounds.left - width, bounds.top - height, bounds.right - marginEnd, bounds.top)
                     draw(canvas)
-                } else if (!endVisible && !edge.top && edge.left) {
-                    setBounds(bounds.left + marginStart, bounds.top - height, bounds.right + width, bounds.top)
+                } else if (!edge.top && edge.left) {
+                    setBounds(bounds.left + marginEnd, bounds.top - height, bounds.right + width, bounds.top)
                     draw(canvas)
-                } else if (!edge.top || (startVisible && edge.top)) {
+                } else if (!edge.top) {
                     setBounds(bounds.left - width, bounds.top - height, bounds.right + width, bounds.top)
                     draw(canvas)
                 }
 
                 // bottom
-                if (!endVisible && edge.right) {
+                if (startVisible && edge.bottom) {
+                    setBounds(bounds.left - width, bounds.bottom, bounds.right + width, bounds.bottom + height)
+                    draw(canvas)
+                } else if (!edge.bottom && edge.right) {
                     setBounds(bounds.left - width, bounds.bottom, bounds.right - marginEnd, bounds.bottom + height)
                     draw(canvas)
-                } else if (!endVisible && !edge.bottom && edge.left) {
-                    setBounds(bounds.left + marginStart, bounds.bottom, bounds.right + width, bounds.bottom + height)
+                } else if (!edge.bottom && edge.left) {
+                    setBounds(bounds.left + marginEnd, bounds.bottom, bounds.right + width, bounds.bottom + height)
                     draw(canvas)
-                } else if (!edge.bottom || (startVisible && edge.bottom)) {
+                } else if (!edge.bottom) {
                     setBounds(bounds.left - width, bounds.bottom, bounds.right + width, bounds.bottom + height)
                     draw(canvas)
                 }
 
                 // left
-                if (edge.top && !endVisible && !edge.left) {
+                if (endVisible && edge.left) {
+                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom + height)
+                    draw(canvas)
+                } else if (!edge.left && edge.top) {
                     setBounds(bounds.left - width, bounds.top + marginStart, bounds.left, bounds.bottom)
                     draw(canvas)
-                } else if (edge.bottom && !endVisible && !edge.left) {
-                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom - marginEnd)
+                } else if (!edge.left && edge.bottom) {
+                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom - marginStart)
                     draw(canvas)
-                } else if (!edge.left || (endVisible && edge.left)) {
-                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom)
+                } else if (!edge.left) {
+                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom + height)
                     draw(canvas)
                 }
 
                 // right
-                if (edge.top && !endVisible && !edge.right) {
+                if (endVisible && edge.right) {
+                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom + height)
+                    draw(canvas)
+                } else if (!edge.right && edge.top) {
                     setBounds(bounds.right, bounds.top + marginStart, bounds.right + width, bounds.bottom)
                     draw(canvas)
-                } else if (edge.bottom && !endVisible && !edge.right) {
-                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom - marginEnd)
+                } else if (!edge.right && edge.bottom) {
+                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom - marginStart)
                     draw(canvas)
-                } else if (!edge.right || (endVisible && edge.right)) {
-                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom)
+                } else if (!edge.right) {
+                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom + height)
                     draw(canvas)
                 }
             }
