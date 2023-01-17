@@ -1,3 +1,8 @@
+## 1.3.90
+- feat: #324 网格分割线间距支持以item为基准
+- refactor: 删除分割线 DefaultDecoration.kt setBackground()(可以使用rv背景色替代)
+- fix: 网格分割线间距设置错误
+
 ## 1.3.89
 - upgrade: stateLayout 1.3.13
 - sample: use mock data
