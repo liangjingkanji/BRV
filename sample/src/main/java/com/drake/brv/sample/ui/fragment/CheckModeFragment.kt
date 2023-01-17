@@ -54,7 +54,6 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
 
             // 监听列表选中
             onChecked { position, isChecked, isAllChecked ->
-
                 val model = getModel<CheckModel>(position)
                 model.checked = isChecked
                 model.notifyChange()
@@ -73,6 +72,7 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
                 val model = getModel<CheckModel>(position)
                 model.visibility = toggleMode
                 model.notifyChange()
+                changeListEditable(this)
             }
 
         }.models = getData()
@@ -112,7 +112,6 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
         // 切换选择模式
         binding.tvManage.setOnClickListener {
             adapter.toggle()
-            changeListEditable(adapter)
             // binding.rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
         }
     }
