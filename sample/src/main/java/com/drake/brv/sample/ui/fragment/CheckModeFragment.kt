@@ -31,13 +31,14 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
 
     override fun initView() {
         binding.rv.linear().setup {
-
             addType<CheckModel>(R.layout.item_check_mode)
 
             // 长按列表进入编辑模式
             onLongClick(R.id.item) {
-                toggle()
-                setChecked(adapterPosition, true)
+                if (!toggleMode) {
+                    toggle()
+                    setChecked(layoutPosition, true)
+                }
             }
 
             // 点击列表触发选中
@@ -48,7 +49,7 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
                 }
                 var checked = getModel<CheckModel>().checked
                 if (it == R.id.item) checked = !checked
-                setChecked(adapterPosition, checked)
+                setChecked(layoutPosition, checked)
             }
 
             // 监听列表选中
@@ -140,6 +141,5 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
         }
     }
 
-    override fun initData() {
-    }
+    override fun initData() {}
 }
