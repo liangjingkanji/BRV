@@ -105,6 +105,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     private var size = 1
     private var marginStart = 0
     private var marginEnd = 0
+    private var marginBaseItemStart = false
+    private var marginBaseItemEnd = false
     private var divider: Drawable? = null
 
     //<editor-fold desc="类型">
@@ -216,8 +218,18 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      * @param start 分割线为水平则是左间距, 垂直则为上间距, 如果网格布局则为上下间距
      * @param end 分割线为水平则是右间距, 垂直则为下间距, 如果网格布局则为左右间距
      * @param dp 是否单位为dp, 默认为false即使用像素单位
+     * @param baseItemStart 是否以item为基准设置间距, 默认为false即以RecyclerView为基准设置分割线的间距
+     * @param baseItemEnd 是否以item为基准设置间距, 默认为false即以RecyclerView为基准设置分割线的间距
      */
-    fun setMargin(start: Int = 0, end: Int = 0, dp: Boolean = false) {
+    fun setMargin(
+        start: Int = 0,
+        end: Int = 0,
+        dp: Boolean = false,
+        baseItemStart: Boolean = false,
+        baseItemEnd: Boolean = false,
+    ) {
+        marginBaseItemStart = baseItemStart
+        marginBaseItemEnd = baseItemEnd
         if (!dp) {
             this.marginStart = start
             this.marginEnd = end
@@ -601,18 +613,21 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     child.bottom + layoutParams.bottomMargin
                 )
 
+                val baseItemStartMargin = if (marginBaseItemStart && marginStart != 0) marginStart + height else 0
+                val baseItemEndMargin = if (marginBaseItemEnd && marginEnd != 0) marginEnd + width else 0
+
                 // top
                 if (startVisible && edge.top) {
                     setBounds(bounds.left - width, bounds.top - height, bounds.right + width, bounds.top)
                     draw(canvas)
                 } else if (!edge.top && edge.right) {
-                    setBounds(bounds.left - width, bounds.top - height, bounds.right - marginEnd, bounds.top)
+                    setBounds(bounds.left - width + baseItemEndMargin, bounds.top - height, bounds.right - marginEnd, bounds.top)
                     draw(canvas)
                 } else if (!edge.top && edge.left) {
-                    setBounds(bounds.left + marginEnd, bounds.top - height, bounds.right + width, bounds.top)
+                    setBounds(bounds.left + marginEnd, bounds.top - height, bounds.right + width - baseItemEndMargin, bounds.top)
                     draw(canvas)
                 } else if (!edge.top) {
-                    setBounds(bounds.left - width, bounds.top - height, bounds.right + width, bounds.top)
+                    setBounds(bounds.left - width + baseItemEndMargin, bounds.top - height, bounds.right + width - baseItemEndMargin, bounds.top)
                     draw(canvas)
                 }
 
@@ -621,13 +636,13 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     setBounds(bounds.left - width, bounds.bottom, bounds.right + width, bounds.bottom + height)
                     draw(canvas)
                 } else if (!edge.bottom && edge.right) {
-                    setBounds(bounds.left - width, bounds.bottom, bounds.right - marginEnd, bounds.bottom + height)
+                    setBounds(bounds.left - width + baseItemEndMargin, bounds.bottom, bounds.right - marginEnd, bounds.bottom + height)
                     draw(canvas)
                 } else if (!edge.bottom && edge.left) {
-                    setBounds(bounds.left + marginEnd, bounds.bottom, bounds.right + width, bounds.bottom + height)
+                    setBounds(bounds.left + marginEnd, bounds.bottom, bounds.right + width - baseItemEndMargin, bounds.bottom + height)
                     draw(canvas)
                 } else if (!edge.bottom) {
-                    setBounds(bounds.left - width, bounds.bottom, bounds.right + width, bounds.bottom + height)
+                    setBounds(bounds.left - width + baseItemEndMargin, bounds.bottom, bounds.right + width - baseItemEndMargin, bounds.bottom + height)
                     draw(canvas)
                 }
 
@@ -636,13 +651,13 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom + height)
                     draw(canvas)
                 } else if (!edge.left && edge.top) {
-                    setBounds(bounds.left - width, bounds.top + marginStart, bounds.left, bounds.bottom)
+                    setBounds(bounds.left - width, bounds.top + marginStart, bounds.left, bounds.bottom + height - baseItemStartMargin)
                     draw(canvas)
                 } else if (!edge.left && edge.bottom) {
-                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom - marginStart)
+                    setBounds(bounds.left - width, bounds.top - height + baseItemStartMargin, bounds.left, bounds.bottom - marginStart)
                     draw(canvas)
                 } else if (!edge.left) {
-                    setBounds(bounds.left - width, bounds.top, bounds.left, bounds.bottom + height)
+                    setBounds(bounds.left - width, bounds.top + baseItemStartMargin, bounds.left, bounds.bottom + height - baseItemStartMargin)
                     draw(canvas)
                 }
 
@@ -651,13 +666,13 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom + height)
                     draw(canvas)
                 } else if (!edge.right && edge.top) {
-                    setBounds(bounds.right, bounds.top + marginStart, bounds.right + width, bounds.bottom)
+                    setBounds(bounds.right, bounds.top + marginStart, bounds.right + width, bounds.bottom + height - baseItemStartMargin)
                     draw(canvas)
                 } else if (!edge.right && edge.bottom) {
-                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom - marginStart)
+                    setBounds(bounds.right, bounds.top - height + baseItemStartMargin, bounds.right + width, bounds.bottom - marginStart)
                     draw(canvas)
                 } else if (!edge.right) {
-                    setBounds(bounds.right, bounds.top, bounds.right + width, bounds.bottom + height)
+                    setBounds(bounds.right, bounds.top + baseItemStartMargin, bounds.right + width, bounds.bottom + height - baseItemStartMargin)
                     draw(canvas)
                 }
             }
