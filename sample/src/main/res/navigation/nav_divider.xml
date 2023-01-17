@@ -26,9 +26,14 @@
         android:label="线性列表-水平分割线"
         tools:layout="@layout/fragment_linear_horizontal_divider" />
     <fragment
-        android:id="@+id/gridDividerFragment"
-        android:name="com.drake.brv.sample.ui.fragment.divider.GridDividerFragment"
-        android:label="网格列表-网格分割线"
+        android:id="@+id/gridDividerVerticalFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridDividerVerticalFragment"
+        android:label="网格列表-网格分割线-垂直"
+        tools:layout="@layout/fragment_grid_divider" />
+    <fragment
+        android:id="@+id/gridDividerHorizontalFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridDividerHorizontalFragment"
+        android:label="网格列表-网格分割线-水平"
         tools:layout="@layout/fragment_grid_divider" />
     <fragment
         android:id="@+id/gridHorizontalDividerFragment"
@@ -39,6 +44,21 @@
         android:id="@+id/gridVerticalDividerFragment"
         android:name="com.drake.brv.sample.ui.fragment.divider.GridVerticalDividerFragment"
         android:label="网格列表-垂直分割线"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/gridMarginDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridMarginDividerFragment"
+        android:label="网格列表-网格分割线-间隔a"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/gridMarginDividerBFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridMarginDividerBFragment"
+        android:label="网格列表-网格分割线-间隔b"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/gridMarginDividerCFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridMarginDividerCFragment"
+        android:label="网格列表-网格分割线-间隔c"
         tools:layout="@layout/fragment_grid_vertical_divider" />
     <fragment
         android:id="@+id/linearVerticalDividerFragment"

@@ -91,6 +91,42 @@ rv.grid(3).divider {
 }.models = getData()
 ```
 
+## 分割线间隔
+
+分割线默认情况下是基于rv设置间隔
+
+<img src="https://cdn.jsdelivr.net/gh/JBFiveHub/picture-storage@master/uPic/Clipboard - 2023-01-17 16.16.01.jpg" width="250"/>
+
+```kotlin
+binding.rv.grid(3, orientation = RecyclerView.VERTICAL).divider {
+    orientation = DividerOrientation.GRID
+    setDivider(1, true)
+    setMargin(16, 16, dp = true)
+    setColor(Color.WHITE)
+}.setup {
+    addType<DividerModel>(R.layout.item_divider_vertical)
+}.models = getData()
+```
+
+<br>
+使用`baseItemStart/baseItemEnd`参数以item为基准设置间隔
+
+<img src="https://cdn.jsdelivr.net/gh/JBFiveHub/picture-storage@master/uPic/Clipboard - 2023-01-17 16.30.04.jpg" width="250"/>
+
+<img src="https://cdn.jsdelivr.net/gh/JBFiveHub/picture-storage@master/uPic/Clipboard - 2023-01-17 16.33.04.jpg" width="250"/>
+
+```kotlin
+binding.rv.grid(3, orientation = RecyclerView.VERTICAL).divider {
+    orientation = DividerOrientation.GRID
+    setDivider(1, true)
+    setMargin(16, 16, dp = true, baseItemStart = true)
+    setColor(Color.WHITE)
+}.setup {
+    addType<DividerModel>(R.layout.item_divider_vertical)
+}.models = getData()
+```
+
+
 ## 网格悬停均布间隔
 
 这里建议使用嵌套列表完成, 避免分割线出现问题. 这种需求比较常见所以演示实现思路

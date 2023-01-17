@@ -30,8 +30,7 @@ class StaggeredDividerFragment :
     override fun initView() {
         binding.rv.staggered(3, RecyclerView.VERTICAL).divider {
             setDrawable(R.drawable.divider_horizontal)
-            startVisible = true
-            endVisible = true
+            // includeVisible = true
         }.setup {
             addType<DividerModel>(R.layout.item_divider_vertical)
             onBind {
@@ -53,7 +52,6 @@ class StaggeredDividerFragment :
                 4 -> data.add(DividerModel(700))
                 5 -> data.add(DividerModel(1000))
                 8 -> data.add(DividerModel(200))
-                11 -> data.add(DividerModel(1200))
                 else -> data.add(DividerModel())
             }
         }

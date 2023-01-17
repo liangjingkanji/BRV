@@ -28,8 +28,20 @@
         android:id="@+id/gridVerticalDividerFragment"
         android:title="网格列表-垂直分割线" />
     <item
-        android:id="@+id/gridDividerFragment"
-        android:title="网格列表-网格分割线" />
+        android:id="@+id/gridDividerVerticalFragment"
+        android:title="网格列表-网格分割线-垂直" />
+    <item
+        android:id="@+id/gridDividerHorizontalFragment"
+        android:title="网格列表-网格分割线-水平" />
+    <item
+        android:id="@+id/gridMarginDividerFragment"
+        android:title="网格列表-网格分割线-间隔a" />
+    <item
+        android:id="@+id/gridMarginDividerBFragment"
+        android:title="网格列表-网格分割线-间隔b" />
+    <item
+        android:id="@+id/gridMarginDividerCFragment"
+        android:title="网格列表-网格分割线-间隔c" />
     <item
         android:id="@+id/staggeredDividerFragment"
         android:title="交错列表-网格分割线" />
