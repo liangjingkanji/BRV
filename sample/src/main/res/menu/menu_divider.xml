@@ -19,6 +19,9 @@
         android:id="@+id/linearHorizontalFragment"
         android:title="线性列表-水平分割线" />
     <item
+        android:id="@+id/linearHorizontalMarginFragment"
+        android:title="线性列表-水平分割线-间隔" />
+    <item
         android:id="@+id/linearVerticalDividerFragment"
         android:title="线性列表-垂直分割线" />
     <item

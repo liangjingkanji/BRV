@@ -93,3 +93,33 @@ rv.grid().divider{
     addType<DividerModel>(R.layout.item_divider_vertical)
 }.models = getData()
 ```
+
+## 分割线间隔
+
+有两种方式
+
+1. 直接配置一个具备间隔margin的drawable, 以下为间距16的水平分割线
+
+    ```xml
+    <inset xmlns:android="http://schemas.android.com/apk/res/android"
+        android:insetLeft="16dp"
+        android:insetRight="16dp">
+        <shape>
+            <solid android:color="@color/dividerDecoration" />
+            <size android:height="5dp" />
+        </shape>
+    </inset>
+    ```
+
+2. 使用setMargin()
+
+    ```kotlin
+    binding.rv.linear().divider {
+        setDivider(1, true)
+        setMargin(16, 0, dp = true)
+        setColor(Color.WHITE)
+    }.setup {
+        addType<DividerModel>(R.layout.item_divider_vertical)
+    }
+    ```
+

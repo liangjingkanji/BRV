@@ -26,6 +26,11 @@
         android:label="线性列表-水平分割线"
         tools:layout="@layout/fragment_linear_horizontal_divider" />
     <fragment
+        android:id="@+id/linearHorizontalMarginFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.LinearHorizontalDividerMarginFragment"
+        android:label="线性列表-水平分割线-间隔"
+        tools:layout="@layout/fragment_linear_horizontal_divider" />
+    <fragment
         android:id="@+id/gridDividerVerticalFragment"
         android:name="com.drake.brv.sample.ui.fragment.divider.GridDividerVerticalFragment"
         android:label="网格列表-网格分割线-垂直"

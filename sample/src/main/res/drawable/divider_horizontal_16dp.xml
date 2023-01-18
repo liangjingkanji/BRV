@@ -14,12 +14,11 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:background="#40b883"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</layout>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="16dp"
+    android:insetRight="16dp">
+    <shape>
+        <solid android:color="@color/dividerDecoration" />
+        <size android:height="5dp" />
+    </shape>
+</inset>
