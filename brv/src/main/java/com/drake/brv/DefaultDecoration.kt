@@ -216,14 +216,14 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      * 设置分隔左右或上下间距, 依据分割线为垂直或者水平决定具体方向间距
      *
      * @param start 分割线为水平则是左间距, 垂直则为上间距, 如果网格布局则为上下间距
-     * @param end 分割线为水平则是右间距, 垂直则为下间距, 如果网格布局则为左右间距
+     * @param end 分割线为水平则是右间距, 垂直则为下间距, 如果网格布局则为左右间距, 默认等于[start]
      * @param dp 是否单位为dp, 默认为false即使用像素单位
      * @param baseItemStart 是否以item为基准设置间距, 默认为false即以RecyclerView为基准设置分割线的间距
      * @param baseItemEnd 是否以item为基准设置间距, 默认为false即以RecyclerView为基准设置分割线的间距
      */
     fun setMargin(
         start: Int = 0,
-        end: Int = 0,
+        end: Int = start,
         dp: Boolean = false,
         baseItemStart: Boolean = false,
         baseItemEnd: Boolean = false,
