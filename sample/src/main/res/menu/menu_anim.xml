@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/animTypeAlpha"
+        android:title="Alpha" />
+    <item
+        android:id="@+id/animTypeAlphaSlideLeft"
+        android:title="SLIDE_LEFT" />
+    <item
+        android:id="@+id/animTypeAlphaSlideRight"
+        android:title="SLIDE_RIGHT" />
+    <item
+        android:id="@+id/animTypeSlideBottom"
+        android:title="SLIDE_BOTTOM" />
+    <item
+        android:id="@+id/animTypeSCALE"
+        android:title="SCALE" />
+</menu>
