@@ -19,7 +19,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main.xml"
     app:startDestination="@id/simpleFragment">
-
+    <fragment
+        android:id="@+id/listAnimationFragment"
+        android:name="com.drake.brv.sample.ui.fragment.ListAnimationFragment"
+        android:label="列表动画"
+        tools:layout="@layout/fragment_list_animation" />
     <fragment
         android:id="@+id/multiTypeFragment"
         android:name="com.drake.brv.sample.ui.fragment.MultiTypeFragment"

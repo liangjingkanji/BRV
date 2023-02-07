@@ -211,9 +211,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     override fun onViewAttachedToWindow(holder: BindingViewHolder) {
         val layoutPosition = holder.layoutPosition
-        if (animationEnabled && lastPosition < layoutPosition) {
-            itemAnimation.onItemEnterAnimation(holder.itemView)
-            lastPosition = layoutPosition
+        if (animationEnabled) {
+            if (animationRepeat || lastPosition < layoutPosition) {
+                itemAnimation.onItemEnterAnimation(holder.itemView)
+                lastPosition = layoutPosition
+            }
         }
         holder.getModelOrNull<ItemAttached>()?.onViewAttachedToWindow(holder)
     }
@@ -399,6 +401,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     var animationEnabled = false
 
     /**
+     * 是否重复显示列表动画, 默认item只显示一次动画
+     **/
+    var animationRepeat = false
+
+    /**
      * 自定义条目的动画样式
      */
     fun setAnimation(itemAnimation: ItemAnimation) {
@@ -408,6 +415,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     /**
      * 设置当前库自带的条目的动画样式
+     * @param animationType 内置动画样式
+     *
+     * @see setAnimation(ItemAnimation) 自定义动画配置
      */
     fun setAnimation(animationType: AnimationType) {
         this.animationEnabled = true
@@ -419,7 +429,6 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
             AnimationType.SLIDE_RIGHT -> this.itemAnimation = SlideRightItemAnimation()
         }
     }
-
 
     // </editor-fold>
 
