@@ -116,8 +116,9 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
     private var targetViewHolder: BindingViewHolder? = null
 
     /**
-     * 状态变化
-     * @param actionState
+     * 拖拽或者侧滑导致的状态变化
+     * @param viewHolder 当前触发的Item
+     * @param actionState 触发的状态
      * @see ItemTouchHelper.ACTION_STATE_DRAG 拖拽
      * @see ItemTouchHelper.ACTION_STATE_SWIPE 侧滑
      * @see ItemTouchHelper.ACTION_STATE_IDLE 闲置

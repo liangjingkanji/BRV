@@ -39,15 +39,6 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
 
             // 自定义部分实现
             itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback() {
-                override fun onSelectedChanged(
-                    viewHolder: RecyclerView.ViewHolder?,
-                    actionState: Int
-                ) {
-                    if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) { // 拖拽移动分组前先折叠子列表
-                        (viewHolder as BindingAdapter.BindingViewHolder).collapse()
-                    }
-                    super.onSelectedChanged(viewHolder, actionState)
-                }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val vh = viewHolder as BindingAdapter.BindingViewHolder
@@ -57,6 +48,17 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
                     // 如果侧滑删除的是分组里面的子列表, 要删除对应父分组的itemSublist数据, 否则会导致数据异常
                     // itemSublist必须为可变集合, 否则无法被删除
                     (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.itemSublist as? ArrayList)?.remove(vh.getModelOrNull())
+                }
+
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    source: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    // 拖拽分组前先折叠子列表
+                    (source as BindingAdapter.BindingViewHolder).collapse()
+                    (target as BindingAdapter.BindingViewHolder).collapse()
+                    return super.onMove(recyclerView, source, target)
                 }
             })
 
