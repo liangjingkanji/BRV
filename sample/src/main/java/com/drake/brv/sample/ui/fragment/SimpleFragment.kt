@@ -28,6 +28,8 @@ import com.drake.tooltip.toast
 class SimpleFragment : EngineFragment<FragmentSimpleBinding>(R.layout.fragment_simple) {
 
     override fun initView() {
+
+        // LayoutManager可以通过 linear/grid/staggered 等函数或者在layout布局中通过属性设置都行, 简单的建议在布局设置
         binding.rv.linear().setup {
             addType<SimpleModel>(R.layout.item_simple_text)
             onBind {
