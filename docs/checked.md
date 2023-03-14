@@ -42,8 +42,8 @@
        }
     
        onClick(R.id.cb, R.id.item) {
-            var checked = (getModel() as CheckModel).checked
-            setChecked(adapterPosition, checked) // 在点击事件中触发选择事件, 即点击列表条目就选中
+            var checked = getModel<CheckModel>().checked
+            setChecked(adapterPosition, !checked) // 在点击事件中触发选择事件, 即点击列表条目就选中
        }
     }.models = getData
     ```
