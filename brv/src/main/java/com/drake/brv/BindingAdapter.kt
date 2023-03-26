@@ -609,7 +609,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     /**
      * 数据模型集合
-     * 如果赋值的是[List]不可变集合将会自动被替换成[MutableList], 将无法保持为同一个集合对象引用
+     * 如果赋值的是[List]不可变集合将会自动复制为[MutableList], 将无法保持为同一个集合对象引用
      */
     var models: List<Any?>?
         get() = _data
@@ -672,9 +672,14 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
     }
 
-    /** 可增删的数据模型集合, 本质上就是返回可变的models. 假设未赋值给models则将抛出异常为[ClassCastException] */
-    var mutable
-        get() = models as ArrayList
+    /** 可增删的数据模型集合, 如果models为null则将为列表默认赋值为空集合*/
+    var mutable: MutableList<Any?>
+        get() {
+            if (_data == null) {
+                _data = mutableListOf()
+            }
+            return _data as ArrayList
+        }
         set(value) {
             models = value
         }
