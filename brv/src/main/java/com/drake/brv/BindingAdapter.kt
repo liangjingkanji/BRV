@@ -191,10 +191,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         val model = getModel<Any>(position)
         val modelClass: Class<*> = model.javaClass
         return typePool[modelClass]?.invoke(model, position)
-            ?: interfacePool?.firstNotNullOfOrNull {
+            ?: interfacePool.firstNotNullOfOrNull {
                 if (it.key.isAssignableFrom(modelClass)) it.value else null
             }?.invoke(model, position)
-            ?: throw NoSuchPropertyException("please add item model type : addType<${model.javaClass.name}>(R.layout.item)")
+            ?: throw NoSuchPropertyException("Please add item model type : addType<${model.javaClass.name}>(R.layout.item)")
     }
 
     override fun getItemCount(): Int {
@@ -229,16 +229,17 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     /** 类型池 */
     val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
-    var interfacePool: MutableMap<Class<*>, Any.(Int) -> Int>? = null
+    val interfacePool: MutableMap<Class<*>, Any.(Int) -> Int> by lazy { mutableMapOf() }
 
     /**
      * 添加多类型
-     * 在BRV中一个Item类型就是对应一个唯一的布局文件Id, 而[M]即为对应该类型所需的数据类型. 只要使用该函数添加的元素类型才被允许赋值给[models].
-     * 然后假设你使用DataBinding的话, 则该类型对应在[models]中的对象会被DataBinding绑定都对应的布局上. 前提是你有在xml中声明数据类型
+     * BRV中一个Item类型对应一个Class布局Id, 而[M]即为对应该类型所需的数据类型. 只有使用该方法添加的元素类型才被允许赋值给[models]
+     *
+     * 如果泛型为接口类型则自动等效于[addInterfaceType]
      */
     inline fun <reified M> addType(@LayoutRes layout: Int) {
         if (Modifier.isInterface(M::class.java.modifiers)) {
-            M::class.java.addInterfaceType { layout }
+            interfacePool[M::class.java] = { layout }
         } else {
             typePool[M::class.java] = { layout }
         }
@@ -247,10 +248,12 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     /**
      * 通过回调函数添加多类型, 一对多多类型(即一个数据类对应多个布局)
      * [block]中的position为当前item位于列表中的索引, [M]则为rv的models中对应的数据类型
+     *
+     * 如果泛型为接口类型则自动等效于[addInterfaceType]
      */
     inline fun <reified M> addType(noinline block: M.(position: Int) -> Int) {
         if (Modifier.isInterface(M::class.java.modifiers)) {
-            M::class.java.addInterfaceType(block as Any.(Int) -> Int)
+            interfacePool[M::class.java] = block as Any.(Int) -> Int
         } else {
             typePool[M::class.java] = block as Any.(Int) -> Int
         }
@@ -262,11 +265,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * @see addType
      */
     fun Class<*>.addInterfaceType(block: Any.(Int) -> Int) {
-        (interfacePool ?: mutableMapOf<Class<*>, Any.(Int) -> Int>().also {
-            interfacePool = it
-        })[this] = block
-    } // </editor-fold>
+        interfacePool[this] = block
+    }
 
+    // </editor-fold>
 
     // <editor-fold desc="触摸事件">
     private val clickListeners = HashMap<Int, Pair<(BindingViewHolder.(Int) -> Unit)?, Boolean>>()
