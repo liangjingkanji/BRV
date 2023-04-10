@@ -159,6 +159,7 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
             adapter.notifyItemMoved(currentPosition, targetPosition)
             sourceViewHolder = source
             targetViewHolder = target
+            return true
         }
         return false
     }
