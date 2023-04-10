@@ -29,7 +29,7 @@ import com.drake.statelayout.Status
  *
  * @param leastDuration 至少显示动画多长时间, 如果为null则至少显示动画完整播放一次的时间
  */
-open class LeastAnimationStateChangedHandler(private val leastDuration: Long? = null) :
+open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
     StateChangedHandler {
 
     /** 加载状态开始时间 */
@@ -46,19 +46,23 @@ open class LeastAnimationStateChangedHandler(private val leastDuration: Long? = 
                     animationPlaying = false
                     animation.cancelAnimation()
                     animation.removeAllUpdateListeners()
-                    container.removeAllViews()
-                    next?.let { state -> if (state.parent == null) container.addView(state) }
+                    for (i in 0 until container.childCount) {
+                        container.getChildAt(i).visibility = View.GONE
+                    }
+                    next?.let { state ->
+                        StateChangedHandler.onAdd(container, state, status, tag)
+                    }
                 }
             }
         } else {
-            StateChangedHandler.onRemove(container, state, status, tag)
+            super.onRemove(container, state, status, tag)
         }
     }
 
     override fun onAdd(container: StateLayout, state: View, status: Status, tag: Any?) {
         next = state
         if (animationPlaying) return
-        super.onAdd(container, state, status, tag)
+        StateChangedHandler.onAdd(container, state, status, tag)
         if (status == Status.LOADING) {
             loadingStartTime = System.currentTimeMillis()
             state.findViewById<LottieAnimationView>(R.id.lottie)?.let {
