@@ -48,11 +48,3 @@ fun View.pageCreate(
 
     return pageRefreshLayout
 }
-
-@Deprecated("命名规范, 本方法将在未来废弃建议立即替换", ReplaceWith("pageCreate(loadMoreEnabled, stateEnabled)"))
-fun View.page(
-    loadMoreEnabled: Boolean = true,
-    stateEnabled: Boolean = true
-): PageRefreshLayout = pageCreate(loadMoreEnabled, stateEnabled)
-
-

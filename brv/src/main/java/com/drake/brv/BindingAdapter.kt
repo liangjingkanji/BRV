@@ -79,19 +79,6 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     var modelId: Int = BRV.modelId
 
     companion object {
-        /**
-         * 即item的layout布局中的<variable>标签内定义变量名称
-         * 示例:
-         * ```
-         * <variable
-         *      name="m"
-         *      type="com.drake.brv.sample.model.CheckModel" />
-         * ```
-         * 则应在Application中的onCreate函数内设置:
-         * `BRV.modelId = BR.m`
-         */
-        @Deprecated("函数优化", ReplaceWith("BRV.modelId", "com.drake.brv.utils.BRV"), DeprecationLevel.ERROR)
-        var modelId: Int = BRV.modelId
 
         /** 是否启用DataBinding */
         private val dataBindingEnable: Boolean by lazy {
@@ -288,54 +275,6 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     /** 防抖动点击事件的间隔时间, 单位毫秒 */
     var clickThrottle: Long = BRV.clickThrottle
-
-    /** 防抖动点击事件的间隔时间, 单位毫秒. 本函数已废弃 */
-    @Deprecated("Rename to clickThrottle", ReplaceWith("clickThrottle"), DeprecationLevel.ERROR)
-    var clickPeriod: Long
-        get() = clickThrottle
-        set(value) {
-            clickThrottle = value
-        }
-
-    /**
-     * 添加点击事件
-     * 默认500ms防抖, 修改[clickThrottle]属性可以全局设置间隔时间, 单位毫秒
-     * 默认会回调最后一个onClick监听函数
-     */
-    @Deprecated(
-        "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖", ReplaceWith("onClick(*id){  }"), DeprecationLevel.ERROR
-    )
-    fun addClickable(@IdRes vararg id: Int) {
-        for (i in id) {
-            clickListeners[i] = Pair(null, false)
-        }
-    }
-
-    /**
-     * 指定Id的视图将被监听点击事件(未使用防抖)
-     * 默认会回调最后一个onClick监听函数
-     */
-    @Deprecated(
-        "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖", ReplaceWith("onFastClick(*id){  }"), DeprecationLevel.ERROR
-    )
-    fun addFastClickable(@IdRes vararg id: Int) {
-        for (i in id) {
-            clickListeners[i] = Pair(null, true)
-        }
-    }
-
-    /**
-     * 指定Id的视图将被监听长按事件
-     * 默认会回调最后一个onLongClick监听函数
-     */
-    @Deprecated(
-        "点击事件现在是指定Id对应一个回调函数, 相同Id覆盖", ReplaceWith("onLongClick(*id){  }"), DeprecationLevel.ERROR
-    )
-    fun addLongClickable(@IdRes vararg id: Int) {
-        for (i in id) {
-            longClickListeners[i] = null
-        }
-    }
 
     /**
      * 监听指定Id控件的点击事件, 包含防抖动
