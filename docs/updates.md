@@ -1,3 +1,11 @@
+## 1.4.0
+- refactor: 如果models为null则mutable返回空集合
+- refactor: 删除isNetworkingRetry
+- refactor: 删除废弃方法
+- upgrade: StateLayout 1.4.1
+- fix: #200 拖拽第一个Item会快速滑动跳过列表
+- feat: 列表动画支持重复显示
+
 ## 1.3.90
 - feat: #324 网格分割线间距支持以item为基准
 - refactor: 删除分割线 DefaultDecoration.kt setBackground()(可以使用rv背景色替代)
