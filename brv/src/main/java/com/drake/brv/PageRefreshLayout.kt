@@ -29,7 +29,6 @@ import com.drake.brv.utils.bindingAdapter
 import com.drake.statelayout.StateChangedHandler
 import com.drake.statelayout.StateConfig
 import com.drake.statelayout.StateConfig.errorLayout
-import com.drake.statelayout.StateConfig.setRetryIds
 import com.drake.statelayout.StateLayout
 import com.drake.statelayout.Status
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -79,17 +78,6 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
 
     /** 缺省页视图 */
     var stateLayout: StateLayout? = null
-
-    /**
-     * 设置[setRetryIds]点击重试要求网络可用才会显示加载缺省,
-     * 会回调[onRefresh]但不会回调[onLoading]
-     * 为避免无网络情况下点击重试导致闪屏
-     */
-    var isNetworkingRetry
-        get() = stateLayout?.isNetworkingRetry ?: false
-        set(value) {
-            stateLayout?.isNetworkingRetry = value
-        }
 
     /**
      * 缺省页ID, 默认不配置会自动创建StateLayout并且包裹PageRefreshLayout的RefreshContent
