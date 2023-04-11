@@ -40,12 +40,16 @@ import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.item.*
 import com.drake.brv.listener.*
+import com.drake.brv.reflect.isAssignableFrom
+import com.drake.brv.reflect.isInstance
 import com.drake.brv.utils.BRV
 import com.drake.brv.utils.setDifferModels
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Modifier
 import java.util.concurrent.*
 import kotlin.math.min
+import kotlin.reflect.KType
+import kotlin.reflect.typeOf
 
 /**
  * < Android上最强大的RecyclerView框架 >
@@ -176,10 +180,11 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     override fun getItemViewType(position: Int): Int {
         val model = getModel<Any>(position)
-        val modelClass: Class<*> = model.javaClass
-        return typePool[modelClass]?.invoke(model, position)
+        return typePool.firstNotNullOfOrNull {
+            if (it.key.isInstance(model)) it.value else null
+        }?.invoke(model, position)
             ?: interfacePool.firstNotNullOfOrNull {
-                if (it.key.isAssignableFrom(modelClass)) it.value else null
+                if (it.key.isAssignableFrom(model)) it.value else null
             }?.invoke(model, position)
             ?: throw NoSuchPropertyException("Please add item model type : addType<${model.javaClass.name}>(R.layout.item)")
     }
@@ -217,8 +222,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     // <editor-fold desc="多类型">
 
     /** 类型池 */
-    val typePool = mutableMapOf<Class<*>, Any.(Int) -> Int>()
-    val interfacePool: MutableMap<Class<*>, Any.(Int) -> Int> by lazy { mutableMapOf() }
+    val typePool = mutableMapOf<KType, Any.(Int) -> Int>()
+    val interfacePool = mutableMapOf<KType, Any.(Int) -> Int>()
 
     /**
      * 添加多类型
@@ -228,9 +233,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      */
     inline fun <reified M> addType(@LayoutRes layout: Int) {
         if (Modifier.isInterface(M::class.java.modifiers)) {
-            interfacePool[M::class.java] = { layout }
+            interfacePool[typeOf<M>()] = { layout }
         } else {
-            typePool[M::class.java] = { layout }
+            typePool[typeOf<M>()] = { layout }
         }
     }
 
@@ -242,9 +247,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      */
     inline fun <reified M> addType(noinline block: M.(position: Int) -> Int) {
         if (Modifier.isInterface(M::class.java.modifiers)) {
-            interfacePool[M::class.java] = block as Any.(Int) -> Int
+            interfacePool[typeOf<M>()] = block as Any.(Int) -> Int
         } else {
-            typePool[M::class.java] = block as Any.(Int) -> Int
+            typePool[typeOf<M>()] = block as Any.(Int) -> Int
         }
     }
 
@@ -253,8 +258,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * @receiver 接口类
      * @see addType
      */
-    fun Class<*>.addInterfaceType(block: Any.(Int) -> Int) {
-        interfacePool[this] = block
+    inline fun <reified M> addInterfaceType(noinline block: Any.(Int) -> Int) {
+        interfacePool[typeOf<M>()] = block
     }
 
     // </editor-fold>
@@ -1102,7 +1107,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     viewBinding.setVariable(modelId, model)
                     viewBinding.executePendingBindings()
                 } catch (e: Exception) {
-                    val message = "DataBinding type mismatch ...(${context.resources.getResourceEntryName(itemViewType)}.xml:1)"
+                    val message = "DataBinding type mismatch (${context.resources.getResourceEntryName(itemViewType)}.xml:1)"
                     Log.e(javaClass.simpleName, message, e)
                 }
             }
