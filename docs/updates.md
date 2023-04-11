@@ -1,3 +1,6 @@
+## 1.4.1
+- feat: 新增copyType方法让集合保留泛型, 避免addType无法判断List泛型区别
+
 ## 1.4.0
 - refactor: 如果models为null则mutable返回空集合
 - refactor: 删除isNetworkingRetry
