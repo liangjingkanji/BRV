@@ -21,6 +21,8 @@ import com.youth.banner.indicator.RoundLinesIndicator
 
 /**
  * 演示如何使用BRV+NET(https://github.com/liangjingkanji/Net)快速构建应用首页(MVVM架构)
+ *
+ * 使用CoordinatorLayout+RecyclerView实现首页布局
  */
 class HomeFragment : EngineFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun initView() {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="m"
+            type="String" />
+
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:text="@{m}"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+</layout>

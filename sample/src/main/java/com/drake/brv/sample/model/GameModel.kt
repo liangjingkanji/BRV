@@ -18,6 +18,7 @@ import java.text.NumberFormat
 @kotlinx.serialization.Serializable
 data class GameModel(
     var total: Int = 0,
+    var totalPage: Int = 0,
     var list: List<Data> = listOf()
 ) {
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.drake.brv.sample.model.HomeModel.Event" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp">
+
+        <ImageView
+            android:id="@+id/ivEvent"
+            corner="@{8}"
+            img="@{m.image}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/windowBackgroundSecond"
+            app:layout_constraintDimensionRatio="1600:900"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

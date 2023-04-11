@@ -24,6 +24,10 @@
         android:icon="@drawable/ic_home"
         android:title="首页布局" />
     <item
+        android:id="@+id/homeListFragment"
+        android:icon="@drawable/ic_home"
+        android:title="首页列表" />
+    <item
         android:id="@+id/commentFragment"
         android:icon="@drawable/ic_comment"
         android:title="哔哩哔哩评论" />

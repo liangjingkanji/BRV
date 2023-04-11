@@ -1,6 +1,7 @@
 package com.drake.brv.sample.model
 
 import androidx.databinding.BaseObservable
+import com.drake.brv.reflect.copyType
 
 @kotlinx.serialization.Serializable
 data class HomeModel(
@@ -9,6 +10,18 @@ data class HomeModel(
     var event: Event = Event(),
     var tabs: List<Tab> = listOf()
 ) {
+
+    /** 获取列表有效数据 */
+    fun getAvailableData(games: List<GameModel.Data>): MutableList<Any> {
+        val data = mutableListOf<Any>()
+        if (banner.isNotEmpty()) data.add(banner.copyType())
+        if (explore.isNotEmpty()) data.add(explore.copyType())
+        if (event.id != 0L) data.add(event)
+        data.add("最新折扣")
+        data.addAll(games)
+        return data
+    }
+
     @kotlinx.serialization.Serializable
     data class Banner(
         var id: Long = 0,
@@ -35,4 +48,10 @@ data class HomeModel(
     ) : BaseObservable() {
         var checked = false
     }
+
+    @kotlinx.serialization.Serializable
+    class BannerList<T> : ArrayList<T>()
+
+    @kotlinx.serialization.Serializable
+    class ExploreList<T> : ArrayList<T>()
 }
