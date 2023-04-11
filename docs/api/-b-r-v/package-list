@@ -1,5 +1,8 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:androidx.recyclerview.widget////PointingToDeclaration/-b-r-v/androidx.recyclerview.widget/index.html
+$dokka.location:androidx.recyclerview.widget/RecyclerViewUtils///PointingToDeclaration/-b-r-v/androidx.recyclerview.widget/-recycler-view-utils/index.html
+$dokka.location:androidx.recyclerview.widget/RecyclerViewUtils/setItemViewType/#androidx.recyclerview.widget.RecyclerView.ViewHolder#int/PointingToDeclaration/-b-r-v/androidx.recyclerview.widget/-recycler-view-utils/set-item-view-type.html
 $dokka.location:com.drake.brv.animation////PointingToDeclaration/-b-r-v/com.drake.brv.animation/index.html
 $dokka.location:com.drake.brv.animation/AlphaItemAnimation.Companion///PointingToDeclaration/-b-r-v/com.drake.brv.animation/-alpha-item-animation/-companion/index.html
 $dokka.location:com.drake.brv.animation/AlphaItemAnimation///PointingToDeclaration/-b-r-v/com.drake.brv.animation/-alpha-item-animation/index.html
@@ -48,8 +51,15 @@ $dokka.location:com.drake.brv.binding/ObservableIml/notifyPropertyChanged/#kotli
 $dokka.location:com.drake.brv.binding/ObservableIml/registry/#/PointingToDeclaration/-b-r-v/com.drake.brv.binding/-observable-iml/registry.html
 $dokka.location:com.drake.brv.binding/ObservableIml/removeOnPropertyChangedCallback/#androidx.databinding.Observable.OnPropertyChangedCallback/PointingToDeclaration/-b-r-v/com.drake.brv.binding/-observable-iml/remove-on-property-changed-callback.html
 $dokka.location:com.drake.brv.item////PointingToDeclaration/-b-r-v/com.drake.brv.item/index.html
+$dokka.location:com.drake.brv.item/ItemAttached///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-attached/index.html
+$dokka.location:com.drake.brv.item/ItemAttached/onViewAttachedToWindow/#com.drake.brv.BindingAdapter.BindingViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-attached/on-view-attached-to-window.html
+$dokka.location:com.drake.brv.item/ItemAttached/onViewDetachedFromWindow/#com.drake.brv.BindingAdapter.BindingViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-attached/on-view-detached-from-window.html
 $dokka.location:com.drake.brv.item/ItemBind///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-bind/index.html
 $dokka.location:com.drake.brv.item/ItemBind/onBind/#com.drake.brv.BindingAdapter.BindingViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-bind/on-bind.html
+$dokka.location:com.drake.brv.item/ItemDepth.Companion///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-depth/-companion/index.html
+$dokka.location:com.drake.brv.item/ItemDepth.Companion/refreshItemDepth/#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-depth/-companion/refresh-item-depth.html
+$dokka.location:com.drake.brv.item/ItemDepth///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-depth/index.html
+$dokka.location:com.drake.brv.item/ItemDepth/itemDepth/#/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-depth/item-depth.html
 $dokka.location:com.drake.brv.item/ItemDrag///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-drag/index.html
 $dokka.location:com.drake.brv.item/ItemDrag/itemOrientationDrag/#/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-drag/item-orientation-drag.html
 $dokka.location:com.drake.brv.item/ItemExpand///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-expand/index.html
@@ -60,6 +70,8 @@ $dokka.location:com.drake.brv.item/ItemHover///PointingToDeclaration/-b-r-v/com
 $dokka.location:com.drake.brv.item/ItemHover/itemHover/#/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-hover/item-hover.html
 $dokka.location:com.drake.brv.item/ItemPosition///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-position/index.html
 $dokka.location:com.drake.brv.item/ItemPosition/itemPosition/#/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-position/item-position.html
+$dokka.location:com.drake.brv.item/ItemStableId///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-stable-id/index.html
+$dokka.location:com.drake.brv.item/ItemStableId/getItemId/#/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-stable-id/get-item-id.html
 $dokka.location:com.drake.brv.item/ItemSwipe///PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-swipe/index.html
 $dokka.location:com.drake.brv.item/ItemSwipe/itemOrientationSwipe/#/PointingToDeclaration/-b-r-v/com.drake.brv.item/-item-swipe/item-orientation-swipe.html
 $dokka.location:com.drake.brv.layoutmanager////PointingToDeclaration/-b-r-v/com.drake.brv.layoutmanager/index.html
@@ -170,6 +182,7 @@ $dokka.location:com.drake.brv.layoutmanager/HoverStaggeredGridLayoutManager/setH
 $dokka.location:com.drake.brv.listener////PointingToDeclaration/-b-r-v/com.drake.brv.listener/index.html
 $dokka.location:com.drake.brv.listener/DefaultItemTouchCallback///PointingToDeclaration/-b-r-v/com.drake.brv.listener/-default-item-touch-callback/index.html
 $dokka.location:com.drake.brv.listener/DefaultItemTouchCallback/DefaultItemTouchCallback/#/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-default-item-touch-callback/-default-item-touch-callback.html
+$dokka.location:com.drake.brv.listener/DefaultItemTouchCallback/clearView/#androidx.recyclerview.widget.RecyclerView#androidx.recyclerview.widget.RecyclerView.ViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-default-item-touch-callback/clear-view.html
 $dokka.location:com.drake.brv.listener/DefaultItemTouchCallback/getMovementFlags/#androidx.recyclerview.widget.RecyclerView#androidx.recyclerview.widget.RecyclerView.ViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-default-item-touch-callback/get-movement-flags.html
 $dokka.location:com.drake.brv.listener/DefaultItemTouchCallback/getSwipeThreshold/#androidx.recyclerview.widget.RecyclerView.ViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-default-item-touch-callback/get-swipe-threshold.html
 $dokka.location:com.drake.brv.listener/DefaultItemTouchCallback/onChildDraw/#android.graphics.Canvas#androidx.recyclerview.widget.RecyclerView#androidx.recyclerview.widget.RecyclerView.ViewHolder#kotlin.Float#kotlin.Float#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-default-item-touch-callback/on-child-draw.html
@@ -200,19 +213,23 @@ $dokka.location:com.drake.brv.listener/OnMultiStateListener/onHeaderStartAnimato
 $dokka.location:com.drake.brv.listener/OnMultiStateListener/onLoadMore/#com.scwang.smart.refresh.layout.api.RefreshLayout/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-on-multi-state-listener/on-load-more.html
 $dokka.location:com.drake.brv.listener/OnMultiStateListener/onRefresh/#com.scwang.smart.refresh.layout.api.RefreshLayout/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-on-multi-state-listener/on-refresh.html
 $dokka.location:com.drake.brv.listener/OnMultiStateListener/onStateChanged/#com.scwang.smart.refresh.layout.api.RefreshLayout#com.scwang.smart.refresh.layout.constant.RefreshState#com.scwang.smart.refresh.layout.constant.RefreshState/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-on-multi-state-listener/on-state-changed.html
-$dokka.location:com.drake.brv.listener/SnapLinearSmoothScroller///PointingToDeclaration/-b-r-v/com.drake.brv.listener/-snap-linear-smooth-scroller/index.html
-$dokka.location:com.drake.brv.listener/SnapLinearSmoothScroller/SnapLinearSmoothScroller/#android.content.Context/PointingToDeclaration/-b-r-v/com.drake.brv.listener/-snap-linear-smooth-scroller/-snap-linear-smooth-scroller.html
+$dokka.location:com.drake.brv.reflect////PointingToDeclaration/-b-r-v/com.drake.brv.reflect/index.html
+$dokka.location:com.drake.brv.reflect//copyType/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#/PointingToDeclaration/-b-r-v/com.drake.brv.reflect/copy-type.html
+$dokka.location:com.drake.brv.reflect/TypeList///PointingToDeclaration/-b-r-v/com.drake.brv.reflect/-type-list/index.html
+$dokka.location:com.drake.brv.reflect/TypeList/TypeList/#kotlin.reflect.KType#kotlin.collections.Collection[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/-b-r-v/com.drake.brv.reflect/-type-list/-type-list.html
+$dokka.location:com.drake.brv.reflect/TypeList/TypeList/#kotlin.reflect.KType/PointingToDeclaration/-b-r-v/com.drake.brv.reflect/-type-list/-type-list.html
+$dokka.location:com.drake.brv.reflect/TypeList/type/#/PointingToDeclaration/-b-r-v/com.drake.brv.reflect/-type-list/type.html
 $dokka.location:com.drake.brv.utils////PointingToDeclaration/-b-r-v/com.drake.brv.utils/index.html
-$dokka.location:com.drake.brv.utils//addModels/androidx.recyclerview.widget.RecyclerView#kotlin.collections.List[kotlin.Any?]?#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.utils/add-models.html
+$dokka.location:com.drake.brv.utils//addModels/androidx.recyclerview.widget.RecyclerView#kotlin.collections.List[kotlin.Any?]?#kotlin.Boolean#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv.utils/add-models.html
 $dokka.location:com.drake.brv.utils//bindingAdapter/androidx.recyclerview.widget.RecyclerView#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/binding-adapter.html
 $dokka.location:com.drake.brv.utils//divider/androidx.recyclerview.widget.RecyclerView#kotlin.Function1[com.drake.brv.DefaultDecoration,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv.utils/divider.html
 $dokka.location:com.drake.brv.utils//divider/androidx.recyclerview.widget.RecyclerView#kotlin.Int#com.drake.brv.annotaion.DividerOrientation/PointingToDeclaration/-b-r-v/com.drake.brv.utils/divider.html
+$dokka.location:com.drake.brv.utils//dividerSpace/androidx.recyclerview.widget.RecyclerView#kotlin.Int#com.drake.brv.annotaion.DividerOrientation/PointingToDeclaration/-b-r-v/com.drake.brv.utils/divider-space.html
 $dokka.location:com.drake.brv.utils//grid/androidx.recyclerview.widget.RecyclerView#kotlin.Int#kotlin.Int#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.utils/grid.html
 $dokka.location:com.drake.brv.utils//linear/androidx.recyclerview.widget.RecyclerView#kotlin.Int#kotlin.Boolean#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.utils/linear.html
 $dokka.location:com.drake.brv.utils//models/androidx.recyclerview.widget.RecyclerView#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/models.html
 $dokka.location:com.drake.brv.utils//mutable/androidx.recyclerview.widget.RecyclerView#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/mutable.html
-$dokka.location:com.drake.brv.utils//page/android.view.View#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.utils/page.html
-$dokka.location:com.drake.brv.utils//refreshItemDepth/kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv.utils/refresh-item-depth.html
+$dokka.location:com.drake.brv.utils//pageCreate/android.view.View#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv.utils/page-create.html
 $dokka.location:com.drake.brv.utils//setDifferModels/androidx.recyclerview.widget.RecyclerView#kotlin.collections.List[kotlin.Any?]?#kotlin.Boolean#java.lang.Runnable?/PointingToDeclaration/-b-r-v/com.drake.brv.utils/set-differ-models.html
 $dokka.location:com.drake.brv.utils//setup/android.app.Dialog#kotlin.Function2[com.drake.brv.BindingAdapter,androidx.recyclerview.widget.RecyclerView,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv.utils/setup.html
 $dokka.location:com.drake.brv.utils//setup/androidx.recyclerview.widget.RecyclerView#kotlin.Function2[com.drake.brv.BindingAdapter,androidx.recyclerview.widget.RecyclerView,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv.utils/setup.html
@@ -220,8 +237,6 @@ $dokka.location:com.drake.brv.utils//staggered/androidx.recyclerview.widget.Recy
 $dokka.location:com.drake.brv.utils/BRV///PointingToDeclaration/-b-r-v/com.drake.brv.utils/-b-r-v/index.html
 $dokka.location:com.drake.brv.utils/BRV/clickThrottle/#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/-b-r-v/click-throttle.html
 $dokka.location:com.drake.brv.utils/BRV/modelId/#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/-b-r-v/model-id.html
-$dokka.location:com.drake.brv.utils/ItemDepth///PointingToDeclaration/-b-r-v/com.drake.brv.utils/-item-depth/index.html
-$dokka.location:com.drake.brv.utils/ItemDepth/itemDepth/#/PointingToDeclaration/-b-r-v/com.drake.brv.utils/-item-depth/item-depth.html
 $dokka.location:com.drake.brv////PointingToDeclaration/-b-r-v/com.drake.brv/index.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder///PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/index.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/BindingViewHolder/#android.view.View/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/-binding-view-holder.html
@@ -236,24 +251,22 @@ $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/findParentPositio
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/findParentViewHolder/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/find-parent-view-holder.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/findView/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/find-view.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/getBinding/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/get-binding.html
+$dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/getBindingOrNull/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/get-binding-or-null.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/getModel/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/get-model.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/getModelOrNull/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/get-model-or-null.html
 $dokka.location:com.drake.brv/BindingAdapter.BindingViewHolder/modelPosition/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-view-holder/model-position.html
 $dokka.location:com.drake.brv/BindingAdapter.Companion///PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-companion/index.html
-$dokka.location:com.drake.brv/BindingAdapter.Companion/modelId/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-companion/model-id.html
 $dokka.location:com.drake.brv/BindingAdapter///PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/index.html
 $dokka.location:com.drake.brv/BindingAdapter/BindingAdapter/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/-binding-adapter.html
 $dokka.location:com.drake.brv/BindingAdapter/_data/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/_data.html
-$dokka.location:com.drake.brv/BindingAdapter/addClickable/#kotlin.IntArray/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-clickable.html
-$dokka.location:com.drake.brv/BindingAdapter/addFastClickable/#kotlin.IntArray/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-fast-clickable.html
 $dokka.location:com.drake.brv/BindingAdapter/addFooter/#kotlin.Any?#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-footer.html
 $dokka.location:com.drake.brv/BindingAdapter/addHeader/#kotlin.Any?#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-header.html
-$dokka.location:com.drake.brv/BindingAdapter/addInterfaceType/java.lang.Class[*]#kotlin.Function2[kotlin.Any,kotlin.Int,kotlin.Int]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-interface-type.html
-$dokka.location:com.drake.brv/BindingAdapter/addLongClickable/#kotlin.IntArray/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-long-clickable.html
-$dokka.location:com.drake.brv/BindingAdapter/addModels/#kotlin.collections.List[kotlin.Any?]?#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-models.html
+$dokka.location:com.drake.brv/BindingAdapter/addInterfaceType/#kotlin.Function2[kotlin.Any,kotlin.Int,kotlin.Int]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-interface-type.html
+$dokka.location:com.drake.brv/BindingAdapter/addModels/#kotlin.collections.List[kotlin.Any?]?#kotlin.Boolean#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-models.html
 $dokka.location:com.drake.brv/BindingAdapter/addType/#kotlin.Function2[TypeParam(bounds=[kotlin.Any?]),kotlin.Int,kotlin.Int]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-type.html
 $dokka.location:com.drake.brv/BindingAdapter/addType/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/add-type.html
 $dokka.location:com.drake.brv/BindingAdapter/animationEnabled/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/animation-enabled.html
+$dokka.location:com.drake.brv/BindingAdapter/animationRepeat/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/animation-repeat.html
 $dokka.location:com.drake.brv/BindingAdapter/checkedAll/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/checked-all.html
 $dokka.location:com.drake.brv/BindingAdapter/checkedCount/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/checked-count.html
 $dokka.location:com.drake.brv/BindingAdapter/checkedPosition/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/checked-position.html
@@ -261,7 +274,6 @@ $dokka.location:com.drake.brv/BindingAdapter/checkedReverse/#/PointingToDeclarat
 $dokka.location:com.drake.brv/BindingAdapter/checkedSwitch/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/checked-switch.html
 $dokka.location:com.drake.brv/BindingAdapter/clearFooter/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/clear-footer.html
 $dokka.location:com.drake.brv/BindingAdapter/clearHeader/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/clear-header.html
-$dokka.location:com.drake.brv/BindingAdapter/clickPeriod/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/click-period.html
 $dokka.location:com.drake.brv/BindingAdapter/clickThrottle/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/click-throttle.html
 $dokka.location:com.drake.brv/BindingAdapter/collapse/#kotlin.Int#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/collapse.html
 $dokka.location:com.drake.brv/BindingAdapter/expand/#kotlin.Int#kotlin.Boolean#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/expand.html
@@ -271,10 +283,10 @@ $dokka.location:com.drake.brv/BindingAdapter/footerCount/#/PointingToDeclaration
 $dokka.location:com.drake.brv/BindingAdapter/footers/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/footers.html
 $dokka.location:com.drake.brv/BindingAdapter/getCheckedModels/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-checked-models.html
 $dokka.location:com.drake.brv/BindingAdapter/getItemCount/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-item-count.html
+$dokka.location:com.drake.brv/BindingAdapter/getItemId/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-item-id.html
 $dokka.location:com.drake.brv/BindingAdapter/getItemViewType/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-item-view-type.html
 $dokka.location:com.drake.brv/BindingAdapter/getModel/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-model.html
 $dokka.location:com.drake.brv/BindingAdapter/getModelOrNull/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-model-or-null.html
-$dokka.location:com.drake.brv/BindingAdapter/getView/android.view.ViewGroup#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/get-view.html
 $dokka.location:com.drake.brv/BindingAdapter/headerCount/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/header-count.html
 $dokka.location:com.drake.brv/BindingAdapter/headers/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/headers.html
 $dokka.location:com.drake.brv/BindingAdapter/hoverEnabled/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/hover-enabled.html
@@ -288,6 +300,7 @@ $dokka.location:com.drake.brv/BindingAdapter/isSameGroup/#kotlin.Int#kotlin.Int/
 $dokka.location:com.drake.brv/BindingAdapter/itemDifferCallback/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/item-differ-callback.html
 $dokka.location:com.drake.brv/BindingAdapter/itemTouchHelper/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/item-touch-helper.html
 $dokka.location:com.drake.brv/BindingAdapter/modelCount/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/model-count.html
+$dokka.location:com.drake.brv/BindingAdapter/modelId/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/model-id.html
 $dokka.location:com.drake.brv/BindingAdapter/models/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/models.html
 $dokka.location:com.drake.brv/BindingAdapter/mutable/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/mutable.html
 $dokka.location:com.drake.brv/BindingAdapter/onAttachedToRecyclerView/#androidx.recyclerview.widget.RecyclerView/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-attached-to-recycler-view.html
@@ -306,9 +319,10 @@ $dokka.location:com.drake.brv/BindingAdapter/onFastClick/kotlin.Int#kotlin.Funct
 $dokka.location:com.drake.brv/BindingAdapter/onHoverAttachListener/#/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-hover-attach-listener.html
 $dokka.location:com.drake.brv/BindingAdapter/onLongClick/#kotlin.IntArray#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-long-click.html
 $dokka.location:com.drake.brv/BindingAdapter/onLongClick/kotlin.Int#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Int,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-long-click.html
-$dokka.location:com.drake.brv/BindingAdapter/onPayload/#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Any,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-payload.html
+$dokka.location:com.drake.brv/BindingAdapter/onPayload/#kotlin.Function2[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.collections.MutableList[kotlin.Any],kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-payload.html
 $dokka.location:com.drake.brv/BindingAdapter/onToggle/#kotlin.Function3[kotlin.Int,kotlin.Boolean,kotlin.Boolean,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-toggle.html
 $dokka.location:com.drake.brv/BindingAdapter/onViewAttachedToWindow/#com.drake.brv.BindingAdapter.BindingViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-view-attached-to-window.html
+$dokka.location:com.drake.brv/BindingAdapter/onViewDetachedFromWindow/#com.drake.brv.BindingAdapter.BindingViewHolder/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/on-view-detached-from-window.html
 $dokka.location:com.drake.brv/BindingAdapter/removeFooter/#kotlin.Any?#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/remove-footer.html
 $dokka.location:com.drake.brv/BindingAdapter/removeFooterAt/#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/remove-footer-at.html
 $dokka.location:com.drake.brv/BindingAdapter/removeHeader/#kotlin.Any?#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-binding-adapter/remove-header.html
@@ -344,26 +358,24 @@ $dokka.location:com.drake.brv/DefaultDecoration/includeVisible/#/PointingToDecla
 $dokka.location:com.drake.brv/DefaultDecoration/onDraw/#android.graphics.Canvas#androidx.recyclerview.widget.RecyclerView#androidx.recyclerview.widget.RecyclerView.State/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/on-draw.html
 $dokka.location:com.drake.brv/DefaultDecoration/onEnabled/#kotlin.Function1[com.drake.brv.BindingAdapter.BindingViewHolder,kotlin.Boolean]/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/on-enabled.html
 $dokka.location:com.drake.brv/DefaultDecoration/orientation/#/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/orientation.html
-$dokka.location:com.drake.brv/DefaultDecoration/setBackground/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-background.html
-$dokka.location:com.drake.brv/DefaultDecoration/setBackground/#kotlin.String/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-background.html
-$dokka.location:com.drake.brv/DefaultDecoration/setBackgroundRes/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-background-res.html
 $dokka.location:com.drake.brv/DefaultDecoration/setColor/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-color.html
 $dokka.location:com.drake.brv/DefaultDecoration/setColor/#kotlin.String/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-color.html
 $dokka.location:com.drake.brv/DefaultDecoration/setColorRes/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-color-res.html
 $dokka.location:com.drake.brv/DefaultDecoration/setDivider/#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-divider.html
 $dokka.location:com.drake.brv/DefaultDecoration/setDrawable/#android.graphics.drawable.Drawable/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-drawable.html
 $dokka.location:com.drake.brv/DefaultDecoration/setDrawable/#kotlin.Int/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-drawable.html
-$dokka.location:com.drake.brv/DefaultDecoration/setMargin/#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-margin.html
+$dokka.location:com.drake.brv/DefaultDecoration/setMargin/#kotlin.Int#kotlin.Int#kotlin.Boolean#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/set-margin.html
 $dokka.location:com.drake.brv/DefaultDecoration/startVisible/#/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/start-visible.html
 $dokka.location:com.drake.brv/DefaultDecoration/typePool/#/PointingToDeclaration/-b-r-v/com.drake.brv/-default-decoration/type-pool.html
 $dokka.location:com.drake.brv/PageRefreshLayout.Companion///PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-companion/index.html
 $dokka.location:com.drake.brv/PageRefreshLayout.Companion/preloadIndex/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-companion/preload-index.html
+$dokka.location:com.drake.brv/PageRefreshLayout.Companion/refreshEnableWhenEmpty/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-companion/refresh-enable-when-empty.html
+$dokka.location:com.drake.brv/PageRefreshLayout.Companion/refreshEnableWhenError/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-companion/refresh-enable-when-error.html
 $dokka.location:com.drake.brv/PageRefreshLayout.Companion/startIndex/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-companion/start-index.html
 $dokka.location:com.drake.brv/PageRefreshLayout///PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/index.html
 $dokka.location:com.drake.brv/PageRefreshLayout/PageRefreshLayout/#android.content.Context#android.util.AttributeSet?/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-page-refresh-layout.html
 $dokka.location:com.drake.brv/PageRefreshLayout/PageRefreshLayout/#android.content.Context/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/-page-refresh-layout.html
 $dokka.location:com.drake.brv/PageRefreshLayout/addData/#kotlin.collections.List[kotlin.Any?]?#com.drake.brv.BindingAdapter?#kotlin.Function0[kotlin.Boolean]#kotlin.Function1[com.drake.brv.BindingAdapter,kotlin.Boolean]/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/add-data.html
-$dokka.location:com.drake.brv/PageRefreshLayout/contentView/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/content-view.html
 $dokka.location:com.drake.brv/PageRefreshLayout/emptyLayout/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/empty-layout.html
 $dokka.location:com.drake.brv/PageRefreshLayout/errorLayout/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/error-layout.html
 $dokka.location:com.drake.brv/PageRefreshLayout/finish/#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/finish.html
@@ -382,8 +394,12 @@ $dokka.location:com.drake.brv/PageRefreshLayout/onLoading/#kotlin.Function2[andr
 $dokka.location:com.drake.brv/PageRefreshLayout/onRefresh/#com.scwang.smart.refresh.layout.api.RefreshLayout/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/on-refresh.html
 $dokka.location:com.drake.brv/PageRefreshLayout/onRefresh/#kotlin.Function1[com.drake.brv.PageRefreshLayout,kotlin.Unit]/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/on-refresh.html
 $dokka.location:com.drake.brv/PageRefreshLayout/preloadIndex/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/preload-index.html
+$dokka.location:com.drake.brv/PageRefreshLayout/recyclerViewId/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/recycler-view-id.html
 $dokka.location:com.drake.brv/PageRefreshLayout/refresh/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/refresh.html
+$dokka.location:com.drake.brv/PageRefreshLayout/refreshEnableWhenEmpty/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/refresh-enable-when-empty.html
+$dokka.location:com.drake.brv/PageRefreshLayout/refreshEnableWhenError/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/refresh-enable-when-error.html
 $dokka.location:com.drake.brv/PageRefreshLayout/refreshing/#kotlin.Any?/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/refreshing.html
+$dokka.location:com.drake.brv/PageRefreshLayout/rv/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/rv.html
 $dokka.location:com.drake.brv/PageRefreshLayout/setEnableLoadMore/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/set-enable-load-more.html
 $dokka.location:com.drake.brv/PageRefreshLayout/setEnableRefresh/#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/set-enable-refresh.html
 $dokka.location:com.drake.brv/PageRefreshLayout/setOnMultiStateListener/#com.drake.brv.listener.OnMultiStateListener/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/set-on-multi-state-listener.html
@@ -392,10 +408,13 @@ $dokka.location:com.drake.brv/PageRefreshLayout/showContent/#kotlin.Boolean#kotl
 $dokka.location:com.drake.brv/PageRefreshLayout/showEmpty/#kotlin.Any?/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/show-empty.html
 $dokka.location:com.drake.brv/PageRefreshLayout/showError/#kotlin.Any?#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/show-error.html
 $dokka.location:com.drake.brv/PageRefreshLayout/showLoading/#kotlin.Any?#kotlin.Boolean/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/show-loading.html
+$dokka.location:com.drake.brv/PageRefreshLayout/stateChangedHandler/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/state-changed-handler.html
 $dokka.location:com.drake.brv/PageRefreshLayout/stateEnabled/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/state-enabled.html
 $dokka.location:com.drake.brv/PageRefreshLayout/stateLayout/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/state-layout.html
+$dokka.location:com.drake.brv/PageRefreshLayout/stateLayoutId/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/state-layout-id.html
 $dokka.location:com.drake.brv/PageRefreshLayout/trigger/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/trigger.html
 $dokka.location:com.drake.brv/PageRefreshLayout/upFetchEnabled/#/PointingToDeclaration/-b-r-v/com.drake.brv/-page-refresh-layout/up-fetch-enabled.html
+androidx.recyclerview.widget
 com.drake.brv
 com.drake.brv.animation
 com.drake.brv.annotaion
@@ -403,5 +422,6 @@ com.drake.brv.binding
 com.drake.brv.item
 com.drake.brv.layoutmanager
 com.drake.brv.listener
+com.drake.brv.reflect
 com.drake.brv.utils
 

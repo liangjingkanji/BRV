@@ -22,7 +22,7 @@
           </div>
           <div class="cover ">
             <h1 class="cover"><span>Page</span><wbr></wbr><span>Refresh</span><wbr></wbr><span>Layout</span></h1>
-            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><div class="symbol monospace">open class <a href="index.html">PageRefreshLayout</a> : <span data-unresolved-link="com.scwang.smart.refresh.layout/SmartRefreshLayout///PointingToDeclaration/">SmartRefreshLayout</span>, <span data-unresolved-link="com.scwang.smart.refresh.layout.listener/OnRefreshLoadMoreListener///PointingToDeclaration/">OnRefreshLoadMoreListener</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">扩展SmartRefreshLayout的功能</p><p class="paragraph">功能:</p><ul><li><p class="paragraph">下拉刷新u</p></li><li><p class="paragraph">上拉加载</p></li><li><p class="paragraph">拉取</p></li><li><p class="paragraph">预加载</p></li><li><p class="paragraph">预拉取</p></li><li><p class="paragraph">自动分页</p></li><li><p class="paragraph">添加数据</p></li><li><p class="paragraph">缺省状态页</p></li></ul></div></div>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><div class="symbol monospace">open class <a href="index.html">PageRefreshLayout</a> : <span data-unresolved-link="com.scwang.smart.refresh.layout/SmartRefreshLayout///PointingToDeclaration/">SmartRefreshLayout</span>, <span data-unresolved-link="com.scwang.smart.refresh.layout.listener/OnRefreshLoadMoreListener///PointingToDeclaration/">OnRefreshLoadMoreListener</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">扩展<a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a>的功能</p><h2 class=""> 功能</h2><ol><li><p class="paragraph">下拉刷新</p></li><li><p class="paragraph">上拉加载</p></li><li><p class="paragraph">拉取</p></li><li><p class="paragraph">预加载</p></li><li><p class="paragraph">预拉取</p></li><li><p class="paragraph">自动分页</p></li><li><p class="paragraph">添加数据</p></li><li><p class="paragraph">缺省状态页</p></li></ol></div></div>
           </div>
           <div class="tabbedcontent">
             <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
@@ -87,7 +87,7 @@
   <div>
     <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><div class="symbol monospace">fun <a href="add-data.html">addData</a>(data: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;?, adapter: <a href="../-binding-adapter/index.html">BindingAdapter</a>? = null, isEmpty: () -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = { data.isNullOrEmpty() }, hasMore: <a href="../-binding-adapter/index.html">BindingAdapter</a>.() -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = { true })<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<a data-name="-704450894%2FFunctions%2F-900954490" anchor-label="addData" id="-704450894%2FFunctions%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="brief "><a data-name="-704450894%2FFunctions%2F-900954490" anchor-label="addData" id="-704450894%2FFunctions%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多此函数每次调用会导致<a href="--index--.html">index</a>递增或者下拉刷新会导致<a href="--index--.html">index</a>等于<a href="-companion/start-index.html">startIndex</a></div></div>
+<a data-name="-704450894%2FFunctions%2F-900954490" anchor-label="addData" id="-704450894%2FFunctions%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="brief "><a data-name="-704450894%2FFunctions%2F-900954490" anchor-label="addData" id="-704450894%2FFunctions%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>自动分页自动加载数据, 自动判断当前属于下拉刷新还是上拉加载更多<h2 class=""> 实现</h2>当<span data-unresolved-link="com.drake.brv/PageRefreshLayout/getState/#/PointingToDeclaration/">getState</span>等于<span data-unresolved-link="com.scwang.smart.refresh.layout.constant/RefreshState.Refreshing///PointingToDeclaration/">RefreshState.Refreshing</span>或者<a href="--index--.html">index</a>等于<a href="-companion/start-index.html">startIndex</a>会判断为下拉刷新 <a href="--index--.html">index</a>初始值为<a href="-companion/start-index.html">startIndex</a>, 每次调用本方法会将<a href="--index--.html">index</a>递增, 下拉刷新会将<a href="--index--.html">index</a>重置为<a href="-companion/start-index.html">startIndex</a><h2 class=""> 注意事项</h2>请勿每次给<a href="add-data.html">data</a>赋值同一个集合对象, 因为为了保证rv持有数据集合为一个对象, 覆盖数据会先clear再addAll新的数据集合本方法只是简化分页列表数据赋值, 如果出现特别的需求请尝试自己更新rv数据集(即不使用本方法), 比如使用<a href="../-binding-adapter/models.html">BindingAdapter.models</a></div></div>
 </div>
                     </div>
                   </div>
@@ -446,20 +446,7 @@
                 </div>
               </div>
               <h2 class="">Properties</h2>
-              <div class="table" data-togglable="Properties"><a data-name="1238512367%2FProperties%2F-900954490" anchor-label="contentView" id="1238512367%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
-                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="content-view.html">contentView</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1238512367%2FProperties%2F-900954490"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="1238512367%2FProperties%2F-900954490" anchor-label="contentView" id="1238512367%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="content-view.html">contentView</a>: <a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a>? = null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1238512367%2FProperties%2F-900954490" anchor-label="contentView" id="1238512367%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>内容视图</div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1992306442%2FProperties%2F-900954490" anchor-label="emptyLayout" id="-1992306442%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+              <div class="table" data-togglable="Properties"><a data-name="-1992306442%2FProperties%2F-900954490" anchor-label="emptyLayout" id="-1992306442%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
                 <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
                   <div class="main-subrow keyValue ">
                     <div class=""><span class="inline-flex"><a href="empty-layout.html">emptyLayout</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1992306442%2FProperties%2F-900954490"></span>
@@ -467,7 +454,7 @@
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="-1992306442%2FProperties%2F-900954490" anchor-label="emptyLayout" id="-1992306442%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="empty-layout.html">emptyLayout</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="-1992306442%2FProperties%2F-900954490" anchor-label="emptyLayout" id="-1992306442%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="empty-layout.html">emptyLayout</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1992306442%2FProperties%2F-900954490" anchor-label="emptyLayout" id="-1992306442%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>空页面布局</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -480,7 +467,7 @@
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="-684544805%2FProperties%2F-900954490" anchor-label="errorLayout" id="-684544805%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="error-layout.html">errorLayout</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="-684544805%2FProperties%2F-900954490" anchor-label="errorLayout" id="-684544805%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="error-layout.html">errorLayout</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-684544805%2FProperties%2F-900954490" anchor-label="errorLayout" id="-684544805%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>错误页面布局</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -519,7 +506,7 @@
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="1012624167%2FProperties%2F-900954490" anchor-label="loadingLayout" id="1012624167%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="loading-layout.html">loadingLayout</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="1012624167%2FProperties%2F-900954490" anchor-label="loadingLayout" id="1012624167%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="loading-layout.html">loadingLayout</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1012624167%2FProperties%2F-900954490" anchor-label="loadingLayout" id="1012624167%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>加载中页面布局</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -550,6 +537,71 @@
                     </div>
                   </div>
                 </div>
+<a data-name="893136558%2FProperties%2F-900954490" anchor-label="recyclerViewId" id="893136558%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="recycler-view-id.html">recyclerViewId</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="893136558%2FProperties%2F-900954490"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="893136558%2FProperties%2F-900954490" anchor-label="recyclerViewId" id="893136558%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="recycler-view-id.html">recyclerViewId</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="893136558%2FProperties%2F-900954490" anchor-label="recyclerViewId" id="893136558%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>列表ID, 会根据ID自动赋值<a href="rv.html">rv</a></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1642281880%2FProperties%2F-900954490" anchor-label="refreshEnableWhenEmpty" id="1642281880%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="refresh-enable-when-empty.html">refreshEnableWhenEmpty</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1642281880%2FProperties%2F-900954490"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="1642281880%2FProperties%2F-900954490" anchor-label="refreshEnableWhenEmpty" id="1642281880%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="refresh-enable-when-empty.html">refreshEnableWhenEmpty</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1642281880%2FProperties%2F-900954490" anchor-label="refreshEnableWhenEmpty" id="1642281880%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>是否显示空缺省页时启用下拉刷新</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-426891459%2FProperties%2F-900954490" anchor-label="refreshEnableWhenError" id="-426891459%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="refresh-enable-when-error.html">refreshEnableWhenError</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-426891459%2FProperties%2F-900954490"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="-426891459%2FProperties%2F-900954490" anchor-label="refreshEnableWhenError" id="-426891459%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="refresh-enable-when-error.html">refreshEnableWhenError</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-426891459%2FProperties%2F-900954490" anchor-label="refreshEnableWhenError" id="-426891459%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>是否显示错误缺省页时启用下拉刷新</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1106237385%2FProperties%2F-900954490" anchor-label="rv" id="1106237385%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="rv.html">rv</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1106237385%2FProperties%2F-900954490"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="1106237385%2FProperties%2F-900954490" anchor-label="rv" id="1106237385%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="rv.html">rv</a>: <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>? = null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1106237385%2FProperties%2F-900954490" anchor-label="rv" id="1106237385%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>手动指定列表, 用于获取<a href="../-binding-adapter/index.html">BindingAdapter</a>来让<a href="add-data.html">addData</a>方法处理自动分页, 如果<a href="index.html">PageRefreshLayout</a>直接嵌套<a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>本方法没必要调用</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1264449766%2FProperties%2F-900954490" anchor-label="stateChangedHandler" id="1264449766%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="state-changed-handler.html">stateChangedHandler</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1264449766%2FProperties%2F-900954490"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="1264449766%2FProperties%2F-900954490" anchor-label="stateChangedHandler" id="1264449766%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="state-changed-handler.html">stateChangedHandler</a>: <span data-unresolved-link="com.drake.statelayout/StateChangedHandler///PointingToDeclaration/">StateChangedHandler</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1264449766%2FProperties%2F-900954490" anchor-label="stateChangedHandler" id="1264449766%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>处理缺省页状态变更</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-1612955107%2FProperties%2F-900954490" anchor-label="stateEnabled" id="-1612955107%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
                 <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
                   <div class="main-subrow keyValue ">
@@ -576,6 +628,19 @@
                     </div>
                   </div>
                 </div>
+<a data-name="-1495834857%2FProperties%2F-900954490" anchor-label="stateLayoutId" id="-1495834857%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
+                <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="state-layout-id.html">stateLayoutId</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1495834857%2FProperties%2F-900954490"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="-1495834857%2FProperties%2F-900954490" anchor-label="stateLayoutId" id="-1495834857%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="state-layout-id.html">stateLayoutId</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1495834857%2FProperties%2F-900954490" anchor-label="stateLayoutId" id="-1495834857%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>缺省页ID, 默认不配置会自动创建StateLayout并且包裹PageRefreshLayout的RefreshContent</div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="126583403%2FProperties%2F-900954490" anchor-label="upFetchEnabled" id="126583403%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>
                 <div class="table-row" data-filterable-current=":brv:dokkaHtml/release" data-filterable-set=":brv:dokkaHtml/release">
                   <div class="main-subrow keyValue ">
@@ -584,7 +649,7 @@
                         </span></span></div>
                     <div>
                       <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="126583403%2FProperties%2F-900954490" anchor-label="upFetchEnabled" id="126583403%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="up-fetch-enabled.html">upFetchEnabled</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="126583403%2FProperties%2F-900954490" anchor-label="upFetchEnabled" id="126583403%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>变更为 下拉加载更多, 上拉刷新</div></div></div>
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":brv:dokkaHtml/release"><a data-name="126583403%2FProperties%2F-900954490" anchor-label="upFetchEnabled" id="126583403%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a><div class="symbol monospace">var <a href="up-fetch-enabled.html">upFetchEnabled</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="126583403%2FProperties%2F-900954490" anchor-label="upFetchEnabled" id="126583403%2FProperties%2F-900954490" data-filterable-set=":brv:dokkaHtml/release"></a>变更为下拉加载更多, 上拉刷新</div></div></div>
                       </div>
                     </div>
                   </div>
@@ -593,7 +658,7 @@
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2023 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
       </div>
     </div>
   </body>
