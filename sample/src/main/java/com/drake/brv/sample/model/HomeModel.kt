@@ -5,7 +5,7 @@ import com.drake.brv.reflect.copyType
 
 @kotlinx.serialization.Serializable
 data class HomeModel(
-    var banner: MutableList<Banner> = mutableListOf(),
+    var banner: List<Banner> = listOf(),
     var explore: List<Explore> = listOf(),
     var event: Event = Event(),
     var tabs: List<Tab> = listOf()
@@ -14,6 +14,8 @@ data class HomeModel(
     /** 获取列表有效数据 */
     fun getAvailableData(games: List<GameModel.Data>): MutableList<Any> {
         val data = mutableListOf<Any>()
+        // 如果不使用copyType, 则会导致BRV无法区分List<Banner>和List<Explore>区别, Java泛型擦除问题
+        // 或者定义不同类的List, 如BannerList<T>和ExploreList<T>也是可以区分的
         if (banner.isNotEmpty()) data.add(banner.copyType())
         if (explore.isNotEmpty()) data.add(explore.copyType())
         if (event.id != 0L) data.add(event)
