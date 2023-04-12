@@ -13,6 +13,7 @@ import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
 import com.drake.net.Get
 import com.drake.net.utils.scope
+import com.drake.statelayout.Status
 import com.drake.tooltip.toast
 import com.youth.banner.indicator.RoundLinesIndicator
 
@@ -31,6 +32,8 @@ class HomeListFragment : EngineFragment<FragmentHomeListBinding>(R.layout.fragme
             addType<List<HomeModel.Explore>>(R.layout.item_home_grid)
             addType<GameModel.Data>(R.layout.item_game)
             addType<String>(R.layout.item_home_title)
+
+            addType<Status>(R.layout.layout_empty) // 如果你需要游戏列表为空时列表区域显示空缺省页
 
             onCreate {
                 when (itemViewType) {

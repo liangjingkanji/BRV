@@ -2,6 +2,7 @@ package com.drake.brv.sample.model
 
 import androidx.databinding.BaseObservable
 import com.drake.brv.reflect.copyType
+import com.drake.statelayout.Status
 
 @kotlinx.serialization.Serializable
 data class HomeModel(
@@ -20,7 +21,12 @@ data class HomeModel(
         if (explore.isNotEmpty()) data.add(explore.copyType())
         if (event.id != 0L) data.add(event)
         data.add("最新折扣")
-        data.addAll(games)
+
+        if (games.isEmpty()) {
+            data.add(Status.EMPTY) // 如果你需要游戏列表为空时列表区域显示空缺省页
+        } else {
+            data.addAll(games) // 游戏列表
+        }
         return data
     }
 
