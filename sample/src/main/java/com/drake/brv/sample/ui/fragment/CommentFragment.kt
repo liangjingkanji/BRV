@@ -62,7 +62,7 @@ class CommentFragment : EngineFragment<FragmentCommentBinding>(R.layout.fragment
             scope {
                 val res = Get<CommentModel>(Api.COMMENT).await()
                 val models = mutableListOf<Any>().apply {
-                    add("标题")
+                    if (index == 1) add("标题")
                     addAll(res.list.shuffled())
                 }
                 addData(models) {
