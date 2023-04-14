@@ -25,7 +25,7 @@
         android:title="首页布局" />
     <item
         android:id="@+id/homeListFragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_list"
         android:title="首页列表" />
     <item
         android:id="@+id/commentFragment"
@@ -60,7 +60,11 @@
         android:icon="@drawable/ic_tree_structure"
         android:title="分割线" />
     <item
-        android:id="@+id/refreshFragment"
+        android:id="@+id/pushRefreshFragment"
+        android:icon="@drawable/ic_push_refresh"
+        android:title="下拉刷新" />
+    <item
+        android:id="@+id/pullRefreshFragment"
         android:icon="@drawable/ic_refresh"
         android:title="下拉/上拉加载" />
     <item

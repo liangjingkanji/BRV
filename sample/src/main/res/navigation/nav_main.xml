@@ -80,15 +80,20 @@
         android:label="分组"
         tools:layout="@layout/fragment_group" />
     <fragment
-        android:id="@+id/refreshFragment"
-        android:name="com.drake.brv.sample.ui.fragment.RefreshFragment"
+        android:id="@+id/pushRefreshFragment"
+        android:label="下拉刷新"
+        android:name="com.drake.brv.sample.ui.fragment.PushRefreshFragment"
+        tools:layout="@layout/fragment_push_refresh" />
+    <fragment
+        android:id="@+id/pullRefreshFragment"
+        android:name="com.drake.brv.sample.ui.fragment.PullRefreshFragment"
         android:label="下拉/上拉加载"
-        tools:layout="@layout/fragment_refresh" />
+        tools:layout="@layout/fragment_pull_refresh" />
     <fragment
         android:id="@+id/pagePartStateFragment"
         android:name="com.drake.brv.sample.ui.fragment.PagePartStateFragment"
         android:label="列表局部缺省页"
-        tools:layout="@layout/fragment_refresh" />
+        tools:layout="@layout/fragment_pull_refresh" />
     <fragment
         android:id="@+id/preloadFragment"
         android:name="com.drake.brv.sample.ui.fragment.PreloadFragment"
