@@ -21,6 +21,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.ActivityMainBinding
 import com.drake.engine.base.EngineActivity
@@ -31,6 +32,11 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
     override fun initView() {
         setSupportActionBar(binding.toolbar)
         immersive(binding.toolbar, true)
+
+        Glide.with(this)
+            .load("https://avatars.githubusercontent.com/u/21078112?v=4")
+            .circleCrop()
+            .into(binding.navView.getHeaderView(0).findViewById(R.id.iv))
 
         val navController = findNavController(R.id.nav)
         binding.toolbar.setupWithNavController(
