@@ -1,3 +1,8 @@
+<p >
+    <a href="http://liangjingkanji.github.io/BRV/">中文</a>
+    | <a href="https://github.com/liangjingkanji/BRV/blob/master/README_EN.md">English</a>
+</p>
+
 <p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
 
 <p align="center">
