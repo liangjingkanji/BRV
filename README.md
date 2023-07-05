@@ -3,7 +3,7 @@
     | <a href="https://github.com/liangjingkanji/BRV/blob/master/README_EN.md">English</a>
 </p>
 
-<p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
+<p align="center"><img src="https://github.com/liangjingkanji/BRV/assets/21078112/443d47ef-5dc7-49a3-bab2-6a9feb678aa1" alt="1600" width="25%"/></p>
 
 <p align="center">
     <strong>可能是最强大的RecyclerView框架</strong>
@@ -14,7 +14,7 @@
     | <a href="https://liangjingkanji.github.io/document/">贡献代码</a>
     | <a href="https://github.com/liangjingkanji/BRV/releases/latest/download/brv-sample.apk">下载体验</a>
     <br>
-    <img src="https://i.imgur.com/G7WYYXb.jpg" width="350"/>
+    <img src="https://github.com/liangjingkanji/BRV/assets/21078112/1cbd9758-0f69-41e3-b6d9-99a4dfb4f73a" width="350"/>
 </p>
 
 
