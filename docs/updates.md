@@ -1,3 +1,6 @@
+## 1.4.2
+- fix: #372 Edge.computeEdge可能发生的NPE
+
 ## 1.4.1
 - feat: 新增copyType方法让集合保留泛型, 避免addType无法判断List泛型区别
 
