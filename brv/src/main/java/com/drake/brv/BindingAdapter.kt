@@ -741,12 +741,14 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                 this.models = flat(data)
                 notifyDataSetChanged()
             }
+
             this.models?.isEmpty() == true -> {
                 (this.models as? MutableList)?.let {
                     it.addAll(flat(data))
                     notifyDataSetChanged()
                 }
             }
+
             else -> {
                 val realModels = this.models as MutableList
                 var insertIndex: Int = headerCount
@@ -1056,10 +1058,20 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
     inner class BindingViewHolder : RecyclerView.ViewHolder {
 
-        lateinit var _data: Any private set
         var context: Context = this@BindingAdapter.context!!
         val adapter: BindingAdapter = this@BindingAdapter
+
+        /** 对应[models]中索引的元素 */
+        lateinit var _data: Any private set
+
+        /** 对应[models]中的索引 */
         val modelPosition get() = layoutPosition - headerCount
+
+        /**
+         * 该变量不会自动变更, 主要用于在[onCreate]和[onBind]中共享数据, 例如嵌套列表的[RecyclerView.Adapter]
+         * [_data]和该变量不同, 会在[onBind]时一直被替换为列表集合[models]中的元素
+         */
+        var tag: Any? = null
 
         @PublishedApi
         internal var viewBinding: ViewBinding? = null
