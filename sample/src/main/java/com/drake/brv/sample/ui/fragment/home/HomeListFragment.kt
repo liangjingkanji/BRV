@@ -28,6 +28,8 @@ class HomeListFragment : EngineFragment<FragmentHomeListBinding>(R.layout.fragme
 
         binding.rv.setup {
             addType<HomeModel.Event>(R.layout.item_home_image)
+
+            // 当你添加两个相同类型的嵌套泛型时为防止擦除泛型, 请注意查看HomeModel.getAvailableData的处理
             addType<List<HomeModel.Banner>>(R.layout.item_home_banner)
             addType<List<HomeModel.Explore>>(R.layout.item_home_grid)
             addType<GameModel.Data>(R.layout.item_game)
