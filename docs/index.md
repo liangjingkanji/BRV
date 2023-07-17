@@ -48,6 +48,17 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
         val appName = holder.context.getString(R.string.app_name)
         holder.findView<TextView>(R.id.tv_simple).text = appName + itemPosition
+
+        // 如果存在多种数据类型, 请使用holder.getModelOrNull<Data>()或者if来判断itemViewType类型, 避免取值类型转换错误
+        val data = holder.getModel<Data>()
+
+        when (holder.itemViewType) {
+            R.layout.item_simple_text -> {
+                val binding = holder.getBinding<ItemSimpleBinding>()
+                val data = holder.getModel<SimpleModel>()
+                binding.tv.text = data.name
+            }
+        }
     }
 }
 ```
@@ -64,6 +75,7 @@ rv.linear().setup {
 
     onBind {
         val binding = getBinding<ItemSimpleBinding>() // 使用ViewBinding/DataBinding都可以使用本方法
+        val data = holder.getModel<SimpleModel>()
     }
 }.models = getData()
 ```
