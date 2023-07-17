@@ -106,7 +106,7 @@ dependencyResolutionManagement {
 ```groovy
 dependencies {
     //...
-    implementation 'com.github.liangjingkanji:BRV:1.4.2'
+    implementation 'com.github.liangjingkanji:BRV:1.4.3'
 }
 ```
 

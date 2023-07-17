@@ -1,3 +1,7 @@
+## 1.4.3
+- fix: #377 修复基础数据类型支持
+- feat: #379 BindViewHolder新增tag变量
+
 ## 1.4.2
 - fix: #372 Edge.computeEdge可能发生的NPE
 
