@@ -21,13 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:OptIn(ExperimentalStdlibApi::class)
 
 package com.drake.brv.reflect
 
-import java.lang.reflect.ParameterizedType
+import kotlin.reflect.KClass
 import kotlin.reflect.KType
-import kotlin.reflect.javaType
 import kotlin.reflect.typeOf
 
 
@@ -59,16 +57,12 @@ class TypeList<T> : ArrayList<T> {
  * 判断类型是否相同
  * 如果[other]为[TypeList]则会判断其嵌套泛型是否也相同
  */
-internal fun KType.isInstance(other: Any): Boolean {
-    val thisClass = if (javaType is ParameterizedType) {
-        (javaType as ParameterizedType).rawType as Class<*>
-    } else {
-        javaType as Class<*>
-    }
+internal fun KType.equalInstance(other: Any): Boolean {
+    val javaObjectType = (classifier as KClass<*>).javaObjectType
     return if (other is TypeList<*>) {
-        thisClass.isAssignableFrom(other.javaClass) && this.arguments == other.type.arguments
+        javaObjectType == other::class.java && this.arguments == other.type.arguments
     } else {
-        thisClass.isInstance(other)
+        javaObjectType == other::class.java
     }
 }
 
@@ -76,15 +70,11 @@ internal fun KType.isInstance(other: Any): Boolean {
  * 判断类型是否相同或为其子类
  * 如果[other]为[TypeList]则会判断其嵌套泛型是否也相同
  */
-internal fun KType.isAssignableFrom(other: Any): Boolean {
-    val thisClass = if (javaType is ParameterizedType) {
-        (javaType as ParameterizedType).rawType as Class<*>
-    } else {
-        javaType as Class<*>
-    }
+internal fun KType.isInstance(other: Any): Boolean {
+    val javaObjectType = (classifier as KClass<*>).javaObjectType
     return if (other is TypeList<*>) {
-        thisClass.isAssignableFrom(other.javaClass) && this.arguments == other.type.arguments
+        javaObjectType.isInstance(other) && this.arguments == other.type.arguments
     } else {
-        thisClass.isAssignableFrom(other.javaClass)
+        javaObjectType.isInstance(other)
     }
 }

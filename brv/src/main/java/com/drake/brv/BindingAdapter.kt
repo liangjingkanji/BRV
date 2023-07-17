@@ -48,7 +48,7 @@ import com.drake.brv.animation.*
 import com.drake.brv.annotaion.AnimationType
 import com.drake.brv.item.*
 import com.drake.brv.listener.*
-import com.drake.brv.reflect.isAssignableFrom
+import com.drake.brv.reflect.equalInstance
 import com.drake.brv.reflect.isInstance
 import com.drake.brv.utils.BRV
 import com.drake.brv.utils.setDifferModels
@@ -189,10 +189,10 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     override fun getItemViewType(position: Int): Int {
         val model = getModel<Any>(position)
         return typePool.firstNotNullOfOrNull {
-            if (it.key.isInstance(model)) it.value else null
+            if (it.key.equalInstance(model)) it.value else null
         }?.invoke(model, position)
             ?: interfacePool.firstNotNullOfOrNull {
-                if (it.key.isAssignableFrom(model)) it.value else null
+                if (it.key.isInstance(model)) it.value else null
             }?.invoke(model, position)
             ?: throw NoSuchPropertyException("Please add item model type : addType<${model.javaClass.name}>(R.layout.item)")
     }
