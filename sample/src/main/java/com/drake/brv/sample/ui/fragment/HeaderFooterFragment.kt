@@ -10,7 +10,7 @@ import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
-import java.util.*
+import java.util.Random
 
 
 class HeaderFooterFragment :
@@ -24,7 +24,7 @@ class HeaderFooterFragment :
 
             /**
              * BRV的数据集 = Header + Footer + Models
-             * 所以本质上他们都是一组多类型而已, 分出来只是为了方便替换Models而不影响Header和Footer
+             * 所以本质上他们都是多类型而已, 区分出来只是为了修改Models时不影响Header和Footer
              */
 
             addType<Header>(R.layout.item_header)

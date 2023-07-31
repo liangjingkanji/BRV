@@ -1,55 +1,29 @@
-BRV提供一个切换事件的触发和监听, 相当于会提供一个回调函数遍历所有的列表条目, 你可以在这个回调里面依次更新数据或者视图.
+BRV提供一个遍历所有列表条目的监听事件, 可以在回调内依次更新视图
 
-<br>
-这个`切换`可以理解为`遍历`列表条目
-
-<br>
-一般用于切换列表的编辑模式
+!!! question "切换模式"
+    `切换`可以理解为`遍历`列表条目, 常用于切换列表为编辑模式
 
 <img src="https://i.loli.net/2021/08/14/BVjGH7CT9lZ8KXa.gif" width="250"/>
 
-<br>
-
-## 示例
 ```kotlin
-override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+rv.linear().setup {
+    addType<CheckModel>(R.layout.item_check_mode)
 
-    rv.linear().setup {
-        addType<CheckModel>(R.layout.item_check_mode)
-
-        // 监听切换事件
-        onToggle { position, toggleMode, end ->
-            if (end) {
-                // 显示和隐藏编辑菜单
-                ll_menu.visibility = if (toggleMode) View.VISIBLE else View.GONE
-            }
+    // 监听切换事件
+    onToggle { position, toggleMode, end ->
+        if (end) {
+            // 显示和隐藏编辑菜单
+            ll_menu.visibility = if (toggleMode) View.VISIBLE else View.GONE
         }
-    }.models = getData()
-}
+    }
+}.models = getData()
 
-fun onClick(v:View){
-    rv.bindingAdapter.toggle() // 点击事件触发切换事件
-}
-
+rv.bindingAdapter.toggle() // 点击事件触发切换事件
 ```
 
-## 函数
-
-```kotlin
-fun toggle()
-// 触发切换模式(根据当前状态取反)
-
-fun getToggleMode(): Boolean
-// 范围当前出何种切换模式
-
-fun setToggleMode(toggleMode: Boolean)
-// 设置切换模式, 如果设置的是当前正处于的模式不会触发回调
-
-fun onToggle(block: (position: Int, toggleMode: Boolean, end: Boolean) -> Unit)
-// 监听切换事件, 在事件中你可以处理任何视图的数据或者视图修改
-// position: 遍历过程中的列表条目索引
-// toggleMode: 切换模式(布尔值)
-// end: 是否全部遍历完成
-```
+| 函数 | 描述 |
+|-|-|
+| toggle | 触发切换 |
+| toggleMode | 当前切换模式 |
+| onToggle | 切换事件回调 |
 

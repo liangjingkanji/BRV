@@ -1,39 +1,37 @@
 ## RecyclerView
 
-提供一些`BindingAdapter`常用的调用
+为RV简化的扩展函数, 例如`rv.bindingAdapter.models` 改为`rv.models`
 
-| 函数 | 描述 |
-|-|-|
-| bindingAdapter | 如果Adapter是[BindingAdapter]则返回对象, 否则抛出异常 |
-| models | 数据模型集合, 无需执行`notify*`函数, 自动使用`notifyDataChanged`刷新 |
-| _data | 和models的唯一区别是不会自动使用`notifyDataChanged`刷新 |
-| mutable | 可增删的非空[models]只读数据模型集合, 需要执行`notify*`函数手动刷新列表,如果实际没有赋值数据该函数会抛出异常  |
-| addModels | 添加数据, 自动刷新列表 |
+| 函数            | 描述                                                         |
+| --------------- | ------------------------------------------------------------ |
+| bindingAdapter  | 如果adapter是`BindingAdapter`则返回, 否则抛出异常            |
+| models          | 设置集合, 会`notifyDataChanged()`                            |
+| setDifferModels | 设置集合, 使用`DiffUtil.calculateDiff`来决定`notifyXX()`更新视图 |
+| addModels       | 添加/插入集合, 会`notifyDataChanged()`                       |
+| _data           | 对应列表的集合对象, 需手动通知更新                           |
 
 ## 布局管理器
 
-框架还提供快速创建布局管理器的扩展函数, 上面使用示例
+扩展函数快速创建布局管理器
 
-=== "LinearLayoutManager"
+=== "线性列表"
     ```kotlin hl_lines="1"
     rv.linear().setup {
         addType<SimpleModel>(R.layout.item_simple)
     }.models = getData()
     ```
-=== "GridLayoutManager"
+=== "网格列表"
     ```kotlin hl_lines="1"
     rv.grid(3).setup {
         addType<SimpleModel>(R.layout.item_simple)
     }.models = getData()
     ```
-=== "StaggeredLayoutManager"
+=== "瀑布流列表"
     ```kotlin hl_lines="1"
     rv.staggered(3).setup {
         addType<SimpleModel>(R.layout.item_simple)
     }.models = getData()
     ```
-
-相关函数
 
 | 函数 | 描述 |
 |-|-|
@@ -43,28 +41,12 @@
 
 
 
-## 分割线
+## 分隔线
 
-框架提供快速设置分隔物扩展函数
+扩展函数`divider`快速创建[DefaultDecoration](api/-b-r-v/com.drake.brv/-default-decoration/index.html)
 
 ```kotlin hl_lines="1"
 rv.linear().divider(R.drawable.divider_horizontal).setup {
     addType<DividerModel>(R.layout.item_divider_horizontal)
 }.models = getData()
 ```
-扩展函数实际上就是使用的[DefaultDecoration](api/-b-r-v/com.drake.brv/-default-decoration/index.html)来创建对象
-
-
-## 对话框
-
-通过扩展函数快速给对话框创建列表
-
-```
-Dialog(activity).setAdapter(bindingAdapter).show()
-```
-
-函数
-```kotlin
-fun Dialog.brv(block: BindingAdapter.(RecyclerView) -> Unit): Dialog
-```
-

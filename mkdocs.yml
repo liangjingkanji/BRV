@@ -1,38 +1,77 @@
 site_name: BRV
-site_author: drake
 site_description: BRV框架文档
-copyright: Copyright &copy; 2018 - 2020 劉強東
-
-repo_name: GitHub
 repo_url: https://github.com/liangjingkanji/BRV
 
+site_author: 劉強東
+copyright: Copyright &copy; 2018 - 2020 劉強東
+repo_name: GitHub
+docs_dir: 'docs'
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/
+    - icon: fontawesome/brands/qq
+      link: https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group-qrcode.png
+    - icon: fontawesome/brands/twitch
+      link: https://github.com/liangjingkanji/BRV/discussions
 extra_css:
   - css/extra.css
-
-docs_dir: 'docs'
-
 theme:
   name: material
   custom_dir: docs/material
-
+  favicon: img/book-open.svg
+  logo: img/book-open.svg
   palette:
-    scheme: drake
-    primary: white
-
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
   font: false
-
   language: zh
-
+  features:
+    - navigation.top
+    - navigation.prune
+    - navigation.footer
+    - navigation.instant
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+plugins:
+  - offline
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+      lang:
+        - en
+        - zh
 markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.tasklist:
       custom_checkbox: true
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.tabbed
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - def_list
+  - md_in_html
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.details
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
 
 nav:
   - 使用: index.md
@@ -40,18 +79,17 @@ nav:
   - 更新数据: refresh-data.md
   - 点击事件: click.md
   - 生命周期: lifecycle.md
-  - 滑动卡顿: performance.md
-  - 头脚布局: header_footer.md
+  - 头脚布局: header-footer.md
   - 分组: group.md
   - 悬停: hover.md
-  - 分割线:
+  - 分隔线:
       - 线性列表: divider-linear.md
       - 网格列表: divider-grid.md
       - 瀑布流列表: divider-staggerd.md
-      - 自定义: divider-other.md
+      - 自定义: divider-customize.md
   - 缺省页: state.md
   - 下拉刷新/上拉加载: refresh.md
-  - 刷新动画: refresh-animate.md
+  - 刷新动画: refresh-animation.md
   - 拉取更多: upfetch.md
   - 预加载/预拉取: preload.md
   - 切换模式: toggle.md
@@ -60,13 +98,12 @@ nav:
   - 拖拽: drag.md
   - 侧滑: swipe.md
   - 列表动画: animation.md
+  - ViewBinding: view-binding.md
   - 数据接口: item.md
-  - 复用列表: recycle.md
   - 扩展函数: extension.md
   - 网络请求: net.md
-  - ViewBinding: view-binding.md
+  - 滑动卡顿: performance.md
   - 社区讨论: https://github.com/liangjingkanji/BRV/discussions
-  - 常见问题: https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md
-  - 第三方组件: component.md
+  - 常见问题: issues.md
   - 更新日志: updates.md
   - 1.x文档: api/index.html

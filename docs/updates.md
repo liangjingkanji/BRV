@@ -17,9 +17,9 @@
 - feat: 列表动画支持重复显示
 
 ## 1.3.90
-- feat: #324 网格分割线间距支持以item为基准
-- refactor: 删除分割线 DefaultDecoration.kt setBackground()(可以使用rv背景色替代)
-- fix: 网格分割线间距设置错误
+- feat: #324 网格分隔线间距支持以item为基准
+- refactor: 删除分隔线 DefaultDecoration.kt setBackground()(可以使用rv背景色替代)
+- fix: 网格分隔线间距设置错误
 
 ## 1.3.89
 - upgrade: stateLayout 1.3.13
@@ -69,7 +69,7 @@ fix: [#263](https://github.com/liangjingkanji/BRV/issues/263) 自定义侧滑移
 pref: setRetryIds设置点击重试会使用最近showLoading的tag
 
 ## 1.3.79
-- fix: 网格分割线动态spanSize间距丢失
+- fix: 网格分隔线动态spanSize间距丢失
 - feat: findView支持可空类型
 - feat: 新增`dividerSpace`函数
 - feat: StateLayout 1.3.8 新增`isNetworkingRetry`来禁止无网络显示加载缺省
@@ -175,7 +175,7 @@ api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
 api 'io.github.scwang90:refresh-header-material:2.0.5'
 api 'io.github.scwang90:refresh-footer-classics:2.0.5'
 ```
-注意如果你有添加附属的SmartRefreshLayout刷新头, 需要一并更新至最新的`mavenCentral()`版本
+注意如果有添加附属的SmartRefreshLayout刷新头, 需要一并更新至最新的`mavenCentral()`版本
 
 详情查看 [#85](https://github.com/liangjingkanji/BRV/issues/85)
 
@@ -195,11 +195,11 @@ api 'io.github.scwang90:refresh-footer-classics:2.0.5'
 
 ## 1.3.37
 - 修复UpFetch模式下缺省页颠倒问题
-- 修复reverseLayout下分割线问题
+- 修复reverseLayout下分隔线问题
 - 新增ItemDepthUtils来简化获取分组层级深度
 
 ## 1.3.36
-- 修复UpFetch模式下分割线显示错误问题
+- 修复UpFetch模式下分隔线显示错误问题
 
 ## 1.3.35
 - 添加多类型列表函数`addType`支持接口多态
@@ -240,7 +240,7 @@ fixed #20 修复shoLoading缺省页参数错误
 1.  组查询父项findParentPosition的性能
 
 ## 1.3.24
-修复局部刷新添加数据时动态分割线可能发生错误
+修复局部刷新添加数据时动态分隔线可能发生错误
 
 ## 1.3.22
 为减少添加点击事件Id后还得判断Id. 点击事件现在和Id对应配置, 不做统一处理. 废弃部分函数

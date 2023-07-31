@@ -1,69 +1,31 @@
-:root > * {
-    --md-code-fg-color:                #A9B7C6;
-    --md-code-bg-color:                #2b2b2b;
-    --md-code-hl-color:                #214283;
-    --md-code-hl-number-color:         #82AAFF;
-    --md-code-hl-special-color:        #A9B7C6;
-    --md-code-hl-function-color:       #FFE64C;
-    --md-code-hl-constant-color:       hsla(250, 70%, 64%, 1);
-    --md-code-hl-keyword-color:        #CC7832;
-    --md-code-hl-string-color:         #6A8759;
-    --md-code-hl-name-color:           var(--md-code-fg-color);
-    --md-code-hl-operator-color:       #A9B7C6;
-    --md-code-hl-punctuation-color:    #A9B7C6;
-    --md-code-hl-comment-color:        #787878;
-    --md-code-hl-generic-color:        #A9B7C6;
-    --md-code-hl-variable-color:       #A9B7C6;
-
-    --md-typeset-color: #333333;
-    --drake-highlight:  #d63200;
-    --drake-accent: #e95f59;
-    --drake-highlight-opacity:  #d6320022;
-    --md-admonition-fg-color: #333333;
-    --drake-font-size: 13px;
-}
-
-[data-md-color-scheme="drake"] {
-    --md-primary-fg-color:          hsla(0, 0%, 100%, 1);
-    --md-primary-fg-color--light:   hsla(0, 0%, 100%, 0.7);
-    --md-primary-fg-color--dark:    hsla(0, 0%, 0%, 0.07);
-    --md-primary-bg-color:          hsla(0, 0%, 0%, 0.87);
-    --md-primary-bg-color--light:   hsla(0, 0%, 0%, 0.54);
-    --md-accent-fg-color:           #d63200;
-    --md-accent-fg-color--light:    #d63200;
-    --md-accent-fg-color--dark:     #d63200;
-    --md-typeset-a-color:           #d63200 !important;
-}
-
-/*字体渲染*/
 @font-face{
-    font-family: 'JetBrains Mono';
-    src: local('JetBrainsMono-Regular'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2');
+    font-family: 'Iosevka Curly';
+    src: local('Iosevka Curly Medium'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-curly/iosevka-curly-medium.woff2') format('woff2');
     font-display: swap;
     font-weight: normal;
     font-style: normal;
 }
 @font-face{
-    font-family: 'JetBrains Mono';
-    src: local('JetBrainsMono-Bold'),
-         url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Bold.woff2') format('woff2');
+    font-family: 'Iosevka Curly';
+    src: local('Iosevka Curly Bold'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-curly/iosevka-curly-bold.woff2') format('woff2');
     font-display: swap;
     font-weight: bold;
     font-style: normal;
 }
 @font-face{
-    font-family: 'HYZhengYuan';
-    src: local('HYZhengYuan-55W'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan.ttf') format('truetype');
+    font-family: 'HYYouYuan';
+    src: local('HYYouYuan-55W'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYYouYuan/HYYouYuan-55W.ttf') format('truetype');
     font-display: swap;
     font-weight: normal;
     font-style: normal;
 }
 @font-face{
-    font-family: 'HYZhengYuan';
-    src: local('HYZhengYuan-75W'),
-         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYZhengYuan-75W.ttf') format('truetype');
+    font-family: 'HYYouYuan';
+    src: local('HYYouYuan-75W'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYYouYuan/HYYouYuan-75W.ttf') format('truetype');
     font-display: swap;
     font-weight: bold;
     font-style: normal;
@@ -74,241 +36,16 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     text-rendering: optimizeLegibility;
-    font-family: "JetBrains Mono", monospace !important;
+    font-family: "Iosevka Curly", HYYouYuan !important;
 }
 
-/*布局*/
-.md-content {
-    max-width: 49.5rem;
-}
-.md-grid {
-    max-width: 80rem;
-}
-
-/*表格*/
-.md-typeset__table {
-    display: block;
-    padding: 0 .8rem;
-    margin: 1em 0;
-}
-table tr:nth-child(2n), thead {
-    background-color: #fafafa;
-}
-.md-typeset table:not([class]) {
-    border-collapse: collapse;
-    border-spacing: 0px;
-    width: 100%;
-    break-inside: auto;
-    text-align: left;
-    display: table;
-    box-shadow:none;
-    font-size: var(--drake-font-size);
-}
-
-.md-typeset table:not([class]) th {
-    border: 1px solid #dfe2e5;
-    background-color: #f2f2f2;
-    padding: 6px 13px;
-    font-weight: bold;
-    color: var(--md-typeset-color);
-}
-.md-typeset table:not([class]) td {
-    border: 1px solid #dfe2e5;
-}
-
-/*隐藏搜索框, 因为不支持中文搜索*/
-.md-search__form {
-    visibility: hidden;
-}
-
-/*引用*/
-.md-typeset :is(.admonition,details) {
-    font-size: 12px;
-}
-[dir=ltr] .md-typeset blockquote {
-    border-left:none;
-}
-.md-typeset blockquote {
-    color: inherit;
-    padding: 10px 16px;
-    background-color: #fdefee;
-    position: relative;
-    border-left: none;
-    margin: 2em 0;
-}
-.md-typeset blockquote p {
-    margin: 0 0 !important;
-}
-.md-typeset blockquote:before {
-    display: block;
-    position: absolute;
-    content: '';
-    width: 4px;
-    left: 0;
-    top: 0;
-    height: 100%;
-    background-color:var(--drake-accent);
-    border-radius: 4px;
-}
-
-/*字间距*/
+code,
+.md-nav,
+.md-typeset code,
 .md-typeset {
-    line-height: 1.8;
-    font-size: var(--drake-font-size);
-}
-.md-typeset pre {
-    line-height: 1.6;
+    font-size: 14px !important;
 }
 
-/*标签*/
-.md-typeset .tabbed-set>label {
-    border-bottom: 2px solid transparent;
-    color: var(--md-typeset-color);
-    line-height: 1.3;
-    font-size: var(--drake-font-size);
-    margin-bottom: .8em;
-    font-weight:normal;
-}
-.md-typeset .tabbed-set>input:checked+label {
-    font-weight:500;
-    line-height: 1.3;
-    margin-bottom: .8em;
-}
-
-/*侧边导航*/
-.md-nav__item .md-nav__link--active {
-    color: var(--drake-highlight);
-    font-weight:500;
-}
-.md-nav__title[for="__drawer"] {
-    display: none;
-}
-div .md-source__fact {
-    display: none;
-}
-.md-source__icon+.md-source__repository {
-    margin-left: -1em;
-    padding-left: 0;
-    font-weight: 500;
-}
-.md-nav__link {
-    font-size: var(--drake-font-size);
-    line-height: 1.6;
-}
-
-/*代码块*/
-.md-typeset code {
-    font-size: inherit;
-    border-radius: 2px !important;
-    border: none !important;
-}
-.md-typeset pre>code {
-    padding: 0.8em 0.8em;
-}
-code span::selection {
-    background: #214283;
-}
-.highlight code::selection {
-    background: #214283;
-}
-
-/*代码片段*/
-p code, article > code, li > code, td > code, th > code, a > code {
-    background-color: transparent !important;
-    color: var(--drake-highlight) !important;
-    padding: 0 2px !important;
-}
-
-img {
-    border-radius: 2px;
-    margin: 4px 0;
-}
-
-/*链接*/
-.md-content a {
-    color: var(--drake-highlight) !important;
-    text-decoration: underline;
-    margin: 0 2px;
-}
-
-/*编辑按钮*/
-.md-typeset .md-content__button {
-    color: var(--md-default-fg-color--lighter) !important;
-}
-.md-icon svg {
-    width: 14px;
-}
-
-/*标题*/
-h1, h2, h3, h4, h5, h6, .md-header-nav__title {
-    font-weight: bold !important;
-    color: #273849;
-}
-.md-typeset h1 {
-    text-align: center;
-    font-size: 1.45em;
-    color:#273849;
-}
-.md-typeset h2 {
-    display: inline-block;
-    font-size: 1.45em;
-}
-h2:after {
-    display: block;
-    content: '';
-    height: 2px;
-    margin-top: 4px;
-    background-color:#273849;
-    border-radius: 2px;
-    margin-right: 1.1em;
-}
-
-/*清单*/
-.md-typeset [type=checkbox]:checked+.task-list-indicator:before {
-    background-color: #43A047;
-}
-.md-typeset .task-list-indicator:before {
-    background-color: #c7c7c7;
-}
-.md-typeset .task-list-control {
-    margin-right: 8px;
-}
-
-/*复制图标*/
-.md-clipboard:after {
-    background-color: #4d4d4d;
-}
-
-/*头部*/
-.md-ellipsis {
-    font-weight: bold;
-}
-
-/*折叠块*/
-/*标题展开状态*/
 .md-typeset .admonition-title, .md-typeset summary {
-    border-left: none;
-    margin: 0;
-}
-/*标题背景*/
-.md-typeset .abstract>.admonition-title, .md-typeset .abstract>summary, .md-typeset .summary>.admonition-title, .md-typeset .summary>summary, .md-typeset .tldr>.admonition-title, .md-typeset .tldr>summary {
-    background-color: #f2f2f2;
-    border: 1px solid #dfe2e5;
-    font-weight: bold;
-}
-/*内容展开状态*/
-.md-typeset .admonition, .md-typeset details {
-    border-left: none;
-    box-shadow: none;
-    padding: 0;
-    font-size: var(--drake-font-size);
-}
-/*标题栏左侧图标*/
-.md-typeset .abstract>.admonition-title:before, .md-typeset .abstract>summary:before, .md-typeset .summary>.admonition-title:before, .md-typeset .summary>summary:before, .md-typeset .tldr>.admonition-title:before, .md-typeset .tldr>summary:before {
-    background-color: var(--md-admonition-fg-color);
-    top: .5rem;
-}
-/*箭头图标*/
-.md-typeset summary:after {
-    top: .5rem;
+    font-weight: normal;
 }

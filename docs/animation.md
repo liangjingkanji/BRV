@@ -1,4 +1,4 @@
-列表动画只是实现列表Item出现的动画
+列表动画即自定义列表Item出现时的动画
 
 ## 动画类型
 通过函数快速设置BRV自带的几种动画类型
@@ -20,13 +20,13 @@ fun setAnimation(animationType: AnimationType)
 
 ## 自定义列表动画
 
-如果默认的动画无法满足你, 你可以参考自带的`ItemAnimation`子类动画来自定义你要的动画效果
+可以参考`ItemAnimation`子类, 来自定义动画效果
 
 ```kotlin
 fun setAnimation(itemAnimation: ItemAnimation)
 ```
 
-这里以`AlphaItemAnimation`源码示例
+以`AlphaItemAnimation`为示例
 
 ```kotlin
 class AlphaItemAnimation @JvmOverloads constructor(private val mFrom: Float = DEFAULT_ALPHA_FROM) : ItemAnimation {

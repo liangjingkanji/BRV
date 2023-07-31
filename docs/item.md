@@ -1,10 +1,10 @@
-rv的数据是集合`List<Any?>?`, 其中的集合元素就是数据模型
+RV的数据是集合`List<Any?>?`, 其中的集合元素就是Model(数据模型)
 
-通过让数据模型实现不同的接口可以获取不同的功能或者回调
+通过让Model实现不同接口可以获取不同的功能
 
 | 接口 | 描述 |
 |-|-|
-| ItemBind | 在数据模型中回调onBindViewHolder生命周期, 用于[绑定数据](index.md) |
+| ItemBind | 监听`onBindViewHolder`来[绑定数据](index.md#_3) |
 | ItemAttached | 监听视图附着到窗口(Window) |
 | ItemExpand | Item可[分组](group.md) |
 | ItemDrag | Item可[拖拽](drag.md) |
@@ -12,15 +12,13 @@ rv的数据是集合`List<Any?>?`, 其中的集合元素就是数据模型
 | ItemHover | Item可[悬停](hover.md) |
 | ItemPosition | Item索引位置 |
 
-具体如何使用请查看对应功能章节或者注释
+如何使用请阅读对应功能章节或者注释
 
 ```kotlin
 data class SimpleModel(var name: String = "BRV") : ItemBind {
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
-        // 使用不同的方法来获取视图控件
-        // holder.findView<TextView>(R.id.tv_simple).text = appName // 使用findById
-        // val binding = holder.getBinding<ItemMultiTypeOneBinding>() // 使用DataBinding或ViewBinding
+        // 在Model内可以为视图绑定数据
     }
 }
 ```

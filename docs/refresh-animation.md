@@ -1,8 +1,8 @@
-上一章介绍过BRV内嵌[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)来实现下拉刷新/上拉加载, 以下演示自定义刷新动画
+BRV使用[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)来实现下拉刷新/上拉加载, 其可以自定义刷新动画
 
 ## 关闭上拉加载动画
 
-关闭动画以后并不会影响原有的预加载功能
+关闭动画不影响预加载功能
 
 全局配置
 
@@ -15,9 +15,9 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
 }
 ```
 
-单例配置, 修改xml布局, 当然你也可以代码修改
+单例配置, 修改xml布局
 
-```xml
+```xml hl_lines="5 15"
 <com.drake.brv.PageRefreshLayout
     android:id="@+id/page"
     android:layout_width="match_parent"
@@ -42,7 +42,7 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
 
 - [SmartRefreshLayout自定义动画文档](https://github.com/scwang90/SmartRefreshLayout/blob/master/art/md_custom.md)
 
-SmartRefresh自带7个动画依赖库可以参考/修改源码或者直接使用
+SmartRefresh自带7个动画依赖库, 可以参考其源码
 
 ```groovy
 implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
@@ -54,7 +54,7 @@ implementation  'io.github.scwang90:refresh-footer-ball:2.0.5'        //球脉�
 implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 ```
 
-想要了解更多请查看[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)主页
+想了解更多请浏览[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)官网
 
 |个人首页|微博列表|
 |:---:|:---:|

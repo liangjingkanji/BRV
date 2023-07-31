@@ -101,9 +101,9 @@
         android:label="哔哩哔哩评论" />
     <fragment
         android:id="@+id/interfaceFragment"
-        android:name="com.drake.brv.sample.ui.fragment.InterfaceFragment"
+        android:name="com.drake.brv.sample.ui.fragment.InterfaceTypeFragment"
         android:label="接口类型绑定"
-        tools:layout="@layout/fragment_interface" />
+        tools:layout="@layout/fragment_interface_type" />
 
     <include app:graph="@navigation/nav_divider" />
 

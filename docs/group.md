@@ -1,4 +1,7 @@
-<p align="center"><img src="https://i.loli.net/2021/08/14/Pl53LCpG8tdhuMW.gif" width="250"/></p>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/Pl53LCpG8tdhuMW.gif){ width="300" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupFragment.kt#L26" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 ## 特点
 
@@ -10,12 +13,15 @@
 - 查找上层分组
 - 分组和多类型可以共存
 
-<br>
-> 1. 列表展开/折叠即动态修改models数据集合内容, 列表的`展开(将子列表添加到数据集合中)和折叠(将子列表从数据集合中删除)`都会导致列表数据索引变化(如果你为rv赋值可变集合情况下)
-> 2. 不要为数据集合重复添加一个对象, 这可能导致数据错乱
+
+!!! note "实现原理"
+    列表展开/折叠是通过修改models数据集合实现, 会导致列表元素索引变化(可变集合情况下)
+
+    - 展开(将子列表添加到数据集合中)
+    - 折叠(将子列表从数据集合中删除)
 
 ## 使用
-要求Model实现[ItemExpand](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/item/ItemExpand.kt)
+Model实现[ItemExpand](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/item/ItemExpand.kt)
 
 ```kotlin
 class GroupModel : ItemExpand {
@@ -29,10 +35,6 @@ class GroupModel : ItemExpand {
     override var itemSublist: List<Any?>? = listOf(Model(), Model(), Model(), Model())
 }
 ```
-
-> 1. 当你要修改子项itemSublist时请使用类型强转将其转成可变集合后修改, 例(itemModel.itemSublist as ArrayList).add或者remove等修改分组集合
-> 1. 如果该数据模型是由Gson生成那么其字段默认值全部会被置为null, 这是由于Gson不支持Kotlin的默认值问题
-
 
 创建列表
 
@@ -48,21 +50,23 @@ rv.linear().setup {
 }.models = getData()
 ```
 
+!!! failure "数据错乱"
+    不要为数据集合重复添加同一对象, 这可能导致数据错乱
+
 ## 分组层级
 
-分组层级其实数据集合本身就能计算出来
+根据数据集合可以计算出当前列表位于的分组层级
 
-为方便BRV提供`ItemDepth`和`ItemDepth.refreshItemDepth`辅助计算Item的层级, 其中`ItemDepth.itemDepth`为当前Model层级，层级计数从0依次递增
+BRV已提供`ItemDepth`辅助计算Item的层级, 其中`ItemDepth.itemDepth`为当前Model分组层级, 层级计数从0依次递增
 
 示例代码
 
-```kotlin
+```kotlin hl_lines="9"
 // Model实现ItemDepth
 class SampleItemDepth(override var itemDepth: Int) : ItemDepth
 
-//
+// 构建示例数据
 fun getData(): List<ItemDepth> = List(10) { SampleItemDepth(it) }
-
 
 rv.linear().setup {
    // ...
@@ -71,16 +75,20 @@ rv.linear().setup {
 
 ## 分组多类型
 
-<img src="https://s2.loli.net/2021/12/10/wo1CAqL5SDIZRKu.png" width="35%"/>
+<figure markdown>
+  ![](https://s2.loli.net/2021/12/10/wo1CAqL5SDIZRKu.png){ width="300" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupGridFragment.kt#L19" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
-这种添加`spanSizeLookup`即可实现. 请查看示例代码
-
-> 分组和多类型属于互不影响的功能, 分组下的多类型和普通列表的多类型添加方式等同
+自定义`GridLayoutManager.spanSizeLookup`即可, 多类型和分组不存在影响
 
 ## 分组拖拽/侧滑
-<img src="https://s2.loli.net/2021/12/14/RSpGEF2DWyqPb5J.gif" width="30%"/>
+<figure markdown>
+  ![](https://s2.loli.net/2021/12/14/RSpGEF2DWyqPb5J.gif){ width="300" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupDragFragment.kt#L25" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
-[拖拽](drag.md)/[侧滑](swipe.md)功能和分组本身互不影响. 但是针对已展开的分组需要在动作发生之前折叠以保证列表数据不错乱, 所以我们需要自定义部分实现
+[拖拽](drag.md)/[侧滑](swipe.md)功能和分组原本互不影响, 但删除/移动已展开的分组未同步他的子列表会导致数据错乱, 需要以下处理
 
 ```kotlin
 binding.rv.linear().setup {
@@ -107,29 +115,28 @@ binding.rv.linear().setup {
     // ...
 }.models = getData()
 ```
-具体可以看完整示例代码
 
 ## 分组全部展开/折叠
 
-遍历集合数据将`itemExpand = true`即可展开全部(反之折叠). 如果要控制展开层级深度请自己遍历时控制
+遍历集合`itemExpand=true`即可展开全部(反之折叠), 如果要控制展开层级深度请自己遍历时控制
 
 展开全部
 ```kotlin
 binding.rv.bindingAdapter.models = getData().forEach {
-                                it.itemExpand = true
-                            }
+    it.itemExpand = true
+}
 ```
 折叠全部
 ```kotlin
 binding.rv.bindingAdapter.models = getData().forEach {
-                                it.itemExpand = false
-                            }
+    it.itemExpand = false
+}
 ```
 
 
 ## 嵌套分组删除
 
-在示例代码中有演示如何删除嵌套分组中的某个item, 和删除普通item只是多了一个步骤, 即删除父item中的`itemSublist`, 避免下次展开时数据错误
+删除分组时请同步删除他的子列表, 避免数据错乱
 
 ```kotlin
 // 点击删除嵌套分组
@@ -145,12 +152,10 @@ if (parentPosition != -1) {
 }
 ```
 
-示例代码: [GroupFragment.kt](https://github.com/liangjingkanji/BRV/blob/67a5caff28bd0872e41e9afffcdef1e4380db6d9/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupFragment.kt#L50)
-
 
 ## 分组相关函数
 
-| BindingAdapter的函数 | 描述 |
+| BindingAdapter | 描述 |
 |-|-|
 | expandAnimationEnabled | 展开是否显示渐隐动画, 默认true |
 | singleExpandMode | 是否只允许一个分组展开(即展开当前分组就折叠上个分组), 默认false |
@@ -161,7 +166,7 @@ if (parentPosition != -1) {
 | isSameGroup | 指定两个索引是否处于相同分组 |
 
 
-| BindingViewHolder的函数 | 描述 |
+| BindingViewHolder | 描述 |
 |-|-|
 | expand | 展开指定条目 |
 | collapse | 折叠指定条目 |

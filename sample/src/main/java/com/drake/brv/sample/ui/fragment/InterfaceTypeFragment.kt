@@ -1,7 +1,7 @@
 package com.drake.brv.sample.ui.fragment
 
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.FragmentInterfaceBinding
+import com.drake.brv.sample.databinding.FragmentInterfaceTypeBinding
 import com.drake.brv.sample.model.BaseInterfaceModel
 import com.drake.brv.sample.model.InterfaceModel1
 import com.drake.brv.sample.model.InterfaceModel2
@@ -9,16 +9,12 @@ import com.drake.brv.sample.model.InterfaceModel3
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
-import com.drake.tooltip.toast
 
-class InterfaceFragment : EngineFragment<FragmentInterfaceBinding>(R.layout.fragment_interface) {
+class InterfaceTypeFragment : EngineFragment<FragmentInterfaceTypeBinding>(R.layout.fragment_interface_type) {
 
     override fun initView() {
         binding.rv.linear().setup {
             addType<BaseInterfaceModel>(R.layout.item_interface_type)
-            R.id.item.onClick {
-                toast("点击文本")
-            }
         }.models = getData()
     }
 

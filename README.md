@@ -14,7 +14,7 @@
     | <a href="https://liangjingkanji.github.io/document/">贡献代码</a>
     | <a href="https://github.com/liangjingkanji/BRV/releases/latest/download/brv-sample.apk">下载体验</a>
     <br>
-    <img src="https://github.com/liangjingkanji/BRV/assets/21078112/1cbd9758-0f69-41e3-b6d9-99a4dfb4f73a" width="350"/>
+    <img src="https://github.com/liangjingkanji/BRV/blob/master/docs/img/code-preview.png?raw=true" width="300"/>
 </p>
 
 
@@ -27,12 +27,12 @@
 <img src="https://img.shields.io/badge/license-Apache-blue"/>
 <a href="http://liangjingkanji.github.io/BRV/updates"><img src="https://img.shields.io/badge/changed-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-brightgreen"/></a>
 <a href="http://liangjingkanji.github.io/BRV/api"><img src="https://img.shields.io/badge/api-%E5%87%BD%E6%95%B0%E6%96%87%E6%A1%A3-red"/></a>
-<img src="https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group.svg"/>
+<a href="https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group-qrcode.png"><img src="https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group.svg"/></a>
 <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md"><img src="https://raw.githubusercontent.com/liangjingkanji/Net/master/docs/img/issues.svg"/></a>
 </p>
 
 
-<p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/image/preview.png?raw=true" align="center" width="30%;" /></p>
+<p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/img/preview.png?raw=true" align="center" width="30%;" /></p>
 
 本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目承诺会永远保持社区维护
 
@@ -58,7 +58,7 @@ Welcome to international translation of this project's documents/notes, thank yo
 - [x] 点击(防抖动)/长按事件
 - [x] 分组(展开折叠/递归层次/展开置顶/拖拽/侧滑/多类型/单一展开模式)
 - [x] 悬停/粘性头部
-- [x] 快速创建分割线/间隔
+- [x] 快速创建分隔线/间隔
 - [x] 切换模式(例如切换编辑模式)
 - [x] 选择模式(多选/单选/全选/取消全选/反选)
 - [x] 拖拽排序
