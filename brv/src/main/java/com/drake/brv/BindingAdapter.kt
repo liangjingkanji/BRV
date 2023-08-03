@@ -826,7 +826,9 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      */
     fun onToggle(block: (position: Int, toggleMode: Boolean, end: Boolean) -> Unit) {
         onToggle = block
-    } //</editor-fold>
+    }
+
+    //</editor-fold>
 
 
     // <editor-fold desc="选择模式">
@@ -1318,5 +1320,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
     fun isHover(position: Int): Boolean {
         val model = getModelOrNull<ItemHover>(position)
         return model != null && model.itemHover && hoverEnabled
-    } //</editor-fold>
+    }
+
+    //</editor-fold>
 }
