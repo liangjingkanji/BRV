@@ -61,11 +61,6 @@
         android:label="头|脚布局"
         tools:layout="@layout/fragment_header_footer" />
     <fragment
-        android:id="@+id/groupGridFragment"
-        android:name="com.drake.brv.sample.ui.fragment.group.GroupGridFragment"
-        android:label="分组"
-        tools:layout="@layout/fragment_group" />
-    <fragment
         android:id="@+id/pushRefreshFragment"
         android:label="下拉刷新"
         android:name="com.drake.brv.sample.ui.fragment.PushRefreshFragment"

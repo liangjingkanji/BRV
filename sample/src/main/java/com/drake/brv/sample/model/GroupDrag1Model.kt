@@ -11,5 +11,8 @@ class GroupDrag1Model(
 ) : ItemDrag, ItemSwipe, Group1Model() {
 
     // 这里要求子列表也是可以侧滑的所以重写该字段, 并且得是可变集合, 否则无法子列表被删除
-    override var itemSublist: List<Any?>? = mutableListOf(GroupDrag2Model(), GroupDrag2Model(), GroupDrag2Model(), GroupDrag2Model())
+    override fun getItemSublist(): List<Any?> {
+        return MutableList(4) { GroupDrag2Model() }
+    }
+
 }

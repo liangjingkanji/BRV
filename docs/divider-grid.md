@@ -146,7 +146,7 @@ binding.rv.linear().setup {
     onBind {
         if (itemViewType == R.layout.item_simple_list) { // 为嵌套的网格列表赋值数据
             findView<RecyclerView>(R.id.rv).models =
-                getModel<NestedGroupModel>().itemSublist
+                getModel<NestedGroupModel>().getItemSublist()
         }
     }
     addType<NestedGroupModel>(R.layout.item_simple_list)

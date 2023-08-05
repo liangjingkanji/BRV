@@ -46,11 +46,7 @@ class GroupGridFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragm
     }
 
     private fun getData(): MutableList<Group1Model> {
-        return mutableListOf<Group1Model>().apply {
-            repeat(4) {
-                add(Group1Model())
-            }
-        }
+        return MutableList(4) { Group1Model() }
     }
 
     override fun initData() {

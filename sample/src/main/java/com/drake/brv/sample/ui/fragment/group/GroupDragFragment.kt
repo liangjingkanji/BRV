@@ -29,9 +29,9 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
                     vh.collapse() // 侧滑删除分组前先折叠子列表
                     super.onSwiped(viewHolder, direction)
 
-                    // 如果侧滑删除的是分组里面的子列表, 要删除对应父分组的itemSublist数据, 否则会导致数据异常
-                    // itemSublist必须为可变集合, 否则无法被删除
-                    (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.itemSublist as? ArrayList)?.remove(vh.getModelOrNull())
+                    // 如果侧滑删除的是子列表, 要删除对应分组的getItemSublist, 避免刷新再次被加载出来
+                    // getItemSublist必须发挥可变集合, 否则无法删除
+                    (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.getItemSublist() as? MutableList)?.remove(vh.getModelOrNull())
                 }
 
                 override fun onMove(
@@ -62,11 +62,7 @@ class GroupDragFragment : BaseGroupFragment<FragmentGroupDragBinding>(R.layout.f
     }
 
     private fun getData(): MutableList<GroupDrag1Model> {
-        return mutableListOf<GroupDrag1Model>().apply {
-            repeat(4) {
-                add(GroupDrag1Model())
-            }
-        }
+        return MutableList(4) { GroupDrag1Model() }
     }
 
     override fun initData() {

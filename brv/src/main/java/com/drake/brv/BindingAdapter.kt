@@ -648,7 +648,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
 
     /**
-     * 扁平化数据, 如果元素存在子列表[ItemExpand.itemSublist], 会自动展开(将子列表添加到数据集合中)/折叠(将子列表从数据集合中删除)
+     * 扁平化数据, 如果元素存在子列表[ItemExpand.getItemSublist], 会自动展开(将子列表添加到数据集合中)/折叠(将子列表从数据集合中删除)
      * @param models 数据集合
      * @param expand true展开或false折叠其子分组, null则什么都不做
      * @param depth 扁平化深度层级 -1 表示全部
@@ -663,7 +663,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         val arrayList = ArrayList(models)
         models.clear()
 
-        var itemSublist: List<*>? = null
+        var itemSublist: List<Any?>? = null
         var itemGroupPosition = 0
 
         arrayList.forEach { item ->
@@ -680,7 +680,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                     if (depth > 0) nextDepth -= 1
                 }
 
-                itemSublist = item.itemSublist
+                itemSublist = item.getItemSublist()
                 itemSublist?.let {
                     if (it.isNotEmpty() && (item.itemExpand || (depth != 0 && expand != null))) {
                         val nestedList = flat(it.toMutableList(), expand, nextDepth)
@@ -993,7 +993,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         val bModel = models?.getOrNull(otherPosition) ?: return false
         for (index in min(position, otherPosition) - 1 downTo 0) {
             val item = models?.getOrNull(index) ?: break
-            if (item is ItemExpand && item.itemSublist?.contains(aModel) == true && item.itemSublist?.contains(bModel) == true) {
+            if (item is ItemExpand && item.getItemSublist()?.contains(aModel) == true && item.getItemSublist()?.contains(bModel) == true) {
                 return true
             }
         }
@@ -1203,7 +1203,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
             onExpand?.invoke(this, true)
 
-            val itemSublist = itemExpand.itemSublist
+            val itemSublist = itemExpand.getItemSublist()
             itemExpand.itemExpand = true
             previousExpandPosition = position
 
@@ -1243,7 +1243,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
             onExpand?.invoke(this, false)
 
-            val itemSublist = itemExpand.itemSublist
+            val itemSublist = itemExpand.getItemSublist()
             itemExpand.itemExpand = false
 
             return if (itemSublist.isNullOrEmpty()) {
@@ -1282,7 +1282,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         fun findParentPosition(): Int {
             for (index in layoutPosition - 1 downTo 0) {
                 val item = models?.getOrNull(index) ?: break
-                if (item is ItemExpand && item.itemSublist?.contains(_data) == true) {
+                if (item is ItemExpand && item.getItemSublist()?.contains(_data) == true) {
                     return index
                 }
             }

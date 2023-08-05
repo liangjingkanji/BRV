@@ -35,7 +35,7 @@ class GroupFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_
                         val model = getModel<Group3Model>()
                         val parentPosition = findParentPosition()
                         if (parentPosition != -1) {
-                            (getModel<ItemExpand>(parentPosition).itemSublist as MutableList).remove(model)
+                            (getModel<ItemExpand>(parentPosition).getItemSublist() as MutableList).remove(model)
                             mutable.removeAt(layoutPosition)
                             notifyItemRemoved(layoutPosition)
                         }
@@ -53,8 +53,7 @@ class GroupFragment : BaseGroupFragment<FragmentGroupBinding>(R.layout.fragment_
                 // 第二个分组存在嵌套分组
                 if (i == 0) {
                     val nestedGroupModel = Group1Model().apply {
-                        itemSublist =
-                            listOf(Group2Model(), Group2Model(), Group2Model())
+                        sublist = MutableList(3) { Group2Model() }
                     }
                     add(nestedGroupModel)
                     continue

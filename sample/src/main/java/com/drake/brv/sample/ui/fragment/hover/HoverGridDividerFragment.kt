@@ -10,7 +10,11 @@ import com.drake.brv.sample.databinding.FragmentHoverBinding
 import com.drake.brv.sample.model.Group2Model
 import com.drake.brv.sample.model.Group3Model
 import com.drake.brv.sample.model.HoverHeaderModel
-import com.drake.brv.utils.*
+import com.drake.brv.utils.divider
+import com.drake.brv.utils.grid
+import com.drake.brv.utils.linear
+import com.drake.brv.utils.models
+import com.drake.brv.utils.setup
 import com.drake.tooltip.toast
 
 
@@ -35,7 +39,7 @@ class HoverGridDividerFragment : BaseHoverFragment<FragmentHoverBinding>(R.layou
             onBind {
                 if (itemViewType == R.layout.item_rv) { // 为嵌套的网格列表赋值数据
                     findView<RecyclerView>(R.id.rv).models =
-                        getModel<Group2Model>().itemSublist
+                        getModel<Group2Model>().getItemSublist()
                 }
             }
             addType<Group2Model>(R.layout.item_rv)

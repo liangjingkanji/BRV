@@ -12,7 +12,11 @@ class Group2Model : ItemExpand, BaseObservable() {
             field = value
             notifyChange()
         }
-    override var itemSublist: List<Any?>? = mutableListOf(Group3Model(), Group3Model(), Group3Model(), Group3Model())
+
+    override fun getItemSublist(): List<Any?> {
+        return MutableList(4) { Group3Model() }
+    }
+
     val title get() = "嵌套分组 [ $itemGroupPosition ]"
     val expandIcon get() = if (itemExpand) R.drawable.ic_arrow_nested_expand else R.drawable.ic_arrow_nested_collapse
 }

@@ -36,5 +36,5 @@ interface ItemExpand {
     var itemExpand: Boolean
 
     /** 子列表 */
-    var itemSublist: List<Any?>?
+    fun getItemSublist(): List<Any?>?
 }

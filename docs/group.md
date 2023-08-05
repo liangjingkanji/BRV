@@ -31,8 +31,12 @@ class GroupModel : ItemExpand {
     // 当前条目是否展开
     override var itemExpand: Boolean = false
 
-	// 该变量存储子列表
-    override var itemSublist: List<Any?>? = listOf(Model(), Model(), Model(), Model())
+	// 返回子列表
+    override fun getItemSublist(): List<Any?>? {
+        return sublist
+    }
+
+    var sublist: List<Any?> = List(10) { Model() }
 }
 ```
 
@@ -108,7 +112,7 @@ binding.rv.linear().setup {
 
             // 如果侧滑删除的是分组里面的子列表, 要删除对应父分组的itemSublist数据, 否则会导致数据异常
             // itemSublist必须为可变集合, 否则无法被删除
-            (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.itemSublist as? ArrayList)?.remove(vh.getModelOrNull())
+            (vh.findParentViewHolder()?.getModelOrNull<ItemExpand>()?.getItemSublist() as? ArrayList)?.remove(vh.getModelOrNull())
         }
     })
 
@@ -144,7 +148,7 @@ val model = getModel<GroupBasicModel>()
 val parentPosition = findParentPosition()
 if (parentPosition != -1) {
     // 删除父item的嵌套分组数据
-    (getModel<ItemExpand>(parentPosition).itemSublist as MutableList).remove(model)
+    (getModel<ItemExpand>(parentPosition).getItemSublist() as MutableList).remove(model)
 
     // 正常删除item
     mutable.removeAt(layoutPosition)

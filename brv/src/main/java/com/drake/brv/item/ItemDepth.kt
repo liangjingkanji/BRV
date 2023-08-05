@@ -47,7 +47,7 @@ interface ItemDepth {
                 item.itemDepth = initDepth
             }
             if (item is ItemExpand) {
-                item.itemSublist?.run {
+                item.getItemSublist()?.run {
                     refreshItemDepth(this, initDepth + 1)
                 }
             }

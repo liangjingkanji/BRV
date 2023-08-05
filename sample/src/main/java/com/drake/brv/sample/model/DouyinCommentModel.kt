@@ -54,11 +54,11 @@ data class DouyinCommentModel(var total: Int, var list: List<Data>) {
         override var itemExpand: Boolean = false
 
         @Transient
-        override var itemSublist: List<Any?>? = listOf()
-            get() = comments
-
-        @Transient
         var comments: MutableList<DouyinCommentReplyModel.Data> = mutableListOf()
+
+        override fun getItemSublist(): List<Any> {
+            return comments
+        }
 
         /** 展开文字动作 */
         fun getExpandDesc(): String {
