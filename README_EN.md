@@ -25,12 +25,12 @@
 <img src="https://img.shields.io/badge/license-Apache-blue"/>
 <a href="http://liangjingkanji.github.io/BRV/updates"><img src="https://img.shields.io/badge/changed-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-brightgreen"/></a>
 <a href="http://liangjingkanji.github.io/BRV/api"><img src="https://img.shields.io/badge/api-%E5%87%BD%E6%95%B0%E6%96%87%E6%A1%A3-red"/></a>
-<img src="https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group.svg"/>
+<a href="https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group-qrcode.png"><img src="https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group.svg"/></a>
 <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md"><img src="https://raw.githubusercontent.com/liangjingkanji/Net/master/docs/img/issues.svg"/></a>
 </p>
 
 
-<p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/image/preview.png?raw=true" align="center" width="30%;" /></p>
+<p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/img/preview.png?raw=true" align="center" width="30%;" /></p>
 
 This framework is developed without affecting any basic functions/components of RecyclerView. This project promises to be maintained by the community forever.
 
@@ -101,8 +101,7 @@ Then, add the framework dependency to the module's build.gradle file:
 
 ```groovy
 dependencies {
-    //...
-    implementation 'com.github.liangjingkanji:BRV:1.4.3'
+    implementation 'com.github.liangjingkanji:BRV:1.5.0'
 }
 ```
 

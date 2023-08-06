@@ -1,3 +1,8 @@
+## 1.5.0
+- docs: 重构开发文档
+- refactor: itemSublist修改为getItemSublist方法
+- pref: 简化ItemBind参数名称
+
 ## 1.4.3
 - fix: #377 修复基础数据类型支持
 - feat: #379 BindViewHolder新增tag变量
