@@ -24,11 +24,8 @@
 
 package com.drake.brv.utils
 
-import android.app.Dialog
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.drake.brv.BindingAdapter
@@ -221,22 +218,3 @@ fun RecyclerView.dividerSpace(
     }
 }
 //</editor-fold>
-
-
-//<editor-fold desc="对话框">
-/**
- *  快速为对话框创建一个列表
- */
-fun Dialog.setup(block: BindingAdapter.(RecyclerView) -> Unit): Dialog {
-    val context = context
-    val recyclerView = RecyclerView(context)
-    recyclerView.setup(block)
-    recyclerView.layoutManager = LinearLayoutManager(context)
-    recyclerView.layoutParams = RecyclerView.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-    setContentView(recyclerView)
-    return this
-}
-//</editor-fold>
-
-
-
