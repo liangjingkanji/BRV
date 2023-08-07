@@ -46,6 +46,8 @@ code,
     font-size: 14px !important;
 }
 
-.md-typeset .admonition-title, .md-typeset summary {
+.highlight span.filename,
+.md-typeset .admonition-title,
+.md-typeset summary {
     font-weight: normal;
 }

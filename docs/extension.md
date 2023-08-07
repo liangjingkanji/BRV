@@ -12,7 +12,7 @@
 
 ## 布局管理器
 
-扩展函数快速创建布局管理器
+快速创建布局管理器
 
 === "线性列表"
     ```kotlin hl_lines="1"
@@ -43,7 +43,7 @@
 
 ## 分隔线
 
-扩展函数`divider`快速创建[DefaultDecoration](api/-b-r-v/com.drake.brv/-default-decoration/index.html)
+使用`divider`快速创建[DefaultDecoration](api/-b-r-v/com.drake.brv/-default-decoration/index.html)
 
 ```kotlin hl_lines="1"
 rv.linear().divider(R.drawable.divider_horizontal).setup {

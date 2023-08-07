@@ -1,9 +1,12 @@
-BRV提供一个遍历所有列表条目的监听事件, 可以在回调内依次更新视图
+一个遍历所有列表条目的监听事件, 开发者可以在回调内更新视图
 
 !!! question "切换模式"
     `切换`可以理解为`遍历`列表条目, 常用于切换列表为编辑模式
 
-<img src="https://i.loli.net/2021/08/14/BVjGH7CT9lZ8KXa.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/BVjGH7CT9lZ8KXa.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 ```kotlin
 rv.linear().setup {

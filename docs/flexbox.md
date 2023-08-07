@@ -19,5 +19,8 @@ rv.setup {
 }.models = getData()
 ```
 
-<img src="https://i.loli.net/2021/08/14/KYkHmyCrDogiLsS.png" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/KYkHmyCrDogiLsS.png){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef2/sample/src/main/java/com/drake/brv/sample/ui/fragment/FlexBoxFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 

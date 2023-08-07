@@ -2,11 +2,14 @@
     拉取更多(又称下拉加载更多页), 例如聊天界面下拉加载更多页
 
 <br>
-例如聊天记录界面, 最新的消息在底部, 下拉列表会触发顶部加载历史
+例如聊天记录界面, 最新的消息在底部, 下拉列表会触发顶部加载历史消息
 
 <br>
 
-<img src="https://i.loli.net/2021/08/14/J9ZEOlKGHsQygwV.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/J9ZEOlKGHsQygwV.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/UpFetchFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 !!! note "实现原理"
     将PageRefreshLayout反转, 再将RV反转, RV反转2次等于还原

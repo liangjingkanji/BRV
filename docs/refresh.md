@@ -1,4 +1,7 @@
-<img src="https://i.loli.net/2021/08/14/lV4ktFRAweYorsC.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/lV4ktFRAweYorsC.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef2/sample/src/main/java/com/drake/brv/sample/ui/fragment/PullRefreshFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 是目前Android上最优秀的刷新框架
 <br>
@@ -29,7 +32,7 @@ implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典�
 
 ## 初始化
 
-要求Application中初始化
+在Application中初始化
 ```
 SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> MaterialHeader(this) }
 SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
@@ -72,7 +75,6 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsF
 ```kotlin
 rv.linear().setup {
     addType<Model>(R.layout.item_simple)
-    addType<DoubleItemModel>(R.layout.item_full_span)
 }
 
 page.onRefresh {

@@ -1,6 +1,9 @@
-<img src="https://i.loli.net/2021/08/14/MIe74pdKf5c1hTX.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/MIe74pdKf5c1hTX.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
-可编辑/多选列表在开发中很常见, BRV可以几行代码实现[选择模式](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
+BRV可快速实现支持单选/多选的[选择模式](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
 
 ## 多选列表
 
@@ -16,13 +19,13 @@
     data class CheckModel(
         var isChecked: Boolean = false,
         var visibility: Boolean = false
-    ) : BaseObservable() // BaseObservable 这是DataBinding的数据绑定写法
+    ) : BaseObservable() // 支持DataBinding数据绑定
     ```
 
 3. 监听选择事件
     ```kotlin hl_lines="3"
     rv.linear().setup {
-       addType<CheckModel>(R.layout.item_check_mode)
+       // ...
        onChecked { position, isChecked, isAllChecked ->
             val model = getModel<CheckModel>(position)
             model.isChecked = isChecked
@@ -32,20 +35,9 @@
     ```
 
 4. 触发选择事件
-    ```kotlin hl_lines="11"
-    rv.linear().setup {
-       addType<CheckModel>(R.layout.item_check_mode)
-       onChecked { position, isChecked, isAllChecked ->
-            val model = getModel<CheckModel>(position)
-            model.isChecked = isChecked
-            model.notifyChange() // 通知UI跟随数据变化
-       }
-    
-       onClick(R.id.cb, R.id.item) {
-            var isChecked = getModel<CheckModel>().isChecked
-            setChecked(adapterPosition, !isChecked) // 在点击事件中触发选择事件, 即点击列表条目就选中
-       }
-    }.models = getData
+    ```kotlin hl_lines="2"
+    val isChecked = getModel<CheckModel>().isChecked
+    setChecked(adapterPosition, !isChecked) // 在点击事件中触发选择事件, 即点击列表条目就选中
     ```
 
 
@@ -56,11 +48,7 @@
 首次加载列表默认选中指定Item, 应调用`setChecked`而不是将Model中某个属性置为true
 
 ```kotlin
-// 切换选择模式
-tv_manage.setOnClickListener {
-    adapter.toggle()
-    rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
-}
+rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
 ```
 
 !!! question "原因"

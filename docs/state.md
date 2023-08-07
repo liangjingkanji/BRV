@@ -12,7 +12,7 @@
 - [x] 快速配置点击重试
 - [x] 监听缺省页回调
 - [x] 自定义动画/布局
-- [x] [骨骼动画](https://liangjingkanji.github.io/StateLayout/skeleton/)
+- [x] [骨骼动画](https://liangjingkanji.github.io/StateLayout/skeleton.html)
 - [x] 传递标签
 - [x] 异步线程使用
 - [x] 自定义缺省页切换处理
@@ -21,7 +21,10 @@
 
 <br>
 
-<img src="https://i.loli.net/2021/08/14/cliN9VtnAfjb1Z4.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/cliN9VtnAfjb1Z4.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef2/sample/src/main/java/com/drake/brv/sample/ui/fragment/StateLayoutFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 
 ## 使用
@@ -56,7 +59,6 @@ StateConfig.apply {
 ```kotlin
 rv.linear().setup {
     addType<Model>(R.layout.item_simple)
-    addType<DoubleItemModel>(R.layout.item_full_span)
 }.models = getData()
 ```
 
@@ -70,11 +72,11 @@ state.showEmpty() // 加载失败
 
 ## StateLayout
 
-如果想要自定义StateLayout缺省页动画或监听生命周期可阅读以下文档
+自定义StateLayout缺省页动画或监听生命周期可阅读以下文档
 
 - [GitHub](https://github.com/liangjingkanji/StateLayout/)
 - [使用文档](https://liangjingkanji.github.io/StateLayout)
 
 ## 骨骼动画
 
-骨骼动画实际上就是对应布局的动画或图片, BRV骨骼动画同样由StateLayout实现: [骨骼动画](https://liangjingkanji.github.io/StateLayout/skeleton/)
+骨骼动画实际上就是对应布局的动画或图片, BRV骨骼动画同样由StateLayout实现: [骨骼动画](https://liangjingkanji.github.io/StateLayout/skeleton.html)

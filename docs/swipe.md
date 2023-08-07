@@ -1,4 +1,7 @@
-<img src="https://i.loli.net/2021/08/14/4ZgG9BmT8Qbv2jF.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/4ZgG9BmT8Qbv2jF.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/SwipeFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 
 Model实现接口`ItemSwipe`即可开启拖拽功能

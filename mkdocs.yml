@@ -1,19 +1,19 @@
 site_name: BRV
 site_description: BRV框架文档
 repo_url: https://github.com/liangjingkanji/BRV
-
-site_author: 劉強東
-copyright: Copyright &copy; 2018 - 2020 劉強東
-repo_name: GitHub
-docs_dir: 'docs'
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/
+      link: https://github.com/liangjingkanji
     - icon: fontawesome/brands/qq
       link: https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/img/group-qrcode.png
     - icon: fontawesome/brands/twitch
       link: https://github.com/liangjingkanji/BRV/discussions
+
+site_author: 劉強東
+copyright: Copyright &copy; 2018 - 2023 劉強東
+repo_name: GitHub
+docs_dir: 'docs'
 extra_css:
   - css/extra.css
 theme:

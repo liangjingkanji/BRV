@@ -2,7 +2,7 @@
 
 <img src="https://i.loli.net/2021/08/14/IoBfnz6ERXVHlq3.png" width="250" />
 
-创建一个`drawable`文件来描述分隔线, 其具备复用的特点
+创建`drawable`来描述分隔线
 
 ```xml
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
@@ -25,7 +25,7 @@ rv.linear().divider(R.drawable.divider_horizontal).setup {
 
 <img src="https://i.loli.net/2021/08/14/rAeDXkfV6HxJUym.png" width="250"/>
 
-创建Drawable作为分隔线
+创建`drawable`来描述分隔线
 ```xml
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/dividerDecoration" />
@@ -41,9 +41,9 @@ rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
 ```
 
 
-- 这里使用`Drawable`资源来快速设置分隔线, Drawable的宽高就是分隔线的宽高
-- 如果水平分隔线, 则Drawable的宽度值无效(实际宽度值为RecyclerView的宽)
-- 如果垂直分隔线, 则Drawable的高度值无效(实际分隔线高度为RecyclerView高度)
+- 使用`drawable`资源可复用分隔线, 其宽高就是分隔线的宽高
+- 如果水平分隔线, 则`drawable`的宽度值无效(实际宽度值为RecyclerView的宽)
+- 如果垂直分隔线, 则`drawable`的高度值无效(实际分隔线高度为RecyclerView高度)
 
 
 ## 边缘分隔线
@@ -56,7 +56,7 @@ rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
 
 <img src="https://i.loli.net/2021/08/14/iL5epWdOQKnwZAc.png" width="250"/>
 
-通过两个字段可以控制首尾是否显示分隔线
+两个字段控制首尾是否显示分隔线
 
 ```kotlin hl_lines="3 4"
 rv.linear().divider {
@@ -93,9 +93,9 @@ rv.grid().divider{
 
 有两种方式
 
-1. 直接配置一个具备间隔margin的drawable, 以下为间距16的水平分隔线
+1. 创建有间隔`内间距`的drawable, 以下为间距16水平分隔线
 
-    ```xml
+    ```xml hl_lines="2"
     <inset xmlns:android="http://schemas.android.com/apk/res/android"
         android:insetLeft="16dp"
         android:insetRight="16dp">
@@ -108,7 +108,7 @@ rv.grid().divider{
 
 2. 使用setMargin()
 
-    ```kotlin
+    ```kotlin hl_lines="3"
     binding.rv.linear().divider {
         setDivider(1, true)
         setMargin(16, 0, dp = true)

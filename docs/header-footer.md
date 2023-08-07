@@ -1,4 +1,7 @@
-<img src="https://s2.loli.net/2022/04/24/JgSrqjWAP26b8x5.gif" width="250"/>
+<figure markdown>
+  ![](https://s2.loli.net/2022/04/24/JgSrqjWAP26b8x5.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef2/sample/src/main/java/com/drake/brv/sample/ui/fragment/HeaderFooterFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 !!! Warning "多类型列表"
     1. 头/脚布局在RV中只是多类型item, 所以在计算`position`时应当考虑其中
@@ -21,7 +24,7 @@ binding.rv.bindingAdapter.run {
 }
 ```
 
-其他头/脚布局实现
+其他头/脚布局实现方式
 
 1. 可使用[ConcatAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter)连接多个`BindingAdapter`
 1. `NestedScrollView`嵌套RV会导致RV一次性加载全部列表, 大量列表数据时会卡顿

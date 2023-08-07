@@ -1,4 +1,7 @@
-<img src="https://i.loli.net/2021/08/14/9EUvCSnONYixWDT.gif" width="250"/>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/9EUvCSnONYixWDT.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef2/sample/src/main/java/com/drake/brv/sample/ui/fragment/DragFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 Model实现接口`ItemDrag`即可开启拖拽功能
 

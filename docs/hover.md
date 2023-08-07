@@ -1,6 +1,9 @@
 悬停条目又常被称为`粘性头部`
 
-<p align="center"><img src="https://i.loli.net/2021/08/14/4wUngbV2qZFAf5H.gif" width="250"/></p>
+<figure markdown>
+  ![](https://i.loli.net/2021/08/14/4wUngbV2qZFAf5H.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef2/sample/src/main/java/com/drake/brv/sample/ui/fragment/hover/HoverLinearFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
+</figure>
 
 Model实现接口`ItemHover`
 

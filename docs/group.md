@@ -1,6 +1,6 @@
 <figure markdown>
-  ![](https://i.loli.net/2021/08/14/Pl53LCpG8tdhuMW.gif){ width="300" }
-  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupFragment.kt#L26" target="_blank"><figcaption>示例代码</figcaption></a>
+  ![](https://i.loli.net/2021/08/14/Pl53LCpG8tdhuMW.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
 </figure>
 
 ## 特点
@@ -44,7 +44,6 @@ class GroupModel : ItemExpand {
 
 ```kotlin
 rv.linear().setup {
-    // 任何条目都需要添加类型到BindingAdapter中
     addType<GroupModel>(R.layout.item_group_title)
 
     R.id.item.onClick {
@@ -80,16 +79,16 @@ rv.linear().setup {
 ## 分组多类型
 
 <figure markdown>
-  ![](https://s2.loli.net/2021/12/10/wo1CAqL5SDIZRKu.png){ width="300" }
-  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupGridFragment.kt#L19" target="_blank"><figcaption>示例代码</figcaption></a>
+  ![](https://s2.loli.net/2021/12/10/wo1CAqL5SDIZRKu.png){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupGridFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
 </figure>
 
 自定义`GridLayoutManager.spanSizeLookup`即可, 多类型和分组不存在影响
 
 ## 分组拖拽/侧滑
 <figure markdown>
-  ![](https://s2.loli.net/2021/12/14/RSpGEF2DWyqPb5J.gif){ width="300" }
-  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupDragFragment.kt#L25" target="_blank"><figcaption>示例代码</figcaption></a>
+  ![](https://s2.loli.net/2021/12/14/RSpGEF2DWyqPb5J.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/group/GroupDragFragment.kt" target="_blank"><figcaption>示例代码</figcaption></a>
 </figure>
 
 [拖拽](drag.md)/[侧滑](swipe.md)功能和分组原本互不影响, 但删除/移动已展开的分组未同步他的子列表会导致数据错乱, 需要以下处理

@@ -1,5 +1,5 @@
-1. 扩展函数`divider`为简化创建`DefaultDecoration`
-2. 如`DefaultDecoration`不满足需求可以继承`RecyclerView.ItemDecoration`实现
+!!! note "列表间隔"
+    有时在布局中使用`layout_margin_bottom`等属性更简单
 
 ## 组合间距
 
@@ -21,6 +21,8 @@ binding.rv.grid(3).divider { // 水平间距
 ```
 
 ## 方法
+
+函数`divider`简化创建`DefaultDecoration`, 其实现接口`ItemDecoration`
 
 | 函数 | 描述 |
 |-|-|
@@ -45,3 +47,20 @@ data class Edge(
 ```
 
 `left`为true表示指定position位于列表左侧, `top`为true表示位于列表顶部, 类推
+
+## 超复杂分隔物
+超复杂分隔物建议在列表布局中绘制, 可根据`Edge.computeEdge()`禁止绘制四周
+
+```kotlin hl_lines="5"
+binding.rv.linear().divider(R.drawable.divider_horizontal).setup {
+    addType<DividerModel>(R.layout.item_divider_vertical)
+    onBind {
+        layoutManager = binding.rv.layoutManager!!
+        val edge = DefaultDecoration.Edge.computeEdge(layoutPosition, layoutManager, false)
+        if (edge.bottom) {
+            // 列表结尾不绘制分隔物
+            return@onBind
+        }
+    }
+}.models = getData()
+```

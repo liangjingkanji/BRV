@@ -32,7 +32,7 @@ rv.linear().setup {
 
 ## 重写
 
-BindingAdapter是`open class` 可以被继承重写, 任何没有提供的函数回调可以通过继承或者匿名类实现 <br>
+任何没有提供的方法回调可继承`BindingAdapter`复写
 
 ```kotlin
 binding.rv.linear().adapter = object : BindingAdapter() {
@@ -47,7 +47,7 @@ binding.rv.linear().adapter = object : BindingAdapter() {
 ```
 
 !!! warning "不允许重复调用"
-    onBind或onCreate只有最后设置的有效, 存在覆盖关系
+    onBind或onCreate请勿重复调用, 其存在覆盖关系
 
 ```kotlin
 rv.linear().setup {
@@ -81,6 +81,3 @@ data class SimpleModel(var name: String = "BRV") : ItemAttached {
 
 }
 ```
-
-当然直接继承BindingAdapter也可以实现
-

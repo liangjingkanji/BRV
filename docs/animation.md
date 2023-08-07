@@ -1,7 +1,7 @@
-列表动画即自定义列表Item出现时的动画
+自定义列表Item出现时的动画
 
 ## 动画类型
-通过函数快速设置BRV自带的几种动画类型
+设置BRV自带的动画类型
 
 ```kotlin
 fun setAnimation(animationType: AnimationType)

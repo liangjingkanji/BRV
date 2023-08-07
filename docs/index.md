@@ -1,13 +1,13 @@
-
-本框架在不影响RecyclerView的任何函数组件使用基础上开发, 本项目将一直保持社区维护
+BRV为快速构建RV列表工具, 以开源分享来完善, 将一直保持社区维护
 
 <br>
 <p align="center"><strong>STAR/分享可以让更多人参与到本开源项目</strong></p>
 <br>
 
 !!! note "前言"
-    - 更详细用法阅读注释
-    - 下载源码参考示例项目
+    - 阅读文档, 提高开发效率
+    - 阅读示例, 学习编程经验
+    - 阅读源码, 成为开源作者
 
 ## 创建一个简单的列表
 
@@ -115,15 +115,10 @@ android {
 
 
 ### 3. 自动绑定
-DataBinding会根据配置的`modelId`自动绑定models中数据到xml中
 
+在Application中初始化, DataBinding会根据`modelId`自动绑定`models`到xml中
 ```kotlin
-class App : Application() {
-    override fun onCreate() {
-        // ...
-        BRV.modelId = BR.m
-    }
-}
+BRV.modelId = BR.m
 ```
 
 1. 先在某个布局中声明`<layout>`布局中的变量`m`(推荐命名), `BR.m`才能被生成 <br>一旦声明`BRV.model = BR.m`所有BRV使用的item布局使用`name="m"`来声明才能自动绑定

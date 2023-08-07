@@ -44,7 +44,7 @@ rv.grid(3).divider {
 | [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | 是否显示左右边缘分隔线 |
 | [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | 是否显示周围分隔线 |
 
-### 1) 上下
+### 上下
 
 <img src="https://i.loli.net/2021/08/14/JBjETuMoaORFWHK.png" width="250"/>
 
@@ -59,7 +59,7 @@ rv.grid(3).divider {
 ```
 
 
-### 2) 左右
+### 左右
 
 <img src="https://i.loli.net/2021/08/14/IcxHsWafFQXh4Eg.png" width="250"/>
 
@@ -73,7 +73,7 @@ rv.grid(3).divider {
 }.models = getData()
 ```
 
-### 3) 四周
+### 四周
 
 <img src="https://i.loli.net/2021/08/14/UmhH5BgFA3a1W2Q.png" width="250"/>
 
