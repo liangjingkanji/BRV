@@ -25,28 +25,15 @@ class PullRefreshFragment : EngineFragment<FragmentPullRefreshBinding>(R.layout.
             addType<FullSpanModel>(R.layout.item_full_span)
         }
 
+        binding.page.setEnableLoadMore(false)
         binding.page.onRefresh {
-
-            val runnable = { // 模拟网络请求, 创建假的数据集
-                val data = getData()
-                addData(data) {
-                    index < total // 判断是否有更多页
-                }
-
-                // addData(data, binding.rv.bindingAdapter, isEmpty = {
-                //     true // 此处判断是否存在下一页
-                // }, hasMore = {
-                //     false // 此处判断是否显示空布局
-                // })
-            }
-            postDelayed(runnable, 2000)
-
+            getData()
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
-        }.autoRefresh()
+        }.refreshing()
     }
 
-    private fun getData(): List<Any> {
-        return mutableListOf<Any>().apply {
+    private fun getData() {
+        val data = mutableListOf<Any>().apply {
             for (i in 0..9) {
                 when (i) {
                     1, 2 -> add(FullSpanModel())
@@ -54,6 +41,8 @@ class PullRefreshFragment : EngineFragment<FragmentPullRefreshBinding>(R.layout.
                 }
             }
         }
+        binding.page.setEnableRefresh(false)
+        binding.page.addData(data) { false }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
