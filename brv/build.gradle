@@ -36,7 +36,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     compileOnly "androidx.recyclerview:recyclerview:$rv_version"
-    api "com.github.liangjingkanji:StateLayout:1.4.1"
+    api "com.github.liangjingkanji:StateLayout:1.4.2"
     api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
     api 'io.github.scwang90:refresh-header-material:2.0.5'
     api 'io.github.scwang90:refresh-footer-classics:2.0.5'
