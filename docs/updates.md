@@ -1,3 +1,7 @@
+## 1.5.1
+- fix: 修复onRefresh中立即showContent导致一直加载中
+- fix: #353 解决SmartRefreshLayout堆栈溢出
+
 ## 1.5.0
 - docs: 重构开发文档
 - refactor: itemSublist修改为getItemSublist方法
