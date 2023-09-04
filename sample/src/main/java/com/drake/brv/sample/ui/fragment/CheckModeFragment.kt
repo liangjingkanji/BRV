@@ -26,10 +26,10 @@ class CheckModeFragment : EngineFragment<FragmentCheckModeBinding>(R.layout.frag
             }
 
             // 点击列表触发选中
-            onClick(R.id.cb, R.id.item) {
+            onFastClick(R.id.cb, R.id.item) {
                 // 如果当前未处于选择模式下 点击无效
                 if (!toggleMode && it == R.id.item) {
-                    return@onClick
+                    return@onFastClick
                 }
                 var checked = getModel<CheckModel>().checked
                 if (it == R.id.item) checked = !checked
