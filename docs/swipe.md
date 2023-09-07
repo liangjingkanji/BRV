@@ -62,14 +62,14 @@ rv.linear().setup {
 
 ## 侧滑按钮
 
-侧滑按钮推荐使用自定义View实现, 而不是让列表实现
+请自定义View实现, 或使用以下三方库
 
-!!! quote "推荐的三方库"
-    <figure markdown>
-      ![](https://github.com/st235/SwipeToActionLayout/raw/master/images/showcase.gif){ width="400" }
-      <a href="https://github.com/st235/SwipeToActionLayout"><figcaption>SwipeToActionLayout</figcaption></a>
-    </figure>
-    这种交互交互效果属于iOS的官方实现, Android存在和全屏手势冲突, 并不推荐实现
+<figure markdown>
+  ![](https://raw.githubusercontent.com/liangjingkanji/BRV/master/docs/img/md/swipe-menu.gif){ width="250" }
+  <a href="https://github.com/mcxtzhang/SwipeDelMenuLayout/blob/master/README-cn.md" target="_blank"><figcaption>SwipeDelMenuLayout</figcaption></a>
+</figure>
+
+侧滑按钮交互属于iOS风格, Android存在全屏手势冲突, 并不推荐
 
 
 
