@@ -32,13 +32,16 @@ binding.rv.bindingAdapter.run {
 <br>
 
 
-## 列表局部缺省页
+## 下拉刷新位置
 
 如果使用`CoordinatorLayout`方案来解决列表缺省页覆盖头/脚布局问题, 但是期望从页面顶部开始下拉刷新动画
 
-- [PagePartStateFragment](https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/PagePartStateFragment.kt#L27)
+<figure markdown>
+  ![](https://raw.githubusercontent.com/liangjingkanji/BRV/master/docs/img/md/partial-state.gif){ width="250" }
+  <a href="https://github.com/liangjingkanji/BRV/blob/5269ef245e7f312a0077194611f1c2aded647a3c/sample/src/main/java/com/drake/brv/sample/ui/fragment/PagePartStateFragment.kt#L27" target="_blank"><figcaption>PagePartStateFragment</figcaption></a>
+</figure>
 
-```kotlin title="fragment_page_part_state_header.xml"
+```kotlin title="fragment_page_partial_state.xml"
 <com.drake.brv.PageRefreshLayout
     android:id="@+id/page"
     android:layout_width="match_parent"

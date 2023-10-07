@@ -14,7 +14,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
-            android:text="缺省页不会覆盖Header"
+            android:text="缺省页不会覆盖头布局"
             android:textColor="@color/textSecond"
             android:textSize="12dp" />
 
