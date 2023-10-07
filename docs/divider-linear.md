@@ -19,7 +19,8 @@ rv.linear().divider(R.drawable.divider_horizontal).setup {
 }.models = getData()
 ```
 
-<br>
+!!! warning "重复调用"
+    divider实现是`addItemDecoration`, 重复调用会叠加分隔物
 
 ## 垂直分隔线
 
