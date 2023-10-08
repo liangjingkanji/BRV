@@ -1,3 +1,6 @@
+## 1.5.3
+- 禁止`PageRefreshLayout.setNoMoreData`重复调用
+
 ## 1.5.2
 - fix: 修复onRefresh中立即showContent导致一直加载中
 - fix: #353 解决SmartRefreshLayout堆栈溢出

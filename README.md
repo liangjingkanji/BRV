@@ -91,7 +91,7 @@ Module 的 build.gradle 添加依赖框架
 
 ```groovy
 dependencies {
-    implementation 'com.github.liangjingkanji:BRV:1.5.2'
+    implementation 'com.github.liangjingkanji:BRV:1.5.3'
 }
 ```
 
