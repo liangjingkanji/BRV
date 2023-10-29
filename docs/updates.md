@@ -1,3 +1,6 @@
+## 1.5.4
+- fix: #397 禁止头脚布局被拖拽移动
+
 ## 1.5.3
 - fix: 禁止`PageRefreshLayout.setNoMoreData`重复调用
 
