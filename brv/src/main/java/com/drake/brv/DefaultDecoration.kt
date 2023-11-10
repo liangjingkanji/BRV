@@ -314,7 +314,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val spanIndex = when (layoutManager) {
                     is GridLayoutManager -> layoutManager.spanSizeLookup.getSpanIndex(position, spanCount)
-                    is StaggeredGridLayoutManager -> (layoutManager.findViewByPosition(position)?.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
+                    is StaggeredGridLayoutManager -> {
+                        val v = layoutManager.findViewByPosition(position) ?: return
+                        (v.layoutParams as StaggeredGridLayoutManager.LayoutParams).spanIndex
+                    }
+
                     else -> 0
                 }
 
