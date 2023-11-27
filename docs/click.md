@@ -2,8 +2,8 @@
 
 | 函数 | 描述 |
 |-|-|
-| onFastClick | 添加指定Id点击事件 |
 | onClick | 添加指定Id点击事件, 包含防抖动([500ms禁止重复点击](#_4)) |
+| onFastClick | 添加指定Id点击事件 |
 | onLongClick | 添加指定Id长按事件 |
 
 !!! Failure "点击无效"

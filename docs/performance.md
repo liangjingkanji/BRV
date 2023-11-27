@@ -5,7 +5,7 @@
 
 ## 滑动列表耗时
 
-!!! question "滑动卡顿"
+!!! question "最常见的卡顿原因"
     卡顿优化重点是避免滑动列表时耗时, 应减少在onBind中耗时行为
 
  `SharedPreferences`(简称sp)在读取数据相对耗时, 建议替换为[Serialze](https://github.com/liangjingkanji/Serialize)
@@ -62,9 +62,10 @@ data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
     }
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
+        // 500ms 以后依然可见才会触发加载
         holder.itemView.postDelayed({
             if (itemVisible) {
-                  // 500ms 以后依然可见才会触发加载
+                // 此处可以加载图片或其他耗时操作
             }
         }, 500)
     }
@@ -76,7 +77,7 @@ data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
 
 ## 固定布局优化
 
-如果条目宽高不会因Adapter动态改变, 那么可以使用`setHasFixedSize(true)`来减少测绘次数提高性能
+如果条目宽高不会因Adapter动态改变, 可以使用`setHasFixedSize(true)`来减少测绘次数提高性能
 
 
 ## 列表唯一标识
