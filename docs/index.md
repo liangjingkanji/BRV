@@ -9,7 +9,7 @@ BRV为快速构建RV列表工具, 以开源分享来完善, 将一直保持社�
     2. 阅读示例, 快速运用
     3. 阅读源码, 熟练并拓展
 
-## 创建一个简单的列表
+## 简单示例
 
 ```kotlin
 rv.linear().setup {
@@ -21,7 +21,7 @@ rv.linear().setup {
 <br>
 BRV支持以下4种数据绑定方式, 根据使用场景选择
 
-## 函数回调
+## onBind
 
 在`onBind`函数中填充数据
 
@@ -38,7 +38,7 @@ rv.linear().setup {
 
 
 
-## 实现接口
+## ItemBind
 
 为Model实现接口`ItemBind`, 然后在`onBind`中进行赋值数据
 
