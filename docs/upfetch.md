@@ -12,7 +12,7 @@
 </figure>
 
 !!! note "实现原理"
-    将PageRefreshLayout反转, 再将RV反转, RV反转2次等于还原
+    将PageRefreshLayout反转, 再将RV反转(相当于RV反转2次等于还原)
 
 ```kotlin hl_lines="8"
 rv.setup {
