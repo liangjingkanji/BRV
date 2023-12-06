@@ -14,6 +14,7 @@ import com.drake.statusbar.immersive
 class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initView() {
+
         setSupportActionBar(binding.toolbar)
         immersive(binding.toolbar, true)
 
