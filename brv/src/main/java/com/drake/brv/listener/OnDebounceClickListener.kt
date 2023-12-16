@@ -25,21 +25,27 @@
 package com.drake.brv.listener
 
 import android.view.View
+import com.drake.brv.utils.BRV
 
 
-internal fun View.throttleClick(period: Long = 500, block: View.() -> Unit) {
-    setOnClickListener(ThrottleClickListener(period, block))
+internal fun View.setOnDebounceClickListener(interval: Long = 500, block: View.() -> Unit) {
+    setOnClickListener(OnDebounceClickListener(interval, block))
 }
 
-private class ThrottleClickListener(private val period: Long = 500, private var block: View.() -> Unit) :
-        View.OnClickListener {
+private class OnDebounceClickListener(
+    private val interval: Long = 500,
+    private var block: View.() -> Unit
+) : View.OnClickListener {
 
-    private var lastTime: Long = 0
+    private var _lastDebounceClickTime: Long = 0
+    private var lastDebounceClickTime: Long
+        get() = if (BRV.debounceGlobalEnabled) BRV.lastDebounceClickTime else _lastDebounceClickTime
+        set(value) = if (BRV.debounceGlobalEnabled) BRV.lastDebounceClickTime = value else _lastDebounceClickTime = value
 
     override fun onClick(v: View) {
         val currentTime = System.currentTimeMillis()
-        if (currentTime - lastTime > period) {
-            lastTime = currentTime
+        if (currentTime - lastDebounceClickTime > interval) {
+            lastDebounceClickTime = currentTime
             block(v)
         }
     }

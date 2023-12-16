@@ -43,5 +43,21 @@ object BRV {
      * 防抖动点击事件默认的间隔时间, 单位毫秒
      * @see com.drake.brv.BindingAdapter.onClick
      */
+    var debounceClickInterval: Long = 500
+
+    @Deprecated("命名规范", ReplaceWith("BRV.debounceClickInterval"), DeprecationLevel.ERROR)
     var clickThrottle: Long = 500
+
+    /**
+     * 启用item所有view点击事件共享防抖动间隔, BRV默认防抖动仅针对单个view
+     * @see com.drake.brv.BindingAdapter.onClick
+     */
+    var debounceGlobalEnabled: Boolean = false
+
+    /**
+     * 此变量用于支持全局控件防抖动
+     * @see com.drake.brv.BindingAdapter.onClick
+     * @see debounceGlobalEnabled 要求先启用全局共享防抖动
+     */
+    var lastDebounceClickTime: Long = 0
 }

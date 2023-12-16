@@ -287,7 +287,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
 
     /** 防抖动点击事件的间隔时间, 单位毫秒 */
-    var clickThrottle: Long = BRV.clickThrottle
+    var debounceClickInterval: Long = BRV.debounceClickInterval
 
     /**
      * 监听指定Id控件的点击事件, 包含防抖动
@@ -1096,7 +1096,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                         (clickListener.value.first ?: onClick)?.invoke(this, it.id)
                     }
                 } else {
-                    view.throttleClick(clickThrottle) {
+                    view.setOnDebounceClickListener(debounceClickInterval) {
                         (clickListener.value.first ?: onClick)?.invoke(this@BindingViewHolder, id)
                     }
                 }
