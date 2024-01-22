@@ -1221,7 +1221,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
 
                 (this@BindingAdapter.models as MutableList).addAll(position + 1 - headerCount, sublistFlat)
                 if (expandAnimationEnabled) {
-                    notifyItemChanged(position)
+                    notifyItemChanged(position, itemExpand)
                     notifyItemRangeInserted(position + 1, sublistFlat.size)
                 } else {
                     notifyDataSetChanged()
