@@ -100,6 +100,9 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      */
     var orientation = DividerOrientation.HORIZONTAL
 
+    /** 是否拉伸图片, 暂不支持网格分割线 */
+    var stretch: Boolean = true
+
     /**
      * 列表是否被反转
      */
@@ -156,18 +159,24 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     /**
      * 将图片作为分割线, 图片宽高即分割线宽高
+     *
+     * @param stretch 是否拉伸图片, 默认为 true
      */
-    fun setDrawable(drawable: Drawable) {
+    fun setDrawable(drawable: Drawable, stretch: Boolean = true) {
         divider = drawable
+        this.stretch = stretch
     }
 
     /**
      * 将图片作为分割线, 图片宽高即分割线宽高
+     *
+     * @param stretch 是否拉伸图片, 默认为 true
      */
-    fun setDrawable(@DrawableRes drawableRes: Int) {
+    fun setDrawable(@DrawableRes drawableRes: Int, stretch: Boolean = true) {
         val drawable = ContextCompat.getDrawable(context, drawableRes)
             ?: throw IllegalArgumentException("Drawable cannot be find")
         divider = drawable
+        this.stretch = stretch
     }
     //</editor-fold>
 
@@ -453,8 +462,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      */
     private fun drawHorizontal(canvas: Canvas, parent: RecyclerView, reverseLayout: Boolean) {
         canvas.save()
-        val left: Int
-        val right: Int
+        var left: Int
+        var right: Int
 
         if (parent.clipToPadding) {
             left = parent.paddingLeft + this.marginStart
@@ -506,6 +515,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     bottom = decoratedBounds.bottom
                     top = if (intrinsicHeight == -1) bottom - size else bottom - intrinsicHeight
                 }
+                if (intrinsicWidth != -1 && stretch.not()) {
+                    val centerHorizontal = (left + right) / 2
+                    left = centerHorizontal - intrinsicWidth / 2
+                    right = centerHorizontal + intrinsicWidth / 2
+                }
 
                 if (startVisible && if (reverseLayout) edge.bottom else edge.top) {
                     setBounds(left, firstTop, right, firstBottom)
@@ -524,8 +538,8 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
      */
     private fun drawVertical(canvas: Canvas, parent: RecyclerView, reverseLayout: Boolean) {
         canvas.save()
-        val top: Int
-        val bottom: Int
+        var top: Int
+        var bottom: Int
 
         if (parent.clipToPadding) {
             top = parent.paddingTop + marginStart
@@ -566,6 +580,11 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val right = (decoratedBounds.right + child.translationX).roundToInt()
                 val left = if (intrinsicWidth == -1) right - size else right - intrinsicWidth
+                if (intrinsicHeight != -1 && stretch.not()) {
+                    val centerVertical = (top + bottom) / 2
+                    top = centerVertical - intrinsicHeight / 2
+                    bottom = centerVertical + intrinsicHeight / 2
+                }
 
                 if (startVisible && edge.left) {
                     setBounds(firstLeft, top, firstRight, bottom)

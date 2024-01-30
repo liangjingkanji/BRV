@@ -192,13 +192,15 @@ fun RecyclerView.divider(
  * 指定Drawable资源为分割线, 分割线的间距和宽度应在资源文件中配置
  * @param drawable 描述分割线的drawable
  * @param orientation 分割线方向, 仅[androidx.recyclerview.widget.GridLayoutManager]需要使用此参数, 其他LayoutManager都是根据其方向自动推断
+ * @param stretch 是否拉伸图片, 默认为 true, 暂不支持网格分割线
  */
 fun RecyclerView.divider(
     @DrawableRes drawable: Int,
-    orientation: DividerOrientation = DividerOrientation.HORIZONTAL
+    orientation: DividerOrientation = DividerOrientation.HORIZONTAL,
+    stretch: Boolean = true
 ): RecyclerView {
     return divider {
-        setDrawable(drawable)
+        setDrawable(drawable, stretch)
         this.orientation = orientation
     }
 }
