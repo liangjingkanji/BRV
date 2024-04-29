@@ -439,6 +439,10 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         } else {
             if (hasMore) finishLoadMore(success) else finishLoadMoreWithNoMoreData()
         }
+        // fix: 页面未创建完成立即finish, 会导致下拉动画无法回弹以及刷新无效
+        if (isRefreshing) {
+            notifyStateChanged(RefreshState.None)
+        }
     }
 
     /**
