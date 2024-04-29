@@ -2,7 +2,6 @@ package com.drake.brv.sample.ui.activity
 
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.ActTestBinding
-import com.drake.brv.sample.model.FullSpanModel
 import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
@@ -13,25 +12,16 @@ class TestAct : EngineActivity<ActTestBinding>(R.layout.act_test) {
     }
 
     private fun loadData() {
-        binding.refresh.setEnableRefresh(false)
-        val data = mutableListOf<Any>().apply {
-            for (i in 0..9) {
-                when (i) {
-                    1, 2 -> add(FullSpanModel())
-                    else -> add(SimpleModel())
-                }
-            }
+        val data = (0..9).map { SimpleModel() }
+        binding.refresh.addData(data) {
+            data.size == 20
         }
-        binding.refresh.addData(data) { false }
     }
 
     override fun initView() {
         binding.recyclerview.linear().setup {
             addType<SimpleModel>(R.layout.item_simple)
-            addType<FullSpanModel>(R.layout.item_full_span)
         }
-        binding.refresh.setEnableLoadMore(false)
         binding.refresh.onRefresh { loadData() }.refreshing()
     }
-
 }
