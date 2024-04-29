@@ -72,7 +72,7 @@
         tools:layout="@layout/fragment_pull_refresh" />
     <fragment
         android:id="@+id/pagePartStateFragment"
-        android:name="com.drake.brv.sample.ui.fragment.PagePartStateFragment"
+        android:name="com.drake.brv.sample.ui.fragment.PagePartialStateFragment"
         android:label="列表局部缺省页"
         tools:layout="@layout/fragment_pull_refresh" />
     <fragment

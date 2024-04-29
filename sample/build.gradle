@@ -75,12 +75,11 @@ dependencies {
     implementation 'com.github.liangjingkanji:Engine:0.0.74' // 快速开发基础库
     implementation 'com.github.liangjingkanji:spannable:1.2.6' // 富文本
     implementation 'com.github.liangjingkanji:soft-input-event:1.0.9' // 软键盘事件监听/平滑键盘弹出动画
-    implementation 'com.github.liangjingkanji:Net:3.5.8' // 网络请求
+    implementation 'com.github.liangjingkanji:Net:3.6.4' // 网络请求
     implementation "com.squareup.okhttp3:okhttp:4.11.0" // 网络请求
     implementation 'com.airbnb.android:lottie:5.1.1' // 动画库
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4" // 协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-    implementation 'com.github.liangjingkanji:Net:3.5.8'
     implementation 'com.squareup.okhttp3:mockwebserver:4.11.0'
     implementation 'io.github.youth5201314:banner:2.2.2'
     implementation 'com.github.liangjingkanji:Serialize:3.0.1'

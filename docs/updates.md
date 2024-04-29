@@ -1,4 +1,23 @@
-## 1.5.1
+## 1.5.8
+- feat: #412 支持全局点击防抖动
+
+## 1.5.7
+- fix: #409 修复单一展开模式下删除数据后展开导致崩溃
+
+## 1.5.6
+- fix: #402 修复Staggered布局+分割线添加数据崩溃
+- fix: 修复分组删除子列表后折叠导致异常
+
+## 1.5.5
+- fix: #399 修复setNoMoreData异常
+
+## 1.5.4
+- fix: #397 禁止头脚布局被拖拽移动
+
+## 1.5.3
+- fix: 禁止`PageRefreshLayout.setNoMoreData`重复调用
+
+## 1.5.2
 - fix: 修复onRefresh中立即showContent导致一直加载中
 - fix: #353 解决SmartRefreshLayout堆栈溢出
 

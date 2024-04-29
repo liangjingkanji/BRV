@@ -57,8 +57,8 @@ rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
     1. `checkedXX()`函数通知BRV更新选中索引
     2. `onChecked()`通知开发者选中状态更新
 
-## 数据变化
-如果列表发生插入/覆盖数据集行为, 那么集合位置/数量和BRV内部保存的选中索引`checkedPosition`可能对不上
+## 数据变化导致异常
+如果列表发生数据集长度或位置变化, 那么集合位置/数量和BRV内部保存的选中索引`checkedPosition`可能对不上
 
 网络请求刷新列表场景
 

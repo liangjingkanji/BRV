@@ -23,9 +23,9 @@ class SwipeFragment : EngineFragment<FragmentSwipeBinding>(R.layout.fragment_swi
             SwipeModel(ItemOrientation.LEFT), // 左划
             SwipeModel(),
             SwipeModel(ItemOrientation.RIGHT), // 右划
-            SwipeModel(),
+            SwipeModel(ItemOrientation.HORIZONTAL),
             SwipeModel(ItemOrientation.NONE),  // 不支持侧滑
-            SwipeModel(),
+            SwipeModel(ItemOrientation.HORIZONTAL),
             SwipeModel(ItemOrientation.NONE), // 不支持侧滑
             SwipeModel()
         )

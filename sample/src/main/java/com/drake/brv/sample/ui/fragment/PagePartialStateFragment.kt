@@ -4,7 +4,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.drake.brv.sample.R
-import com.drake.brv.sample.databinding.FragmentPagePartStateHeaderBinding
+import com.drake.brv.sample.databinding.FragmentPagePartialStateBinding
 import com.drake.brv.sample.model.FullSpanModel
 import com.drake.brv.sample.model.SimpleModel
 import com.drake.brv.utils.linear
@@ -12,7 +12,7 @@ import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
 
 
-class PagePartStateFragment : EngineFragment<FragmentPagePartStateHeaderBinding>(R.layout.fragment_page_part_state_header) {
+class PagePartialStateFragment : EngineFragment<FragmentPagePartialStateBinding>(R.layout.fragment_page_partial_state) {
 
     private val total = 6
 

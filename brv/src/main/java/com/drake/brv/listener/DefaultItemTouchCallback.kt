@@ -141,13 +141,17 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
                     onDrag(sourceViewHolder!!, targetViewHolder!!)
                 }
             }
+
             else -> {
                 this.lastActionState = actionState
             }
         }
     }
 
-    /** 拖拽移动超过其他item时, 其返回值表示是否已经拖拽替换(会触发函数onMoved) */
+    /**
+     * 拖拽移动超过其他item时, 其返回值表示是否已经拖拽替换(会触发函数onMoved)
+     * @return 返回false 禁止被拖拽交换移动
+     */
     override fun onMove(
         recyclerView: RecyclerView,
         source: RecyclerView.ViewHolder,
@@ -158,7 +162,7 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
         val targetPosition = recyclerView.getChildLayoutPosition(target.itemView)
 
         val models = adapter.models as? MutableList
-        if (models != null && source is BindingViewHolder && target is BindingViewHolder) {
+        if (models != null && source is BindingViewHolder && target is BindingViewHolder && adapter.isModel(targetPosition)) {
             val fromPosition = currentPosition - adapter.headerCount
             val toPosition = targetPosition - adapter.headerCount
             val fromItem = models[fromPosition]

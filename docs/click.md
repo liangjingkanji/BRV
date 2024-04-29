@@ -2,8 +2,8 @@
 
 | 函数 | 描述 |
 |-|-|
-| onFastClick | 添加指定Id点击事件 |
 | onClick | 添加指定Id点击事件, 包含防抖动([500ms禁止重复点击](#_4)) |
+| onFastClick | 添加指定Id点击事件 |
 | onLongClick | 添加指定Id长按事件 |
 
 !!! Failure "点击无效"
@@ -57,13 +57,13 @@ BRV使用`onClick`函数设置监听事件即包含防抖动, 以下为修改防
 
 === "全局"
     ```kotlin
-    BRV.clickThrottle = 1000 // 单位毫秒
+    BRV.debounceClickInterval = 1000 // 单位毫秒
     ```
 
 === "单例"
     ```kotlin hl_lines="2"
     binding.rv.linear().setup {
-        clickThrottle = 1000 // 覆盖全局设置
+        debounceClickInterval = 1000 // 覆盖全局设置
 
         addType<SimpleModel>(R.layout.item_simple)
         R.id.item.onClick {
@@ -71,3 +71,13 @@ BRV使用`onClick`函数设置监听事件即包含防抖动, 以下为修改防
         }
     }.models = getData()
     ```
+=== "共享防抖动"
+    ```kotlin
+    // 启用item所有view点击事件共享防抖动间隔, BRV默认防抖动仅针对单个view
+    BRV.debounceGlobalEnabled = true
+    ```
+
+!!! question "全局防抖动"
+    使用`BRV.lastDebounceClickTime`来判断抖动间隔时间, 即可统一BRV和你实现的防抖动点击事件监听
+
+    - [防抖动示例](https://github.com/liangjingkanji/BRV/blob/master/brv/src/main/java/com/drake/brv/listener/OnDebounceClickListener.kt)

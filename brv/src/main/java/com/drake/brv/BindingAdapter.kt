@@ -287,7 +287,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         }
 
     /** 防抖动点击事件的间隔时间, 单位毫秒 */
-    var clickThrottle: Long = BRV.clickThrottle
+    var debounceClickInterval: Long = BRV.debounceClickInterval
 
     /**
      * 监听指定Id控件的点击事件, 包含防抖动
@@ -716,7 +716,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         return when {
             isHeader(position) -> headers[position] as M
             isFooter(position) -> footers[position - headerCount - modelCount] as M
-            else -> models!!.let { it[position - headerCount] as M }
+            else -> models!![position - headerCount] as M
         }
     }
 
@@ -1014,11 +1014,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         scrollTop: Boolean = false,
         @IntRange(from = -1) depth: Int = 0,
     ): Int {
-        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: rv?.run {
-            val holder = createViewHolder(this, getItemViewType(position))
-            bindViewHolder(holder, position)
-            holder
-        } ?: return 0
+        val holder = getBindViewHolder(position) ?: return 0
         return holder.expand(scrollTop, depth)
     }
 
@@ -1029,11 +1025,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
      * @return 折叠后消失的条目数量
      */
     fun collapse(@IntRange(from = 0) position: Int, @IntRange(from = -1) depth: Int = 0): Int {
-        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: rv?.run {
-            val holder = createViewHolder(this, getItemViewType(position))
-            bindViewHolder(holder, position)
-            holder
-        } ?: return 0
+        val holder = getBindViewHolder(position) ?: return 0
         return holder.collapse(depth)
     }
 
@@ -1048,12 +1040,24 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         scrollTop: Boolean = false,
         @IntRange(from = -1) depth: Int = 0,
     ): Int {
-        val holder = rv?.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: rv?.run {
-            val holder = createViewHolder(this, getItemViewType(position))
-            bindViewHolder(holder, position)
-            holder
-        } ?: return 0
+        val holder = getBindViewHolder(position) ?: return 0
         return holder.expandOrCollapse(scrollTop, depth)
+    }
+
+    /**
+     * 获取ViewHolder, 如果获取不到就创建一个
+     */
+    private fun getBindViewHolder(position: Int): BindingViewHolder? {
+        val rv = rv ?: return null
+        return rv.findViewHolderForLayoutPosition(position) as? BindingViewHolder ?: run {
+            try {
+                val holder = createViewHolder(rv, getItemViewType(position))
+                bindViewHolder(holder, position)
+                holder
+            } catch (e: Exception) {
+                null
+            }
+        }
     }
 
     //</editor-fold>
@@ -1092,7 +1096,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
                         (clickListener.value.first ?: onClick)?.invoke(this, it.id)
                     }
                 } else {
-                    view.throttleClick(clickThrottle) {
+                    view.setOnDebounceClickListener(debounceClickInterval) {
                         (clickListener.value.first ?: onClick)?.invoke(this@BindingViewHolder, id)
                     }
                 }

@@ -465,11 +465,8 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         return this
     }
 
-    // 解决在Activity的onAttachedToWindow未调用时SmartRefreshLayout下拉刷新立即完成导致的循环调用堆栈溢出
-    private var currentNoMoreData: Boolean? = null
     override fun setNoMoreData(noMoreData: Boolean): RefreshLayout {
-        if (currentNoMoreData != noMoreData) {
-            currentNoMoreData = noMoreData
+        if (mRefreshFooter != null && mRefreshContent != null) {
             super.setNoMoreData(noMoreData)
         }
         return this
