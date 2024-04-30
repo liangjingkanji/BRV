@@ -253,7 +253,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun refresh() {
         if (state == RefreshState.None) {
-            notifyStateChanged(RefreshState.Refreshing)
+            notifyStateChanged(RefreshState.PullDownToRefresh)
             onRefresh(this)
         }
     }
@@ -681,7 +681,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             state.loadingLayout = loadingLayout
             state.onRefresh {
                 if (realEnableRefresh) super.setEnableRefresh(false)
-                notifyStateChanged(RefreshState.Refreshing)
+                notifyStateChanged(RefreshState.PullDownToRefresh)
                 onRefresh(this@PageRefreshLayout)
             }
         }
