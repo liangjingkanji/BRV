@@ -253,7 +253,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
      */
     fun refresh() {
         if (state == RefreshState.None) {
-            notifyStateChanged(RefreshState.PullDownToRefresh)
+            notifyStateChanged(RefreshState.Refreshing)
             onRefresh(this)
         }
     }
@@ -451,7 +451,9 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
         success: Boolean,
         noMoreData: Boolean?
     ): RefreshLayout {
-        super.finishRefresh(delayed, success, noMoreData)
+        post {
+            super.finishRefresh(delayed, success, noMoreData)
+        }
         if (!mEnableLoadMoreWhenContentNotFull) {
             setEnableLoadMoreWhenContentNotFull(noMoreData == false || !mFooterNoMoreData)
         }
@@ -681,7 +683,7 @@ open class PageRefreshLayout : SmartRefreshLayout, OnRefreshLoadMoreListener {
             state.loadingLayout = loadingLayout
             state.onRefresh {
                 if (realEnableRefresh) super.setEnableRefresh(false)
-                notifyStateChanged(RefreshState.PullDownToRefresh)
+                notifyStateChanged(RefreshState.Refreshing)
                 onRefresh(this@PageRefreshLayout)
             }
         }
