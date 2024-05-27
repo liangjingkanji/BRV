@@ -116,6 +116,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
     private var marginBaseItemStart = false
     private var marginBaseItemEnd = false
     private var divider: Drawable? = null
+    private var stretchDivider: Boolean = true
 
     //<editor-fold desc="类型">
 
@@ -156,18 +157,24 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
     /**
      * 将图片作为分割线, 图片宽高即分割线宽高
+     *
+     * @param stretch 是否拉伸图片, 默认为 true
      */
-    fun setDrawable(drawable: Drawable) {
+    fun setDrawable(drawable: Drawable, stretch: Boolean = true) {
         divider = drawable
+        this.stretchDivider = stretch
     }
 
     /**
      * 将图片作为分割线, 图片宽高即分割线宽高
+     *
+     * @param stretch 是否拉伸图片, 默认为 true
      */
-    fun setDrawable(@DrawableRes drawableRes: Int) {
+    fun setDrawable(@DrawableRes drawableRes: Int, stretch: Boolean = true) {
         val drawable = ContextCompat.getDrawable(context, drawableRes)
             ?: throw IllegalArgumentException("Drawable cannot be find")
         divider = drawable
+        this.stretchDivider = stretch
     }
     //</editor-fold>
 
@@ -506,7 +513,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
                     bottom = decoratedBounds.bottom
                     top = if (intrinsicHeight == -1) bottom - size else bottom - intrinsicHeight
                 }
-                if (intrinsicWidth != -1) {
+                if (intrinsicWidth != -1 && stretchDivider.not()) {
                     val centerHorizontal = (left + right) / 2
                     left = centerHorizontal - intrinsicWidth / 2
                     right = centerHorizontal + intrinsicWidth / 2
@@ -571,7 +578,7 @@ class DefaultDecoration constructor(private val context: Context) : RecyclerView
 
                 val right = (decoratedBounds.right + child.translationX).roundToInt()
                 val left = if (intrinsicWidth == -1) right - size else right - intrinsicWidth
-                if (intrinsicHeight != -1) {
+                if (intrinsicHeight != -1 && stretchDivider.not()) {
                     val centerVertical = (top + bottom) / 2
                     top = centerVertical - intrinsicHeight / 2
                     bottom = centerVertical + intrinsicHeight / 2
