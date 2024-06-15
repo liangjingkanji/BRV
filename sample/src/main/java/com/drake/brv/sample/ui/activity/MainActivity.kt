@@ -1,6 +1,7 @@
 package com.drake.brv.sample.ui.activity
 
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,7 +13,6 @@ import com.drake.engine.base.EngineActivity
 import com.drake.statusbar.immersive
 
 class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main) {
-
     override fun initView() {
         setSupportActionBar(binding.toolbar)
         immersive(binding.toolbar, true)
@@ -34,6 +34,14 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
         }
 
         binding.navView.setupWithNavController(navController)
+    }
+
+    fun addDrawerListener(listener: DrawerListener) {
+        binding.drawer.addDrawerListener(listener)
+    }
+
+    fun removeListener(listener: DrawerListener) {
+        binding.drawer.removeDrawerListener(listener)
     }
 
     override fun initData() {

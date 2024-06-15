@@ -1,12 +1,15 @@
 package com.drake.brv.sample.ui.fragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.View
 import android.widget.TextView
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import com.drake.brv.sample.R
 import com.drake.brv.sample.databinding.FragmentChatBinding
 import com.drake.brv.sample.model.ChatMessage
 import com.drake.brv.sample.model.ChatModel
+import com.drake.brv.sample.ui.activity.MainActivity
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineFragment
@@ -15,9 +18,25 @@ import com.drake.softinput.hideSoftInput
 import com.drake.softinput.setWindowSoftInput
 import com.drake.spannable.movement.ClickableMovementMethod
 
-class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat) {
+class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat), DrawerListener {
 
     private val model = ChatModel()
+    private var mainAct: MainActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is MainActivity) {
+            mainAct = context
+            mainAct?.addDrawerListener(this)
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mainAct?.removeListener(this)
+        mainAct = null
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initView() {
@@ -67,5 +86,18 @@ class ChatFragment : EngineFragment<FragmentChatBinding>(R.layout.fragment_chat)
                 hideSoftInput() // 隐藏键盘
             }
         }
+    }
+
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+        hideSoftInput() // 隐藏键盘
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+    }
+
+    override fun onDrawerStateChanged(newState: Int) {
     }
 }
