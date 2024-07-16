@@ -1,3 +1,9 @@
+## 1.6.0
+- feat: 分割线函数divider新增参数stretch禁止拉伸
+- fix: #439 PageRefreshLayout在页面未创建完成立即finish，会导致下拉动画无法回弹以及刷新无效
+- fix: 修复展开分组当前item动画白屏
+- perf: #447 如果拖拽起始位置等于目标位置则属于无效移动, 不回调onDrag方法
+
 ## 1.5.8
 - feat: #412 支持全局点击防抖动
 
