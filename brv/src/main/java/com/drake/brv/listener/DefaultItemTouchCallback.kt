@@ -111,7 +111,7 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
     }
 
     /**
-     * 当拖拽动作完成且松开手指时触发
+     * 当拖拽动作完成且松开手指时触发, 如果拖拽起始位置等于目标位置则属于无效移动, 不回调当前方法
      * @param source 触发拖拽的Item
      * @param target 拖拽目标的Item
      */
@@ -125,21 +125,25 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
 
     /**
      * 拖拽或者侧滑导致的状态变化
-     * @param viewHolder 当前触发的Item
+     * @param vh 当前触发的Item
      * @param actionState 触发的状态
      * @see ItemTouchHelper.ACTION_STATE_DRAG 拖拽
      * @see ItemTouchHelper.ACTION_STATE_SWIPE 侧滑
      * @see ItemTouchHelper.ACTION_STATE_IDLE 闲置
      */
-    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+    override fun onSelectedChanged(vh: RecyclerView.ViewHolder?, actionState: Int) {
         when (actionState) {
             ItemTouchHelper.ACTION_STATE_IDLE -> {
+                val source = sourceViewHolder
+                val target = targetViewHolder
                 if (lastActionState == ItemTouchHelper.ACTION_STATE_DRAG &&
-                    sourceViewHolder is BindingViewHolder &&
-                    targetViewHolder is BindingViewHolder
+                    source is BindingViewHolder && target is BindingViewHolder &&
+                    startMovingPosition != target.bindingAdapterPosition
                 ) {
-                    onDrag(sourceViewHolder!!, targetViewHolder!!)
+                    onDrag(source, target)
                 }
+                // 手指放下, 重置起始移动位置
+                startMovingPosition = null
             }
 
             else -> {
@@ -147,6 +151,9 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
             }
         }
     }
+
+    /**记录开始移动位置, 如果拖拽起始位置等于目标位置则属于无效移动*/
+    private var startMovingPosition: Int? = null
 
     /**
      * 拖拽移动超过其他item时, 其返回值表示是否已经拖拽替换(会触发函数onMoved)
@@ -169,6 +176,10 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
             models.removeAt(fromPosition)
             models.add(toPosition, fromItem)
             adapter.notifyItemMoved(currentPosition, targetPosition)
+            // 记录起始移动位置
+            if (startMovingPosition == null) {
+                startMovingPosition = source.bindingAdapterPosition
+            }
             sourceViewHolder = source
             targetViewHolder = target
             return true
