@@ -66,7 +66,7 @@ data class DouyinCommentModel(var total: Int, var list: List<Data>) {
         }
 
         fun addComment(data: List<DouyinCommentReplyModel.Data>) {
-            comments.addAll(data)
+            comments.addAll(data.take(commentCount).shuffled())
             val size = comments.size
             comments.forEachIndexed { index, m ->
                 m.loadedCommentSize = size
