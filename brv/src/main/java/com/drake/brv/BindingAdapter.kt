@@ -845,7 +845,8 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         get() {
             var count = 0
             if (checkableItemTypeList == null) {
-                return models!!.size
+                //安全调用 models，如果为 null 则返回 0
+                return models?.size ?:0
             } else {
                 for (i in 0 until itemCount) {
                     if (checkableItemTypeList!!.contains(getItemViewType(i))) {
