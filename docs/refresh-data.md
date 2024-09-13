@@ -94,5 +94,6 @@ rv.linear().setup {
 | notifyItemRangeInserted | 指定范围内Item插入 |
 | notifyItemRangeRemoved | 指定范围内删除 |
 
-!!! warning  "更新无效"
-    这些方法都是通知更新视图, 如果列表数据并没有发生改变那么是无效的
+!!! warning  "更新异常"
+    1. 以上方法是通知更新视图, 若列表数据未改变那么更新无效的 <br>
+    2. 若更新item导致分隔线无效, 请使用`invalidateItemDecorations()`刷新
