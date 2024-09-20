@@ -19,11 +19,16 @@ rv.linear().setup {
 文档提及的`rv`为RecyclerView简称, Model即`数据类/bean/pojo`
 
 <br>
-BRV支持以下4种数据绑定方式, 根据使用场景选择
 
-## onBind
+## 四种使用方式
+BRV可自由扩展, 几乎支持市面上所有写法, 请按场景酌情考虑
+!!! bug "编码规范"
+    某些开发者无视建议写垃圾代码和本框架无关
 
-在`onBind`函数中填充数据
+
+### onBind - 简单
+
+在`onBind`函数中填充数据, 适用于简单代码(去繁就简)
 
 ```kotlin
 rv.linear().setup {
@@ -36,14 +41,12 @@ rv.linear().setup {
 
 
 
+### 接口实现 - 解耦 BRVAH
 
-
-## ItemBind
-
-为Model实现接口`ItemBind`, 然后在`onBind`中进行赋值数据
+为Model实现接口`ItemBind`, 在`onBind`中赋值数据, 适用于复杂数据但又不想使用双向数据绑定
 
 !!! warning "耦合"
-    不推荐, 这会导致业务逻辑和视图耦合, 不方便应用迭代 <br>
+    不推荐, 会导致业务逻辑和视图代码耦合, 不便迭代 <br>
     但这种方式在很多框架中被使用, 例如`BRVAH`, 可以方便从其他框架迁移到BRV
 
 ```kotlin
@@ -55,8 +58,10 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
 }
 ```
 
-## ViewBinding
-要求开启ViewBinding, 上面实现接口方式也可以使用`getBinding()`
+### ViewBinding - 查找视图
+
+要求开启ViewBinding, 上面接口实现方式也可以通过`getBinding()`使用
+
 ```kotlin
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
@@ -69,14 +74,14 @@ rv.linear().setup {
 
 
 
-## DataBinding
+### DataBinding - 数据绑定
 
-通过DataBinding数据绑定可以自动填充数据
+通过DataBinding实现数据绑定, 可以自动填充数据, 适用于任何场景
 
 !!! success "推荐"
     这是最简洁优雅/最安全的一种绑定数据方式
 
-### 1. 启用DataBinding
+#### 1. 启用DataBinding
 
 首先在module中的`build.gradle`中开启DataBinding
 
@@ -89,7 +94,7 @@ android {
 }
 ```
 
-### 2. 布局声明变量
+#### 2. 布局声明变量
 
 第二步, 在Item的布局文件中声明变量, 然后绑定变量到视图控件上
 
@@ -114,7 +119,7 @@ android {
 选中行是DataBinding使用方法
 
 
-### 3. 自动绑定
+#### 3. 自动绑定
 
 在Application中初始化, DataBinding会根据`modelId`自动绑定`models`到xml中
 ```kotlin
@@ -129,7 +134,7 @@ BRV.modelId = BR.m
 1. 如没有生成可`Make Project`(小锤子) <br>
    <img src="https://i.loli.net/2021/08/14/IEh3H8VaFM6d1LR.png" width="150"/>
 
-### 4. 构建列表
+#### 4. 构建列表
 
 ```kotlin
 rv.linear().setup {
