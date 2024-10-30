@@ -137,8 +137,10 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
                 val source = sourceViewHolder
                 val target = targetViewHolder
                 if (lastActionState == ItemTouchHelper.ACTION_STATE_DRAG &&
-                    source is BindingViewHolder && target is BindingViewHolder &&
-                    startMovingPosition != target.bindingAdapterPosition
+                    source is BindingViewHolder &&
+                    target is BindingViewHolder &&
+                    startMovingPosition != null &&
+                    startMovingPosition != source.bindingAdapterPosition
                 ) {
                     onDrag(source, target)
                 }
@@ -178,7 +180,7 @@ open class DefaultItemTouchCallback : ItemTouchHelper.Callback() {
             adapter.notifyItemMoved(currentPosition, targetPosition)
             // 记录起始移动位置
             if (startMovingPosition == null) {
-                startMovingPosition = source.bindingAdapterPosition
+                startMovingPosition = target.bindingAdapterPosition
             }
             sourceViewHolder = source
             targetViewHolder = target
