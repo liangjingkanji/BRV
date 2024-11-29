@@ -24,6 +24,7 @@
 
 package com.drake.brv.listener
 
+import android.os.SystemClock
 import android.view.View
 import com.drake.brv.utils.BRV
 
@@ -43,7 +44,7 @@ private class OnDebounceClickListener(
         set(value) = if (BRV.debounceGlobalEnabled) BRV.lastDebounceClickTime = value else _lastDebounceClickTime = value
 
     override fun onClick(v: View) {
-        val currentTime = System.currentTimeMillis()
+        val currentTime = SystemClock.elapsedRealtime()
         if (currentTime - lastDebounceClickTime > interval) {
             lastDebounceClickTime = currentTime
             block(v)
