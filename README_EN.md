@@ -88,7 +88,7 @@ Then, add the framework dependency to the module's build.gradle file:
 
 ```groovy
 dependencies {
-    implementation 'com.github.liangjingkanji:BRV:1.5.8'
+    implementation 'com.github.liangjingkanji:BRV:1.6.1'
 }
 ```
 
