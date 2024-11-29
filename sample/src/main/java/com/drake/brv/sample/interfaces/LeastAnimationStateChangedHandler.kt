@@ -16,6 +16,7 @@
 
 package com.drake.brv.sample.interfaces
 
+import android.os.SystemClock
 import android.view.View
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
@@ -41,7 +42,7 @@ open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
         if (status == Status.LOADING) {
             val animation = state.findViewById<LottieAnimationView>(R.id.lottie)
             animation?.addAnimatorUpdateListener {
-                val duration = System.currentTimeMillis() - loadingStartTime
+                val duration = SystemClock.elapsedRealtime() - loadingStartTime
                 if (duration >= (leastDuration ?: it.duration)) {
                     animationPlaying = false
                     animation.cancelAnimation()
@@ -64,7 +65,7 @@ open class LeastAnimationStateChangedHandler(var leastDuration: Long? = null) :
         if (animationPlaying) return
         StateChangedHandler.onAdd(container, state, status, tag)
         if (status == Status.LOADING) {
-            loadingStartTime = System.currentTimeMillis()
+            loadingStartTime = SystemClock.elapsedRealtime()
             state.findViewById<LottieAnimationView>(R.id.lottie)?.let {
                 animationPlaying = true
                 it.repeatCount = LottieDrawable.INFINITE
