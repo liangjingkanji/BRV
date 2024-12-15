@@ -1,5 +1,5 @@
 <p >
-    <a href="http://liangjingkanji.github.io/BRV/">中文</a>
+    <a href="https://github.com/liangjingkanji/BRV/">中文</a>
     | <a href="https://github.com/liangjingkanji/BRV/blob/master/README_EN.md">English</a>
 </p>
 
@@ -35,8 +35,6 @@
 <p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/img/preview.png?raw=true" align="center" width="30%;" /></p>
 
 BRV为快速构建RV列表工具, 以开源分享来完善, 将一直保持社区维护
-
-Welcome to international translation of this project's documents/notes, thank you for your support!
 
 <br>
 <p align="center"><strong>欢迎贡献代码/问题</strong></p>
