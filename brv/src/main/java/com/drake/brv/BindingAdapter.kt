@@ -1000,7 +1000,7 @@ open class BindingAdapter : RecyclerView.Adapter<BindingAdapter.BindingViewHolde
         @IntRange(from = 0) position: Int,
         @IntRange(from = 0) otherPosition: Int,
     ): Boolean {
-        val aModel = models?.getOrNull(otherPosition) ?: return false
+        val aModel = models?.getOrNull(position) ?: return false
         val bModel = models?.getOrNull(otherPosition) ?: return false
         for (index in min(position, otherPosition) - 1 downTo 0) {
             val item = models?.getOrNull(index) ?: break
