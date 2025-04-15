@@ -1,0 +1,53 @@
+@font-face{
+    font-family: 'Iosevka Curly';
+    src: local('Iosevka Curly Medium'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-curly/iosevka-curly-medium.woff2') format('woff2');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Iosevka Curly';
+    src: local('Iosevka Curly Bold'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/iosevka-curly/iosevka-curly-bold.woff2') format('woff2');
+    font-display: swap;
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'HYYouYuan';
+    src: local('HYYouYuan-55W'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYYouYuan/HYYouYuan-55W.ttf') format('truetype');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'HYYouYuan';
+    src: local('HYYouYuan-75W'),
+         url('https://raw.githubusercontent.com/liangjingkanji/liangjingkanji/master/font/HYYouYuan/HYYouYuan-75W.ttf') format('truetype');
+    font-display: swap;
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: optimizeLegibility;
+    font-family: "Iosevka Curly", HYYouYuan !important;
+}
+
+code,
+.md-nav,
+.md-typeset code,
+.md-typeset {
+    font-size: 14px !important;
+}
+
+.highlight span.filename,
+.md-typeset .admonition-title,
+.md-typeset summary {
+    font-weight: normal;
+}
