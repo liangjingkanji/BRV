@@ -36,6 +36,7 @@ import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.layoutmanager.HoverStaggeredGridLayoutManager
 import com.drake.brv.listener.ItemDifferCallback
+import com.drake.brv.listener.SwipeSelectTouchListener
 
 //<editor-fold desc="数据集">
 /**
@@ -75,8 +76,8 @@ var RecyclerView.mutable
  *
  * @return 添加的[com.drake.brv.listener.SwipeSelectTouchListener]实例，可用于后续移除
  */
-fun RecyclerView.addSwipeSelect(): com.drake.brv.listener.SwipeSelectTouchListener {
-    val listener = com.drake.brv.listener.SwipeSelectTouchListener(bindingAdapter)
+fun RecyclerView.addSwipeSelect(): SwipeSelectTouchListener {
+    val listener = SwipeSelectTouchListener(bindingAdapter)
     addOnItemTouchListener(listener)
     return listener
 }
