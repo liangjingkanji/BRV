@@ -36,6 +36,11 @@
         android:label="选择模式"
         tools:layout="@layout/fragment_check_mode" />
     <fragment
+        android:id="@+id/swipeSelectFragment"
+        android:name="com.drake.brv.sample.ui.fragment.SwipeSelectFragment"
+        android:label="滑动选择"
+        tools:layout="@layout/fragment_swipe_select" />
+    <fragment
         android:id="@+id/stateLayoutFragment"
         android:name="com.drake.brv.sample.ui.fragment.StateLayoutFragment"
         android:label="缺省状态"

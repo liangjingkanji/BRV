@@ -68,6 +68,20 @@ var RecyclerView.mutable
 //</editor-fold>
 
 /**
+ * 为RecyclerView添加滑动多选支持
+ *
+ * 在编辑模式([BindingAdapter.toggleMode])下，按下并滑动手指可以批量选择/取消选择列表项.
+ * 需要先通过[BindingAdapter.onChecked]和[BindingAdapter.onToggle]配置好选择模式.
+ *
+ * @return 添加的[com.drake.brv.listener.SwipeSelectTouchListener]实例，可用于后续移除
+ */
+fun RecyclerView.addSwipeSelect(): com.drake.brv.listener.SwipeSelectTouchListener {
+    val listener = com.drake.brv.listener.SwipeSelectTouchListener(bindingAdapter)
+    addOnItemTouchListener(listener)
+    return listener
+}
+
+/**
  * 添加新的数据
  * @param models 被添加的数据
  * @param animation 是否使用动画

@@ -78,6 +78,10 @@
         android:icon="@drawable/ic_check_mode"
         android:title="选择模式" />
     <item
+        android:id="@+id/swipeSelectFragment"
+        android:icon="@drawable/ic_check_mode"
+        android:title="滑动选择" />
+    <item
         android:id="@+id/flexBoxFragment"
         android:icon="@drawable/ic_flex_box"
         android:title="伸缩布局" />
